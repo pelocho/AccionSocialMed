@@ -5,31 +5,46 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[fill][148,fill][fill]"
-			"$rowConstraints": "[][66][]"
+			"$columnConstraints": "[fill][50,fill][52,fill][56,fill][fill][fill]"
+			"$rowConstraints": "[][][][][][29][34]"
 		} ) {
-			name: "MainPage"
+			name: "IniciarSesion"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "¡Bienvenido a AcciónSocialMed!"
+				"text": "Iniciar Sesión"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 0"
+				"value": "cell 1 0 3 2"
 			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
-				"text": "Iniciar Sesion"
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator1"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 1"
+				"value": "cell 0 2 6 1"
 			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
-				"text": "Registrarse"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Correo:"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 2"
+				"value": "cell 0 4"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "correoInput"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 4 4 1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Contraseña:"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 5"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "passwordInput"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 5 4 1"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 250, 155 )
+			"size": new java.awt.Dimension( 400, 300 )
 		} )
 	}
 }
