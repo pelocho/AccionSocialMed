@@ -1,4 +1,4 @@
-package Vista;
+package login;
 
 import java.awt.EventQueue;
 
@@ -11,13 +11,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JTextPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
-public class InterfazDeRegistro {
+public class loginView {
 
 	private JFrame frame;
 	private ButtonGroup tipoUsuario = new ButtonGroup();
@@ -31,7 +35,7 @@ public class InterfazDeRegistro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfazDeRegistro window = new InterfazDeRegistro();
+					loginView window = new loginView();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +47,7 @@ public class InterfazDeRegistro {
 	/**
 	 * Create the application.
 	 */
-	public InterfazDeRegistro() {
+	public loginView() {
 		initialize();
 	}
 
@@ -87,5 +91,29 @@ public class InterfazDeRegistro {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(161, 104, 89, 23);
 		frame.getContentPane().add(btnLogin);
+		
+		btnLogin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (textField.getText().equals("profesor@profesor.com") && String.valueOf(passwordField.getPassword()).equals("profesor")) {
+					JDialog d = new JDialog(frame, "Hola profesor", true);
+					d.setLocationRelativeTo(frame);
+					d.setVisible(true);
+				}else if (textField.getText().equals("ong@ong.com") && String.valueOf(passwordField.getPassword()).equals("ong")) {
+					JDialog d = new JDialog(frame, "Hola ONG", true);
+					d.setLocationRelativeTo(frame);
+					d.setVisible(true);
+				} else if (textField.getText().equals("alumno@alumno.com") && String.valueOf(passwordField.getPassword()).equals("alumno")) {
+					JDialog d = new JDialog(frame, "Hola alumno", true);
+					d.setLocationRelativeTo(frame);
+					d.setVisible(true);
+				} else {
+					JDialog d = new JDialog(frame, "Datos incorrectos", true);
+					d.setLocationRelativeTo(frame);
+					d.setVisible(true);
+				}
+				
+			}
+		});
 	}
 }

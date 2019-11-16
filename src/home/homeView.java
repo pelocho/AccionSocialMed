@@ -1,13 +1,17 @@
-package Vista;
+package home;
+
+import login.loginView;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-public class InterfazDeHome {
+public class homeView {
 
 	private JFrame frame;
 
@@ -18,7 +22,7 @@ public class InterfazDeHome {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfazDeHome window = new InterfazDeHome();
+					homeView window = new homeView();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +34,7 @@ public class InterfazDeHome {
 	/**
 	 * Create the application.
 	 */
-	public InterfazDeHome() {
+	public homeView() {
 		initialize();
 	}
 
@@ -56,6 +60,14 @@ public class InterfazDeHome {
 		JButton btnIniciarSesin = new JButton("Iniciar Sesi\u00F3n");
 		btnIniciarSesin.setBounds(70, 48, 123, 23);
 		frame.getContentPane().add(btnIniciarSesin);
+		
+		btnIniciarSesin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loginView.main(null);
+			}
+		});
 	}
 
 }
