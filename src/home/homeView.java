@@ -66,6 +66,7 @@ public class homeView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				loginView.main(null);
+				frame.dispose();
 			}
 		});
 	}
