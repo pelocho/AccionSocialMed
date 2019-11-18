@@ -1,5 +1,6 @@
 package login;
 
+import ong.ongMainView;
 import java.awt.EventQueue;
 
 import javax.swing.ButtonGroup;
@@ -99,10 +100,9 @@ public class loginView {
 					JDialog d = new JDialog(frame, "Hola profesor", true);
 					d.setLocationRelativeTo(frame);
 					d.setVisible(true);
-				}else if (textField.getText().equals("ong@ong.com") && String.valueOf(passwordField.getPassword()).equals("ong")) {
-					JDialog d = new JDialog(frame, "Hola ONG", true);
-					d.setLocationRelativeTo(frame);
-					d.setVisible(true);
+				}else if (textField.getText().equals("ongprueba@gmail.com") && String.valueOf(passwordField.getPassword()).equals("ongpassword")) {
+					ongMainView.main(null);
+					frame.dispose();
 				} else if (textField.getText().equals("alumno@alumno.com") && String.valueOf(passwordField.getPassword()).equals("alumno")) {
 					JDialog d = new JDialog(frame, "Hola alumno", true);
 					d.setLocationRelativeTo(frame);
