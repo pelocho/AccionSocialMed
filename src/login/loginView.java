@@ -21,10 +21,12 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 public class loginView {
 
-	private JFrame frame;
+	private JFrame frmAccionsocialmed;
 	private ButtonGroup tipoUsuario = new ButtonGroup();
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -37,7 +39,7 @@ public class loginView {
 			public void run() {
 				try {
 					loginView window = new loginView();
-					window.frame.setVisible(true);
+					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,60 +58,62 @@ public class loginView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 197);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		
-		JLabel lblAccionsocialmed = new JLabel("AccionSocialMed");
-		menuBar.add(lblAccionsocialmed);
-		frame.getContentPane().setLayout(null);
+		frmAccionsocialmed = new JFrame();
+		frmAccionsocialmed.setTitle("AccionSocialMed");
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Rafa Rueda\\eclipse-workspace\\prAccionSocialMed\\imagenes\\icono pequeno.png"));
+		frmAccionsocialmed.setBounds(100, 100, 412, 200);
+		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JLabel lblCorreo = new JLabel("Correo:");
 		lblCorreo.setBounds(10, 41, 49, 14);
-		frame.getContentPane().add(lblCorreo);
+		frmAccionsocialmed.getContentPane().add(lblCorreo);
 		
 		textField = new JTextField();
 		textField.setBounds(102, 38, 273, 20);
-		frame.getContentPane().add(textField);
+		frmAccionsocialmed.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setBounds(10, 72, 82, 14);
-		frame.getContentPane().add(lblContrasea);
+		frmAccionsocialmed.getContentPane().add(lblContrasea);
 		
 		JLabel lblIniciarSesin = new JLabel("Iniciar sesi\u00F3n");
 		lblIniciarSesin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblIniciarSesin.setBounds(10, 11, 132, 14);
-		frame.getContentPane().add(lblIniciarSesin);
+		frmAccionsocialmed.getContentPane().add(lblIniciarSesin);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(102, 69, 273, 20);
-		frame.getContentPane().add(passwordField);
+		frmAccionsocialmed.getContentPane().add(passwordField);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(161, 104, 89, 23);
-		frame.getContentPane().add(btnLogin);
+		btnLogin.setBounds(153, 128, 89, 23);
+		frmAccionsocialmed.getContentPane().add(btnLogin);
+		
+		JLabel lblRecordarContrasea = new JLabel("\u00BFHas olvidado tu contrase\u00F1a?");
+		lblRecordarContrasea.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblRecordarContrasea.setForeground(Color.BLUE);
+		lblRecordarContrasea.setBounds(10, 97, 147, 28);
+		frmAccionsocialmed.getContentPane().add(lblRecordarContrasea);
 		
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().equals("profesor@profesor.com") && String.valueOf(passwordField.getPassword()).equals("profesor")) {
-					JDialog d = new JDialog(frame, "Hola profesor", true);
-					d.setLocationRelativeTo(frame);
+					JDialog d = new JDialog(frmAccionsocialmed, "Hola profesor", true);
+					d.setLocationRelativeTo(frmAccionsocialmed);
 					d.setVisible(true);
 				}else if (textField.getText().equals("ongprueba@gmail.com") && String.valueOf(passwordField.getPassword()).equals("ongpassword")) {
 					ongMainView.main(null);
-					frame.dispose();
+					frmAccionsocialmed.dispose();
 				} else if (textField.getText().equals("alumno@alumno.com") && String.valueOf(passwordField.getPassword()).equals("alumno")) {
-					JDialog d = new JDialog(frame, "Hola alumno", true);
-					d.setLocationRelativeTo(frame);
+					JDialog d = new JDialog(frmAccionsocialmed, "Hola alumno", true);
+					d.setLocationRelativeTo(frmAccionsocialmed);
 					d.setVisible(true);
 				} else {
-					JDialog d = new JDialog(frame, "Datos incorrectos", true);
-					d.setLocationRelativeTo(frame);
+					JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
+					d.setLocationRelativeTo(frmAccionsocialmed);
 					d.setVisible(true);
 				}
 				

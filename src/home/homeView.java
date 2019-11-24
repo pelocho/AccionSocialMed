@@ -10,10 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class homeView {
 
-	private JFrame frame;
+	private JFrame frmAccionsocialmed;
 
 	/**
 	 * Launch the application.
@@ -23,7 +28,7 @@ public class homeView {
 			public void run() {
 				try {
 					homeView window = new homeView();
-					window.frame.setVisible(true);
+					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,31 +47,33 @@ public class homeView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 281, 154);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		
-		JLabel lblAccionsocialmed = new JLabel("AccionSocialMed");
-		menuBar.add(lblAccionsocialmed);
-		frame.getContentPane().setLayout(null);
+		frmAccionsocialmed = new JFrame();
+		frmAccionsocialmed.getContentPane().setForeground(Color.GRAY);
+		frmAccionsocialmed.setTitle("AccionSocialMed");
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Rafa Rueda\\eclipse-workspace\\prAccionSocialMed\\imagenes\\icono pequeno.png"));
+		frmAccionsocialmed.setBounds(100, 100, 709, 370);
+		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JLabel lblbienvenidoAAccinsocialmed = new JLabel("\u00A1Bienvenido a AccionSocialMed!");
-		lblbienvenidoAAccinsocialmed.setBounds(44, 21, 197, 14);
-		frame.getContentPane().add(lblbienvenidoAAccinsocialmed);
+		lblbienvenidoAAccinsocialmed.setBounds(255, 272, 197, 14);
+		frmAccionsocialmed.getContentPane().add(lblbienvenidoAAccinsocialmed);
 		
 		JButton btnIniciarSesin = new JButton("Iniciar Sesi\u00F3n");
-		btnIniciarSesin.setBounds(70, 48, 123, 23);
-		frame.getContentPane().add(btnIniciarSesin);
+		btnIniciarSesin.setBounds(281, 298, 123, 23);
+		frmAccionsocialmed.getContentPane().add(btnIniciarSesin);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rafa Rueda\\eclipse-workspace\\prAccionSocialMed\\imagenes\\icono grande.png"));
+		lblNewLabel.setBounds(-28, 22, 760, 239);
+		frmAccionsocialmed.getContentPane().add(lblNewLabel);
 		
 		btnIniciarSesin.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				loginView.main(null);
-				frame.dispose();
+				frmAccionsocialmed.dispose();
 			}
 		});
 	}
