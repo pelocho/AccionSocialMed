@@ -50,7 +50,7 @@ public class homeView {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.getContentPane().setForeground(Color.GRAY);
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Rafa Rueda\\eclipse-workspace\\prAccionSocialMed\\imagenes\\icono pequeno.png"));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono pequeno.png"));
 		frmAccionsocialmed.setBounds(100, 100, 709, 370);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
@@ -64,7 +64,7 @@ public class homeView {
 		frmAccionsocialmed.getContentPane().add(btnIniciarSesin);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rafa Rueda\\eclipse-workspace\\prAccionSocialMed\\imagenes\\icono grande.png"));
+		lblNewLabel.setIcon(new ImageIcon("imagenes/icono grande.png"));
 		lblNewLabel.setBounds(-28, 22, 760, 239);
 		frmAccionsocialmed.getContentPane().add(lblNewLabel);
 		
