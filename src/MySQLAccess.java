@@ -14,7 +14,7 @@ public class MySQLAccess {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			connect = DriverManager.getConnection("jdbc:mysql://" + host + "/gestor?user=" + user + "&password=" + passwd);
+			connect = DriverManager.getConnection("jdbc:mysql://" + host + "/gestor?user=" + user + "&password=" + passwd + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 			
 			System.out.println("Connected");
 			
@@ -27,10 +27,6 @@ public class MySQLAccess {
 	
 	private void close() {
 		try {
-			
-			if (statement != null) {
-				statement.close();
-			}
 			if (connect != null) {
 				connect.close();
 			}
