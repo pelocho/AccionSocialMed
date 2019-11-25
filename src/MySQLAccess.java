@@ -2,9 +2,6 @@ import java.sql.*;
 
 public class MySQLAccess {
 	private Connection connect = null;
-	private Statement statement = null;
-	private PreparedStatement preparedStatement = null;
-	private ResultSet resultSet = null;
 	
 	final private String host = "localhost:3306";
 	final private String user = "root";
@@ -18,20 +15,20 @@ public class MySQLAccess {
 			
 			System.out.println("Connected");
 			
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close();
+		} catch (ClassNotFoundException ex) {
+			System.err.println("No se ga podido encontrar el driver");
+			System.exit(1);
+		} catch (SQLException e) {
+			System.err.println("Hubo un error al iniciar la base de datos");
+			System.exit(1);
 		}
 	}
 	
 	private void close() {
 		try {
-			if (connect != null) {
-				connect.close();
-			}
-		} catch (Exception e) {
-		
+			connect.close();
+		} catch (SQLException e) {
+			System.err.println("Error al cerrar la base de datos");
 		}
 	}
 }
