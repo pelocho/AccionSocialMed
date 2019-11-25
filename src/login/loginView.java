@@ -60,7 +60,7 @@ public class loginView {
 	private void initialize() {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono pequeno.png"));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(loginView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setBounds(100, 100, 412, 200);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);

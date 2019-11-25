@@ -46,7 +46,7 @@ public class gestorAnadirONG {
 	 */
 	private void initialize() {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono pequeno.png"));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(gestorAnadirONG.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 450, 237);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

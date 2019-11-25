@@ -50,7 +50,7 @@ public class homeView {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.getContentPane().setForeground(Color.GRAY);
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono pequeno.png"));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(homeView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setBounds(100, 100, 709, 370);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
@@ -63,8 +63,8 @@ public class homeView {
 		btnIniciarSesin.setBounds(281, 298, 123, 23);
 		frmAccionsocialmed.getContentPane().add(btnIniciarSesin);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("imagenes/icono grande.png"));
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(homeView.class.getResource("/imagenes/icono grande.png")));
 		lblNewLabel.setBounds(-28, 22, 760, 239);
 		frmAccionsocialmed.getContentPane().add(lblNewLabel);
 		
