@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainTestJason {
@@ -16,7 +17,7 @@ public class MainTestJason {
 	//		private static String appURL = "http://localhost:5000";
 	private static String appURL = "http://idumamockup-env.3mca2qexfx.eu-central-1.elasticbeanstalk.com";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JSONException {
 		URL url = null;
 		try {
 			url = new URL(appURL + "/fullcontent");
@@ -87,7 +88,7 @@ public class MainTestJason {
 		}
 	}
 
-	public static void informacionUsuario(String userInfoFromURL) {
+	public static void informacionUsuario(String userInfoFromURL) throws JSONException {
 		JSONObject obj = new JSONObject(new String(userInfoFromURL));
 		System.out.println(obj.toString());
 		String userSituation = obj.getString("situation");
