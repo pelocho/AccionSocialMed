@@ -24,7 +24,7 @@ import javax.swing.JDialog;
 import java.awt.Toolkit;
 import java.awt.Color;
 
-public class loginView {
+public class loginView extends funcionesLogin{
 
 	private JFrame frmAccionsocialmed;
 	private ButtonGroup tipoUsuario = new ButtonGroup();
@@ -100,23 +100,23 @@ public class loginView {
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (textField.getText().equals("profesor@profesor.com") && String.valueOf(passwordField.getPassword()).equals("profesor")) {
-					JDialog d = new JDialog(frmAccionsocialmed, "Hola profesor", true);
-					d.setLocationRelativeTo(frmAccionsocialmed);
-					d.setVisible(true);
-				}else if (textField.getText().equals("ongprueba@gmail.com") && String.valueOf(passwordField.getPassword()).equals("ongpassword")) {
-					ongMainView.main(null);
-					frmAccionsocialmed.dispose();
-				} else if (textField.getText().equals("alumno@alumno.com") && String.valueOf(passwordField.getPassword()).equals("alumno")) {
-					JDialog d = new JDialog(frmAccionsocialmed, "Hola alumno", true);
-					d.setLocationRelativeTo(frmAccionsocialmed);
-					d.setVisible(true);
-				} else {
-					JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
-					d.setLocationRelativeTo(frmAccionsocialmed);
-					d.setVisible(true);
+				String user = textField.getText();
+				String passwd = String.valueOf(passwordField.getPassword());
+				Boolean acceso;
+				try {
+					acceso = comprobarUsuario(user, passwd);
+					if(acceso) {
+						ongMainView.main(null);
+						frmAccionsocialmed.dispose();
+					} else {
+						JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
+						d.setLocationRelativeTo(frmAccionsocialmed);
+						d.setVisible(true);
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				
 			}
 		});
 	}
