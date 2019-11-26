@@ -13,6 +13,7 @@ import login.loginView;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import modelos.Usuario;
 
 public class ongMainView {
 
@@ -21,11 +22,11 @@ public class ongMainView {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongMainView window = new ongMainView();
+					ongMainView window = new ongMainView(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,14 +38,15 @@ public class ongMainView {
 	/**
 	 * Create the application.
 	 */
-	public ongMainView() {
-		initialize();
+	public ongMainView(String user) {
+		Usuario u = new Usuario(0, user, null, 0, null, null, null);
+		initialize(u.getEmail());
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -64,7 +66,7 @@ public class ongMainView {
 		btnCerrarSesin.setBounds(66, 210, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
-		JLabel lblnombreDeLa = new JLabel("\"Correo de la ong\"");
+		JLabel lblnombreDeLa = new JLabel(user);
 		lblnombreDeLa.setBounds(72, 11, 133, 22);
 		frmAccionsocialmed.getContentPane().add(lblnombreDeLa);
 		
@@ -80,7 +82,6 @@ public class ongMainView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ongSubirActividad.main(null);
-				frmAccionsocialmed.dispose();
 			}
 		});
 		

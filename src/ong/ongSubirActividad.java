@@ -184,7 +184,6 @@ public class ongSubirActividad {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ongMainView.main(null);
 				frmAccionsocialmed.dispose();
 			}
 		});

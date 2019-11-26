@@ -106,7 +106,7 @@ public class loginView extends funcionesLogin{
 				try {
 					acceso = comprobarUsuario(user, passwd);
 					if(acceso) {
-						ongMainView.main(null);
+						ongMainView.main(user);
 						frmAccionsocialmed.dispose();
 					} else {
 						JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
