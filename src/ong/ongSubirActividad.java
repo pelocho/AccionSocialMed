@@ -28,7 +28,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
 
-public class ongSubirProyecto {
+public class ongSubirActividad {
 
 	private JFrame frmAccionsocialmed;
 	private JTextField titulo;
@@ -41,7 +41,7 @@ public class ongSubirProyecto {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongSubirProyecto window = new ongSubirProyecto();
+					ongSubirActividad window = new ongSubirActividad();
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class ongSubirProyecto {
 	/**
 	 * Create the application.
 	 */
-	public ongSubirProyecto() {
+	public ongSubirActividad() {
 		initialize();
 	}
 
@@ -62,7 +62,7 @@ public class ongSubirProyecto {
 	 */
 	private void initialize() {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongSubirProyecto.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongSubirActividad.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 512, 639);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

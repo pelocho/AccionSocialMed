@@ -1,6 +1,6 @@
 package ong;
 
-import ong.ongSubirProyecto;
+import ong.ongSubirActividad;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,7 +79,7 @@ public class ongMainView {
 		btnSubirProyecto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ongSubirProyecto.main(null);
+				ongSubirActividad.main(null);
 				frmAccionsocialmed.dispose();
 			}
 		});
