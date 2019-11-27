@@ -191,6 +191,12 @@ public class ongSubirActividad {
 		btnSubir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String name = titulo.getText();
+				String sitio = lugar.getText();
+				String descripc = descripcion.getText();
+				Date init_date = (Date) fecha_inicio.getValue();
+				Date end_date = (Date) fecha_fin.getValue();
+				int total_horas = (int) horas.getValue();
 				JDialog d = new JDialog(frmAccionsocialmed, "Proyecto creado y pendiente de revision", true);
 				d.setSize(350, 0);
 				d.setLocationRelativeTo(frmAccionsocialmed);
