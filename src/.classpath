@@ -8,6 +8,8 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="D:/Óscar/Documentos/Github/AccionSocialMed/java-json.jar"/>
 	<classpathentry kind="lib" path="D:/Óscar/Documentos/Github/AccionSocialMed/src/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="D:/Óscar/Documentos/Github/AccionSocialMed/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="D:/Óscar/Documentos/Github/AccionSocialMed/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="D:/Óscar/Documentos/Github/AccionSocialMed/miglayout15-swing.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
