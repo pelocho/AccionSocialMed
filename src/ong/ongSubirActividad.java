@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.text.SimpleDateFormat;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.JRadioButton;
@@ -197,8 +197,9 @@ public class ongSubirActividad extends funcionesONG{
 				String name = titulo.getText();
 				String sitio = lugar.getText();
 				String descripc = descripcion.getText();
-				Date init_date = (Date) fecha_inicio.getValue();
-				Date end_date = (Date) fecha_fin.getValue();
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+				String init_date = formater.format(fecha_inicio.getValue());
+				String end_date = formater.format(fecha_fin.getValue());
 				int total_horas = (int) horas.getValue();
 				ArrayList<String> tipo = new ArrayList<>();
 				if(rdbtnSalud.isSelected()) {

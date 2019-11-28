@@ -6,7 +6,7 @@ import main.MySQLBD;
 import java.util.List;
 
 public class funcionesONG {
-	public Boolean subirActividad(String name, String lugar, String descripcion, Date init_date, Date end_date, int horas, ArrayList<String> tipo, ArrayList<String> area, String ong) throws Exception {
+	public Boolean subirActividad(String name, String lugar, String descripcion, String init_date, String end_date, int horas, ArrayList<String> tipo, ArrayList<String> area, String ong) throws Exception {
 		Boolean ok = false;
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
@@ -25,7 +25,7 @@ public class funcionesONG {
 		}
 		areas = sbarea.toString();
 		String query;
-		query = "INSERT INTO eef_primera_iteracion.actividades(Titulo, Horas, Fecha_Inicio, Fecha_Fin, Descripcion, Area_Actividad, Tipo_Actividad, ONG, Lugar) VALUES('"+name+"', "+horas+", "+init_date+", "+end_date+", '"+descripcion+"', '"+areas+"', '"+tipos+"', '"+ong+"', '"+lugar+"');";
+		query = "INSERT INTO eef_primera_iteracion.actividades(Titulo, Horas, Fecha_Inicio, Fecha_Fin, Descripcion, Area_Actividad, Tipo_Actividad, ONG, Lugar) VALUES('"+name+"', "+horas+", '"+init_date+"', '"+end_date+"', '"+descripcion+"', '"+areas+"', '"+tipos+"', '"+ong+"', '"+lugar+"');";
 		ok = bd.insert(query);
 		return ok;
 	}
