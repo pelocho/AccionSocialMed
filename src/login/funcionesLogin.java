@@ -17,6 +17,17 @@ public class funcionesLogin {
 		return acceso;
 	}
 	
+	public int tipoDeUsuario(String user, String passwd) throws Exception {
+		int res = 0;
+		
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		String [] usuario = bd.selectForLogin("SELECT * FROM users WHERE userEmail='"+user+"' AND passwd='"+passwd+"'").get(0);
+		
+		res = Integer.parseInt(usuario[3]);
+		return res;
+	}
+	
 	public void cargarBD(String user, String passwd) throws Exception {	
 		boolean registrado = false;
 		MySQLBD bd = new MySQLBD();

@@ -1,6 +1,9 @@
 package login;
 
 import ong.ongMainView;
+import pas.pasMainView;
+import pdi.pdiMainView;
+
 import java.awt.EventQueue;
 
 import javax.swing.ButtonGroup;
@@ -8,6 +11,10 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import alumno.alumnoMainView;
+import gestor.gestorMainView;
+
 import javax.swing.JMenuBar;
 import javax.swing.JTextPane;
 import javax.swing.JPanel;
@@ -104,10 +111,23 @@ public class loginView extends funcionesLogin{
 				String passwd = String.valueOf(passwordField.getPassword());
 				Boolean acceso;
 				try {
+					int tipoUsur = 0;
 					acceso = comprobarUsuario(user, passwd);
 					if(acceso) {
+						tipoUsur = tipoDeUsuario(user,passwd);
 						cargarBD(user, passwd);
-						ongMainView.main(user);
+						
+						if(tipoUsur == 1) {
+							alumnoMainView.main(null);
+						}else if(tipoUsur == 2) {
+							pdiMainView.main(null);
+						}else if(tipoUsur == 4) {
+							pasMainView.main(null);
+						}else if(tipoUsur == 3) {
+							gestorMainView.main(user);
+						}else {
+							ongMainView.main(user);
+						}
 						frmAccionsocialmed.dispose();
 					} else {
 						JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);

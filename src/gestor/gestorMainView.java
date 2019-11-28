@@ -14,11 +14,11 @@ public class gestorMainView {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gestorMainView window = new gestorMainView();
+					gestorMainView window = new gestorMainView(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,14 +30,14 @@ public class gestorMainView {
 	/**
 	 * Create the application.
 	 */
-	public gestorMainView() {
-		initialize();
+	public gestorMainView(String user) {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(gestorMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -65,7 +65,7 @@ public class gestorMainView {
 		btnCerrarSesin.setBounds(48, 224, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
-		JLabel lblcorreoGestor = new JLabel("\"Correo del gestor\"");
+		JLabel lblcorreoGestor = new JLabel(user);
 		lblcorreoGestor.setBounds(70, 11, 131, 25);
 		frmAccionsocialmed.getContentPane().add(lblcorreoGestor);
 	}

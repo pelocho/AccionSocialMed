@@ -6,12 +6,9 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Rafa Rueda/Documents/GitHub/AccionSocialMed/src/mysql-connector-java-8.0.15.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Laurichi/Documents/GitHub/AccionSocialMed/src/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Laurichi/Documents/GitHub/AccionSocialMed/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Laurichi/Documents/GitHub/AccionSocialMed/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Laurichi/Documents/GitHub/AccionSocialMed/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="output" path="src"/>
 </classpath>
