@@ -35,8 +35,9 @@ public class MySQLBD {
 		}
 	}
 	
-	public void insert(String statement) {
+	public Boolean insert(String statement) {
 		execute(statement);
+		return true;
 	}
 	
 	public void delete(String statement) {

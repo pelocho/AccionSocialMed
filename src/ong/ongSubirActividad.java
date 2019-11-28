@@ -22,13 +22,14 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
 
-public class ongSubirActividad {
+public class ongSubirActividad extends funcionesONG{
 
 	private JFrame frmAccionsocialmed;
 	private JTextField titulo;
@@ -37,11 +38,11 @@ public class ongSubirActividad {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongSubirActividad window = new ongSubirActividad();
+					ongSubirActividad window = new ongSubirActividad(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,15 +53,17 @@ public class ongSubirActividad {
 
 	/**
 	 * Create the application.
+	 * @param user 
 	 */
-	public ongSubirActividad() {
-		initialize();
+	public ongSubirActividad(String user) {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @param user 
 	 */
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongSubirActividad.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -197,12 +200,58 @@ public class ongSubirActividad {
 				Date init_date = (Date) fecha_inicio.getValue();
 				Date end_date = (Date) fecha_fin.getValue();
 				int total_horas = (int) horas.getValue();
-				JDialog d = new JDialog(frmAccionsocialmed, "Proyecto creado y pendiente de revision", true);
-				d.setSize(350, 0);
-				d.setLocationRelativeTo(frmAccionsocialmed);
-				d.setVisible(true);
-				ongMainView.main(null);
-				frmAccionsocialmed.dispose();
+				ArrayList<String> tipo = new ArrayList<>();
+				if(rdbtnSalud.isSelected()) {
+					tipo.add("Salud");
+				}
+				if(rdbtnSaludSexual.isSelected()) {
+					tipo.add("SaludSexual");
+				}
+				if(rdbtnEducacin.isSelected()) {
+					tipo.add("Educacion");
+				}
+				if(rdbtnIntegracin.isSelected()) {
+					tipo.add("Integracion");
+				}
+				if(rdbtnNuevo.isSelected()) {
+					tipo.add("Nuevo");
+				}
+				ArrayList<String> area = new ArrayList<>();
+				if(rdbtnAncianos.isSelected()) {
+					area.add("Ancianos");
+				}
+				if(rdbtnInmigrantes.isSelected()) {
+					area.add("Inmigrantes");
+				}
+				if(rdbtnNios.isSelected()) {
+					area.add("Ninos");
+				}
+				if(rdbtnNecesitados.isSelected()) {
+					area.add("Necesitados");
+				}
+				if(rdbtnAdictos.isSelected()) {
+					area.add("Adictos");
+				}
+				String ong = user;
+				try {
+					Boolean ok = false;
+					ok = subirActividad(name, sitio, descripc, init_date, end_date, total_horas, tipo, area, ong);
+					if(ok) {
+						JDialog d = new JDialog(frmAccionsocialmed, "Proyecto creado y pendiente de revision", true);
+						d.setSize(350, 0);
+						d.setLocationRelativeTo(frmAccionsocialmed);
+						d.setVisible(true);
+						frmAccionsocialmed.dispose();
+					} else {
+						JDialog d = new JDialog(frmAccionsocialmed, "Hay algun fallo en el formulario", true);
+						d.setSize(350, 0);
+						d.setLocationRelativeTo(frmAccionsocialmed);
+						d.setVisible(true);
+					}
+				}catch (Exception e1) {
+					// TODO: handle exception
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
