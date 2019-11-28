@@ -10,7 +10,7 @@ public class funcionesLogin {
 		bd.readDataBase();
 		List<String[]> usuario = null;
 		usuario = bd.selectForLogin("SELECT * FROM users WHERE userEmail='"+user+"' AND passwd='"+passwd+"'");
-		
+	
 		if (usuario.size() == 1) {
 			acceso = true;
 		}

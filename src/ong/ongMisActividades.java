@@ -2,24 +2,32 @@ package ong;
 
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+
+import com.jgoodies.forms.layout.Size;
+
 import java.awt.Font;
 
-public class ongMisActividades {
+public class ongMisActividades extends ongListaActividades{
 
 	private JFrame frmAccionsocialmed;
+	
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongMisActividades window = new ongMisActividades();
+					ongMisActividades window = new ongMisActividades(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,15 +38,17 @@ public class ongMisActividades {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public ongMisActividades() {
-		initialize();
+	public ongMisActividades(String user) throws Exception {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize() {
+	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 9));
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongMisActividades.class.getResource("/imagenes/icono pequeno.png")));
@@ -61,71 +71,51 @@ public class ongMisActividades {
 		frmAccionsocialmed.getContentPane().add(lblLugar);
 		
 		JLabel lblHoras = new JLabel("Horas");
-		lblHoras.setBounds(209, 36, 37, 14);
+		lblHoras.setBounds(260, 36, 37, 14);
 		frmAccionsocialmed.getContentPane().add(lblHoras);
 		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
-		lblDescripcin.setBounds(278, 36, 105, 14);
+		lblDescripcin.setBounds(330, 36, 105, 14);
 		frmAccionsocialmed.getContentPane().add(lblDescripcin);
 		
-		JLabel lblT = new JLabel("t1");
-		lblT.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblT.setBounds(10, 61, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblT);
+		int numerofilaAcaba=0;
 		
-		JLabel lblL = new JLabel("l1");
-		lblL.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblL.setBounds(137, 61, 30, 14);
-		frmAccionsocialmed.getContentPane().add(lblL);
+		for (int i = 0; i<listaActividades(user).size(); i++) {
+			JLabel lblT = new JLabel(name(user,i));
+			lblT.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			lblT.setBounds(10, 61+i*40, 110, 14);
+			frmAccionsocialmed.getContentPane().add(lblT);
+			
+			
+			JLabel lblL = new JLabel(lugar(user,i));
+			lblL.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			lblL.setBounds(137, 61+i*40, 110, 14);
+			frmAccionsocialmed.getContentPane().add(lblL);
+			//lblT.setText(lugar(user,i));
+			
+			JLabel lblH = new JLabel(Integer.toString(horas(user,i)));
+			lblH.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			lblH.setBounds(260, 61+i*40, 50, 14);
+			frmAccionsocialmed.getContentPane().add(lblH);
+			//lblT.setText(Integer.toString(horas(user,i)));
+			
+			JLabel lblD = new JLabel(desc(user,i));
+			lblD.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			lblD.setBounds(330, 61+i*40, 300, 14);
+			frmAccionsocialmed.getContentPane().add(lblD);
+			//lblT.setText(desc(user,i));
+			
+			numerofilaAcaba=i*40;
+		}
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, numerofilaAcaba+100, 75, 23);
+		frmAccionsocialmed.getContentPane().add(btnVolver);
 		
-		JLabel lblH = new JLabel("h1");
-		lblH.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblH.setBounds(209, 61, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblH);
-		
-		JLabel lblD = new JLabel("d1");
-		lblD.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblD.setBounds(278, 61, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblD);
-		
-		JLabel lblT_1 = new JLabel("t2");
-		lblT_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblT_1.setBounds(10, 80, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblT_1);
-		
-		JLabel lblL_1 = new JLabel("l2");
-		lblL_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblL_1.setBounds(137, 80, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblL_1);
-		
-		JLabel lblH_1 = new JLabel("h2");
-		lblH_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblH_1.setBounds(209, 80, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblH_1);
-		
-		JLabel lblD_1 = new JLabel("d2");
-		lblD_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblD_1.setBounds(278, 80, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblD_1);
-		
-		JLabel lblT_2 = new JLabel("t3");
-		lblT_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblT_2.setBounds(10, 105, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblT_2);
-		
-		JLabel lblL_2 = new JLabel("l3");
-		lblL_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblL_2.setBounds(137, 105, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblL_2);
-		
-		JLabel lblH_2 = new JLabel("h3");
-		lblH_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblH_2.setBounds(209, 105, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblH_2);
-		
-		JLabel lblD_2 = new JLabel("d3");
-		lblD_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblD_2.setBounds(278, 105, 49, 14);
-		frmAccionsocialmed.getContentPane().add(lblD_2);
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
+			}
+		});
 	}
 }

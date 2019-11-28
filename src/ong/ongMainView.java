@@ -92,5 +92,11 @@ public class ongMainView {
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		btnMisProyectos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ongMisActividades.main(user);
+			}
+		});
 	}
 }
