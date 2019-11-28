@@ -18,7 +18,7 @@ public class MySQLBD {
 			connection = DriverManager.getConnection("jdbc:mysql://" + host + "/eef_primera_iteracion?user=" + user + "&password=" + passwd + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 			connection2 = DriverManager.getConnection("jdbc:mysql://" + host + "/dumamockup?user=" + user + "&password=" + passwd + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 		} catch (ClassNotFoundException ex) {
-			System.err.println("No se ga podido encontrar el driver");
+			System.err.println("No se ha podido encontrar el driver");
 			System.exit(1);
 		} catch (SQLException e) {
 			System.err.println("Hubo un error al iniciar la base de datos");
