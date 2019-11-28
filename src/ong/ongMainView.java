@@ -81,7 +81,7 @@ public class ongMainView {
 		btnSubirProyecto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ongSubirActividad.main(null);
+				ongSubirActividad.main(user);
 			}
 		});
 		
