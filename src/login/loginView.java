@@ -116,17 +116,17 @@ public class loginView extends funcionesLogin{
 					if(acceso) {
 						tipoUsur = tipoDeUsuario(user,passwd);
 						cargarBD(user, passwd);
-						
+						System.out.println(tipoUsur);
 						if(tipoUsur == 1) {
 							alumnoMainView.main(null);
 						}else if(tipoUsur == 2) {
 							pdiMainView.main(null);
-						}else if(tipoUsur == 4) {
-							pasMainView.main(null);
 						}else if(tipoUsur == 3) {
-							gestorMainView.main(user);
-						}else {
+							pasMainView.main(null);
+						}else if(tipoUsur == 4) {
 							ongMainView.main(user);
+						}else {
+							gestorMainView.main(user);
 						}
 						frmAccionsocialmed.dispose();
 					} else {
