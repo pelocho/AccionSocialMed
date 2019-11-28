@@ -106,6 +106,7 @@ public class loginView extends funcionesLogin{
 				try {
 					acceso = comprobarUsuario(user, passwd);
 					if(acceso) {
+						cargarBD(user, passwd);
 						ongMainView.main(user);
 						frmAccionsocialmed.dispose();
 					} else {
