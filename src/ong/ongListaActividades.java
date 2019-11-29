@@ -15,7 +15,7 @@ public class ongListaActividades{
 		bd.readDataBase();
 		List<String[]> actividades = null;
 		actividades = bd.select("SELECT * FROM actividades WHERE ong ='" + ong+ "'");
-		System.out.println(actividades.size());
+		
 		return actividades;
 	}
 	
@@ -24,7 +24,7 @@ public class ongListaActividades{
 		
 		bd.readDataBase();
 		name = listaActividades(ong).get(i)[1];
-		System.out.println(name);
+		
 		//	name = bd.select("SELECT Titulo FROM actividades WHERE ong ='" + ong+ "' LIMIT 1 OFFSET "+i+" ").toString();
 		
 		return name;
@@ -34,7 +34,7 @@ public class ongListaActividades{
 		
 		bd.readDataBase();
 		lugar = listaActividades(ong).get(i)[9];
-		System.out.println(lugar);
+		
 			//lugar = bd.select("SELECT Lugar FROM actividades WHERE ong ='" + ong+ "' LIMIT 1 OFFSET "+i+" ").toString();
 		
 		return lugar;

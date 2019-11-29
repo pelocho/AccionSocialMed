@@ -4,8 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import ong.ongMisActividades;
 
 public class gestorMainView {
 
@@ -68,5 +73,11 @@ public class gestorMainView {
 		JLabel lblcorreoGestor = new JLabel(user);
 		lblcorreoGestor.setBounds(70, 11, 131, 25);
 		frmAccionsocialmed.getContentPane().add(lblcorreoGestor);
+		
+		btnAadirOng.addActionListener((ActionListener) new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gestorAnadirONG.main(null);
+			}
+		});
 	}
 }

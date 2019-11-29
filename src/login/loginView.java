@@ -116,7 +116,6 @@ public class loginView extends funcionesLogin{
 					if(acceso) {
 						tipoUsur = tipoDeUsuario(user,passwd);
 						cargarBD(user, passwd);
-						System.out.println(tipoUsur);
 						if(tipoUsur == 1) {
 							alumnoMainView.main(null);
 						}else if(tipoUsur == 2) {
@@ -125,7 +124,7 @@ public class loginView extends funcionesLogin{
 							pasMainView.main(null);
 						}else if(tipoUsur == 4) {
 							ongMainView.main(user);
-						}else {
+						}else /*if(user.equals("admin") && passwd.equals("admin"))*/{
 							gestorMainView.main(user);
 						}
 						frmAccionsocialmed.dispose();
