@@ -2,7 +2,7 @@ package ong;
 
 import java.util.List;
 
-import javafx.css.Size;
+//import javafx.css.Size;
 import main.MySQLBD;
 import modelos.Actividad;
 

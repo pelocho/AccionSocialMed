@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import login.loginView;
 import ong.ongMisActividades;
 
 public class gestorMainView {
@@ -77,6 +78,15 @@ public class gestorMainView {
 		btnAadirOng.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gestorAnadirONG.main(null);
+				frmAccionsocialmed.dispose();
+			}
+		});
+		
+		btnCerrarSesin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loginView.main(null);
+				frmAccionsocialmed.dispose();
 			}
 		});
 	}

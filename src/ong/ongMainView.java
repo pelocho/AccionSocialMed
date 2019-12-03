@@ -55,11 +55,13 @@ public class ongMainView {
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JButton btnSubirProyecto = new JButton("Subir actividad");
-		btnSubirProyecto.setBounds(66, 112, 126, 23);
+		//btnSubirProyecto.setBounds(66, 112, 126, 23);
+		btnSubirProyecto.setBounds(66, 44, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnSubirProyecto);
 		
 		JButton btnMisProyectos = new JButton("Mis actividades");
-		btnMisProyectos.setBounds(66, 146, 126, 23);
+//		btnMisProyectos.setBounds(66, 146, 126, 23);
+		btnMisProyectos.setBounds(66, 78, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisProyectos);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
@@ -71,11 +73,12 @@ public class ongMainView {
 		frmAccionsocialmed.getContentPane().add(lblnombreDeLa);
 		
 		JButton btnSolicitudes = new JButton("Solicitudes");
-		btnSolicitudes.setBounds(66, 78, 126, 23);
+		//btnSolicitudes.setBounds(66, 78, 126, 23);
+		btnSolicitudes.setBounds(66, 112, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudes);
 		
 		JButton btnActividades = new JButton("Actividades");
-		btnActividades.setBounds(66, 44, 126, 23);
+		btnActividades.setBounds(66, 146, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnActividades);
 		
 		btnSubirProyecto.addActionListener(new ActionListener() {
