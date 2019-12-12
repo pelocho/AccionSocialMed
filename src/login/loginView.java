@@ -119,7 +119,7 @@ public class loginView extends funcionesLogin{
 						if(tipoUsur == 1) {
 							alumnoMainView.main(null);
 						}else if(tipoUsur == 2) {
-							pdiMainView.main(null);
+							pdiMainView.main(user);
 						}else if(tipoUsur == 3) {
 							pasMainView.main(null);
 						}else if(tipoUsur == 4) {
