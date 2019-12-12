@@ -117,6 +117,12 @@ public class pdiMainView {
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		btnSolicitudesDeAlumnos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pdiSolicitudesAlumnosView.main(user);
+			}
+		});
 	}
 
 }
