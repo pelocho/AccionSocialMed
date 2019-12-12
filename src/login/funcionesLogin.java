@@ -42,7 +42,7 @@ public class funcionesLogin {
 		
 		if(!registrado) {
 			String[] usuario = null;
-			usuario = bd.selectForLogin("SELECT * FROM users WHERE userEmail='"+user+"' AND passwd='"+passwd+"'").get(0);
+			usuario = bd.selectForLogin("SELECT * FROM dumamockup.users WHERE userEmail='"+user+"' AND passwd='"+passwd+"'").get(0);
 			//bd.insert("INSERT INTO usuarios VALUES('" + usuario[1] + "', '" + usuario[0] + ", " + usuario[4] +
 			//			", " + usuario[5] + ", " + usuario[6] + ", España, null, " + usuario[2] + ", 0, " + usuario[3] + ");");
 			if(usuario[3].equals("4")) {
