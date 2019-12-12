@@ -3,7 +3,7 @@ package modelos;
 import java.util.ArrayList;
 import java.util.List;
 
-import gestor.Gestor;
+
 import main.MySQLBD;
 
 public class Usuario {
