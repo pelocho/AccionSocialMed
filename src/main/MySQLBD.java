@@ -9,7 +9,7 @@ public class MySQLBD {
 	
 	final private String host = "localhost:3306";
 	final private String user = "root";
-	final private String passwd = "password";
+	final private String passwd = "usuario";
 	
 	public void readDataBase() throws Exception {
 		try {
