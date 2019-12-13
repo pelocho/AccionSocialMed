@@ -14,6 +14,8 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class pdiSolicitudesAlumnosView extends JFrame {
 	private JTable table_1;
@@ -21,11 +23,11 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pdiSolicitudesAlumnosView frame = new pdiSolicitudesAlumnosView();
+					pdiSolicitudesAlumnosView frame = new pdiSolicitudesAlumnosView(user);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +39,7 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public pdiSolicitudesAlumnosView() {
+	public pdiSolicitudesAlumnosView(String user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 455);
 		getContentPane().setLayout(null);
@@ -74,7 +76,11 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		btnNewButton_1.setBounds(637, 293, 111, 23);
 		getContentPane().add(btnNewButton_1);
 		
-		JButton btnVerAlumno = new JButton("Ver solicitud");
+		JButton btnVerAlumno = new JButton("Ver perfil");
+		btnVerAlumno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnVerAlumno.setBounds(637, 77, 111, 23);
 		getContentPane().add(btnVerAlumno);
 	}

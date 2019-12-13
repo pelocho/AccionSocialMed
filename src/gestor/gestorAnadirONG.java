@@ -4,11 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import login.loginView;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
 public class gestorAnadirONG {
 
@@ -94,5 +101,38 @@ public class gestorAnadirONG {
 		JButton btnAadir = new JButton("A\u00F1adir");
 		btnAadir.setBounds(167, 166, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnAadir);
+		
+		btnAadir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					try {
+						boolean ok = false;
+						if (textField.getText().equals(textField_1.getText())  && passwordField.getText().equals(passwordField_1.getText()) ) {
+						funcionesGestor.insertarONG(textField.getText(),passwordField.getText());
+						ok = true;
+							if(ok ==true) {
+								frmAccionsocialmed.dispose();
+								JDialog d = new JDialog(frmAccionsocialmed, "ONG introducida correctamente", true);
+								d.setLocationRelativeTo(frmAccionsocialmed);
+								d.setVisible(true);
+							}
+							
+						}else {
+							JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
+							d.setLocationRelativeTo(frmAccionsocialmed);
+							d.setVisible(true);
+						}
+						
+						
+						
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+			}
+		});
+		
 	}
 }
