@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 
-import com.jgoodies.forms.layout.Size;
 
 import java.awt.Font;
 

@@ -1,5 +1,6 @@
 package home;
 
+import login.loginONGView;
 import login.loginView;
 
 import java.awt.EventQueue;
@@ -59,14 +60,18 @@ public class homeView {
 		lblbienvenidoAAccinsocialmed.setBounds(255, 272, 197, 14);
 		frmAccionsocialmed.getContentPane().add(lblbienvenidoAAccinsocialmed);
 		
-		JButton btnIniciarSesin = new JButton("Iniciar Sesi\u00F3n");
-		btnIniciarSesin.setBounds(281, 298, 123, 23);
+		JButton btnIniciarSesin = new JButton("iDUMA");
+		btnIniciarSesin.setBounds(167, 297, 133, 23);
 		frmAccionsocialmed.getContentPane().add(btnIniciarSesin);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(homeView.class.getResource("/imagenes/icono grande.png")));
 		lblNewLabel.setBounds(-28, 22, 760, 239);
 		frmAccionsocialmed.getContentPane().add(lblNewLabel);
+		
+		JButton btnIniciarSesinOng = new JButton("Iniciar Sesi\u00F3n ONG");
+		btnIniciarSesinOng.setBounds(374, 297, 123, 23);
+		frmAccionsocialmed.getContentPane().add(btnIniciarSesinOng);
 		
 		btnIniciarSesin.addActionListener(new ActionListener() {
 			
@@ -76,6 +81,14 @@ public class homeView {
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		btnIniciarSesinOng.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loginONGView.main(null);
+				frmAccionsocialmed.dispose();
+			}
+		});
 	}
-
 }

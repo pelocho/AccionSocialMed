@@ -32,7 +32,7 @@ import javax.swing.JDialog;
 import java.awt.Toolkit;
 import java.awt.Color;
 
-public class loginView extends funcionesLogin{
+public class loginONGView extends funcionesLogin{
 
 	private JFrame frmAccionsocialmed;
 	private ButtonGroup tipoUsuario = new ButtonGroup();
@@ -46,7 +46,7 @@ public class loginView extends funcionesLogin{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loginView window = new loginView();
+					loginONGView window = new loginONGView();
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +58,7 @@ public class loginView extends funcionesLogin{
 	/**
 	 * Create the application.
 	 */
-	public loginView() {
+	public loginONGView() {
 		initialize();
 	}
 
@@ -68,7 +68,7 @@ public class loginView extends funcionesLogin{
 	private void initialize() {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(loginView.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(loginONGView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setBounds(100, 100, 412, 200);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
@@ -86,7 +86,7 @@ public class loginView extends funcionesLogin{
 		lblContrasea.setBounds(10, 72, 82, 14);
 		frmAccionsocialmed.getContentPane().add(lblContrasea);
 		
-		JLabel lblIniciarSesin = new JLabel("Iniciar sesi\u00F3n iDUMA");
+		JLabel lblIniciarSesin = new JLabel("Iniciar sesi\u00F3n ONG");
 		lblIniciarSesin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblIniciarSesin.setBounds(10, 11, 132, 14);
 		frmAccionsocialmed.getContentPane().add(lblIniciarSesin);
@@ -117,21 +117,9 @@ public class loginView extends funcionesLogin{
 				Boolean acceso;
 				try {
 					int tipoUsur = 0;
-					acceso = comprobarUsuario(user, passwd);
+					acceso = comprobarUsuarioONG(user, passwd);
 					if(acceso) {
-						tipoUsur = tipoDeUsuario(user,passwd);
-						cargarBD(user, passwd);
-						if(tipoUsur == 1) {
-							alumnoMainView.main(null);
-						}else if(tipoUsur == 2) {
-							pdiMainView.main(user);
-						}else if(tipoUsur == 3) {
-							pasMainView.main(null);
-						}/*else if(tipoUsur == 4) {
-							ongMainView.main(user);
-						}*/else /*if(user.equals("admin") && passwd.equals("admin"))*/{
-							gestorMainView.main(user);
-						}
+						ongMainView.main(user);
 						frmAccionsocialmed.dispose();
 					} else {
 						JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
