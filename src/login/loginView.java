@@ -72,39 +72,39 @@ public class loginView extends funcionesLogin{
 		frmAccionsocialmed.setBounds(100, 100, 412, 200);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
-		
+
 		JLabel lblCorreo = new JLabel("Correo:");
 		lblCorreo.setBounds(10, 41, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblCorreo);
-		
+
 		textField = new JTextField();
 		textField.setBounds(102, 38, 273, 20);
 		frmAccionsocialmed.getContentPane().add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setBounds(10, 72, 82, 14);
 		frmAccionsocialmed.getContentPane().add(lblContrasea);
-		
+
 		JLabel lblIniciarSesin = new JLabel("Iniciar sesi\u00F3n");
 		lblIniciarSesin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblIniciarSesin.setBounds(10, 11, 132, 14);
 		frmAccionsocialmed.getContentPane().add(lblIniciarSesin);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(102, 69, 273, 20);
 		frmAccionsocialmed.getContentPane().add(passwordField);
-		
+
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(153, 128, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnLogin);
-		
+
 		JLabel lblRecordarContrasea = new JLabel("\u00BFHas olvidado tu contrase\u00F1a?");
 		lblRecordarContrasea.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblRecordarContrasea.setForeground(Color.BLUE);
 		lblRecordarContrasea.setBounds(10, 97, 147, 28);
 		frmAccionsocialmed.getContentPane().add(lblRecordarContrasea);
-		
+
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -130,7 +130,7 @@ public class loginView extends funcionesLogin{
 						}
 						frmAccionsocialmed.dispose();
 					} else {
-						JOptionPane.showMessageDialog (frmAccionsocialmed, " Datos incorrectos ");
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Datos incorrectos");
 					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
