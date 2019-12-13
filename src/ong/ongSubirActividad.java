@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -210,16 +211,10 @@ public class ongSubirActividad extends funcionesONG{
 					boolean ok = false;
 					ok = subirActividad(name, sitio, descripc, init_date, end_date, total_horas, ong);
 					if(ok) {
-						JDialog d = new JDialog(frmAccionsocialmed, "Proyecto creado y pendiente de revision", true);
-						d.setSize(350, 0);
-						d.setLocationRelativeTo(frmAccionsocialmed);
-						d.setVisible(true);
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Proyecto creado y pendiente de revision");
 						frmAccionsocialmed.dispose();
 					} else {
-						JDialog d = new JDialog(frmAccionsocialmed, "Hay algun fallo en el formulario", true);
-						d.setSize(350, 0);
-						d.setLocationRelativeTo(frmAccionsocialmed);
-						d.setVisible(true);
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Hay algun fallo en el formulario");
 					}
 				}catch (Exception e1) {
 					e1.printStackTrace();

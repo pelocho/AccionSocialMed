@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 
@@ -112,15 +114,11 @@ public class gestorAnadirONG {
 						ok = true;
 							if(ok ==true) {
 								frmAccionsocialmed.dispose();
-								JDialog d = new JDialog(frmAccionsocialmed, "ONG introducida correctamente", true);
-								d.setLocationRelativeTo(frmAccionsocialmed);
-								d.setVisible(true);
+								JOptionPane.showMessageDialog(frmAccionsocialmed, "ONG introducida correctamente");
 							}
 							
 						}else {
-							JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
-							d.setLocationRelativeTo(frmAccionsocialmed);
-							d.setVisible(true);
+							JOptionPane.showMessageDialog(frmAccionsocialmed, "Datos incorrectos");
 						}
 						
 						
