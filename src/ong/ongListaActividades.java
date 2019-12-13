@@ -33,7 +33,7 @@ public class ongListaActividades{
 		String lugar = null;
 		
 		bd.readDataBase();
-		lugar = listaActividades(ong).get(i)[9];
+		lugar = listaActividades(ong).get(i)[7];
 		
 			//lugar = bd.select("SELECT Lugar FROM actividades WHERE ong ='" + ong+ "' LIMIT 1 OFFSET "+i+" ").toString();
 		

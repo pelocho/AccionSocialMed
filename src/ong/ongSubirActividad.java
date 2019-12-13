@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
+
+import main.MySQLBD;
+
 import javax.swing.JRadioButton;
 import java.awt.Choice;
 import javax.swing.JComboBox;
@@ -201,42 +204,11 @@ public class ongSubirActividad extends funcionesONG{
 				String init_date = formater.format(fecha_inicio.getValue());
 				String end_date = formater.format(fecha_fin.getValue());
 				int total_horas = (int) horas.getValue();
-				ArrayList<String> tipo = new ArrayList<>();
-				if(rdbtnSalud.isSelected()) {
-					tipo.add("Salud");
-				}
-				if(rdbtnSaludSexual.isSelected()) {
-					tipo.add("SaludSexual");
-				}
-				if(rdbtnEducacin.isSelected()) {
-					tipo.add("Educacion");
-				}
-				if(rdbtnIntegracin.isSelected()) {
-					tipo.add("Integracion");
-				}
-				if(rdbtnNuevo.isSelected()) {
-					tipo.add("Nuevo");
-				}
-				ArrayList<String> area = new ArrayList<>();
-				if(rdbtnAncianos.isSelected()) {
-					area.add("Ancianos");
-				}
-				if(rdbtnInmigrantes.isSelected()) {
-					area.add("Inmigrantes");
-				}
-				if(rdbtnNios.isSelected()) {
-					area.add("Ninos");
-				}
-				if(rdbtnNecesitados.isSelected()) {
-					area.add("Necesitados");
-				}
-				if(rdbtnAdictos.isSelected()) {
-					area.add("Adictos");
-				}
+
 				String ong = user;
 				try {
-					Boolean ok = false;
-					ok = subirActividad(name, sitio, descripc, init_date, end_date, total_horas, tipo, area, ong);
+					boolean ok = false;
+					ok = subirActividad(name, sitio, descripc, init_date, end_date, total_horas, ong);
 					if(ok) {
 						JDialog d = new JDialog(frmAccionsocialmed, "Proyecto creado y pendiente de revision", true);
 						d.setSize(350, 0);
@@ -250,9 +222,52 @@ public class ongSubirActividad extends funcionesONG{
 						d.setVisible(true);
 					}
 				}catch (Exception e1) {
-					// TODO: handle exception
 					e1.printStackTrace();
 				}
+				
+				MySQLBD bd = new MySQLBD();
+				try {
+					bd.readDataBase();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				int id = Integer.parseInt(bd.select("SELECT Codigo FROM actividades WHERE titulo = '" + name + "';").get(0)[0]);
+				
+				if(rdbtnSalud.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_tipoact(idActividad, idTipoActividad) VALUES("+id+", " +1+ ");");
+				}
+				if(rdbtnSaludSexual.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_tipoact(idActividad, idTipoActividad) VALUES("+id+", " +2+ ");");
+				}
+				if(rdbtnEducacin.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_tipoact(idActividad, idTipoActividad) VALUES("+id+", " +3+ ");");
+				}
+				if(rdbtnIntegracin.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_tipoact(idActividad, idTipoActividad) VALUES("+id+", " +4+ ");");
+				}
+				if(rdbtnNuevo.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_tipoact(idActividad, idTipoActividad) VALUES("+id+", " +5+ ");");
+				}
+				
+				
+				if(rdbtnAncianos.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_areaact(idActividad, idAreaActividad) VALUES("+id+", " +1+ ");");
+				}
+				if(rdbtnInmigrantes.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_areaact(idActividad, idAreaActividad) VALUES("+id+", " +2+ ");");
+				}
+				if(rdbtnNios.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_areaact(idActividad, idAreaActividad) VALUES("+id+", " +3+ ");");
+				}
+				if(rdbtnNecesitados.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_areaact(idActividad, idAreaActividad) VALUES("+id+", " +4+ ");");
+				}
+				if(rdbtnAdictos.isSelected()) {
+					bd.insert("INSERT INTO eef_primera_iteracion.inter_act_areaact(idActividad, idAreaActividad) VALUES("+id+", " +5+ ");");
+				}
+				
+				
 			}
 		});
 	}

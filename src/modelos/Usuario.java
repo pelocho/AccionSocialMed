@@ -12,8 +12,8 @@ public class Usuario {
 	
 	public Usuario(int id, String email, String passwd, int categoria, String nombre, String apellido1, String apellido2) {
 		//Crea objeto y lo inserta en la base de datos
-		MySQLBD miBD = new MySQLBD();
-		miBD.insert("insert into dumamockup.users values ('"+ id + "', '"+ email + "', '" + passwd + "', '" + categoria + "', '" + nombre + "', '" +  apellido1 + "', '" + apellido2+ "'); ");
+		//MySQLBD miBD = new MySQLBD();
+		//miBD.insert("insert into dumamockup.users values ('"+ id + "', '"+ email + "', '" + passwd + "', '" + categoria + "', '" + nombre + "', '" +  apellido1 + "', '" + apellido2+ "'); ");
 		this.id = id;
 		this.email = email;
 		this.passwd = passwd;
