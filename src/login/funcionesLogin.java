@@ -26,7 +26,7 @@ public class funcionesLogin {
 		System.out.print(usuario.size());
 		if (usuario.size() == 1) {
 			acceso = true;
-			System.out.print("aqui sii");
+			
 		}
 		return acceso;
 	}

@@ -17,6 +17,7 @@ import gestor.gestorMainView;
 import home.homeView;
 
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -122,9 +123,7 @@ public class loginONGView extends funcionesLogin{
 						ongMainView.main(user);
 						frmAccionsocialmed.dispose();
 					} else {
-						JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
-						d.setLocationRelativeTo(frmAccionsocialmed);
-						d.setVisible(true);
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Datos incorrectos");
 					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

@@ -9,7 +9,7 @@ public class funcionesGestor {
 		boolean res = false;
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		res = bd.insert("INSERT INTO eef_primera_iteracion.ong (Correo, Contraseña) VALUES ('"+ correo + " ', '"+ contrasena +"');");
+		res = bd.insert("INSERT INTO eef_primera_iteracion.ong (Correo, Contraseña) VALUES ('"+ correo + "', '"+ contrasena +"');");
 		
 		return res;
 		}

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import home.homeView;
 import login.loginView;
 
 import javax.swing.JPasswordField;
@@ -100,8 +101,12 @@ public class gestorAnadirONG {
 		frmAccionsocialmed.getContentPane().add(passwordField_1);
 
 		JButton btnAadir = new JButton("A\u00F1adir");
-		btnAadir.setBounds(167, 166, 89, 23);
+		btnAadir.setBounds(109, 164, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnAadir);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(258, 164, 89, 23);
+		frmAccionsocialmed.getContentPane().add(btnVolver);
 
 		btnAadir.addActionListener(new ActionListener() {
 			@Override
@@ -130,6 +135,13 @@ public class gestorAnadirONG {
 						e1.printStackTrace();
 					}
 
+			}
+		});
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gestorMainView.main(null);
+				frmAccionsocialmed.dispose();
 			}
 		});
 

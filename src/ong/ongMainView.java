@@ -95,7 +95,8 @@ public class ongMainView {
 		
 		btnMisProyectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ongMisActividades.main(user);
+				ongMisActividadesTableView.main(user);
+				frmAccionsocialmed.dispose();
 			}
 		});
 	}
