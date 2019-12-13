@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
@@ -107,20 +108,18 @@ public class gestorAnadirONG {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						boolean ok = false;
-						if (textField.getText().equals(textField_1.getText())  && passwordField.getText().equals(passwordField_1.getText()) ) {
-						funcionesGestor.insertarONG(textField.getText(),passwordField.getText());
-						ok = true;
-							if(ok ==true) {
+						if (textField.getText().equals(textField_1.getText()) && new String(passwordField.getPassword()).equals(new String(passwordField_1.getPassword()))) {
+							ok = funcionesGestor.insertarONG(textField.getText(),new String(passwordField.getPassword()));
+							if(ok == true) {
 								frmAccionsocialmed.dispose();
-								JDialog d = new JDialog(frmAccionsocialmed, "ONG introducida correctamente", true);
-								d.setLocationRelativeTo(frmAccionsocialmed);
-								d.setVisible(true);
+								JOptionPane.showMessageDialog (frmAccionsocialmed, " ONG introducida correctamente " );
+							}else{
+								frmAccionsocialmed.dispose();
+								JOptionPane.showMessageDialog (frmAccionsocialmed, " Ya existe ese correo " );
 							}
 							
 						}else {
-							JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
-							d.setLocationRelativeTo(frmAccionsocialmed);
-							d.setVisible(true);
+							JOptionPane.showMessageDialog (frmAccionsocialmed, " Datos incorrectos " );
 						}
 						
 						

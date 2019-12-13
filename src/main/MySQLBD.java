@@ -9,7 +9,7 @@ public class MySQLBD {
 	
 	final private String host = "localhost:3306";
 	final private String user = "root";
-	final private String passwd = "usuario";
+	final private String passwd = "contrasena";
 	
 	public void readDataBase() throws Exception {
 		try {
@@ -26,26 +26,27 @@ public class MySQLBD {
 		}
 	}
 	
-	public void execute(String statement) {
+	public Boolean execute(String statement) {
 		try {
 			Statement stm = connection.createStatement();
 			stm.execute(statement);
+			return true;
 		} catch (SQLException e) {
 			System.err.println("Error al ejecutar la sentencia: " + e.getMessage());
+			return false;
 		}
 	}
 	
 	public Boolean insert(String statement) {
-		execute(statement);
-		return true;
+		return execute(statement);
 	}
 	
-	public void delete(String statement) {
-		execute(statement);
+	public Boolean delete(String statement) {
+		return execute(statement);
 	}
 	
-	public void update(String statement) {
-		execute(statement);
+	public Boolean update(String statement) {
+		return execute(statement);
 	}
 	
 	public List<String[]> select(String query) {
