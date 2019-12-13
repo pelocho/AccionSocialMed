@@ -9,10 +9,10 @@ import main.MySQLBD;
 public class Usuario {
 	private int id, categoryId;
 	private String email, passwd, nombre, primerApellido, segundoApellido;
-	
+
 	public Usuario(int id, String email, String passwd, int categoria, String nombre, String apellido1, String apellido2) {
 		//Crea objeto y lo inserta en la base de datos
-		MySQLBD miBD = new MySQLBD();
+		//MySQLBD miBD = new MySQLBD();
 		//miBD.insert("insert into dumamockup.users values ('"+ id + "', '"+ email + "', '" + passwd + "', '" + categoria + "', '" + nombre + "', '" +  apellido1 + "', '" + apellido2+ "'); ");
 		this.id = id;
 		this.email = email;
@@ -32,9 +32,9 @@ public class Usuario {
 		this.nombre = (String) tupla[3];
 		this.primerApellido = (String) tupla[4];
 		this.segundoApellido = (String) tupla[5];
-		
+
 	}
-	
+
 
 	public String toString() {
 		return id + " " + email + " " + passwd + " " + categoryId + " " + nombre + " " + primerApellido + " " + segundoApellido;
@@ -98,10 +98,10 @@ public class Usuario {
 
 
 	public static List<Usuario> ListaUsuarios(){
-		// Método de clase que devuelve la lista con todos los usuarios
+		// Mï¿½todo de clase que devuelve la lista con todos los usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
 		MySQLBD miBD = new MySQLBD();
-		
+
 		for(Object[] tupla: miBD.select("SELECT id FROM users;")){
 			int id = (int)tupla[0];
 			lista.add(new Usuario(id));

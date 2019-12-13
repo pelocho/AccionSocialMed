@@ -17,6 +17,7 @@ import gestor.gestorMainView;
 import home.homeView;
 
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -72,16 +73,16 @@ public class loginView extends funcionesLogin{
 		frmAccionsocialmed.setBounds(100, 100, 412, 200);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
-		
+
 		JLabel lblCorreo = new JLabel("Correo:");
 		lblCorreo.setBounds(10, 41, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblCorreo);
-		
+
 		textField = new JTextField();
 		textField.setBounds(102, 38, 273, 20);
 		frmAccionsocialmed.getContentPane().add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setBounds(10, 72, 82, 14);
 		frmAccionsocialmed.getContentPane().add(lblContrasea);
@@ -90,11 +91,11 @@ public class loginView extends funcionesLogin{
 		lblIniciarSesin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblIniciarSesin.setBounds(10, 11, 132, 14);
 		frmAccionsocialmed.getContentPane().add(lblIniciarSesin);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(102, 69, 273, 20);
 		frmAccionsocialmed.getContentPane().add(passwordField);
-		
+
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(102, 127, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnLogin);
@@ -134,9 +135,7 @@ public class loginView extends funcionesLogin{
 						}
 						frmAccionsocialmed.dispose();
 					} else {
-						JDialog d = new JDialog(frmAccionsocialmed, "Datos incorrectos", true);
-						d.setLocationRelativeTo(frmAccionsocialmed);
-						d.setVisible(true);
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Datos incorrectos");
 					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
