@@ -107,8 +107,8 @@ public class gestorAnadirONG {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						boolean ok = false;
-						if (textField.getText().equals(textField_1.getText())  && passwordField.getText().equals(passwordField_1.getText()) ) {
-						funcionesGestor.insertarONG(textField.getText(),passwordField.getText());
+						if (textField.getText().equals(textField_1.getText())  && new String(passwordField.getPassword()).equals(new String(passwordField_1.getPassword()))) {
+						funcionesGestor.insertarONG(textField.getText(),new String(passwordField.getPassword()));
 						ok = true;
 							if(ok ==true) {
 								frmAccionsocialmed.dispose();
