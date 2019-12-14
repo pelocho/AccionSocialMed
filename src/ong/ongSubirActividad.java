@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
+import java.awt.Color;
 
 public class ongSubirActividad extends funcionesONG{
 
@@ -102,10 +103,12 @@ public class ongSubirActividad extends funcionesONG{
 		frmAccionsocialmed.getContentPane().add(lblDescripcinDelProyecto);
 
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setBounds(10, 570, 75, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolver);
 
 		JButton btnSubir = new JButton("Subir");
+		btnSubir.setBackground(Color.LIGHT_GRAY);
 		btnSubir.setBounds(192, 570, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnSubir);
 
