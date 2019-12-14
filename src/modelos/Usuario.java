@@ -97,7 +97,7 @@ public class Usuario {
 	}
 
 
-	public static List<Usuario> ListaUsuarios(){
+	public static List<Usuario> listaUsuarios(){
 		// M�todo de clase que devuelve la lista con todos los usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
 		MySQLBD miBD = new MySQLBD();
