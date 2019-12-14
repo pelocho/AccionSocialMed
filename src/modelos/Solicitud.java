@@ -49,7 +49,7 @@ public class Solicitud {
 	}
 	
 	public Solicitud(int idSolicitud, String solicitante, String correoSolicitante, int actividad,
-						boolean aprobadaPorPDI, boolean aprobadaPorONG, boolean rechazadaPorPDI, boolean rechazadaPorONG) {
+						boolean aprobadaPorPDI, boolean aprobadaPorONG, boolean rechazadaPorPDI, boolean rechazadaPorONG) throws Exception {
 		this.idSolicitud = idSolicitud;
 		this.solicitante = solicitante;
 		this.correoSolicitante = correoSolicitante;
@@ -59,6 +59,7 @@ public class Solicitud {
 		this.rechazadaPorPDI = rechazadaPorPDI;
 		this.rechazadaPorONG = rechazadaPorONG;
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.insert("INSERT INTO `eef_primera_iteracion`.`solicitud` (`idSolicitud`, `Solicitante`, `CorreoSolicitante`, "
 				+ "`Actividad`, `AprobadaPorPDI`, `AprobadaPorONG`, `RechazadaPorPDI`, `RechazadaPorONG`) VALUES ('"+ 
 				this.idSolicitud + "', '" + this.solicitante + "', '" + this.correoSolicitante + "', '" + this.actividad +
