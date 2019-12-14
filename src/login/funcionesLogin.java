@@ -23,7 +23,6 @@ public class funcionesLogin {
 		bd.readDataBase();
 		List<String[]> usuario = null;
 		usuario = bd.selectForLogin("SELECT * FROM eef_primera_iteracion.ong WHERE Correo='"+user+"' AND Contraseña='"+passwd+"'");
-		System.out.print(usuario.size());
 		if (usuario.size() == 1) {
 			acceso = true;
 			
