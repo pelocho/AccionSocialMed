@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import login.loginView;
 import modelos.Solicitud;
@@ -59,14 +60,11 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 399, 239);
 		contentPane.add(scrollPane);
-		int i = 1;
-		Solicitud prueba1 = new Solicitud(i);
 		
 		table = new JTable();
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{prueba1.getSolicitante(), prueba1.getCorreoSolicitante(), prueba1.getActividad()},
 			},
 			new String[] {
 				"T\u00EDtulo", "Lugar", "Horas"
@@ -78,18 +76,20 @@ public class ongMisActividadesTableView extends ongListaActividades {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
 		});
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(207);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(253);
 		table.getColumnModel().getColumn(2).setResizable(false);
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		
+		for (int i = 0; i<listaActividades(user).size(); i++) {
+			Object[] prueba = {listaActividades(user).get(i)[1],listaActividades(user).get(i)[7], Integer.parseInt(listaActividades(user).get(i)[2])};
+			modelo.addRow(prueba);
+		}
+		
+
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Ver detalles");
@@ -110,7 +110,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ongMainView.main(null);
+				//ongMainView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});

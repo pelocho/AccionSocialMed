@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
+import home.homeView;
 import login.loginView;
 
 import javax.swing.JLabel;
@@ -88,7 +89,7 @@ public class ongMainView {
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loginView.main(null);
+				homeView.main(null);
 				frmAccionsocialmed.dispose();
 			}
 		});
@@ -96,7 +97,6 @@ public class ongMainView {
 		btnMisProyectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ongMisActividadesTableView.main(user);
-				frmAccionsocialmed.dispose();
 			}
 		});
 	}
