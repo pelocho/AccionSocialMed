@@ -99,5 +99,10 @@ public class ongMainView {
 				ongMisActividadesTableView.main(user);
 			}
 		});
+		btnActividades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ongActividadesView.main(user);
+			}
+		});
 	}
 }

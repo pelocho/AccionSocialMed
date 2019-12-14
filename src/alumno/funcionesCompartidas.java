@@ -16,7 +16,7 @@ import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Usuario;
 
-public class funcionesAlumno {
+public class funcionesCompartidas {
 	
 	public List<Actividad> listaOrdenada(Usuario us) throws Exception{
 		List<Actividad> lista = Actividad.listaActividades();

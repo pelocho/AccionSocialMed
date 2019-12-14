@@ -19,6 +19,15 @@ public class ongListaActividades{
 		return actividades;
 	}
 	
+	public List<String[]> listaActividades() throws Exception {
+		
+		bd.readDataBase();
+		List<String[]> actividades = null;
+		actividades = bd.select("SELECT * FROM actividades");
+		
+		return actividades;
+	}
+	
 	public String name (String ong, int i) throws Exception {
 		String name = null;
 		
