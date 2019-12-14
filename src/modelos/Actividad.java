@@ -7,8 +7,8 @@ import java.util.List;
 
 import main.MySQLBD;
 
-public class Actividad {
-	private int codigo, horas;
+public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
+	private int codigo, tipo, horas, asignaturaAsociada;
 	private String titulo,descripcion,ong,lugar;
 	private Date fecha_inicio,fecha_fin;
 	private int[] tipoActividad;
@@ -23,12 +23,14 @@ public class Actividad {
 		String[] actividad = bd.select("SELECT * FROM eef_primera_iteracion.actividades WHERE codigo = '"+codigo+"';").get(0);
 		this.codigo = codigo;
 		this.titulo = actividad[1];
-		this.horas = Integer.parseInt(actividad[2]);
-		this.fecha_inicio = (Date) sdt.parse(actividad[3]);
-		this.fecha_fin = (Date) sdt.parse(actividad [4]);
-		this.descripcion = actividad[5];
-		this.ong = actividad [6];
-		this.lugar = actividad[7];
+		this.tipo = Integer.parseInt(actividad[2]);
+		this.horas = Integer.parseInt(actividad[3]);
+		this.fecha_inicio = (Date) sdt.parse(actividad[4]);
+		this.fecha_fin = (Date) sdt.parse(actividad [5]);
+		this.descripcion = actividad[6];
+		this.ong = actividad [7];
+		this.lugar = actividad[8];
+		this.asignaturaAsociada = Integer.parseInt(actividad[9]);
 		List<String[]> listAux = bd.select("SELECT idTipoActividad FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad='"+this.codigo+"'");
 	    int i = 0;
 		for(String[] act : listAux) {
@@ -69,8 +71,19 @@ public class Actividad {
 	public void setCodigo(int codigo) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET Codigo = '" + codigo + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.codigo = codigo;
+	}
+	
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		MySQLBD bd = new MySQLBD();
+		bd.update("UPDATE actividades SET Tipo = '" + tipo + "' "
+				+ "WHERE Codigo ='" + this.codigo + "';");
+		this.tipo = tipo;
 	}
 
 	public int getHoras() {
@@ -80,7 +93,7 @@ public class Actividad {
 	public void setHoras(int horas) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET Horas = '" + horas + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.horas = horas;
 	}
 
@@ -91,7 +104,7 @@ public class Actividad {
 	public void setTitulo(String titulo) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET Titulo = '" + titulo + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.titulo = titulo;
 	}
 
@@ -102,7 +115,7 @@ public class Actividad {
 	public void setDescripcion(String descripcion) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET Descripcion = '" + descripcion + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.descripcion = descripcion;
 	}
 
@@ -113,7 +126,7 @@ public class Actividad {
 	public void setOng(String ong) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET ONG = '" + ong + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.ong = ong;
 	}
 
@@ -124,7 +137,7 @@ public class Actividad {
 	public void setLugar(String lugar) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET Lugar = '" + lugar + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.lugar = lugar;
 	}
 
@@ -135,7 +148,7 @@ public class Actividad {
 	public void setFecha_inicio(Date fecha_inicio) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET Fecha_Inicio = '" + fecha_inicio + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.fecha_inicio = fecha_inicio;
 	}
 
@@ -146,8 +159,19 @@ public class Actividad {
 	public void setFecha_fin(Date fecha_fin) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE actividades SET Fecha_Fin = '" + fecha_fin + "' "
-				+ "WHERE Codigo ='"+ this.codigo + "';");
+				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.fecha_fin = fecha_fin;
+	}
+	
+	public int getAsignaturaAsociada() {
+		return asignaturaAsociada;
+	}
+
+	public void setAsignaturaAsociada(int asignaturaAsociada) {
+		MySQLBD bd = new MySQLBD();
+		bd.update("UPDATE actividades SET AsignaturaAsociada = '" + asignaturaAsociada + "' "
+				+ "WHERE Codigo ='"+ this.codigo + "';");
+		this.asignaturaAsociada = asignaturaAsociada;
 	}
 
 	public int[] getTipoActividad() {
