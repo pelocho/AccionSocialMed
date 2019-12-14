@@ -45,11 +45,11 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBounds(637, 181, 111, 23);
+		btnNewButton.setBounds(516, 11, 111, 23);
 		getContentPane().add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 617, 394);
+		scrollPane.setBounds(10, 39, 738, 366);
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -73,7 +73,7 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnNewButton_1 = new JButton("Rechazar");
-		btnNewButton_1.setBounds(637, 293, 111, 23);
+		btnNewButton_1.setBounds(637, 11, 111, 23);
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnVerAlumno = new JButton("Ver perfil");
@@ -81,7 +81,11 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnVerAlumno.setBounds(637, 77, 111, 23);
+		btnVerAlumno.setBounds(395, 11, 111, 23);
 		getContentPane().add(btnVerAlumno);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 11, 89, 23);
+		getContentPane().add(btnVolver);
 	}
 }
