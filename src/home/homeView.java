@@ -61,7 +61,7 @@ public class homeView {
 		frmAccionsocialmed.getContentPane().add(lblbienvenidoAAccinsocialmed);
 		
 		JButton btnIniciarSesin = new JButton("iDUMA");
-		btnIniciarSesin.setBounds(167, 297, 133, 23);
+		btnIniciarSesin.setBounds(179, 297, 144, 23);
 		frmAccionsocialmed.getContentPane().add(btnIniciarSesin);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -70,7 +70,7 @@ public class homeView {
 		frmAccionsocialmed.getContentPane().add(lblNewLabel);
 		
 		JButton btnIniciarSesinOng = new JButton("Iniciar Sesi\u00F3n ONG");
-		btnIniciarSesinOng.setBounds(374, 297, 123, 23);
+		btnIniciarSesinOng.setBounds(358, 297, 144, 23);
 		frmAccionsocialmed.getContentPane().add(btnIniciarSesinOng);
 		
 		btnIniciarSesin.addActionListener(new ActionListener() {
