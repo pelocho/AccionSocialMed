@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
-import login.loginView;
+import home.homeView;
 import modelos.Usuario;
 import ong.ongMainView;
 import ong.ongMisActividades;
@@ -81,7 +81,6 @@ public class pdiMainView {
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesONG);
 		
 		btnActividades.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				actividadesView.main(null);
 				frmAccionsocialmed.dispose();
@@ -99,7 +98,7 @@ public class pdiMainView {
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loginView.main(null);
+				homeView.main(null);
 				frmAccionsocialmed.dispose();
 			}
 		});

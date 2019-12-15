@@ -1,6 +1,7 @@
 package modelos;
 
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,10 @@ import main.MySQLBD;
 public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 	private int codigo, tipo, horas, asignaturaAsociada;
 	private String titulo,descripcion,ong,lugar;
-	private Date fecha_inicio,fecha_fin;
+	java.util.Date fecha_inicio, fecha_fin;
 	private int[] tipoActividad;
 	private int[] areaActividad;
-	private static SimpleDateFormat sdt;
+	private static SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
 	
 	
 	public Actividad(int codigo) throws Exception {
@@ -21,12 +22,13 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		bd.readDataBase();
 		
 		String[] actividad = bd.select("SELECT * FROM eef_primera_iteracion.actividades WHERE codigo = '"+codigo+"';").get(0);
+		
 		this.codigo = codigo;
 		this.titulo = actividad[1];
 		this.tipo = Integer.parseInt(actividad[2]);
-		this.horas = Integer.parseInt(actividad[3]);
-		this.fecha_inicio = (Date) sdt.parse(actividad[4]);
-		this.fecha_fin = (Date) sdt.parse(actividad [5]);
+		this.horas = Integer.parseInt(actividad[3]);		
+		this.fecha_inicio =sdt.parse(actividad[4]);
+		this.fecha_fin =sdt.parse(actividad [5]);
 		this.descripcion = actividad[6];
 		this.ong = actividad [7];
 		this.lugar = actividad[8];
@@ -42,10 +44,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		for(String[] act : listAux1) {
 			areaActividad[i] = Integer.parseInt(act[0]);
 			i++;
-		}
-		
-		//this.tipoactividad = bd.select("SELECT idTipoActividad FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad='"+this.codigo+"'").get(i);
-		
+		}		
 	}
 	
 	public static List<Actividad> listaActividades() throws Exception{
@@ -59,8 +58,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 			Actividad aux = new Actividad(Integer.parseInt(sol[0]));
 			res.add(aux);
 		}
-		
-		
+				
 		return res;
 	}
 
@@ -84,6 +82,18 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		bd.update("UPDATE actividades SET Tipo = '" + tipo + "' "
 				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.tipo = tipo;
+	}
+	
+	public String getTipoToString() {
+		if(getTipo() == 0) {
+			return "Voluntariado";
+		}else if(getTipo() == 1) {
+			return "Aprendizaje y Servicio";
+		}else if(getTipo() == 2) {
+			return "Investigación";
+		}else {
+			return "El tipo no es ni 0, ni 1 ni 2";
+		}
 	}
 
 	public int getHoras() {
@@ -141,7 +151,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.lugar = lugar;
 	}
 
-	public Date getFecha_inicio() {
+	public java.util.Date getFecha_inicio() {
 		return fecha_inicio;
 	}
 
@@ -152,7 +162,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.fecha_inicio = fecha_inicio;
 	}
 
-	public Date getFecha_fin() {
+	public java.util.Date getFecha_fin() {
 		return fecha_fin;
 	}
 
@@ -173,6 +183,12 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 				+ "WHERE Codigo ='"+ this.codigo + "';");
 		this.asignaturaAsociada = asignaturaAsociada;
 	}
+	
+	public String getAsignaturaAsociadaToString() {
+		MySQLBD bd = new MySQLBD();
+		String[] asig = bd.selectFromDomamockup("SELECT name FROM courses WHERE id = '"+getCodigo()+"';").get(0);
+		return asig[0];
+	}
 
 	public int[] getTipoActividad() {
 		return tipoActividad;
@@ -187,6 +203,17 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.tipoActividad = tipoActividad;
 	}
 
+	public String[] getTipoActividadToString() throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		String[] res = new String[getTipoActividad().length];
+		for(int i : getTipoActividad()) {
+			String[] tipo = bd.select("SELECT Titulo FROM tipoactividad WHERE idTipoActividad = '"+i+"';").get(0);
+			res[i] = tipo[0];
+		}
+		return res;
+	}
+	
 	public int[] getAreaActividad() {
 		return areaActividad;
 	}

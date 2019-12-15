@@ -7,6 +7,9 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import home.homeView;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,11 +23,11 @@ public class alumnoMainView {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					alumnoMainView window = new alumnoMainView();
+					alumnoMainView window = new alumnoMainView(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,14 +39,14 @@ public class alumnoMainView {
 	/**
 	 * Create the application.
 	 */
-	public alumnoMainView() {
-		initialize();
+	public alumnoMainView(String user) {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(alumnoMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -83,11 +86,11 @@ public class alumnoMainView {
 		scrollPane.setViewportView(table);
 		
 		JButton btnEditarPerfil = new JButton("Editar perfil");
-		btnEditarPerfil.setBounds(126, 11, 117, 23);
+		btnEditarPerfil.setBounds(230, 11, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnEditarPerfil);
 		
-		JLabel label = new JLabel("<Correo alumno>");
-		label.setBounds(10, 11, 106, 23);
+		JLabel label = new JLabel(user);
+		label.setBounds(10, 11, 200, 23);
 		frmAccionsocialmed.getContentPane().add(label);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
@@ -101,6 +104,13 @@ public class alumnoMainView {
 		});
 		btnVisualizarActividad.setBounds(10, 444, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
+		
+		btnCerrarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				homeView.main(null);
+				frmAccionsocialmed.dispose();
+			}
+		});
 		
 	}
 }

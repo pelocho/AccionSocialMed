@@ -85,7 +85,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
 		for (int i = 0; i<listaActividades(user).size(); i++) {
-			Object[] prueba = {listaActividades(user).get(i)[1],listaActividades(user).get(i)[7], Integer.parseInt(listaActividades(user).get(i)[2])};
+			Object[] prueba = {listaActividades(user).get(i)[1],listaActividades(user).get(i)[8], Integer.parseInt(listaActividades(user).get(i)[3])};
 			modelo.addRow(prueba);
 		}
 		

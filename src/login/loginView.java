@@ -123,7 +123,7 @@ public class loginView extends funcionesLogin{
 						tipoUsur = tipoDeUsuario(user,passwd);
 						cargarBD(user, passwd);
 						if(tipoUsur == 1) {
-							alumnoMainView.main(null);
+							alumnoMainView.main(user);
 						}else if(tipoUsur == 2) {
 							pdiMainView.main(user);
 						}else if(tipoUsur == 3) {

@@ -2,6 +2,7 @@ package home;
 
 import login.loginONGView;
 import login.loginView;
+import modelos.Actividad;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -39,15 +40,17 @@ public class homeView {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public homeView() {
+	public homeView() throws Exception {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize() {
+	private void initialize() throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.getContentPane().setForeground(Color.GRAY);
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -72,6 +75,7 @@ public class homeView {
 		JButton btnIniciarSesinOng = new JButton("Iniciar Sesi\u00F3n ONG");
 		btnIniciarSesinOng.setBounds(358, 297, 144, 23);
 		frmAccionsocialmed.getContentPane().add(btnIniciarSesinOng);
+		
 		
 		btnIniciarSesin.addActionListener(new ActionListener() {
 			

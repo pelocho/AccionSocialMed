@@ -11,7 +11,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import alumno.vistaActividad;
 import login.loginView;
+import main.MySQLBD;
 import modelos.Solicitud;
 
 import javax.swing.JButton;
@@ -85,22 +87,23 @@ public class ongActividadesView extends ongListaActividades {
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
 		for (int i = 0; i<listaActividades().size(); i++) {
-			Object[] prueba = {listaActividades().get(i)[1],listaActividades().get(i)[7], Integer.parseInt(listaActividades().get(i)[2])};
+			Object[] prueba = {listaActividades().get(i)[1],listaActividades().get(i)[8], Integer.parseInt(listaActividades().get(i)[3])};
 			modelo.addRow(prueba);
 		}
 		
 
 		scrollPane.setViewportView(table);
 		
-		JButton btnNewButton = new JButton("Ver detalles");
-		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnVerDetalles = new JButton("Ver detalles");
+		btnVerDetalles.setForeground(Color.BLACK);
+		btnVerDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnVerDetalles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(419, 71, 85, 23);
-		contentPane.add(btnNewButton);
+		
+		btnVerDetalles.setBounds(419, 71, 85, 23);
+		contentPane.add(btnVerDetalles);
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -112,6 +115,24 @@ public class ongActividadesView extends ongListaActividades {
 			public void actionPerformed(ActionEvent e) {
 				//ongMainView.main(user);
 				frmAccionsocialmed.dispose();
+			}
+		});
+		
+		
+		btnVerDetalles.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					System.out.println(id);
+					vistaActividad.main(id);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}				
 			}
 		});
 	}
