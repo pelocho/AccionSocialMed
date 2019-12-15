@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class ongActividadesView extends ongListaActividades {
 
@@ -51,6 +52,7 @@ public class ongActividadesView extends ongListaActividades {
 	 */
 	public ongActividadesView(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongActividadesView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 530, 300);
@@ -60,7 +62,7 @@ public class ongActividadesView extends ongListaActividades {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 399, 239);
+		scrollPane.setBounds(10, 41, 494, 210);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -87,7 +89,7 @@ public class ongActividadesView extends ongListaActividades {
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
 		for (int i = 0; i<listaActividades().size(); i++) {
-			Object[] prueba = {listaActividades().get(i)[1],listaActividades().get(i)[8], Integer.parseInt(listaActividades().get(i)[3])};
+			Object[] prueba = {listaActividades().get(i)[1],listaActividades().get(i)[7], Integer.parseInt(listaActividades().get(i)[2])};
 			modelo.addRow(prueba);
 		}
 		
@@ -95,6 +97,7 @@ public class ongActividadesView extends ongListaActividades {
 		scrollPane.setViewportView(table);
 		
 		JButton btnVerDetalles = new JButton("Ver detalles");
+		btnVerDetalles.setBackground(Color.LIGHT_GRAY);
 		btnVerDetalles.setForeground(Color.BLACK);
 		btnVerDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		btnVerDetalles.addActionListener(new ActionListener() {
@@ -102,12 +105,13 @@ public class ongActividadesView extends ongListaActividades {
 			}
 		});
 		
-		btnVerDetalles.setBounds(419, 71, 85, 23);
+		btnVerDetalles.setBounds(419, 11, 85, 23);
 		contentPane.add(btnVerDetalles);
 		
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("<");
+		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnVolver.setBounds(419, 139, 85, 23);
+		btnVolver.setBounds(10, 11, 45, 23);
 		contentPane.add(btnVolver);
 		
 		btnVolver.addActionListener(new ActionListener() {

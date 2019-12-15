@@ -71,9 +71,9 @@ public class vistaActividad {
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
-		Actividad actividad = new Actividad(id);
+		Actividad act = new Actividad(id);
 		
-		JLabel titulo = new JLabel(actividad.getTitulo());
+		JLabel titulo = new JLabel(act.getTitulo());
 		titulo.setFont(new Font("Gill Sans MT", Font.PLAIN, 18));
 		titulo.setBounds(61, 9, 249, 23);
 		frmAccionsocialmed.getContentPane().add(titulo);
@@ -107,13 +107,13 @@ public class vistaActividad {
 		lblConEstaActividad.setBounds(10, 366, 301, 20);
 		frmAccionsocialmed.getContentPane().add(lblConEstaActividad);
 		
-		JLabel actividades = new JLabel(actividad.getAsignaturaAsociadaToString());
+		JLabel actividades = new JLabel(act.getAsignaturaAsociadaToString());
 		actividades.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		actividades.setBounds(10, 386, 556, 14);
 		frmAccionsocialmed.getContentPane().add(actividades);
 		
 		TextArea textArea = new TextArea();
-		textArea.setText(actividad.getDescripcion());
+		textArea.setText(act.getDescripcion());
 		textArea.setEditable(false);
 		textArea.setBounds(10, 218, 354, 142);
 		frmAccionsocialmed.getContentPane().add(textArea);
@@ -135,12 +135,12 @@ public class vistaActividad {
 		label.setBounds(10, 67, 49, 14);
 		frmAccionsocialmed.getContentPane().add(label);
 		
-		JLabel ong = new JLabel(actividad.getOng());
+		JLabel ong = new JLabel(act.getOng());
 		ong.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		ong.setBounds(92, 45, 288, 14);
 		frmAccionsocialmed.getContentPane().add(ong);
 		
-		JLabel lugar = new JLabel(actividad.getLugar());
+		JLabel lugar = new JLabel(act.getLugar());
 		lugar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lugar.setBounds(57, 70, 335, 14);
 		frmAccionsocialmed.getContentPane().add(lugar);
@@ -155,22 +155,22 @@ public class vistaActividad {
 		areas.setBounds(61, 117, 309, 14);
 		frmAccionsocialmed.getContentPane().add(areas);
 		
-		JLabel horas = new JLabel(actividad.getHoras()+"");
+		JLabel horas = new JLabel(act.getHoras()+"");
 		horas.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		horas.setBounds(61, 142, 83, 14);
 		frmAccionsocialmed.getContentPane().add(horas);
 		
-		JLabel desde = new JLabel(actividad.getFecha_fin()+"");
+		JLabel desde = new JLabel(act.getFecha_fin()+"");
 		desde.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		desde.setBounds(57, 167, 87, 14);
 		frmAccionsocialmed.getContentPane().add(desde);
 		
-		JLabel hasta = new JLabel(actividad.getFecha_fin()+"");
+		JLabel hasta = new JLabel(act.getFecha_fin()+"");
 		hasta.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		hasta.setBounds(217, 167, 107, 14);
 		frmAccionsocialmed.getContentPane().add(hasta);
 		
-		JLabel tipo_actividad = new JLabel(actividad.getTipoToString());
+		JLabel tipo_actividad = new JLabel(act.getTipoToString());
 		tipo_actividad.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		tipo_actividad.setBounds(273, 415, 107, 14);
 		frmAccionsocialmed.getContentPane().add(tipo_actividad);
