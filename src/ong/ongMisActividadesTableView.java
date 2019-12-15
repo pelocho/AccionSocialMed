@@ -67,7 +67,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 			new Object[][] {
 			},
 			new String[] {
-				"T\u00EDtulo", "Lugar", "Horas"
+				"Titulo", "Lugar", "Horas"
 			}
 		) {
 			Class[] columnTypes = new Class[] {

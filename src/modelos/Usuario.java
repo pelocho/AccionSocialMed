@@ -7,9 +7,11 @@ import java.util.List;
 import main.MySQLBD;
 
 public class Usuario {
-	private int id, categoryId, dni, telefono;
-	private String email, passwd, nombre, primerApellido, segundoApellido, nacionalidad;
-	private int[] asignaturasCursadas, tipoIntereses, areaIntereses;
+	private int id, categoryId, telefono;
+	private String email, passwd, nombre, primerApellido, segundoApellido, nacionalidad, dni;
+	private int[] asignaturasCursadas = new int [10] ;
+	private int[] tipoIntereses = new int [10] ;
+	private int [] areaIntereses = new int [10] ;
 
 	public int[] getAsignaturasCursadas() {
 		return asignaturasCursadas;
@@ -60,20 +62,20 @@ public class Usuario {
 
 	}
 	
-	public Usuario(String correo) throws Exception { // Crear Objeto cargando de la base de datos DE EEF LA NUESTRA, NO LA OTRA
+	public Usuario(String correo) throws Exception { // Crear Objeto cargando de la base de datos DE EEF LA NUESTRA, NO LA Mockup
 		MySQLBD miBD = new MySQLBD();
 		miBD.readDataBase();
 
-		//Object[] tupla = miBD.select("SELECT * FROM eef_primera_iteracion.usuarios WHERE Correo='"+correo+"';").get(0);
+		Object[] tupla = miBD.select("SELECT * FROM eef_primera_iteracion.usuarios WHERE Correo='"+correo+"';").get(0);
 		this.email = correo ;
-		//this.dni = (int) tupla[1];
-		//this.nombre = (String) tupla[2];
-		//this.primerApellido = (String) tupla[3];
-		//this.segundoApellido = (String) tupla[4];
-		//this.nacionalidad = (String) tupla[5];
-		////this.telefono = (int) tupla[6] ;
-		//this.passwd = (String) tupla[7] ;
-		//this.categoryId = (int) tupla[9];
+		this.dni = (String) tupla[1];
+		this.nombre = (String) tupla[2];
+		this.primerApellido = (String) tupla[3];
+		this.segundoApellido = (String) tupla[4];
+		this.nacionalidad = (String) tupla[5];
+		//this.telefono = (int) tupla[6] ;
+		this.passwd = (String) tupla[7] ;
+		this.categoryId = Integer.parseInt((String)tupla[9]);
 		
 		//this.areaIntereses = 
 		//this.tipoIntereses = 

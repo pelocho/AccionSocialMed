@@ -9,6 +9,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import home.homeView;
+import modelos.Actividad;
+import modelos.Usuario;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -39,15 +41,17 @@ public class alumnoMainView {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public alumnoMainView(String user) {
+	public alumnoMainView(String user) throws Exception {
 		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize(String user) {
+	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(alumnoMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -59,19 +63,17 @@ public class alumnoMainView {
 		scrollPane.setBounds(10, 45, 700, 388);
 		frmAccionsocialmed.getContentPane().add(scrollPane);
 
-		table = new JTable();
+table = new JTable();
+		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
 			},
 			new String[] {
-				"T\u00EDtulo", "Tipo", "Descripci\u00F3n"
+				"Titulo", "Lugar", "Horas"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class
+				String.class, String.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -84,6 +86,15 @@ public class alumnoMainView {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(2).setPreferredWidth(485);
 		table.getColumnModel().getColumn(2).setMinWidth(1);
+		
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		
+		Usuario  al = new Usuario(user); 
+		
+		for (Actividad a : funcionesCompartidas.listaOrdenada(al)) {
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 		// Inserta todas las actividades de ese alumno de forma ordenada
+			modelo.addRow(prueba);
+		}
 		scrollPane.setViewportView(table);
 
 		JButton btnEditarPerfil = new JButton("Editar perfil");
