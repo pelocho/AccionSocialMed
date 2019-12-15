@@ -184,9 +184,10 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.asignaturaAsociada = asignaturaAsociada;
 	}
 	
-	public String getAsignaturaAsociadaToString() {
+	public String getAsignaturaAsociadaToString() throws Exception {
 		MySQLBD bd = new MySQLBD();
-		String[] asig = bd.selectFromDomamockup("SELECT name FROM courses WHERE id = '"+getCodigo()+"';").get(0);
+		bd.readDataBase();
+		String[] asig = bd.select("SELECT name FROM dumamockup.courses WHERE id = '"+getAsignaturaAsociada()+"';").get(0);
 		return asig[0];
 	}
 

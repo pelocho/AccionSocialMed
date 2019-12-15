@@ -8,7 +8,7 @@ import main.MySQLBD;
 public class Solicitud {
 	private int idSolicitud, actividad;
 	private String solicitante, correoSolicitante;
-	private boolean aprobadaPorPDI, aprobadaPorONG, rechazadaPorPDI, rechazadaPorONG;
+	private boolean aprobadaPorGestor, rechazadaPorGestor;
 	
 	public static List<Solicitud> listaSolicitudes() throws Exception{
 		List<Solicitud> res = new ArrayList<>();
@@ -34,10 +34,9 @@ public class Solicitud {
 		solicitante = solicitud[1];
 		correoSolicitante = solicitud[2];
 		actividad = Integer.parseInt(solicitud[3]);
-		aprobadaPorPDI = comprobarBool(Integer.parseInt(solicitud[4])); 
-		aprobadaPorONG = comprobarBool(Integer.parseInt(solicitud[5]));
-		rechazadaPorPDI = comprobarBool(Integer.parseInt(solicitud[6]));
-		rechazadaPorONG = comprobarBool(Integer.parseInt(solicitud[7]));
+		aprobadaPorGestor = comprobarBool(Integer.parseInt(solicitud[4])); 
+		rechazadaPorGestor = comprobarBool(Integer.parseInt(solicitud[5]));
+		
 	}
 
 	private boolean comprobarBool(int num) {
@@ -49,22 +48,21 @@ public class Solicitud {
 	}
 	
 	public Solicitud(int idSolicitud, String solicitante, String correoSolicitante, int actividad,
-						boolean aprobadaPorPDI, boolean aprobadaPorONG, boolean rechazadaPorPDI, boolean rechazadaPorONG) throws Exception {
+						boolean aprobadaPorGestor, boolean rechazadaPorGestor) throws Exception {
 		this.idSolicitud = idSolicitud;
 		this.solicitante = solicitante;
 		this.correoSolicitante = correoSolicitante;
 		this.actividad = actividad;
-		this.aprobadaPorPDI = aprobadaPorPDI; 
-		this.aprobadaPorONG = aprobadaPorONG;
-		this.rechazadaPorPDI = rechazadaPorPDI;
-		this.rechazadaPorONG = rechazadaPorONG;
+		this.aprobadaPorGestor = aprobadaPorGestor; 
+		this.rechazadaPorGestor = rechazadaPorGestor;
+
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		bd.insert("INSERT INTO `eef_primera_iteracion`.`solicitud` (`idSolicitud`, `Solicitante`, `CorreoSolicitante`, "
-				+ "`Actividad`, `AprobadaPorPDI`, `AprobadaPorONG`, `RechazadaPorPDI`, `RechazadaPorONG`) VALUES ('"+ 
+				+ "`Actividad`, `AprobadaPorGestor`, `RechazadaPorGestor`) VALUES ('"+ 
 				this.idSolicitud + "', '" + this.solicitante + "', '" + this.correoSolicitante + "', '" + this.actividad +
-				"', '" + transformarATinyInt(this.aprobadaPorPDI) + "', '" + transformarATinyInt(this.aprobadaPorONG) +
-				"', '" + transformarATinyInt(this.rechazadaPorPDI) + "', '" + transformarATinyInt(this.rechazadaPorONG) + "');");
+				"', '" + transformarATinyInt(this.aprobadaPorGestor) + "', '" + transformarATinyInt(this.rechazadaPorGestor) +
+				"');");
 	}
 
 	private int transformarATinyInt(boolean aprobado) {
@@ -120,49 +118,26 @@ public class Solicitud {
 		this.correoSolicitante = correoSolicitante;
 	}
 
-	public boolean isAprobadaPorPDI() {
-		return aprobadaPorPDI;
+	public boolean isAprobadaPorGestor() {
+		return aprobadaPorGestor;
 	}
 
-	public void setAprobadaPorPDI(boolean aprobadaPorPDI) {
+	public void setAprobadaPorGestor(boolean aprobadaPorPDI) {
 		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET aprobadaPorPDI = '" + transformarATinyInt(aprobadaPorPDI) + "' "
+		bd.update("UPDATE solicitud SET aprobadaPorGestor = '" + transformarATinyInt(aprobadaPorGestor) + "' "
 				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.aprobadaPorPDI = aprobadaPorPDI;
+		this.aprobadaPorGestor = aprobadaPorPDI;
 	}
 
-	public boolean isAprobadaPorONG() {
-		return aprobadaPorONG;
+
+	public boolean isRechazadaPorGestor() {
+		return rechazadaPorGestor;
 	}
 
-	public void setAprobadaPorONG(boolean aprobadaPorONG) {
+	public void setRechazadaPorGestor(boolean rechazadaPorGestor) {
 		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET aprobadaPorONG = '" + transformarATinyInt(aprobadaPorONG) + "' "
+		bd.update("UPDATE solicitud SET aprobadaPorGestor = '" + transformarATinyInt(rechazadaPorGestor) + "' "
 				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.aprobadaPorONG = aprobadaPorONG;
+		this.rechazadaPorGestor = rechazadaPorGestor;
 	}
-
-	public boolean isRechazadaPorPDI() {
-		return rechazadaPorPDI;
-	}
-
-	public void setRechazadaPorPDI(boolean rechazadaPorPDI) {
-		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET aprobadaPorONG = '" + transformarATinyInt(rechazadaPorPDI) + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.rechazadaPorPDI = rechazadaPorPDI;
-	}
-
-	public boolean isRechazadaPorONG() {
-		return rechazadaPorONG;
-	}
-
-	public void setRechazadaPorONG(boolean rechazadaPorONG) {
-		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET rechazadaPorONG = '" + transformarATinyInt(rechazadaPorONG) + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.rechazadaPorONG = rechazadaPorONG;
-	}
-	
-	
 }

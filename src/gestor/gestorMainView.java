@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import login.loginView;
-import ong.ongMisActividades;
+
 import java.awt.Color;
 
 public class gestorMainView {
