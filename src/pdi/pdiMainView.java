@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import alumno.vistaActividad;
 import home.homeView;
 import modelos.Usuario;
 import ong.ongMainView;
 import ong.ongSubirActividad;
-import pantallasCompartidas.actividadesView;
 
 public class pdiMainView {
 
@@ -81,7 +81,7 @@ public class pdiMainView {
 		
 		btnActividades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actividadesView.main(null);
+				//vistaActividad.main();
 				frmAccionsocialmed.dispose();
 			}
 		});
