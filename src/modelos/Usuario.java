@@ -7,8 +7,8 @@ import java.util.List;
 import main.MySQLBD;
 
 public class Usuario {
-	private int id, categoryId;
-	private String email, passwd, nombre, primerApellido, segundoApellido;
+	private int id, categoryId, dni, telefono;
+	private String email, passwd, nombre, primerApellido, segundoApellido, nacionalidad;
 	private int[] asignaturasCursadas, tipoIntereses, areaIntereses;
 
 	public int[] getAsignaturasCursadas() {
@@ -59,6 +59,31 @@ public class Usuario {
 		this.segundoApellido = (String) tupla[5];
 
 	}
+	
+	public Usuario(String correo) throws Exception { // Crear Objeto cargando de la base de datos DE EEF LA NUESTRA, NO LA OTRA
+		MySQLBD miBD = new MySQLBD();
+		miBD.readDataBase();
+
+		//Object[] tupla = miBD.select("SELECT * FROM eef_primera_iteracion.usuarios WHERE Correo='"+correo+"';").get(0);
+		this.email = correo ;
+		//this.dni = (int) tupla[1];
+		//this.nombre = (String) tupla[2];
+		//this.primerApellido = (String) tupla[3];
+		//this.segundoApellido = (String) tupla[4];
+		//this.nacionalidad = (String) tupla[5];
+		////this.telefono = (int) tupla[6] ;
+		//this.passwd = (String) tupla[7] ;
+		//this.categoryId = (int) tupla[9];
+		
+		//this.areaIntereses = 
+		//this.tipoIntereses = 
+		
+		//this.asignaturasCursadas = 
+		
+
+	}
+	
+	
 
 
 	public String toString() {
@@ -123,7 +148,7 @@ public class Usuario {
 
 
 	public static List<Usuario> listaUsuarios(){
-		// M�todo de clase que devuelve la lista con todos los usuarios
+		// Metodo de clase que devuelve la lista con todos los usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
 		MySQLBD miBD = new MySQLBD();
 
@@ -133,4 +158,6 @@ public class Usuario {
 		}
 		return lista;
 	}
+	
 }
+

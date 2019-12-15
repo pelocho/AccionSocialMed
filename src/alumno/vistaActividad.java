@@ -75,7 +75,7 @@ public class vistaActividad {
 		
 		JLabel titulo = new JLabel(actividad.getTitulo());
 		titulo.setFont(new Font("Gill Sans MT", Font.PLAIN, 18));
-		titulo.setBounds(61, 7, 249, 26);
+		titulo.setBounds(61, 9, 249, 23);
 		frmAccionsocialmed.getContentPane().add(titulo);
 		
 		JLabel lblTipo = new JLabel("Tipo(s):");

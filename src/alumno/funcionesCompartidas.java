@@ -18,9 +18,12 @@ import modelos.Usuario;
 
 public class funcionesCompartidas {
 	
-	public List<Actividad> listaOrdenada(Usuario us) throws Exception{
+	
+	
+	
+	
+	public static List<Actividad> listaOrdenada(Usuario us) throws Exception{
 		List<Actividad> lista = Actividad.listaActividades();
-		List<Actividad> res = new ArrayList<> ();
 
 		Map<Integer,Actividad> prioridad = new TreeMap<Integer, Actividad>();  // 0 Voluntariado     1 APS     2 Invest     
 		
@@ -45,7 +48,7 @@ public class funcionesCompartidas {
 		
 	
 	
-	private int calcularCompatibilidad(Usuario us, Actividad a) {
+	private static int calcularCompatibilidad(Usuario us, Actividad a) {
 		int area = calcularComunes(us.getAreaIntereses(),a.getAreaActividad() );
 		int tipo = calcularComunes(us.getTipoIntereses() , a.getTipoActividad() );
 		int asignatura = 0;
@@ -62,7 +65,7 @@ public class funcionesCompartidas {
 	}
 	
 	
-	private int calcularComunes(int[] a , int[]b) {
+	private static int calcularComunes(int[] a , int[]b) {
 		int res = 0;
 		for(int i = 0; i < a.length ; i++) {
 			for(int j = 0; j < b.length; j++) {

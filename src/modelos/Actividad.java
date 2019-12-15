@@ -52,7 +52,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT Codigo FROM actividades");
+		List<String[]> list = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades");
 		
 		for(String[] sol : list) {
 			Actividad aux = new Actividad(Integer.parseInt(sol[0]));
