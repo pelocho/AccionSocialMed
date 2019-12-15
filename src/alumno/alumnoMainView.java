@@ -90,7 +90,7 @@ public class alumnoMainView {
 		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
-		Usuario  al = new Usuario(user); 
+		Usuario al = new Usuario(user); 
 		
 		for (Actividad a : funcionesCompartidas.listaOrdenada(al)) {
 			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 		// Inserta todas las actividades de ese alumno de forma ordenada

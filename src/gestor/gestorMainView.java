@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import home.homeView;
 import login.loginView;
 
 import java.awt.Color;
@@ -87,7 +88,7 @@ public class gestorMainView {
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loginView.main(null);
+				homeView.main(null);
 				frmAccionsocialmed.dispose();
 			}
 		});

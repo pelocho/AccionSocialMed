@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 
 import main.MySQLBD;
@@ -97,7 +98,7 @@ public class relacionarAPSconAsignatura {
 				bd.update("UPDATE eef_primera_iteracion.actividades SET AsignaturaAsociada = '"+ID+"' WHERE (Codigo = '"+id+"');");
 				bd.update("UPDATE eef_primera_iteracion.solicitud SET AprobadaPorGestor = '1' WHERE (Actividad = '"+id+"');");
 				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '1' WHERE (Codigo = '"+id+"');");
-				
+				JOptionPane.showMessageDialog(frmAccionsocialmed, "La actividad ha sido añadida como ApS");
 				gestorSolicitudesActividad.main(user);
 				frmAccionsocialmed.dispose();
 				

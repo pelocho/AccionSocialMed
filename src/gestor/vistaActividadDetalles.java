@@ -215,7 +215,7 @@ public class vistaActividadDetalles {
 				bd.delete("DELETE FROM eef_primera_iteracion.inter_act_areaact WHERE idActividad = '"+id+"';");
 				bd.delete("DELETE FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad = '"+id+"';");
 				bd.delete("DELETE FROM eef_primera_iteracion.actividades WHERE Codigo = '"+id+"';");
-				
+				JOptionPane.showMessageDialog(frmAccionsocialmed, "Actividad rechazada");
 				frmAccionsocialmed.dispose();
 				frmAccionsocialmed.dispose();
 				gestorSolicitudesActividad.main(user);
@@ -234,7 +234,7 @@ public class vistaActividadDetalles {
 				}
 				bd.update("UPDATE eef_primera_iteracion.solicitud SET AprobadaPorGestor = '1' WHERE (Actividad = '"+id+"');");
 				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '2' WHERE (Codigo = '"+id+"');");
-				
+				JOptionPane.showMessageDialog(frmAccionsocialmed, "Actividad añadida como investigación");
 				frmAccionsocialmed.dispose();
 				frmAccionsocialmed.dispose();
 				gestorSolicitudesActividad.main(user);
@@ -253,7 +253,7 @@ public class vistaActividadDetalles {
 				}
 				bd.update("UPDATE eef_primera_iteracion.solicitud SET AprobadaPorGestor = '1' WHERE (Actividad = '"+id+"');");
 				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '0' WHERE (Codigo = '"+id+"');");
-				
+				JOptionPane.showMessageDialog(frmAccionsocialmed, "Actividad añadida como voluntariado");
 				frmAccionsocialmed.dispose();
 				frmAccionsocialmed.dispose();
 				gestorSolicitudesActividad.main(user);

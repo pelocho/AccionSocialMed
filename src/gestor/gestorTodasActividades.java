@@ -138,7 +138,6 @@ public class gestorTodasActividades {
 					bd.readDataBase();
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					System.out.println(id);
 					vistaActividadDetallesActs.main(id);
 				} catch (Exception e1) {
 					e1.printStackTrace();
