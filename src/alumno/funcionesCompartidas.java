@@ -21,17 +21,19 @@ public class funcionesCompartidas {
 
 		Map<Integer,Actividad> prioridad = new TreeMap<Integer, Actividad>();  // 0 Voluntariado     1 APS     2 Invest     
 		
-		for(Actividad a : lista) {									// 1 estudiante 2 pdi 3 pas  4 ong   5 gestor
-			if(a.getTipo() == 2) { // si es invest
-				if(us.getCategoryId() == 2 ) { // cuenta solo pa los pdi
+		for(Actividad a : lista) {	// 1 estudiante 2 pdi 3 pas  4 ong   5 gestor
+			if(a.getPlazasDisponibles() >0 && !us.estaParticipando(a) ) {
+				if(a.getTipo() == 2) { // si es invest
+					if(us.getCategoryId() == 2 ) { // cuenta solo pa los pdi
+						prioridad.put(calcularCompatibilidad(us,a),a);
+					}
+				}else if(a.getTipo() == 1) { // si es APS
+					if(us.getCategoryId() == 1) {	// cuenta solo pa los estudiantes
+						prioridad.put(calcularCompatibilidad(us,a),a);
+					}
+				}else {					// si es voluntariado cuenta para todos
 					prioridad.put(calcularCompatibilidad(us,a),a);
 				}
-			}else if(a.getTipo() == 1) { // si es APS
-				if(us.getCategoryId() == 1) {	// cuenta solo pa los estudiantes
-					prioridad.put(calcularCompatibilidad(us,a),a);
-				}
-			}else {					// si es voluntariado cuenta para todos
-				prioridad.put(calcularCompatibilidad(us,a),a);
 			}
 		}
 		List <Actividad> res = new ArrayList(prioridad.values() );
