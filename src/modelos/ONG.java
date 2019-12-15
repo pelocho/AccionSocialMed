@@ -38,7 +38,7 @@ public class ONG {
 		
 		List<String[]> listAux = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades WHERE ONG='"+this.correo+"';");
 	    int i = 0;
-	    actividades = new int[5];
+	    actividades = new int[listAux.size()];
 		for(String[] act : listAux) {
 			actividades[i] = Integer.parseInt(act[0]);
 			i++;
