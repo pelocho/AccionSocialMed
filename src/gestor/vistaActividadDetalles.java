@@ -188,7 +188,7 @@ public class vistaActividadDetalles {
 		lblPlazas.setBounds(10, 87, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblPlazas);
 		
-		JLabel label_1 = new JLabel("0");
+		JLabel label_1 = new JLabel(act.getPlazasDisponibles()+"");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_1.setBounds(67, 87, 49, 14);
 		frmAccionsocialmed.getContentPane().add(label_1);

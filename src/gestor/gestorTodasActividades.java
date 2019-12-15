@@ -73,11 +73,11 @@ public class gestorTodasActividades {
 			new Object[][] {
 			},
 			new String[] {
-				"T\u00EDtulo", "Lugar", "Horas"
+				"T\u00EDtulo", "Lugar", "Horas", "Plazas"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Integer.class
+				String.class, String.class, Integer.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -88,13 +88,14 @@ public class gestorTodasActividades {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(253);
 		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setPreferredWidth(78);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
-		List<Actividad> listaact = Actividad.listaActividades();
+		List<Actividad> listaact = Actividad.listaActividadesAceptadas();
 		
 		
 		for (Actividad a : listaact) {
-			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 	
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles() }; 	
 			modelo.addRow(prueba);
 		}
 		
@@ -138,7 +139,7 @@ public class gestorTodasActividades {
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
 					System.out.println(id);
-					vistaActividad.main(id);
+					vistaActividadDetallesActs.main(id);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}				

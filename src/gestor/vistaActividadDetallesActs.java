@@ -1,4 +1,4 @@
-package alumno;
+package gestor;
 
 import java.awt.EventQueue;
 
@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 
 import home.homeView;
+import main.MySQLBD;
 import modelos.Actividad;
 
 import javax.swing.JList;
@@ -31,7 +32,7 @@ import java.awt.TextArea;
 import java.awt.Font;
 import java.awt.Color;
 
-public class vistaActividad {
+public class vistaActividadDetallesActs {
 
 	private JFrame frmAccionsocialmed;
 
@@ -42,7 +43,7 @@ public class vistaActividad {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaActividad window = new vistaActividad(id);
+					vistaActividadDetallesActs window = new vistaActividadDetallesActs(id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +56,7 @@ public class vistaActividad {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public vistaActividad(int id) throws Exception {
+	public vistaActividadDetallesActs(int id) throws Exception {
 		initialize(id);
 	}
 
@@ -65,7 +66,7 @@ public class vistaActividad {
 	 */
 	private void initialize(int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividadDetallesActs.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 406, 504);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,10 +123,10 @@ public class vistaActividad {
 		lblDescripcinDeLa.setBounds(10, 213, 226, 20);
 		frmAccionsocialmed.getContentPane().add(lblDescripcinDeLa);
 		
-		JButton btnSolicitarEstaActividad = new JButton("Solicitar esta actividad");
-		btnSolicitarEstaActividad.setBackground(Color.LIGHT_GRAY);
-		btnSolicitarEstaActividad.setBounds(10, 432, 165, 23);
-		frmAccionsocialmed.getContentPane().add(btnSolicitarEstaActividad);
+		JButton btnVolun = new JButton("Convertir a voluntariado");
+		btnVolun.setBackground(Color.LIGHT_GRAY);
+		btnVolun.setBounds(10, 432, 165, 23);
+		frmAccionsocialmed.getContentPane().add(btnVolun);
 		
 		JLabel lblLugar = new JLabel("Organizaci\u00F3n:");
 		lblLugar.setBounds(10, 45, 83, 14);
@@ -192,18 +193,21 @@ public class vistaActividad {
 			}
 		});
 		
-	/*	btnSolicitarEstaActividad.addActionListener(new ActionListener() {
+		btnVolun.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean ok = enviarSolicitud();
-				if(ok) {
-					JOptionPane.showMessageDialog(frmAccionsocialmed, "Su solicitud ha sido enviada");
-				}else {
-					JOptionPane.showMessageDialog(frmAccionsocialmed, "Ha habido un error al enviar su solicitud");
+				MySQLBD bd = new MySQLBD();
+				try {
+					bd.readDataBase();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '0' WHERE (Codigo = '"+id+"');");
+				JOptionPane.showMessageDialog(frmAccionsocialmed, "Actividad covertida a voluntariado.");
 				
-				frmAccionsocialmed.dispose();
 			}
-		});*/
+		});
+
 	}
 }

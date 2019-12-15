@@ -73,11 +73,11 @@ public class gestorSolicitudesActividad {
 			new Object[][] {
 			},
 			new String[] {
-				"T\u00EDtulo", "Lugar", "Horas"
+				"T\u00EDtulo", "Lugar", "Horas", "Plazas"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Integer.class
+				String.class, String.class, Integer.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -88,6 +88,7 @@ public class gestorSolicitudesActividad {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(253);
 		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setPreferredWidth(65);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
 		MySQLBD bd = new MySQLBD();
@@ -99,7 +100,7 @@ public class gestorSolicitudesActividad {
 			Solicitud solicitud = solicitudes.get(i);
 			if (solicitud.isAprobadaPorGestor() == false && solicitud.isRechazadaPorGestor()== false) {
 				Actividad act = new Actividad(solicitud.getActividad());
-				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras()};
+				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
 				modelo.addRow(insert);
 			}
 		}

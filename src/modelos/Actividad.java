@@ -66,6 +66,21 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 
 		return res;
 	}
+	
+	public static List<Actividad> listaActividadesAceptadas() throws Exception{
+		List<Actividad> res = new ArrayList<>();
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+
+		List<String[]> list = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades WHERE Tipo != 4");
+
+		for(String[] sol : list) {
+			Actividad aux = new Actividad(Integer.parseInt(sol[0]));
+			res.add(aux);
+		}
+
+		return res;
+	}
 
 	public int getCodigo() {
 		return codigo;

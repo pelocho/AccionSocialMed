@@ -195,9 +195,9 @@ public class ongSubirActividad extends funcionesONG{
 		lblNmeroDePlazas.setBounds(10, 368, 104, 14);
 		frmAccionsocialmed.getContentPane().add(lblNmeroDePlazas);
 		
-		JLabel label = new JLabel("0");
-		label.setBounds(117, 368, 49, 14);
-		frmAccionsocialmed.getContentPane().add(label);
+		JSpinner Plazas = new JSpinner();
+		Plazas.setBounds(155, 362, 48, 20);
+		frmAccionsocialmed.getContentPane().add(Plazas);
 
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
@@ -216,11 +216,12 @@ public class ongSubirActividad extends funcionesONG{
 				String init_date = formater.format(fecha_inicio.getValue());
 				String end_date = formater.format(fecha_fin.getValue());
 				int total_horas = (int) horas.getValue();
+				int plazas = (int) Plazas.getValue();
 
 				String ong = user;
 				try {
 					boolean ok = false;
-					ok = subirActividad(name, sitio, descripc, init_date, end_date, total_horas, ong);
+					ok = subirActividad(name, sitio, descripc, init_date, end_date, total_horas, ong, plazas);
 					if(ok) {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "Proyecto creado y pendiente de revision");
 						frmAccionsocialmed.dispose();
