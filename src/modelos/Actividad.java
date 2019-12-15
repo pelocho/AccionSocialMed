@@ -109,7 +109,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		}else if(getTipo() == 1) {
 			return "Aprendizaje y Servicio";
 		}else if(getTipo() == 2) {
-			return "Investigaciï¿½n";
+			return "Investigación";
 		}else {
 			return "";
 		}
