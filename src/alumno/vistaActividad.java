@@ -145,12 +145,12 @@ public class vistaActividad {
 		lugar.setBounds(57, 70, 335, 14);
 		frmAccionsocialmed.getContentPane().add(lugar);
 		
-		JLabel tipos = new JLabel(actividad.getTipoActividadToString());
+		JLabel tipos = new JLabel(act.getTipoActividadToString());
 		tipos.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		tipos.setBounds(61, 92, 309, 14);
 		frmAccionsocialmed.getContentPane().add(tipos);
 		
-		JLabel areas = new JLabel(actividad.getAreaActividadToString());
+		JLabel areas = new JLabel(act.getAreaActividadToString());
 		areas.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		areas.setBounds(61, 117, 309, 14);
 		frmAccionsocialmed.getContentPane().add(areas);
