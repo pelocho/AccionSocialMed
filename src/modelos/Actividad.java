@@ -17,7 +17,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 	
 	
 	public Actividad(int codigo) throws Exception {
-		/*MySQLBD bd = new MySQLBD();
+		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
 		String[] actividad = bd.select("SELECT * FROM eef_primera_iteracion.actividades WHERE codigo = '"+codigo+"';").get(0);
@@ -45,10 +45,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		}
 		
 		//this.tipoactividad = bd.select("SELECT idTipoActividad FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad='"+this.codigo+"'").get(i);
-		*/
 		
-		
-		codigo = 2;
 	}
 	
 	public static List<Actividad> listaActividades() throws Exception{
