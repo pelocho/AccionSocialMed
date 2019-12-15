@@ -13,6 +13,9 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import main.MySQLBD;
+
 import javax.swing.JCheckBox;
 
 public class editarPerfilView extends funcionesEditarPerfil{
@@ -158,6 +161,52 @@ public class editarPerfilView extends funcionesEditarPerfil{
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
+				
+				MySQLBD bd = new MySQLBD();
+				try {
+					bd.readDataBase();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				int dni = Integer.parseInt(bd.select("SELECT DNI FROM eef_primera_iteracion.usuarios WHERE Correo = '" + user + "';").get(0)[0]);
+				//Si el alumno cambia sus preferencias hay que borrar las antiguas
+				bd.delete("DELETE * FROM TABLAALUMNO-TIPO WHERE DNI="+dni+";");
+				bd.delete("DELETE * FROM TABLAALUMNO-area WHERE DNI="+dni+";");
+				
+				//Preferencias tipo
+				if(chckbxSalud.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+1+", "+dni+");");
+				}
+				if(chckbxEducacin.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+2+", "+dni+");");
+				}
+				if(chckbxIntegracin.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+3+", "+dni+");");
+				}
+				if(chckbxSaludSexual.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+4+", "+dni+");");
+				}
+				if(chckbxNuevo.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+5+", "+dni+");");
+				}
+				//Preferencias area
+				if(chckbxAncianos.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+1+", "+dni+");");
+				}
+				if(chckbxInmigrantes.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+2+", "+dni+");");
+				}
+				if(chckbxNios.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+3+", "+dni+");");
+				}
+				if(chckbxNecesitados.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+4+", "+dni+");");
+				}
+				if(chckbxAdictos.isSelected()) {
+					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+5+", "+dni+");");
+				}
+				
 				if (ok) {
 					frmAccionsocialmed.dispose();
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Perfil editado correctamente");
