@@ -34,13 +34,15 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.lugar = actividad[8];
 		this.asignaturaAsociada = Integer.parseInt(actividad[9]);
 		List<String[]> listAux = bd.select("SELECT idTipoActividad FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad='"+this.codigo+"'");
-	    int i = 0;
+	    tipoActividad=new int[listAux.size()];
+		int i = 0;
 		for(String[] act : listAux) {
 			tipoActividad[i] = Integer.parseInt(act[0]);
 			i++;
 		}
 		List<String[]> listAux1 = bd.select("SELECT idAreaActividad FROM eef_primera_iteracion.inter_act_areaact WHERE idActividad='"+this.codigo+"'");
-	    i = 0;
+	    areaActividad = new int [listAux1.size()];
+		i = 0;
 		for(String[] act : listAux1) {
 			areaActividad[i] = Integer.parseInt(act[0]);
 			i++;

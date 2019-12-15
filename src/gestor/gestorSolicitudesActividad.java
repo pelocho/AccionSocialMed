@@ -1,5 +1,6 @@
 package gestor;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -12,22 +13,24 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import login.loginView;
+import main.MySQLBD;
+import modelos.Actividad;
 import modelos.Solicitud;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Toolkit;
 
-public class gestorSolicitudesActividad  {
+public class gestorSolicitudesActividad {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JFrame frmAccionsocialmed;
-	private Solicitud prueba;
 	/**
 	 * Launch the application.
 	 */
@@ -86,6 +89,20 @@ public class gestorSolicitudesActividad  {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		List<Solicitud> solicitudes= Solicitud.listaSolicitudes(); 
+		
+		for (int i = 0; i<solicitudes.size();i++) {
+			Solicitud solicitud = solicitudes.get(i);
+			if (solicitud.isAprobadaPorGestor() == false && solicitud.isRechazadaPorGestor()== false) {
+				Actividad act = new Actividad(solicitud.getActividad());
+				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras()};
+				modelo.addRow(insert);
+			}
+		}
+		
 	
 		
 
@@ -115,5 +132,7 @@ public class gestorSolicitudesActividad  {
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		
 	}
 }

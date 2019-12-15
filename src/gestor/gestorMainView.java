@@ -95,5 +95,12 @@ public class gestorMainView {
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		btnSolicitudesOng.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gestorSolicitudesActividad.main(user);
+			}
+		});
 	}
 }
