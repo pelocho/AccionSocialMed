@@ -214,7 +214,9 @@ public class vistaActividadDetalles {
 				bd.delete("DELETE FROM eef_primera_iteracion.solicitud WHERE Actividad = '"+id+"';");
 				bd.delete("DELETE FROM eef_primera_iteracion.inter_act_areaact WHERE idActividad = '"+id+"';");
 				bd.delete("DELETE FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad = '"+id+"';");
-				bd.delete("DELETE FROM eef_primera_iteracion.actividades WHERE Codigo = '"+id+"';");
+				//bd.delete("DELETE FROM eef_primera_iteracion.actividades WHERE Codigo = '"+id+"';");
+				bd.update("UPDATE eef_primera_iteracion.solicitud SET RechazadaPorGestor = '1' WHERE (idSolicitud = '"+id+"');");
+				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '3' WHERE (Codigo = '"+id+"');");
 				
 				frmAccionsocialmed.dispose();
 				frmAccionsocialmed.dispose();
