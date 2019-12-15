@@ -12,10 +12,7 @@ public class Usuario {
 	private int[] asignaturasCursadas = new int [10] ;
 	private int[] tipoIntereses = new int [10] ;
 	private int [] areaIntereses = new int [10] ;
-	private List<Actividad> participacion ;
-	
-	
-	
+	private List<Actividad> participacion = new ArrayList<>();
 
 	public int[] getAsignaturasCursadas() {
 		return asignaturasCursadas;
@@ -90,15 +87,14 @@ public class Usuario {
 			//this.asignaturasCursadas = 
 			
 			////////////////////////////////////
-			
 			List<String[]> strs = miBD.select("SELECT * FROM eef_primera_iteracion.participacion WHERE correoUsuario='"+correo+"';");
 			for(String[] str : strs) {
-				participacion.add(new Actividad(Integer.parseInt(str[1] ) ) );
+				participacion.add(new Actividad(Integer.parseInt(str[1])));
 			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.err.println("Error al cargar de la base de datos de eef en el consctructor de usuario") ;
+			System.err.println("Error al cargar de la base de datos de eef en el constructor de usuario") ;
 			e.printStackTrace();
 		}
 

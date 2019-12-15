@@ -64,7 +64,7 @@ public class alumnoMainView {
 		scrollPane.setBounds(10, 45, 700, 388);
 		frmAccionsocialmed.getContentPane().add(scrollPane);
 
-table = new JTable();
+		table = new JTable();
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -117,6 +117,7 @@ table = new JTable();
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
 		btnVisualizarActividad.setBounds(10, 444, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
 

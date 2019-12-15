@@ -32,14 +32,13 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.ong = actividad [7];
 		this.lugar = actividad[8];
 		this.asignaturaAsociada = Integer.parseInt(actividad[9]);
-		this.plazasDisponibles = Integer.parseInt(actividad[10] );
+		this.plazasDisponibles = Integer.parseInt(actividad[10]);
 
 		List<String[]> listAux = bd.select("SELECT idTipoActividad FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad='"+this.codigo+"'");
 		tipoActividad = new int[listAux.size()];
 
 	    int i = 0;
 		for(String[] act : listAux) {
-			System.out.println(act[0]);
 			tipoActividad[i] = Integer.parseInt(act[0]);
 			i++;
 		}
@@ -242,8 +241,13 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		for(int i = 0; i < res.length-1; i++) {
 			sb.append(res[i] + ", ");
 		}
-
-		sb.append(res[res.length-1]);
+		
+		if(res.length == 0) {
+			sb.append("No tiene tipos");
+		}else {
+			sb.append(res[res.length-1]);
+		}
+		
 		return sb.toString();
 	}
 
@@ -276,7 +280,12 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 			sb.append(res[i] + ", ");
 		}
 
-		sb.append(res[res.length-1]);
+		if(res.length == 0) {
+			sb.append("No tiene areas");
+		}else {
+			sb.append(res[res.length-1]);
+		}
+		
 		return sb.toString();
 	}
 	/*public Actividad (int codigo, String titulo, int horas, Date fecha_inicio, Date fecha_fin, String descripcion, String ong, String lugar) throws Exception {
@@ -298,3 +307,4 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 
 	}*/
 }
+
