@@ -4,10 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
+
+import main.MySQLBD;
+
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -19,11 +25,11 @@ public class relacionarAPSconAsignatura {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(int id, String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					relacionarAPSconAsignatura window = new relacionarAPSconAsignatura();
+					relacionarAPSconAsignatura window = new relacionarAPSconAsignatura( id, user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,14 +41,14 @@ public class relacionarAPSconAsignatura {
 	/**
 	 * Create the application.
 	 */
-	public relacionarAPSconAsignatura() {
-		initialize();
+	public relacionarAPSconAsignatura(int id, String user) {
+		initialize( id, user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(int id, String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(relacionarAPSconAsignatura.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -64,6 +70,10 @@ public class relacionarAPSconAsignatura {
 		frmAccionsocialmed.getContentPane().add(lblSeleccionarLaAsignatura);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Anatom\u00EDa Topogr\u00E1fica y Aplicativa", "Bases Neurofisiol\u00F3gicas de la Conducta Humana", "Aplicaciones de T\u00E9cnicas Moleculares en Patolog\u00EDa", "Biomec\u00E1nica Aplicada en Medicina y Pr\u00E1ctica Deportiva", "Farmacolog\u00EDa Social", "Salud Ambiental y Ecolog\u00EDa", "Arteriosclerosis y Factores de Riesgo Vascular", "Avances en Neurofisiolog\u00EDa del Sistema Nervioso Aut\u00F3nomo", "Habilidades B\u00E1sicas en Cirug\u00EDa Laparosc\u00F3pica", "Medicina Transfusional Perioperatoria", "Avances en Ciencias Forenses", "Los Medicamentos en los Ni\u00F1os", "Patolog\u00EDa Quir\u00FArgica Oral y Maxilofacial", "Urgencias en Patolog\u00EDa del Aparato Locomotor en el Ni\u00F1o", "Bases Microbiol\u00F3gicas para Tratamiento Antimicrobiano y Vacunolog\u00EDa", "Farmacolog\u00EDa de las Drogas de Abuso: Toxicoman\u00EDas", "Rehabilitaci\u00F3n y Medicina F\u00EDsica", "Farmacoterap\u00E9utica en Entornos Desfavorecidos", "T\u00E9cnicas de Evaluaci\u00F3n de la Composici\u00F3n Corporal", "Medicina del Deporte", "Fundamentos de la Investigaci\u00F3n en Medicina", "Gesti\u00F3n Sanitaria"}));
 		comboBox.setBackground(Color.LIGHT_GRAY);
 		comboBox.setBounds(10, 54, 454, 23);
@@ -73,5 +83,31 @@ public class relacionarAPSconAsignatura {
 		btnAceptar.setBackground(Color.LIGHT_GRAY);
 		btnAceptar.setBounds(375, 88, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptar);
+		
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MySQLBD bd = new MySQLBD();
+				try {
+					bd.readDataBase();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				int ID =Integer.parseInt((bd.select("SELECT id FROM dumamockup.courses WHERE name = '"+comboBox.getSelectedItem()+"';")).get(0)[0]);
+				bd.update("UPDATE eef_primera_iteracion.actividades SET AsignaturaAsociada = '"+ID+"' WHERE (Codigo = '"+id+"');");
+				bd.update("UPDATE eef_primera_iteracion.solicitud SET AprobadaPorGestor = '1' WHERE (Actividad = '"+id+"');");
+				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '1' WHERE (Codigo = '"+id+"');");
+				
+				gestorSolicitudesActividad.main(user);
+				frmAccionsocialmed.dispose();
+				
+				
+				
+				
+			}
+		});
+		
+		
+		
 	}
 }

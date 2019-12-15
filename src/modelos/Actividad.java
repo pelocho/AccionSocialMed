@@ -96,7 +96,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		}else if(getTipo() == 2) {
 			return "Investigaci�n";
 		}else {
-			return "El tipo no es ni 0, ni 1 ni 2";
+			return "";
 		}
 	}
 

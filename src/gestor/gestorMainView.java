@@ -48,33 +48,34 @@ public class gestorMainView {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(gestorMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 282, 295);
+		frmAccionsocialmed.setBounds(100, 100, 320, 358);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JButton btnAadirOng = new JButton("A\u00F1adir ONG");
 		btnAadirOng.setBackground(Color.LIGHT_GRAY);
-		btnAadirOng.setBounds(48, 149, 160, 23);
+		btnAadirOng.setBounds(62, 172, 182, 35);
 		frmAccionsocialmed.getContentPane().add(btnAadirOng);
 		
 		JButton btnActividades = new JButton("Actividades");
+		btnActividades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnActividades.setBackground(Color.LIGHT_GRAY);
-		btnActividades.setBounds(48, 47, 160, 23);
-		frmAccionsocialmed.getContentPane().add(btnActividades);
+		btnActividades.setBounds(62, 62, 182, 35);
 		
+		frmAccionsocialmed.getContentPane().add(btnActividades);
+		btnActividades.setVisible(false);
 		JButton btnSolicitudesOng = new JButton("Solicitudes ONG");
 		btnSolicitudesOng.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesOng.setBounds(48, 81, 160, 23);
+		btnSolicitudesOng.setBounds(62, 118, 182, 36);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesOng);
-		
-		JButton btnSolicitudesAlumnos = new JButton("Solicitudes Alumnos");
-		btnSolicitudesAlumnos.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesAlumnos.setBounds(48, 115, 160, 23);
-		frmAccionsocialmed.getContentPane().add(btnSolicitudesAlumnos);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
-		btnCerrarSesin.setBounds(48, 224, 160, 23);
+		btnCerrarSesin.setBounds(62, 251, 182, 35);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
 		JLabel lblcorreoGestor = new JLabel(user);

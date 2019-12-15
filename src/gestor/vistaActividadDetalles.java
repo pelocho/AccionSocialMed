@@ -247,5 +247,14 @@ public class vistaActividadDetalles {
 			}
 		});
 		
+		btnAceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//alumnoMainView.main(user);
+				relacionarAPSconAsignatura.main(id,user);
+				frmAccionsocialmed.dispose();
+			}
+		});
+		
 	}
 }
