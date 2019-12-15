@@ -35,8 +35,11 @@ public class funcionesCompartidas {
 				prioridad.put(calcularCompatibilidad(us,a),a);
 			}
 		}
+		List <Actividad> res = new ArrayList(prioridad.values() );
 		
-		return (List<Actividad>) prioridad.values();	
+		return res;
+		
+		
 	}
 		
 	private static int calcularCompatibilidad(Usuario us, Actividad a) {
@@ -53,9 +56,11 @@ public class funcionesCompartidas {
 	
 	private static int calcularComunes(int[] a , int[]b) {
 		int res = 0;
-		for(int i = 0; i < a.length ; i++) {
-			for(int j = 0; j < b.length; j++) {
-				if(a[i] == b[j]) res++;
+		if(a != null && b != null && a.length != 0 && b.length != 0 ) {
+			for(int i = 0; i < a.length ; i++) {
+				for(int j = 0; j < b.length; j++) {
+					if(a[i] == b[j]) res++;
+				}
 			}
 		}
 		return res;
