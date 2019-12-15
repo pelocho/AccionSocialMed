@@ -125,7 +125,7 @@ public class vistaActividadDetallesActs {
 		
 		JButton btnVolun = new JButton("Convertir a voluntariado");
 		btnVolun.setBackground(Color.LIGHT_GRAY);
-		btnVolun.setBounds(10, 432, 165, 23);
+		btnVolun.setBounds(10, 432, 211, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolun);
 		
 		JLabel lblLugar = new JLabel("Organizaci\u00F3n:");
