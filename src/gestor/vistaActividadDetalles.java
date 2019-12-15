@@ -68,7 +68,7 @@ public class vistaActividadDetalles {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividadDetalles.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 517, 507);
+		frmAccionsocialmed.setBounds(100, 100, 518, 528);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
@@ -80,7 +80,7 @@ public class vistaActividadDetalles {
 		frmAccionsocialmed.getContentPane().add(titulo);
 		
 		JLabel lblTipo = new JLabel("Tipo(s):");
-		lblTipo.setBounds(10, 92, 49, 14);
+		lblTipo.setBounds(10, 112, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblTipo);
 		
 		JButton btnVolver = new JButton("<");
@@ -89,29 +89,29 @@ public class vistaActividadDetalles {
 		frmAccionsocialmed.getContentPane().add(btnVolver);
 		
 		JLabel lblrea = new JLabel("\u00C1rea(s):");
-		lblrea.setBounds(10, 117, 49, 14);
+		lblrea.setBounds(10, 137, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblrea);
 		
 		JLabel lblHoras = new JLabel("Horas:");
-		lblHoras.setBounds(10, 142, 41, 14);
+		lblHoras.setBounds(10, 162, 41, 14);
 		frmAccionsocialmed.getContentPane().add(lblHoras);
 		
 		JLabel lblDesde = new JLabel("Desde:");
-		lblDesde.setBounds(10, 167, 49, 14);
+		lblDesde.setBounds(10, 187, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblDesde);
 		
 		JLabel lblHasta = new JLabel("Hasta:");
-		lblHasta.setBounds(269, 167, 41, 14);
+		lblHasta.setBounds(269, 187, 41, 14);
 		frmAccionsocialmed.getContentPane().add(lblHasta);
 		
 		TextArea textArea = new TextArea();
 		textArea.setText(act.getDescripcion());
 		textArea.setEditable(false);
-		textArea.setBounds(10, 218, 459, 142);
+		textArea.setBounds(10, 238, 459, 142);
 		frmAccionsocialmed.getContentPane().add(textArea);
 		
 		JLabel lblDescripcinDeLa = new JLabel("Descripci\u00F3n de la actividad:");
-		lblDescripcinDeLa.setBounds(10, 192, 226, 20);
+		lblDescripcinDeLa.setBounds(10, 212, 226, 20);
 		frmAccionsocialmed.getContentPane().add(lblDescripcinDeLa);
 		
 		JLabel lblLugar = new JLabel("Organizaci\u00F3n:");
@@ -134,51 +134,64 @@ public class vistaActividadDetalles {
 		
 		JLabel tipos = new JLabel(act.getTipoActividadToString());
 		tipos.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		tipos.setBounds(61, 92, 387, 14);
+		tipos.setBounds(61, 112, 387, 14);
 		frmAccionsocialmed.getContentPane().add(tipos);
 		
 		JLabel areas = new JLabel(act.getAreaActividadToString());
 		areas.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		areas.setBounds(61, 117, 371, 14);
+		areas.setBounds(61, 137, 371, 14);
 		frmAccionsocialmed.getContentPane().add(areas);
 		
 		JLabel horas = new JLabel(act.getHoras()+"");
 		horas.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		horas.setBounds(61, 142, 83, 14);
+		horas.setBounds(61, 162, 83, 14);
 		frmAccionsocialmed.getContentPane().add(horas);
 		
 		JLabel desde = new JLabel(act.getFecha_fin()+"");
 		desde.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		desde.setBounds(57, 167, 202, 14);
+		desde.setBounds(57, 187, 202, 14);
 		frmAccionsocialmed.getContentPane().add(desde);
 		
 		JLabel hasta = new JLabel(act.getFecha_fin()+"");
 		hasta.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		hasta.setBounds(341, 167, 150, 14);
+		hasta.setBounds(341, 187, 150, 14);
 		frmAccionsocialmed.getContentPane().add(hasta);
 		
 		JLabel tipo_actividad = new JLabel(act.getTipoToString());
 		tipo_actividad.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		tipo_actividad.setBounds(362, 404, 107, 14);
+		tipo_actividad.setBounds(362, 424, 107, 14);
 		frmAccionsocialmed.getContentPane().add(tipo_actividad);
 		
 		
 		JButton btnRechazar = new JButton("Rechazar");
+		btnRechazar.setBackground(Color.LIGHT_GRAY);
 		btnRechazar.setForeground(Color.RED);
-		btnRechazar.setBounds(237, 400, 89, 23);
+		btnRechazar.setBounds(237, 420, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
 		
 		JButton btnAceptar = new JButton("Aceptar como APS"); //1
-		btnAceptar.setBounds(30, 366, 167, 23);
+		btnAceptar.setBackground(Color.LIGHT_GRAY);
+		btnAceptar.setBounds(10, 386, 197, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptar);
 		
 		JButton btnAceptarInv = new JButton("Aceptar como investigacion");//2
-		btnAceptarInv.setBounds(30, 400, 167, 23);
+		btnAceptarInv.setBackground(Color.LIGHT_GRAY);
+		btnAceptarInv.setBounds(10, 420, 197, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptarInv);
 		
 		JButton btnAceptarVol = new JButton("Aceptar como voluntariado");//0
-		btnAceptarVol.setBounds(30, 434, 167, 23);
+		btnAceptarVol.setBackground(Color.LIGHT_GRAY);
+		btnAceptarVol.setBounds(10, 456, 197, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptarVol);
+		
+		JLabel lblPlazas = new JLabel("Plazas:");
+		lblPlazas.setBounds(10, 87, 49, 14);
+		frmAccionsocialmed.getContentPane().add(lblPlazas);
+		
+		JLabel label_1 = new JLabel("0");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		label_1.setBounds(67, 87, 49, 14);
+		frmAccionsocialmed.getContentPane().add(label_1);
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
