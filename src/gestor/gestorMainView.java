@@ -58,16 +58,11 @@ public class gestorMainView {
 		frmAccionsocialmed.getContentPane().add(btnAadirOng);
 		
 		JButton btnActividades = new JButton("Actividades");
-		btnActividades.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+		
 		btnActividades.setBackground(Color.LIGHT_GRAY);
 		btnActividades.setBounds(62, 62, 182, 35);
-		
 		frmAccionsocialmed.getContentPane().add(btnActividades);
-		btnActividades.setVisible(false);
+		
 		JButton btnSolicitudesOng = new JButton("Solicitudes ONG");
 		btnSolicitudesOng.setBackground(Color.LIGHT_GRAY);
 		btnSolicitudesOng.setBounds(62, 118, 182, 36);
@@ -101,6 +96,13 @@ public class gestorMainView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gestorSolicitudesActividad.main(user);
+			}
+		});
+
+		btnActividades.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gestorTodasActividades.main(user);
 			}
 		});
 	}

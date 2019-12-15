@@ -1,5 +1,4 @@
-package ong;
-
+package gestor;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -11,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import alumno.funcionesCompartidas;
 import alumno.vistaActividad;
 import login.loginView;
 import main.MySQLBD;
@@ -19,13 +19,14 @@ import modelos.Solicitud;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Toolkit;
 
-public class gestorTodasActividades extends {
+public class gestorTodasActividades {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -89,13 +90,13 @@ public class gestorTodasActividades extends {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
-		/*Actividad act = new Actividad ();
+		List<Actividad> listaact = Actividad.listaActividades();
 		
 		
-		for (int i = 0; i<Actividad.listaActividades().size(); i++) {
-			Object[] prueba = { Actividad.listaActividades().get(i)[1], Actividad.listaActividades().get(i)[7], Integer.parseInt(Actividad.listaActividades().get(i)[2])};
+		for (Actividad a : listaact) {
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 	
 			modelo.addRow(prueba);
-		}*/
+		}
 		
 
 		scrollPane.setViewportView(table);
