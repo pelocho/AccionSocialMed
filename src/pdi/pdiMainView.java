@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import home.homeView;
 import modelos.Usuario;
 import ong.ongMainView;
-import ong.ongMisActividades;
+import ong.ongListaActividades;
 import ong.ongSubirActividad;
 import pantallasCompartidas.actividadesView;
 

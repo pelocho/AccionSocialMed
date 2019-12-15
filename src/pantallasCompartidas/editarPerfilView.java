@@ -1,16 +1,21 @@
 package pantallasCompartidas;
 
 import java.awt.EventQueue;
+import pantallasCompartidas.funcionesEditarPerfil;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
-public class editarPerfilView {
+public class editarPerfilView extends funcionesEditarPerfil{
 
 	private JFrame frmAccionsocialmed;
 	private JTextField lugar;
@@ -20,11 +25,11 @@ public class editarPerfilView {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					editarPerfilView window = new editarPerfilView();
+					editarPerfilView window = new editarPerfilView(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,14 +41,14 @@ public class editarPerfilView {
 	/**
 	 * Create the application.
 	 */
-	public editarPerfilView() {
-		initialize();
+	public editarPerfilView(String user) {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(editarPerfilView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -135,5 +140,31 @@ public class editarPerfilView {
 		textField.setColumns(10);
 		textField.setBounds(147, 46, 149, 20);
 		frmAccionsocialmed.getContentPane().add(textField);
+		
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
+			}
+		});
+		
+		btnGuardarCambios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int telf = Integer.parseInt(telefono.getText());
+				String lugarPref = lugar.getText();
+				String contraseña = textField.getText();
+				Boolean ok = false;
+				try {
+					ok = editarAlumno(contraseña, telf, lugarPref, user);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				if (ok) {
+					frmAccionsocialmed.dispose();
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Perfil editado correctamente");
+				} else {
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Error al editar perfil");
+				}
+			}
+		});
 	}
 }
