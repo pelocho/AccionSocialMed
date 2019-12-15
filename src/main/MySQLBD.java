@@ -114,30 +114,6 @@ public class MySQLBD {
 		return list;
 	}
 	
-	public List<String[]> selectFromDomamockup(String query) {
-		ArrayList<String[]> list = new ArrayList<>();
-
-		try {
-			Statement stm = connection2.createStatement();
-			ResultSet rs = stm.executeQuery(query);
-			ResultSetMetaData rsmt = rs.getMetaData();
-
-			while (rs.next()) {
-				String [] sm = new String[rsmt.getColumnCount()];
-
-				for(int i = 0; i < sm.length; i++) {
-					sm[i] = rs.getString(i+1);
-				}
-
-				list.add(sm);
-			}
-		} catch (SQLException e) {
-			System.out.println("Error al ejecutar sentencia: " + query + "\nError: " + e.getMessage());
-		}
-
-		return list;
-	}
-
 	public String selectEscalarForLogin(String query) {
 		String result = null;
 
