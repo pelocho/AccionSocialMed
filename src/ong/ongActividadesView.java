@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
@@ -14,10 +15,12 @@ import javax.swing.table.TableModel;
 import alumno.vistaActividad;
 import login.loginView;
 import main.MySQLBD;
+import modelos.Actividad;
 import modelos.Solicitud;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -71,11 +74,11 @@ public class ongActividadesView extends ongListaActividades {
 			new Object[][] {
 			},
 			new String[] {
-				"T\u00EDtulo", "Lugar", "Horas"
+				"T\u00EDtulo", "ONG", "Lugar", "Horas", "Plazas"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Integer.class
+				String.class, String.class, String.class, Integer.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -84,12 +87,16 @@ public class ongActividadesView extends ongListaActividades {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(207);
 		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setPreferredWidth(253);
+		table.getColumnModel().getColumn(1).setPreferredWidth(215);
 		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(132);
+		table.getColumnModel().getColumn(3).setResizable(false);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		List<Actividad> listaact = Actividad.listaActividades();
 		
-		for (int i = 0; i<listaActividades().size(); i++) {
-			Object[] prueba = {listaActividades().get(i)[1],listaActividades().get(i)[7], Integer.parseInt(listaActividades().get(i)[2])};
+		
+		for (Actividad a : listaact) {
+			Object[] prueba = {a.getTitulo(),a.getOng(), a.getLugar(),a.getHoras(),a.getPlazasDisponibles() }; 	
 			modelo.addRow(prueba);
 		}
 		
@@ -132,12 +139,12 @@ public class ongActividadesView extends ongListaActividades {
 					bd.readDataBase();
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					System.out.println(id);
-					vistaActividad.main(id);
+					ongDetallesAct.main(id);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}				
 			}
 		});
+		
 	}
 }

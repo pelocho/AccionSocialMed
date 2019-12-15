@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
@@ -11,11 +12,16 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import alumno.vistaActividad;
+import gestor.vistaActividadDetallesActs;
 import login.loginView;
+import main.MySQLBD;
+import modelos.Actividad;
 import modelos.Solicitud;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -53,14 +59,14 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongMisActividadesTableView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 530, 300);
+		frmAccionsocialmed.setBounds(100, 100, 621, 385);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frmAccionsocialmed.setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 40, 494, 211);
+		scrollPane.setBounds(10, 40, 585, 295);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -69,11 +75,11 @@ public class ongMisActividadesTableView extends ongListaActividades {
 			new Object[][] {
 			},
 			new String[] {
-				"Titulo", "Lugar", "Horas"
+				"Titulo", "Lugar", "Horas", "Plazas", "Estado"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Integer.class
+				String.class, String.class, Integer.class, Integer.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -84,32 +90,53 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(253);
 		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(4).setResizable(false);
+		table.getColumnModel().getColumn(4).setPreferredWidth(129);
+		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
-		for (int i = 0; i<listaActividades(user).size(); i++) {
-			Object[] prueba = {listaActividades(user).get(i)[1],listaActividades(user).get(i)[8], Integer.parseInt(listaActividades(user).get(i)[3])};
+		List<Actividad> listaact = Actividad.listaActividades();
+		
+		String estado = ""; 
+		for (Actividad a : listaact) {
+			if (a.getTipo() == 4) {
+				estado = "Pendiente";
+			}else if (a.getTipo()==3) {
+				estado = "Rechazada";
+			}else {
+				estado = "Aceptada";
+			}
+			
+			
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),estado }; 	
 			modelo.addRow(prueba);
 		}
 		
 
 		scrollPane.setViewportView(table);
 		
-		JButton btnNewButton = new JButton("Ver detalles");
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnVerDetalles = new JButton("Ver detalles");
+		btnVerDetalles.setBackground(Color.LIGHT_GRAY);
+		btnVerDetalles.setForeground(Color.BLACK);
+		btnVerDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnVerDetalles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(419, 11, 85, 23);
-		contentPane.add(btnNewButton);
+		btnVerDetalles.setBounds(499, 11, 85, 23);
+		contentPane.add(btnVerDetalles);
 		
 		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		btnVolver.setBounds(10, 11, 46, 23);
 		contentPane.add(btnVolver);
+		
+		JButton btnEliminarRechazadas = new JButton("Eliminar rechazadas");
+		btnEliminarRechazadas.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnEliminarRechazadas.setBounds(276, 11, 126, 23);
+		contentPane.add(btnEliminarRechazadas);
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
@@ -118,5 +145,39 @@ public class ongMisActividadesTableView extends ongListaActividades {
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		btnEliminarRechazadas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MySQLBD bd = new MySQLBD();
+				try {
+					bd.readDataBase();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				bd.delete("DELETE FROM eef_primera_iteracion.actividades WHERE Tipo = '3';");
+				JOptionPane.showMessageDialog(frmAccionsocialmed, "Eliminadas actividades rechazadas");
+				frmAccionsocialmed.dispose();
+				ongMisActividadesTableView.main(user);
+			}
+		});
+		btnVerDetalles.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					ongDetallesAct.main(id);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}				
+			}
+		});
+		
 	}
 }
