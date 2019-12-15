@@ -129,7 +129,7 @@ public class loginView extends funcionesLogin{
 						}else if(tipoUsur == 2) {
 							pdiMainView.main(user);
 						}else if(tipoUsur == 3) {
-							pasMainView.main(null);
+							pasMainView.main(user);
 						}/*else if(tipoUsur == 4) {
 							ongMainView.main(user);
 						}*/else /*if(user.equals("admin") && passwd.equals("admin"))*/{

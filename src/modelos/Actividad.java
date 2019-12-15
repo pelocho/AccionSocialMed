@@ -9,7 +9,7 @@ import java.util.List;
 import main.MySQLBD;
 
 public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
-	private int codigo, tipo, horas, asignaturaAsociada;
+	private int codigo, tipo, horas, asignaturaAsociada, plazasDisponibles;
 	private String titulo,descripcion,ong,lugar;
 	java.util.Date fecha_inicio, fecha_fin;
 	private int[] tipoActividad;
@@ -32,6 +32,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.ong = actividad [7];
 		this.lugar = actividad[8];
 		this.asignaturaAsociada = Integer.parseInt(actividad[9]);
+		this.plazasDisponibles = Integer.parseInt(actividad[10] );
 
 		List<String[]> listAux = bd.select("SELECT idTipoActividad FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad='"+this.codigo+"'");
 		tipoActividad = new int[listAux.size()];
@@ -135,6 +136,24 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 
 	public String getOng() {
 		return ong;
+	}
+
+	public int getPlazasDisponibles() {
+		return plazasDisponibles;
+	}
+
+	public void setPlazasDisponibles(int plazasDisponibles) {
+		MySQLBD bd = new MySQLBD();
+		bd.update("UPDATE actividades SET ONG = '" + plazasDisponibles + "' "
+				+ "WHERE Codigo ='" + this.codigo + "';");
+		this.plazasDisponibles = plazasDisponibles;
+	}
+	
+	public void plazaMenos() {
+		MySQLBD bd = new MySQLBD();
+		bd.update("UPDATE actividades SET ONG = '" + plazasDisponibles-- + "' "
+				+ "WHERE Codigo ='" + this.codigo + "';");
+		plazasDisponibles --;
 	}
 
 	public void setOng(String ong) {

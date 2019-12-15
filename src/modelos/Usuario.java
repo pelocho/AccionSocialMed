@@ -12,6 +12,10 @@ public class Usuario {
 	private int[] asignaturasCursadas = new int [10] ;
 	private int[] tipoIntereses = new int [10] ;
 	private int [] areaIntereses = new int [10] ;
+	private List<Actividad> participacion ;
+	
+	
+	
 
 	public int[] getAsignaturasCursadas() {
 		return asignaturasCursadas;
@@ -62,27 +66,49 @@ public class Usuario {
 
 	}
 	
-	public Usuario(String correo) throws Exception { // Crear Objeto cargando de la base de datos DE EEF LA NUESTRA, NO LA Mockup
-		MySQLBD miBD = new MySQLBD();
-		miBD.readDataBase();
+	public Usuario(String correo)  { // Crear Objeto cargando de la base de datos DE EEF LA NUESTRA, NO LA Mockup
+		
+		try {
+			MySQLBD miBD = new MySQLBD();
+			miBD.readDataBase();
+			
+			
+			Object[] tupla = miBD.select("SELECT * FROM eef_primera_iteracion.usuarios WHERE Correo='"+correo+"';").get(0);
+			this.email = correo ;
+			this.dni = (String) tupla[1];
+			this.nombre = (String) tupla[2];
+			this.primerApellido = (String) tupla[3];
+			this.segundoApellido = (String) tupla[4];
+			this.nacionalidad = (String) tupla[5];
+			//this.telefono = (int) tupla[6] ;
+			this.passwd = (String) tupla[7] ;
+			this.categoryId = Integer.parseInt((String)tupla[9]);
+			
+			//this.areaIntereses = 
+			//this.tipoIntereses = 
+			
+			//this.asignaturasCursadas = 
+			
+			////////////////////////////////////
+			
+			List<String[]> strs = miBD.select("SELECT * FROM eef_primera_iteracion.participacion WHERE correoUsuario='"+correo+"';");
+			for(String[] str : strs) {
+				participacion.add(new Actividad(Integer.parseInt(str[1] ) ) );
+			}
 
-		Object[] tupla = miBD.select("SELECT * FROM eef_primera_iteracion.usuarios WHERE Correo='"+correo+"';").get(0);
-		this.email = correo ;
-		this.dni = (String) tupla[1];
-		this.nombre = (String) tupla[2];
-		this.primerApellido = (String) tupla[3];
-		this.segundoApellido = (String) tupla[4];
-		this.nacionalidad = (String) tupla[5];
-		//this.telefono = (int) tupla[6] ;
-		this.passwd = (String) tupla[7] ;
-		this.categoryId = Integer.parseInt((String)tupla[9]);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.err.println("Error al cargar de la base de datos de eef en el consctructor de usuario") ;
+			e.printStackTrace();
+		}
+
 		
-		//this.areaIntereses = 
-		//this.tipoIntereses = 
-		
-		//this.asignaturasCursadas = 
 		
 
+	}
+	
+	public boolean estaParticipando(Actividad a) {
+		return participacion.contains(a) ;
 	}
 	
 	
