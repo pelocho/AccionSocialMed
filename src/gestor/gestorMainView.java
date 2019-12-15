@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 
 import login.loginView;
 import ong.ongMisActividades;
+import java.awt.Color;
 
 public class gestorMainView {
 
@@ -52,22 +53,27 @@ public class gestorMainView {
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JButton btnAadirOng = new JButton("A\u00F1adir ONG");
+		btnAadirOng.setBackground(Color.LIGHT_GRAY);
 		btnAadirOng.setBounds(48, 149, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnAadirOng);
 		
 		JButton btnActividades = new JButton("Actividades");
+		btnActividades.setBackground(Color.LIGHT_GRAY);
 		btnActividades.setBounds(48, 47, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnActividades);
 		
 		JButton btnSolicitudesOng = new JButton("Solicitudes ONG");
+		btnSolicitudesOng.setBackground(Color.LIGHT_GRAY);
 		btnSolicitudesOng.setBounds(48, 81, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesOng);
 		
 		JButton btnSolicitudesAlumnos = new JButton("Solicitudes Alumnos");
+		btnSolicitudesAlumnos.setBackground(Color.LIGHT_GRAY);
 		btnSolicitudesAlumnos.setBounds(48, 115, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesAlumnos);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
 		btnCerrarSesin.setBounds(48, 224, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		

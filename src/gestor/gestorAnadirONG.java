@@ -18,6 +18,7 @@ import login.loginView;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import java.awt.Color;
 
 public class gestorAnadirONG {
 
@@ -101,10 +102,12 @@ public class gestorAnadirONG {
 		frmAccionsocialmed.getContentPane().add(passwordField_1);
 
 		JButton btnAadir = new JButton("A\u00F1adir");
+		btnAadir.setBackground(Color.LIGHT_GRAY);
 		btnAadir.setBounds(109, 164, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnAadir);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setBounds(258, 164, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolver);
 

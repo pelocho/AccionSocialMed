@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class alumnoMainView {
 
@@ -83,6 +84,7 @@ public class alumnoMainView {
 		scrollPane.setViewportView(table);
 		
 		JButton btnEditarPerfil = new JButton("Editar perfil");
+		btnEditarPerfil.setBackground(Color.LIGHT_GRAY);
 		btnEditarPerfil.setBounds(126, 11, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnEditarPerfil);
 		
@@ -91,10 +93,12 @@ public class alumnoMainView {
 		frmAccionsocialmed.getContentPane().add(label);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
 		btnCerrarSesin.setBounds(593, 11, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
 		JButton btnVisualizarActividad = new JButton("Ver actividad");
+		btnVisualizarActividad.setBackground(Color.LIGHT_GRAY);
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}

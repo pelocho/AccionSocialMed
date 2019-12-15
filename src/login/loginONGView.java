@@ -70,7 +70,7 @@ public class loginONGView extends funcionesLogin{
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(loginONGView.class.getResource("/imagenes/icono pequeno.png")));
-		frmAccionsocialmed.setBounds(100, 100, 412, 200);
+		frmAccionsocialmed.setBounds(100, 100, 412, 174);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
@@ -96,12 +96,14 @@ public class loginONGView extends funcionesLogin{
 		passwordField.setBounds(102, 69, 273, 20);
 		frmAccionsocialmed.getContentPane().add(passwordField);
 		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(102, 127, 89, 23);
+		JButton btnLogin = new JButton("Entrar");
+		btnLogin.setBackground(Color.LIGHT_GRAY);
+		btnLogin.setBounds(102, 100, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnLogin);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(219, 127, 89, 23);
+		btnVolver.setBackground(Color.LIGHT_GRAY);
+		btnVolver.setBounds(219, 100, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolver);
 		
 		/*JLabel lblRecordarContrasea = new JLabel("\u00BFHas olvidado tu contrase\u00F1a?");
