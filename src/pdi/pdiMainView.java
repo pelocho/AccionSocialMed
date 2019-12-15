@@ -55,6 +55,8 @@ public class pdiMainView {
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
+		Usuario pdi = new Usuario(user);
+		
 		JButton btnActividades = new JButton("Actividades");
 		btnActividades.setBounds(51, 44, 154, 23);
 		frmAccionsocialmed.getContentPane().add(btnActividades);
@@ -81,7 +83,7 @@ public class pdiMainView {
 		
 		btnActividades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//vistaActividad.main();
+				pdiActividadesView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});

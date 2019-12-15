@@ -187,10 +187,11 @@ public class vistaActividad {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//alumnoMainView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		
 		
 	/*	btnSolicitarEstaActividad.addActionListener(new ActionListener() {
 			@Override

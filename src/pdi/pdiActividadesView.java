@@ -1,26 +1,28 @@
-package alumno;
+package pdi;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-import pantallasCompartidas.editarPerfilView;
-
-import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import alumno.alumnoMainView;
+import alumno.funcionesCompartidas;
+import alumno.vistaActividad;
 import home.homeView;
+import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Usuario;
+import pantallasCompartidas.editarPerfilView;
 
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-
-public class alumnoMainView {
-
+public class pdiActividadesView {
 	private JFrame frmAccionsocialmed;
 	private JTable table;
 
@@ -31,7 +33,7 @@ public class alumnoMainView {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					alumnoMainView window = new alumnoMainView(user);
+					pdiActividadesView window = new pdiActividadesView(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +46,7 @@ public class alumnoMainView {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public alumnoMainView(String user) throws Exception {
+	public pdiActividadesView(String user) throws Exception {
 		initialize(user);
 	}
 
@@ -54,7 +56,7 @@ public class alumnoMainView {
 	 */
 	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(alumnoMainView.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiActividadesView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 736, 515);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,25 +108,35 @@ public class alumnoMainView {
 		label.setBounds(10, 11, 200, 23);
 		frmAccionsocialmed.getContentPane().add(label);
 
-		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
-		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
-		btnCerrarSesin.setBounds(593, 11, 117, 23);
-		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBackground(Color.LIGHT_GRAY);
+		btnVolver.setBounds(593, 11, 117, 23);
+		frmAccionsocialmed.getContentPane().add(btnVolver);
 
 		JButton btnVisualizarActividad = new JButton("Ver actividad");
 		btnVisualizarActividad.setBackground(Color.LIGHT_GRAY);
 		
+		btnVisualizarActividad.setBounds(10, 444, 117, 23);
+		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
+		
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					vistaActividad.main(id);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}		
 			}
 		});
 		
-		btnVisualizarActividad.setBounds(10, 444, 117, 23);
-		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
-
-		btnCerrarSesin.addActionListener(new ActionListener() {
+		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				homeView.main(null);
+				pdiMainView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
@@ -134,6 +146,5 @@ public class alumnoMainView {
 				editarPerfilView.main(user);
 			}
 		});
-
 	}
 }
