@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import alumno.vistaActividad;
 import login.loginView;
 import main.MySQLBD;
 import modelos.Actividad;
@@ -103,21 +104,18 @@ public class gestorSolicitudesActividad {
 			}
 		}
 		
-	
-		
-
 		scrollPane.setViewportView(table);
 		
-		JButton btnNewButton = new JButton("Ver detalles");
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton verDetalles = new JButton("Ver detalles");
+		verDetalles.setBackground(Color.LIGHT_GRAY);
+		verDetalles.setForeground(Color.BLACK);
+		verDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		verDetalles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(419, 11, 85, 23);
-		contentPane.add(btnNewButton);
+		verDetalles.setBounds(419, 11, 85, 23);
+		contentPane.add(verDetalles);
 		
 		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
@@ -130,6 +128,25 @@ public class gestorSolicitudesActividad {
 			public void actionPerformed(ActionEvent e) {
 				//ongMainView.main(user);
 				frmAccionsocialmed.dispose();
+			}
+		});
+		verDetalles.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					System.out.print(modelo.getValueAt(table.getSelectedRow(), 0));
+					
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					vistaActividadDetalles.main(id, user);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}				
+				
 			}
 		});
 		
