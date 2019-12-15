@@ -28,7 +28,7 @@ public class ONG {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		String[] ong = bd.select("SELECT * FROM ong WHERE Correo = " + correo + ";").get(0);
+		String[] ong = bd.select("SELECT * FROM ong WHERE Correo = '" + correo + "';").get(0);
 		this.correo = correo;
 		contrasena = ong[1];
 		nombre = ong[2];
@@ -38,6 +38,7 @@ public class ONG {
 		
 		List<String[]> listAux = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades WHERE ONG='"+this.correo+"';");
 	    int i = 0;
+	    actividades = new int[5];
 		for(String[] act : listAux) {
 			actividades[i] = Integer.parseInt(act[0]);
 			i++;

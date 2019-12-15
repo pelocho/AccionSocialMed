@@ -1,6 +1,7 @@
 package alumno;
 
 import java.awt.EventQueue;
+import pantallasCompartidas.editarPerfilView;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
@@ -123,6 +124,12 @@ table = new JTable();
 			public void actionPerformed(ActionEvent e) {
 				homeView.main(null);
 				frmAccionsocialmed.dispose();
+			}
+		});
+		
+		btnEditarPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editarPerfilView.main(user);
 			}
 		});
 

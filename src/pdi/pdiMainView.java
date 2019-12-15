@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import home.homeView;
 import modelos.Usuario;
 import ong.ongMainView;
-import ong.ongMisActividades;
 import ong.ongSubirActividad;
 import pantallasCompartidas.actividadesView;
 
@@ -57,11 +56,11 @@ public class pdiMainView {
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JButton btnActividades = new JButton("Actividades");
-		btnActividades.setBounds(66, 44, 126, 23);
+		btnActividades.setBounds(51, 44, 154, 23);
 		frmAccionsocialmed.getContentPane().add(btnActividades);
 		
 		JButton btnMisActividades = new JButton("Mis actividades");
-		btnMisActividades.setBounds(66, 78, 126, 23);
+		btnMisActividades.setBounds(51, 78, 154, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisActividades);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
@@ -73,11 +72,11 @@ public class pdiMainView {
 		frmAccionsocialmed.getContentPane().add(lblnombreDeLa);
 		
 		JButton btnSolicitudesDeAlumnos = new JButton("Solicitudes de Alumnos");
-		btnSolicitudesDeAlumnos.setBounds(66, 112, 126, 23);
+		btnSolicitudesDeAlumnos.setBounds(51, 112, 154, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesDeAlumnos);
 		
 		JButton btnSolicitudesONG = new JButton("Solicitudes de ONG");
-		btnSolicitudesONG.setBounds(66, 146, 126, 23);
+		btnSolicitudesONG.setBounds(51, 146, 154, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesONG);
 		
 		btnActividades.addActionListener(new ActionListener() {

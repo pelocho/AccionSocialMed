@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import login.loginView;
-import ong.ongMisActividades;
+
 import java.awt.Color;
 
 public class gestorMainView {
@@ -93,6 +93,13 @@ public class gestorMainView {
 			public void actionPerformed(ActionEvent e) {
 				loginView.main(null);
 				frmAccionsocialmed.dispose();
+			}
+		});
+		
+		btnSolicitudesOng.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gestorSolicitudesActividad.main(user);
 			}
 		});
 	}

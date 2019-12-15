@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Toolkit;
 import modelos.Usuario;
+import java.awt.Color;
 
 public class ongMainView {
 
@@ -56,14 +57,17 @@ public class ongMainView {
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JButton btnSubirProyecto = new JButton("Subir actividad");
+		btnSubirProyecto.setBackground(Color.LIGHT_GRAY);
 		btnSubirProyecto.setBounds(66, 44, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnSubirProyecto);
 		
 		JButton btnMisProyectos = new JButton("Mis actividades");
+		btnMisProyectos.setBackground(Color.LIGHT_GRAY);
 		btnMisProyectos.setBounds(66, 78, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisProyectos);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
 		btnCerrarSesin.setBounds(66, 210, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
@@ -72,10 +76,12 @@ public class ongMainView {
 		frmAccionsocialmed.getContentPane().add(lblnombreDeLa);
 		
 		JButton btnSolicitudes = new JButton("Solicitudes");
+		btnSolicitudes.setBackground(Color.LIGHT_GRAY);
 		btnSolicitudes.setBounds(66, 112, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudes);
 		
 		JButton btnActividades = new JButton("Actividades");
+		btnActividades.setBackground(Color.LIGHT_GRAY);
 		btnActividades.setBounds(66, 146, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnActividades);
 		
