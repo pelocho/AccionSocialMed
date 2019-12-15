@@ -1,4 +1,4 @@
-package alumno;
+package pantallasCompartidas;
 
 import java.awt.EventQueue;
 
