@@ -1,4 +1,5 @@
-package ong;
+package gestor;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -11,25 +12,25 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import alumno.vistaActividad;
 import login.loginView;
 import main.MySQLBD;
+import modelos.Actividad;
 import modelos.Solicitud;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Toolkit;
 
-public class ongActividadesView extends ongListaActividades {
+public class gestorSolicitudesActividad {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JFrame frmAccionsocialmed;
-	private Solicitud prueba;
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +38,7 @@ public class ongActividadesView extends ongListaActividades {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongActividadesView window = new ongActividadesView(user);
+					gestorSolicitudesActividad window = new gestorSolicitudesActividad(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,9 +51,9 @@ public class ongActividadesView extends ongListaActividades {
 	 * Create the frame.
 	 * @throws Exception 
 	 */
-	public ongActividadesView(String user) throws Exception {
+	public gestorSolicitudesActividad(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongActividadesView.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(gestorSolicitudesActividad.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 530, 300);
@@ -62,7 +63,7 @@ public class ongActividadesView extends ongListaActividades {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 41, 494, 210);
+		scrollPane.setBounds(10, 40, 494, 211);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -88,30 +89,40 @@ public class ongActividadesView extends ongListaActividades {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
-		for (int i = 0; i<listaActividades().size(); i++) {
-			Object[] prueba = {listaActividades().get(i)[1],listaActividades().get(i)[7], Integer.parseInt(listaActividades().get(i)[2])};
-			modelo.addRow(prueba);
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		List<Solicitud> solicitudes= Solicitud.listaSolicitudes(); 
+		
+		for (int i = 0; i<solicitudes.size();i++) {
+			Solicitud solicitud = solicitudes.get(i);
+			if (solicitud.isAprobadaPorGestor() == false && solicitud.isRechazadaPorGestor()== false) {
+				Actividad act = new Actividad(solicitud.getActividad());
+				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras()};
+				modelo.addRow(insert);
+			}
 		}
+		
+	
 		
 
 		scrollPane.setViewportView(table);
 		
-		JButton btnVerDetalles = new JButton("Ver detalles");
-		btnVerDetalles.setBackground(Color.LIGHT_GRAY);
-		btnVerDetalles.setForeground(Color.BLACK);
-		btnVerDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnVerDetalles.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("Ver detalles");
+		btnNewButton.setBackground(Color.LIGHT_GRAY);
+		btnNewButton.setForeground(Color.BLACK);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		
-		btnVerDetalles.setBounds(419, 11, 85, 23);
-		contentPane.add(btnVerDetalles);
+		btnNewButton.setBounds(419, 11, 85, 23);
+		contentPane.add(btnNewButton);
 		
 		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnVolver.setBounds(10, 11, 45, 23);
+		btnVolver.setBounds(10, 11, 46, 23);
 		contentPane.add(btnVolver);
 		
 		btnVolver.addActionListener(new ActionListener() {
@@ -123,21 +134,5 @@ public class ongActividadesView extends ongListaActividades {
 		});
 		
 		
-		btnVerDetalles.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					int id = 0;
-					MySQLBD bd = new MySQLBD();
-					bd.readDataBase();
-					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
-					id = Integer.parseInt(res[0]);
-					System.out.println(id);
-					vistaActividad.main(id);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}				
-			}
-		});
 	}
 }
