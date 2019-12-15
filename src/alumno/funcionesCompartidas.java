@@ -17,11 +17,6 @@ import modelos.Actividad;
 import modelos.Usuario;
 
 public class funcionesCompartidas {
-	
-	
-	
-	
-	
 	public static List<Actividad> listaOrdenada(Usuario us) throws Exception{
 		List<Actividad> lista = Actividad.listaActividades();
 
@@ -39,15 +34,11 @@ public class funcionesCompartidas {
 			}else {					// si es voluntariado cuenta para todos
 				prioridad.put(calcularCompatibilidad(us,a),a);
 			}
-			
 		}
 		
 		return (List<Actividad>) prioridad.values();	
-		
 	}
 		
-	
-	
 	private static int calcularCompatibilidad(Usuario us, Actividad a) {
 		int area = calcularComunes(us.getAreaIntereses(),a.getAreaActividad() );
 		int tipo = calcularComunes(us.getTipoIntereses() , a.getTipoActividad() );
@@ -57,13 +48,8 @@ public class funcionesCompartidas {
 				if (us.getAsignaturasCursadas()[i] == a.getAsignaturaAsociada() ) asignatura = 5;
 			}
 		}
-		
 		return area + tipo + asignatura;
-		
-		
-		
 	}
-	
 	
 	private static int calcularComunes(int[] a , int[]b) {
 		int res = 0;
@@ -74,11 +60,4 @@ public class funcionesCompartidas {
 		}
 		return res;
 	}
-		
-		
-		
-	
-		 
-	
-
 }

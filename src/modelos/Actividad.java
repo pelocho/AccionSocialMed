@@ -15,50 +15,54 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 	private int[] tipoActividad;
 	private int[] areaActividad;
 	private static SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
-	
-	
+
+
 	public Actividad(int codigo) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
 		String[] actividad = bd.select("SELECT * FROM eef_primera_iteracion.actividades WHERE codigo = '"+codigo+"';").get(0);
-		
+
 		this.codigo = codigo;
 		this.titulo = actividad[1];
 		this.tipo = Integer.parseInt(actividad[2]);
-		this.horas = Integer.parseInt(actividad[3]);		
+		this.horas = Integer.parseInt(actividad[3]);
 		this.fecha_inicio =sdt.parse(actividad[4]);
 		this.fecha_fin =sdt.parse(actividad [5]);
 		this.descripcion = actividad[6];
 		this.ong = actividad [7];
 		this.lugar = actividad[8];
 		this.asignaturaAsociada = Integer.parseInt(actividad[9]);
+
 		List<String[]> listAux = bd.select("SELECT idTipoActividad FROM eef_primera_iteracion.inter_act_tipoact WHERE idActividad='"+this.codigo+"'");
+		tipoActividad = new int[listAux.size()];
+
 	    int i = 0;
 		for(String[] act : listAux) {
+			System.out.println(act[0]);
 			tipoActividad[i] = Integer.parseInt(act[0]);
 			i++;
 		}
 		List<String[]> listAux1 = bd.select("SELECT idAreaActividad FROM eef_primera_iteracion.inter_act_areaact WHERE idActividad='"+this.codigo+"'");
+		areaActividad = new int[listAux1.size()];
 	    i = 0;
 		for(String[] act : listAux1) {
 			areaActividad[i] = Integer.parseInt(act[0]);
 			i++;
-		}		
+		}
 	}
-	
+
 	public static List<Actividad> listaActividades() throws Exception{
 		List<Actividad> res = new ArrayList<>();
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
+
 		List<String[]> list = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades");
-		
+
 		for(String[] sol : list) {
 			Actividad aux = new Actividad(Integer.parseInt(sol[0]));
 			res.add(aux);
 		}
-				
+
 		return res;
 	}
 
@@ -72,7 +76,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.codigo = codigo;
 	}
-	
+
 	public int getTipo() {
 		return tipo;
 	}
@@ -83,14 +87,14 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.tipo = tipo;
 	}
-	
+
 	public String getTipoToString() {
 		if(getTipo() == 0) {
 			return "Voluntariado";
 		}else if(getTipo() == 1) {
 			return "Aprendizaje y Servicio";
 		}else if(getTipo() == 2) {
-			return "Investigación";
+			return "Investigaciï¿½n";
 		}else {
 			return "El tipo no es ni 0, ni 1 ni 2";
 		}
@@ -172,7 +176,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.fecha_fin = fecha_fin;
 	}
-	
+
 	public int getAsignaturaAsociada() {
 		return asignaturaAsociada;
 	}
@@ -183,7 +187,7 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 				+ "WHERE Codigo ='"+ this.codigo + "';");
 		this.asignaturaAsociada = asignaturaAsociada;
 	}
-	
+
 	public String getAsignaturaAsociadaToString() throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
@@ -204,17 +208,26 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.tipoActividad = tipoActividad;
 	}
 
-	public String[] getTipoActividadToString() throws Exception {
+	public String getTipoActividadToString() throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
+		int j = 0;
 		String[] res = new String[getTipoActividad().length];
 		for(int i : getTipoActividad()) {
-			String[] tipo = bd.select("SELECT Titulo FROM tipoactividad WHERE idTipoActividad = '"+i+"';").get(0);
-			res[i] = tipo[0];
+			String[] tipo = bd.select("SELECT Titulo FROM tipoactividad WHERE idTipoActividad = "+i+";").get(0);
+			res[j] = tipo[0];
+			j++;
 		}
-		return res;
+
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < res.length-1; i++) {
+			sb.append(res[i] + ", ");
+		}
+
+		sb.append(res[res.length-1]);
+		return sb.toString();
 	}
-	
+
 	public int[] getAreaActividad() {
 		return areaActividad;
 	}
@@ -227,8 +240,26 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		}
 		this.areaActividad = areaActividad;
 	}
-	
-	
+
+	public String getAreaActividadToString() throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		int j = 0;
+		String[] res = new String[getAreaActividad().length];
+		for(int i : getAreaActividad()) {
+			String[] area = bd.select("SELECT Titulo FROM eef_primera_iteracion.areaactividad WHERE idareaactividad = "+i+";").get(0);
+			res[j] = area[0];
+			j++;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < res.length-1; i++) {
+			sb.append(res[i] + ", ");
+		}
+
+		sb.append(res[res.length-1]);
+		return sb.toString();
+	}
 	/*public Actividad (int codigo, String titulo, int horas, Date fecha_inicio, Date fecha_fin, String descripcion, String ong, String lugar) throws Exception {
 		this.codigo = codigo;
 		this.titulo = titulo;
@@ -238,13 +269,13 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		this.descripcion = descripcion;
 		this.ong = ong;
 		this.lugar = lugar;
-		
+
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
+
 		bd.insert("INSERT INTO eef_primera_iteracion.actividades (Codigo,Titulo,Horas,Fecha_Inicio,Fecha_Fin,Descripcion,ONG,Lugar) VALUES "
 				+ "( '"+this.codigo+"','"+this.titulo+"','"+this.horas+"','"+this.fecha_inicio+"','"+this.fecha_fin+"',"
 				+ "'"+this.descripcion+"','"+this.ong+"','"+this.lugar+"')");
-		
+
 	}*/
 }

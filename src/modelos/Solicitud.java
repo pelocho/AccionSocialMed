@@ -25,6 +25,21 @@ public class Solicitud {
 		return res;		
 	}
 	
+	public static List<Solicitud> listaSolicitudesOng(String ong) throws Exception{
+		List<Solicitud> res = new ArrayList<>();
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		List<String[]> list = bd.select("SELECT idSolicitud FROM solicitud WHERE '"+ong+"';");
+		
+		for(String[] sol : list) {
+			Solicitud aux = new Solicitud(Integer.parseInt(sol[0]));
+			res.add(aux);
+		}
+		
+		return res;		
+	}
+	
 	public Solicitud(int idSolicitud) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
