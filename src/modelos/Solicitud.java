@@ -25,11 +25,26 @@ public class Solicitud {
 		return res;		
 	}
 	
+	public static List<Solicitud> listaSolicitudesNoAceptadas() throws Exception{
+		List<Solicitud> res = new ArrayList<>();
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		List<String[]> list = bd.select("SELECT solicitante FROM solicitud WHERE Aceptada = '"+0+"';");
+		
+		for(String[] sol : list) {
+			Solicitud aux = new Solicitud(sol[0]);
+			res.add(aux);
+		}
+		
+		return res;
+	}	
+	
 	public Solicitud(String solicitante) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		String[] solicitud = bd.select("SELECT * FROM solicitud WHERE Solicitante = " + solicitante + ";").get(0);
+		String[] solicitud = bd.select("SELECT * FROM solicitud WHERE Solicitante = '" + solicitante + "';").get(0);
 		this.solicitante = solicitante;
 		this.actividad = Integer.parseInt(solicitud[1]);
 		this.aprobada = comprobarBool(Integer.parseInt(solicitud[2]));

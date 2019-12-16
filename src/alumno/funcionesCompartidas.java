@@ -91,4 +91,11 @@ public class funcionesCompartidas {
 		
 		return ok;
 	}
+	
+	public static void enviarSolicitudAPDI(String user,int id) throws Exception{
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		String query = "INSERT INTO solicitudesaps (Alumno,Actividad) VALUES ('" + user + "', '" + id + "');";
+		bd.insert(query);
+	}
 }

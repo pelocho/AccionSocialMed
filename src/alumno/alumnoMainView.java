@@ -44,7 +44,7 @@ public class alumnoMainView {
 
 	/**
 	 * Create the application.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public alumnoMainView(String user) throws Exception {
 		initialize(user);
@@ -52,7 +52,7 @@ public class alumnoMainView {
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
@@ -67,7 +67,7 @@ public class alumnoMainView {
 		frmAccionsocialmed.getContentPane().add(scrollPane);
 
 		table = new JTable();
-		
+
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -91,11 +91,11 @@ public class alumnoMainView {
 		table.getColumnModel().getColumn(2).setMinWidth(1);
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(3).setPreferredWidth(226);
-		
+
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		
-		Usuario al = new Usuario(user); 
-		
+
+		Usuario al = new Usuario(user);
+
 		for (Actividad a : funcionesCompartidas.listaOrdenada(al)) {
 			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 		// Inserta todas las actividades de ese alumno de forma ordenada
 			modelo.addRow(prueba);
@@ -117,13 +117,13 @@ public class alumnoMainView {
 
 		JButton btnVisualizarActividad = new JButton("Ver actividad");
 		btnVisualizarActividad.setBackground(Color.LIGHT_GRAY);
-		
+
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 			}
 		});
-		
+
 		btnVisualizarActividad.setBounds(10, 444, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
 
@@ -133,16 +133,16 @@ public class alumnoMainView {
 				frmAccionsocialmed.dispose();
 			}
 		});
-		
+
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editarPerfilView.main(user);
 				frmAccionsocialmed.dispose();
-				
-				
+
+
 			}
 		});
-		
+
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -154,10 +154,9 @@ public class alumnoMainView {
 					id = Integer.parseInt(res[0]);
 					vistaActividad.main(user,id);
 					frmAccionsocialmed.dispose();
-					
 				} catch (Exception e1) {
 					e1.printStackTrace();
-				}				
+				}
 			}
 		});
 
