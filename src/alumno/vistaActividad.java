@@ -202,9 +202,10 @@ public class vistaActividad {
 				try {
 					Usuario u = new Usuario(user);
 					if(u.getCategoryId() == 1 && act.getTipo() == 1) {
-						funcionesCompartidas.enviarSolicitudAPDI(u.getEmail(),act.getCodigo());
-					}
-					ok = funcionesCompartidas.enviarSolicitud(u.getEmail(),act.getCodigo());
+						ok = funcionesCompartidas.enviarSolicitudAPDI(u.getEmail(),act.getCodigo());
+					}else {
+						ok = funcionesCompartidas.enviarSolicitud(u.getEmail(),act.getCodigo());
+					}					
 					if(ok) {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "Su solicitud ha sido enviada");
 						frmAccionsocialmed.dispose();

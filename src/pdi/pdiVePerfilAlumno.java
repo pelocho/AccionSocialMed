@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 
+import main.MySQLBD;
 import modelos.Usuario;
 
 import java.awt.Font;
@@ -22,11 +23,11 @@ public class pdiVePerfilAlumno {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String correo) {
+	public static void main(String correo, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pdiVePerfilAlumno window = new pdiVePerfilAlumno(correo);
+					pdiVePerfilAlumno window = new pdiVePerfilAlumno(correo,id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,14 +39,14 @@ public class pdiVePerfilAlumno {
 	/**
 	 * Create the application.
 	 */
-	public pdiVePerfilAlumno(String correo) {
-		initialize(correo);
+	public pdiVePerfilAlumno(String correo, int id) {
+		initialize(correo, id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String correo) {
+	private void initialize(String correo, int id) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiVePerfilAlumno.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -134,6 +135,16 @@ public class pdiVePerfilAlumno {
 		btnAceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//añadir a solicitud, solicitudesAps BORRAR
+				try {
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					bd.delete("DELETE FROM solicitudesaps WHERE Alumno = '"+correo+"' AND Actividad = '"+id+"';");
+					bd.insert("INSERT INTO solicitud VALUES(Solicitante,Actividad) ("+correo+", " + id + ")");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});
@@ -141,7 +152,14 @@ public class pdiVePerfilAlumno {
 		btnRechazar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					bd.delete("DELETE FROM solicitudesaps WHERE Alumno = '"+correo+"' AND Actividad = '"+id+"';");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}

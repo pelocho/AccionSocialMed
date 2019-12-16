@@ -159,9 +159,12 @@ public class pdiSolicitudesAlumnosView {
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
 					String correo;
+					int id;
 					String[] res = bd.select("SELECT Correo FROM usuarios WHERE Correo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					correo = res[0];
-					pdiVePerfilAlumno.main(correo);
+					res =  bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 1) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					pdiVePerfilAlumno.main(correo,id);
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
