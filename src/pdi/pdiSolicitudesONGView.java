@@ -95,7 +95,7 @@ public class pdiSolicitudesONGView {
 		bd.readDataBase();
 		
 		//List<Solicitud> solicitudes = Solicitud.listaSolicitudes(); 
-		List<Actividad> actividadesONG = Actividad.listaActividadesAceptadasporGestor();
+		List<Actividad> actividadesONG = Actividad.listaActividadesTipo(5);
 		
 		for (Actividad act : actividadesONG) {
 			Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};

@@ -94,15 +94,11 @@ public class gestorSolicitudesActividad {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<Solicitud> solicitudes= Solicitud.listaSolicitudes(); 
+		List<Actividad> actividades = Actividad.listaActividadesTipo(4); 
 		
-		for (int i = 0; i<solicitudes.size();i++) {
-			Solicitud solicitud = solicitudes.get(i);
-			if (solicitud.isAprobadaPorGestor() == false && solicitud.isRechazadaPorGestor()== false) {
-				Actividad act = new Actividad(solicitud.getActividad());
-				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
-				modelo.addRow(insert);
-			}
+		for(Actividad act : actividades) {
+			Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
+			modelo.addRow(insert);
 		}
 		
 		scrollPane.setViewportView(table);
