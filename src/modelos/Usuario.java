@@ -14,29 +14,7 @@ public class Usuario {
 	private int [] areaIntereses = new int [10] ;
 	private List<Actividad> participacion = new ArrayList<>();
 
-	public int[] getAsignaturasCursadas() {
-		return asignaturasCursadas;
-	}
-
-	public void setAsignaturasCursadas(int[] asignaturasCursadas) {
-		this.asignaturasCursadas = asignaturasCursadas;
-	}
-
-	public int[] getTipoIntereses() {
-		return tipoIntereses;
-	}
-
-	public void setTipoIntereses(int[] tipoIntereses) {
-		this.tipoIntereses = tipoIntereses;
-	}
-
-	public int[] getAreaIntereses() {
-		return areaIntereses;
-	}
-
-	public void setAreaIntereses(int[] areaIntereses) {
-		this.areaIntereses = areaIntereses;
-	}
+	
 
 	public Usuario(int id, String email, String passwd, int categoria, String nombre, String apellido1, String apellido2) {
 		//Crea objeto y lo inserta en la base de datos
@@ -107,6 +85,38 @@ public class Usuario {
 		return participacion.contains(a) ;
 	}
 	
+	public boolean estaSolicitada(Actividad a) throws Exception {
+		MySQLBD miBD = new MySQLBD();
+		miBD.readDataBase();
+		int t = miBD.select("Select * from Solicitud where Solicitante = '" + email + "' and Actividad = '" + a.getCodigo() + "' ;" ).size();
+		
+		return t != 0;
+	}
+	
+	
+	public int[] getAsignaturasCursadas() {
+		return asignaturasCursadas;
+	}
+
+	public void setAsignaturasCursadas(int[] asignaturasCursadas) {
+		this.asignaturasCursadas = asignaturasCursadas;
+	}
+
+	public int[] getTipoIntereses() {
+		return tipoIntereses;
+	}
+
+	public void setTipoIntereses(int[] tipoIntereses) {
+		this.tipoIntereses = tipoIntereses;
+	}
+
+	public int[] getAreaIntereses() {
+		return areaIntereses;
+	}
+
+	public void setAreaIntereses(int[] areaIntereses) {
+		this.areaIntereses = areaIntereses;
+	}
 	
 
 
@@ -182,6 +192,8 @@ public class Usuario {
 		}
 		return lista;
 	}
+
+	
 	
 }
 
