@@ -1,4 +1,4 @@
-package alumno;
+package pdi;
 
 import java.awt.EventQueue;
 
@@ -17,11 +17,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 
 import home.homeView;
+import main.MySQLBD;
 import modelos.Actividad;
-import modelos.Usuario;
-import pas.pasMainView;
-import pdi.pdiMainView;
-import alumno.funcionesCompartidas;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -35,18 +32,18 @@ import java.awt.TextArea;
 import java.awt.Font;
 import java.awt.Color;
 
-public class vistaActividad {
+public class vistaActividadDetallesPdi {
 
 	private JFrame frmAccionsocialmed;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String user, int id) {
+	public static void main(int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaActividad window = new vistaActividad(user,id);
+					vistaActividadDetallesPdi window = new vistaActividadDetallesPdi(id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,17 +56,17 @@ public class vistaActividad {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public vistaActividad(String user,int id) throws Exception {
-		initialize(user,id);
+	public vistaActividadDetallesPdi(int id) throws Exception {
+		initialize(id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
 	 */
-	private void initialize(String user, int id) throws Exception {
+	private void initialize(int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividadDetallesPdi.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 406, 504);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,11 +122,6 @@ public class vistaActividad {
 		JLabel lblDescripcinDeLa = new JLabel("Descripci\u00F3n de la actividad:");
 		lblDescripcinDeLa.setBounds(10, 213, 226, 20);
 		frmAccionsocialmed.getContentPane().add(lblDescripcinDeLa);
-		
-		JButton btnSolicitarEstaActividad = new JButton("Solicitar esta actividad");
-		btnSolicitarEstaActividad.setBackground(Color.LIGHT_GRAY);
-		btnSolicitarEstaActividad.setBounds(10, 432, 165, 23);
-		frmAccionsocialmed.getContentPane().add(btnSolicitarEstaActividad);
 		
 		JLabel lblLugar = new JLabel("Organizaci\u00F3n:");
 		lblLugar.setBounds(10, 45, 83, 14);
@@ -191,45 +183,10 @@ public class vistaActividad {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//alumnoMainView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
-		
-		btnSolicitarEstaActividad.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				boolean ok;
-				try {
-					Usuario u = new Usuario(user);
-					ok = funcionesCompartidas.enviarSolicitud(u.getEmail(),act.getCodigo());
-					if(ok) {
-						JOptionPane.showMessageDialog(frmAccionsocialmed, "Su solicitud ha sido enviada");
-						frmAccionsocialmed.dispose();
-						if(u.getCategoryId() == 2) {
-							pdiMainView.main(user);
-						}else if(u.getCategoryId() == 1) {
-							alumnoMainView.main(user);
-						}else {
-							pasMainView.main(user);
-						}
-						
-					}else {
-						JOptionPane.showMessageDialog(frmAccionsocialmed, "Ha habido un error al enviar su solicitud");
-						if(u.getCategoryId() == 2) {
-							pdiMainView.main(user);
-						}else if(u.getCategoryId() == 1) {
-							alumnoMainView.main(user);
-						}else {
-							pasMainView.main(user);
-						}
-					}
-					
-					frmAccionsocialmed.dispose();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+
 	}
 }

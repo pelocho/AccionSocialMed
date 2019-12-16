@@ -1,6 +1,5 @@
 package pdi;
 
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -13,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import alumno.vistaActividad;
+import gestor.vistaActividadDetalles;
 import login.loginView;
 import main.MySQLBD;
 import modelos.Actividad;
@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Toolkit;
 
-public class pdiSolicitudesAlumnosView {
+public class pdiSolicitudesONGView {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -39,7 +39,7 @@ public class pdiSolicitudesAlumnosView {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pdiSolicitudesAlumnosView window = new pdiSolicitudesAlumnosView(user);
+					pdiSolicitudesONGView window = new pdiSolicitudesONGView(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,11 +50,11 @@ public class pdiSolicitudesAlumnosView {
 
 	/**
 	 * Create the frame.
-	 * @throws Exception
+	 * @throws Exception 
 	 */
-	public pdiSolicitudesAlumnosView(String user) throws Exception {
+	public pdiSolicitudesONGView(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiSolicitudesAlumnosView.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiSolicitudesONGView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 530, 300);
@@ -62,18 +62,18 @@ public class pdiSolicitudesAlumnosView {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frmAccionsocialmed.setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 40, 494, 211);
 		contentPane.add(scrollPane);
-
+		
 		table = new JTable();
-
+		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Alumno", "Actividad", "Horas", "Plazas"
+				"T\u00EDtulo", "Lugar", "Horas", "Plazas"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -90,24 +90,21 @@ public class pdiSolicitudesAlumnosView {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(3).setPreferredWidth(65);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-
+		
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-
-		List<Solicitud> solicitudes= Solicitud.listaSolicitudes();
-
-		for (int i = 0; i<solicitudes.size();i++) {
-			Solicitud solicitud = solicitudes.get(i);
-			if (solicitud.isAprobadaPorGestor() == false && solicitud.isRechazadaPorGestor()== false) {
-				Actividad act = new Actividad(solicitud.getActividad());
-				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
-				modelo.addRow(insert);
-			}
+		
+		//List<Solicitud> solicitudes = Solicitud.listaSolicitudes(); 
+		List<Actividad> actividadesONG = Actividad.listaActividadesAceptadasporGestor();
+		
+		for (Actividad act : actividadesONG) {
+			Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
+			modelo.addRow(insert);			
 		}
-
+		
 		scrollPane.setViewportView(table);
-
-		JButton verDetalles = new JButton("Ver detalles actividad");
+		
+		JButton verDetalles = new JButton("Ver detalles");
 		verDetalles.setBackground(Color.LIGHT_GRAY);
 		verDetalles.setForeground(Color.BLACK);
 		verDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -115,19 +112,15 @@ public class pdiSolicitudesAlumnosView {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		verDetalles.setBounds(152, 11, 173, 23);
+		verDetalles.setBounds(419, 11, 85, 23);
 		contentPane.add(verDetalles);
-
+		
 		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		btnVolver.setBounds(10, 11, 46, 23);
 		contentPane.add(btnVolver);
-
-		JButton btnVerDetallesAlumno = new JButton("Ver detalles alumno");
-		btnVerDetallesAlumno.setBounds(348, 11, 156, 23);
-		contentPane.add(btnVerDetallesAlumno);
-
+		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -142,18 +135,19 @@ public class pdiSolicitudesAlumnosView {
 					int id = 0;
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
-
-					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 1) +"';").get(0);
+					System.out.print(modelo.getValueAt(table.getSelectedRow(), 0));
+					
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					vistaActividadDetallesPdi.main(id);
+					vistaActividadDetalles.main(id, user);
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					e1.printStackTrace();
-				}
-
+				}				
+				
 			}
 		});
-
-
+		
+		
 	}
 }

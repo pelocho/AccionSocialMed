@@ -1,41 +1,25 @@
-package gestor;
+package pdi;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import java.awt.Font;
+import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
-import javax.swing.JComboBox;
-import javax.swing.JTextPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-import home.homeView;
+import gestor.gestorSolicitudesActividad;
+import gestor.relacionarAPSconAsignatura;
+import gestor.vistaActividadDetalles;
 import main.MySQLBD;
 import modelos.Actividad;
-import pdi.pdiMainView;
-import pdi.pdiSolicitudesONGView;
 
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.AbstractListModel;
-import javax.swing.JSeparator;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.TextArea;
-import java.awt.Font;
-import java.awt.Color;
-
-public class vistaActividadDetalles {
-
+public class pdiVistaActividadDetalles {
 	private JFrame frmAccionsocialmed;
 
 	/**
@@ -45,7 +29,7 @@ public class vistaActividadDetalles {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaActividadDetalles window = new vistaActividadDetalles(id,user);
+					pdiVistaActividadDetalles window = new pdiVistaActividadDetalles(id,user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +42,7 @@ public class vistaActividadDetalles {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public vistaActividadDetalles(int id,String user) throws Exception {
+	public pdiVistaActividadDetalles(int id,String user) throws Exception {
 		initialize(id, user);
 	}
 

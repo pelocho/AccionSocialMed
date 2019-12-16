@@ -6,51 +6,33 @@ import java.util.List;
 import main.MySQLBD;
 
 public class Solicitud {
-	private int idSolicitud, actividad;
-	private String solicitante, correoSolicitante;
-	private boolean aprobadaPorGestor, rechazadaPorGestor;
+	private int actividad;
+	private String solicitante;
+	private boolean aprobada;
 	
 	public static List<Solicitud> listaSolicitudes() throws Exception{
 		List<Solicitud> res = new ArrayList<>();
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT idSolicitud FROM solicitud");
+		List<String[]> list = bd.select("SELECT solicitante FROM solicitud");
 		
 		for(String[] sol : list) {
-			Solicitud aux = new Solicitud(Integer.parseInt(sol[0]));
+			Solicitud aux = new Solicitud(sol[0]);
 			res.add(aux);
 		}
 		
 		return res;		
 	}
 	
-	public static List<Solicitud> listaSolicitudesOng(String ong) throws Exception{
-		List<Solicitud> res = new ArrayList<>();
+	public Solicitud(String solicitante) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT idSolicitud FROM solicitud WHERE '"+ong+"';");
-		
-		for(String[] sol : list) {
-			Solicitud aux = new Solicitud(Integer.parseInt(sol[0]));
-			res.add(aux);
-		}
-		
-		return res;		
-	}
-	
-	public Solicitud(int idSolicitud) throws Exception {
-		MySQLBD bd = new MySQLBD();
-		bd.readDataBase();
-		
-		String[] solicitud = bd.select("SELECT * FROM solicitud WHERE idSolicitud = " + idSolicitud + ";").get(0);
-		this.idSolicitud = idSolicitud;
-		solicitante = solicitud[1];
-		correoSolicitante = solicitud[2];
-		actividad = Integer.parseInt(solicitud[3]);
-		aprobadaPorGestor = comprobarBool(Integer.parseInt(solicitud[4])); 
-		rechazadaPorGestor = comprobarBool(Integer.parseInt(solicitud[5]));
+		String[] solicitud = bd.select("SELECT * FROM solicitud WHERE Solicitante = " + solicitante + ";").get(0);
+		this.solicitante = solicitante;
+		this.actividad = Integer.parseInt(solicitud[1]);
+		this.aprobada = comprobarBool(Integer.parseInt(solicitud[2]));
 		
 	}
 
@@ -62,22 +44,16 @@ public class Solicitud {
 		}
 	}
 	
-	public Solicitud(int idSolicitud, String solicitante, String correoSolicitante, int actividad,
-						boolean aprobadaPorGestor, boolean rechazadaPorGestor) throws Exception {
-		this.idSolicitud = idSolicitud;
+	public Solicitud(String solicitante, int actividad, boolean aprobada) throws Exception {
 		this.solicitante = solicitante;
-		this.correoSolicitante = correoSolicitante;
 		this.actividad = actividad;
-		this.aprobadaPorGestor = aprobadaPorGestor; 
-		this.rechazadaPorGestor = rechazadaPorGestor;
+		this.aprobada = aprobada;
 
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		bd.insert("INSERT INTO `eef_primera_iteracion`.`solicitud` (`idSolicitud`, `Solicitante`, `CorreoSolicitante`, "
-				+ "`Actividad`, `AprobadaPorGestor`, `RechazadaPorGestor`) VALUES ('"+ 
-				this.idSolicitud + "', '" + this.solicitante + "', '" + this.correoSolicitante + "', '" + this.actividad +
-				"', '" + transformarATinyInt(this.aprobadaPorGestor) + "', '" + transformarATinyInt(this.rechazadaPorGestor) +
-				"');");
+		bd.insert("INSERT INTO `eef_primera_iteracion`.`solicitud` (`Solicitante`, `CorreoSolicitante`, `Actividad`, "
+				+ "`Aprobada`) VALUES ('"+ this.solicitante + "', '" + this.actividad + "', '" 
+				+ transformarATinyInt(this.aprobada) + "');");
 	}
 
 	private int transformarATinyInt(boolean aprobado) {
@@ -88,16 +64,15 @@ public class Solicitud {
 		}
 	}
 
-	public int getIdSolicitud() {
-		return idSolicitud;
+	public String getSolicitante() {
+		return solicitante;
 	}
 
-	public void setIdSolicitud(int idSolicitud) {
+	public void setSolicitante(String solicitante) {
 		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET idSolicitud = '" + idSolicitud + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.idSolicitud = idSolicitud;
-
+		bd.update("UPDATE solicitud SET solicitante = '" + solicitante + "' "
+				+ "WHERE Solicitante ='"+ this.solicitante + "';");
+		this.solicitante = solicitante;
 	}
 
 	public int getActividad() {
@@ -107,52 +82,18 @@ public class Solicitud {
 	public void setActividad(int actividad) {
 		MySQLBD bd = new MySQLBD();
 		bd.update("UPDATE solicitud SET actividad = '" + actividad + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
+				+ "WHERE Solicitante ='"+ this.solicitante + "';");
 		this.actividad = actividad;
 	}
 
-	public String getSolicitante() {
-		return solicitante;
+	public boolean isAprobada() {
+		return aprobada;
 	}
 
-	public void setSolicitante(String solicitante) {
+	public void setAprobada(boolean aprobada) {
 		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET solicitante = '" + solicitante + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.solicitante = solicitante;
-	}
-
-	public String getCorreoSolicitante() {
-		return correoSolicitante;
-	}
-
-	public void setCorreoSolicitante(String correoSolicitante) {
-		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET correoSolicitante = '" + correoSolicitante + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.correoSolicitante = correoSolicitante;
-	}
-
-	public boolean isAprobadaPorGestor() {
-		return aprobadaPorGestor;
-	}
-
-	public void setAprobadaPorGestor(boolean aprobadaPorPDI) {
-		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET aprobadaPorGestor = '" + transformarATinyInt(aprobadaPorGestor) + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.aprobadaPorGestor = aprobadaPorPDI;
-	}
-
-
-	public boolean isRechazadaPorGestor() {
-		return rechazadaPorGestor;
-	}
-
-	public void setRechazadaPorGestor(boolean rechazadaPorGestor) {
-		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE solicitud SET aprobadaPorGestor = '" + transformarATinyInt(rechazadaPorGestor) + "' "
-				+ "WHERE idSolicitud ='"+ this.idSolicitud + "';");
-		this.rechazadaPorGestor = rechazadaPorGestor;
+		bd.update("UPDATE solicitud SET aprobada = '" + transformarATinyInt(aprobada) + "' "
+				+ "WHERE Solicitante ='"+ this.solicitante + "';");
+		this.aprobada = aprobada;
 	}
 }

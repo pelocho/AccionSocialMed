@@ -96,7 +96,8 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
-		List<Actividad> listaact = Actividad.listaActividades();
+		List<Actividad> listaact = Actividad.listaActividadesOng(user);
+		
 		
 		String estado = ""; 
 		for (Actividad a : listaact) {
@@ -104,9 +105,12 @@ public class ongMisActividadesTableView extends ongListaActividades {
 				estado = "Pendiente";
 			}else if (a.getTipo()==3) {
 				estado = "Rechazada";
+			}else if( a.getTipo()==5){
+				estado = "Pendiente de aceptación";
 			}else {
 				estado = "Aceptada";
 			}
+			
 			
 			
 			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),estado }; 	
@@ -124,7 +128,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnVerDetalles.setBounds(499, 11, 85, 23);
+		btnVerDetalles.setBounds(510, 11, 85, 23);
 		contentPane.add(btnVerDetalles);
 		
 		JButton btnVolver = new JButton("<");
@@ -134,8 +138,9 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		contentPane.add(btnVolver);
 		
 		JButton btnEliminarRechazadas = new JButton("Eliminar rechazadas");
+		btnEliminarRechazadas.setBackground(Color.LIGHT_GRAY);
 		btnEliminarRechazadas.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnEliminarRechazadas.setBounds(276, 11, 126, 23);
+		btnEliminarRechazadas.setBounds(374, 11, 126, 23);
 		contentPane.add(btnEliminarRechazadas);
 		
 		btnVolver.addActionListener(new ActionListener() {
@@ -157,7 +162,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 					e1.printStackTrace();
 				}
 				
-				bd.delete("DELETE FROM eef_primera_iteracion.actividades WHERE Tipo = '3';");
+				bd.delete("DELETE FROM eef_primera_iteracion.actividades WHERE Tipo = '3' AND ONG = '"+user+"';");
 				JOptionPane.showMessageDialog(frmAccionsocialmed, "Eliminadas actividades rechazadas");
 				frmAccionsocialmed.dispose();
 				ongMisActividadesTableView.main(user);

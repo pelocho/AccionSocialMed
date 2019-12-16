@@ -80,4 +80,15 @@ public class funcionesCompartidas {
 		}
 		return res;
 	}
+	
+	public static boolean enviarSolicitud(String user,int id) throws Exception {
+		boolean ok = false;
+		String query;
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		query = "INSERT INTO solicitud (Solicitante,Actividad) VALUES ('" + user + "', '" + id + "');";
+		ok = bd.insert(query);
+		
+		return ok;
+	}
 }

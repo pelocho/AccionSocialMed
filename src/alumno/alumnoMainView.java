@@ -9,7 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import gestor.vistaActividadDetallesActs;
 import home.homeView;
+import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Usuario;
 
@@ -118,6 +120,7 @@ public class alumnoMainView {
 		
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		
@@ -134,6 +137,22 @@ public class alumnoMainView {
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editarPerfilView.main(user);
+			}
+		});
+		
+		btnVisualizarActividad.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					vistaActividad.main(user,id);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}				
 			}
 		});
 
