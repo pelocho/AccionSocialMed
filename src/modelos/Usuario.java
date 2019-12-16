@@ -12,6 +12,8 @@ public class Usuario {
 	private int[] asignaturasCursadas = new int [10] ;
 	private int[] tipoIntereses = new int [10] ;
 	private int [] areaIntereses = new int [10] ;
+	private int numAreas = 0;
+	private int numTipos = 0;
 	private List<Actividad> participacion = new ArrayList<>();
 
 	
@@ -106,16 +108,28 @@ public class Usuario {
 		return tipoIntereses;
 	}
 
-	public void setTipoIntereses(int[] tipoIntereses) {
-		this.tipoIntereses = tipoIntereses;
+	public void vaciarTipoIntereses() {
+		tipoIntereses = null;
+		numTipos = 0;
 	}
 
 	public int[] getAreaIntereses() {
 		return areaIntereses;
 	}
 
-	public void setAreaIntereses(int[] areaIntereses) {
-		this.areaIntereses = areaIntereses;
+	public void vaciarAreaIntereses() {
+		this.areaIntereses = null;
+		numAreas = 0;
+	}
+	
+	public void anadirTipoIntereses(int g) {
+		tipoIntereses[numTipos] = g;
+		numTipos++;
+	}
+	
+	public void anadirAreaInteres(int g) {
+		areaIntereses[numAreas] = g;
+		numAreas++;
 	}
 	
 
