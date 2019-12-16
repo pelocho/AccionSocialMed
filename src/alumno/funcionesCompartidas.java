@@ -2,11 +2,7 @@ package alumno;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 
 import java.sql.Date;
@@ -19,30 +15,48 @@ public class funcionesCompartidas {
 	public static List<Actividad> listaOrdenada(Usuario us) throws Exception{
 		List<Actividad> lista = Actividad.listaActividades();
 
-		Map<Integer,Actividad> prioridad = new TreeMap<Integer, Actividad>();  // 0 Voluntariado     1 APS     2 Invest     
+		Map<Integer,List<Actividad>> prioridad = new TreeMap<Integer, List<Actividad > > ();  // 0 Voluntariado     1 APS     2 Invest     
 		
 		for(Actividad a : lista) {	// 1 estudiante 2 pdi 3 pas  4 ong   5 gestor
 			if(a.getPlazasDisponibles() >0 && !us.estaParticipando(a) ) {
 				if(a.getTipo() == 2) { // si es invest
 					if(us.getCategoryId() == 2 ) { // cuenta solo pa los pdi
-						prioridad.put(calcularCompatibilidad(us,a),a);
+						introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
 					}
 				}else if(a.getTipo() == 1) { // si es APS
 					if(us.getCategoryId() == 1) {	// cuenta solo pa los estudiantes
-						prioridad.put(calcularCompatibilidad(us,a),a);
+						introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
 					}
 				}else {					// si es voluntariado cuenta para todos
-					prioridad.put(calcularCompatibilidad(us,a),a);
+					introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
 				}
 			}
 		}
-		List <Actividad> res = new ArrayList(prioridad.values() );
 		
-		return res;
+		List<Actividad> res = new ArrayList<> ();
+		for(int p : prioridad.keySet()) {
+			for(Actividad a : prioridad.get(p) ) {
+				res.add(a);
+			}
+		}
 		
+		Collections.reverse(res);
+		
+		return res; 		
 		
 	}
 		
+	private static void introducir(Map<Integer, List<Actividad>> prioridad, int puntos, Actividad a) {
+		
+		List<Actividad> aux = prioridad.getOrDefault(puntos, new ArrayList<>());
+		aux.add(a);
+		prioridad.put(puntos, aux);
+		
+			
+		
+		
+	}
+
 	private static int calcularCompatibilidad(Usuario us, Actividad a) {
 		int area = calcularComunes(us.getAreaIntereses(),a.getAreaActividad() );
 		int tipo = calcularComunes(us.getTipoIntereses() , a.getTipoActividad() );
