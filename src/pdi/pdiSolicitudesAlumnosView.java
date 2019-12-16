@@ -1,5 +1,6 @@
 package pdi;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -7,22 +8,30 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
-import java.awt.GridLayout;
 import javax.swing.JTable;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import alumno.vistaActividad;
+import login.loginView;
+import main.MySQLBD;
+import modelos.Actividad;
+import modelos.Solicitud;
+
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Toolkit;
 
-public class pdiSolicitudesAlumnosView extends JFrame {
-	private JTable table_1;
-	//private JFrame frmAccionSocialmed;
+public class pdiSolicitudesAlumnosView {
 
+	private JPanel contentPane;
+	private JTable table;
+	private JFrame frmAccionsocialmed;
 	/**
 	 * Launch the application.
 	 */
@@ -30,9 +39,8 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pdiSolicitudesAlumnosView frame = new pdiSolicitudesAlumnosView(user);
-					frame.setVisible(true);
-					//frame.frmAccionSocialmed.setVisible(true);
+					pdiSolicitudesAlumnosView window = new pdiSolicitudesAlumnosView(user);
+					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,67 +50,110 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception
 	 */
-	public pdiSolicitudesAlumnosView(String user) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(pdiSolicitudesAlumnosView.class.getResource("/imagenes/icono pequeno.png")));
-		setTitle("AccionSocialMed");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 774, 455);
-		getContentPane().setLayout(null);
-		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setBounds(516, 11, 111, 23);
-		getContentPane().add(btnNewButton);
-		
+	public pdiSolicitudesAlumnosView(String user) throws Exception {
+		frmAccionsocialmed = new JFrame();
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiSolicitudesAlumnosView.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAccionsocialmed.setTitle("AccionSocialMed");
+		frmAccionsocialmed.setBounds(100, 100, 530, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		frmAccionsocialmed.setContentPane(contentPane);
+		contentPane.setLayout(null);
+
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 39, 738, 366);
-		getContentPane().add(scrollPane);
-		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		scrollPane.setBounds(10, 40, 494, 211);
+		contentPane.add(scrollPane);
+
+		table = new JTable();
+
+		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Alumno", "Correo", "Actividad"
+				"Alumno", "Actividad", "Horas", "Plazas"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Object.class
+				String.class, String.class, Integer.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
-		table_1.getColumnModel().getColumn(0).setPreferredWidth(253);
-		table_1.getColumnModel().getColumn(1).setPreferredWidth(312);
-		table_1.getColumnModel().getColumn(2).setPreferredWidth(315);
-		scrollPane.setViewportView(table_1);
-		
-		JButton btnRechazar = new JButton("Rechazar");
-		btnRechazar.setBackground(Color.LIGHT_GRAY);
-		btnRechazar.setBounds(637, 11, 111, 23);
-		getContentPane().add(btnRechazar);
-		
-		JButton btnVerAlumno = new JButton("Ver perfil");
-		btnVerAlumno.setBackground(Color.LIGHT_GRAY);
-		btnVerAlumno.addActionListener(new ActionListener() {
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(207);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(253);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setPreferredWidth(65);
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+
+		List<Solicitud> solicitudes= Solicitud.listaSolicitudes();
+
+		for (int i = 0; i<solicitudes.size();i++) {
+			Solicitud solicitud = solicitudes.get(i);
+			if (solicitud.isAprobadaPorGestor() == false && solicitud.isRechazadaPorGestor()== false) {
+				Actividad act = new Actividad(solicitud.getActividad());
+				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
+				modelo.addRow(insert);
+			}
+		}
+
+		scrollPane.setViewportView(table);
+
+		JButton verDetalles = new JButton("Ver detalles actividad");
+		verDetalles.setBackground(Color.LIGHT_GRAY);
+		verDetalles.setForeground(Color.BLACK);
+		verDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		verDetalles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnVerAlumno.setBounds(395, 11, 111, 23);
-		getContentPane().add(btnVerAlumno);
-		
-		JButton btnVolver = new JButton("Volver");
+		verDetalles.setBounds(152, 11, 173, 23);
+		contentPane.add(verDetalles);
+
+		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
-		btnVolver.setBounds(10, 11, 89, 23);
-		getContentPane().add(btnVolver);
-		
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnVolver.setBounds(10, 11, 46, 23);
+		contentPane.add(btnVolver);
+
+		JButton btnVerDetallesAlumno = new JButton("Ver detalles alumno");
+		btnVerDetallesAlumno.setBounds(348, 11, 156, 23);
+		contentPane.add(btnVerDetallesAlumno);
+
 		btnVolver.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				//pdiMainView.main(user);
-				//frmAccionSocialmed.dispose();
+				//ongMainView.main(user);
+				frmAccionsocialmed.dispose();
 			}
 		});
+		verDetalles.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 1) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					vistaActividadDetallesPdi.main(id);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+
+
 	}
 }

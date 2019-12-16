@@ -124,7 +124,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnVerDetalles.setBounds(499, 11, 85, 23);
+		btnVerDetalles.setBounds(510, 11, 85, 23);
 		contentPane.add(btnVerDetalles);
 		
 		JButton btnVolver = new JButton("<");
@@ -134,8 +134,9 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		contentPane.add(btnVolver);
 		
 		JButton btnEliminarRechazadas = new JButton("Eliminar rechazadas");
+		btnEliminarRechazadas.setBackground(Color.LIGHT_GRAY);
 		btnEliminarRechazadas.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnEliminarRechazadas.setBounds(276, 11, 126, 23);
+		btnEliminarRechazadas.setBounds(374, 11, 126, 23);
 		contentPane.add(btnEliminarRechazadas);
 		
 		btnVolver.addActionListener(new ActionListener() {

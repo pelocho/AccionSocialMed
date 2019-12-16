@@ -97,7 +97,7 @@ public class relacionarAPSconAsignatura {
 				int ID =Integer.parseInt((bd.select("SELECT id FROM dumamockup.courses WHERE name = '"+comboBox.getSelectedItem()+"';")).get(0)[0]);
 				bd.update("UPDATE eef_primera_iteracion.actividades SET AsignaturaAsociada = '"+ID+"' WHERE (Codigo = '"+id+"');");
 				bd.update("UPDATE eef_primera_iteracion.solicitud SET AprobadaPorGestor = '1' WHERE (Actividad = '"+id+"');");
-				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '1' WHERE (Codigo = '"+id+"');");
+				bd.update("UPDATE eef_primera_iteracion.actividades SET Tipo = '5' WHERE (Codigo = '"+id+"');"); //TIPO 5 PENDIENTE ACEPTACION PROFESOR
 				JOptionPane.showMessageDialog(frmAccionsocialmed, "La actividad ha sido añadida como ApS");
 				gestorSolicitudesActividad.main(user);
 				frmAccionsocialmed.dispose();
