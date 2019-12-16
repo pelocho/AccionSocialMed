@@ -99,7 +99,7 @@ public class pasMainView {
 		Usuario al = new Usuario(user);
 
 		for (Actividad a : funcionesCompartidas.listaOrdenada(al)) {
-			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 		// Inserta todas las actividades de ese alumno de forma ordenada
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getOng() }; 		// Inserta todas las actividades de ese alumno de forma ordenada
 			modelo.addRow(prueba);
 		}
 		scrollPane.setViewportView(table);
@@ -142,7 +142,7 @@ public class pasMainView {
 
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editarPerfilView.main(user);
+				pasEditarPerfil.main(user);
 				frmAccionsocialmed.dispose();
 
 
