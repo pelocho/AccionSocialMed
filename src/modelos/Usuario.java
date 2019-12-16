@@ -122,12 +122,12 @@ public class Usuario {
 		numAreas = 0;
 	}
 	
-	public void añadirTipoIntereses(int g) {
+	public void anadirTipoIntereses(int g) {
 		tipoIntereses[numTipos] = g;
 		numTipos++;
 	}
 	
-	public void añadirAreaInteres(int g) {
+	public void anadirAreaInteres(int g) {
 		areaIntereses[numAreas] = g;
 		numAreas++;
 	}

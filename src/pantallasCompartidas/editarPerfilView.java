@@ -136,11 +136,9 @@ public class editarPerfilView extends funcionesEditarPerfil{
 		btnGuardarCambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int telf = Integer.parseInt(telefono.getText());
-				String lugarPref = lugar.getText();
-				String contrase�a = textField.getText();
-				Boolean ok = false;
+	
 				try {
-					ok = editarAlumno(contrase�a, telf, lugarPref, user);
+					editarAlumno(telf, user);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -157,65 +155,63 @@ public class editarPerfilView extends funcionesEditarPerfil{
 				//Si el alumno cambia sus preferencias hay que borrar las antiguas
 				bd.delete("DELETE FROM eef_primera_iteracion.usuario_tipo_preferencia WHERE Correo='"+user+"';");
 				bd.delete("DELETE FROM eef_primera_iteracion.usuario_area_preferencia WHERE Correo='"+user+"';");
+				us.vaciarAreaIntereses();
+				us.vaciarTipoIntereses();
 				
 				
 				//Preferencias tipo
 				if(chckbxSalud.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+1+", '"+user+"');");
-					us.a�adirTipoIntereses(1);
+					us.anadirTipoIntereses(1);
 				}
 				if(chckbxEducacin.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+2+", '"+user+"');");
-					us.a�adirTipoIntereses(2);
+					us.anadirTipoIntereses(2);
 				}
 				if(chckbxIntegracin.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+3+", '"+user+"');");
-					us.a�adirTipoIntereses(3);
+					us.anadirTipoIntereses(3);
 				}
 				if(chckbxSaludSexual.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+4+", '"+user+"');");
-					us.a�adirTipoIntereses(4);
+					us.anadirTipoIntereses(4);
 				}
 				if(chckbxNuevo.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+5+", '"+user+"');");
-					us.a�adirTipoIntereses(5);
+					us.anadirTipoIntereses(5);
 				}
 				
 				
 				//Preferencias area
 				if(chckbxAncianos.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+1+", '"+user+"');");
-					us.a�adirAreaInteres(1);
+					us.anadirAreaInteres(1);
 				}
 				if(chckbxInmigrantes.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+2+", '"+user+"');");
-					us.a�adirAreaInteres(2);
+					us.anadirAreaInteres(2);
 				}
 				if(chckbxNios.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+3+", '"+user+"');");
-					us.a�adirAreaInteres(3);
+					us.anadirAreaInteres(3);
 
 				}
 				if(chckbxNecesitados.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+4+", '"+user+"');");
-					us.a�adirAreaInteres(4);
+					us.anadirAreaInteres(4);
 
 				}
 				if(chckbxAdictos.isSelected()) {
 					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+5+", '"+user+"');");
-					us.a�adirAreaInteres(5);
+					us.anadirAreaInteres(5);
 
 				}
 				
 				
 				
-				if (ok) {
-					frmAccionsocialmed.dispose();
-					JOptionPane.showMessageDialog(frmAccionsocialmed, "Perfil editado correctamente");
-				} else {
-					JOptionPane.showMessageDialog(frmAccionsocialmed, "Error al editar perfil");
-				}
 				
+				frmAccionsocialmed.dispose();
+				JOptionPane.showMessageDialog(frmAccionsocialmed, "Perfil editado correctamente");	
 				alumnoMainView.main(user);
 				
 				
