@@ -196,6 +196,7 @@ public class vistaActividadDetallesOng {
 					act.setTipo(1);
 					frmAccionsocialmed.dispose();
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Actividad aceptada");
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

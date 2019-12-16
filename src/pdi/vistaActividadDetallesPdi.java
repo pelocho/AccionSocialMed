@@ -39,11 +39,11 @@ public class vistaActividadDetallesPdi {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(int id) {
+	public static void main(String user,int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaActividadDetallesPdi window = new vistaActividadDetallesPdi(id);
+					vistaActividadDetallesPdi window = new vistaActividadDetallesPdi(user,id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,15 +56,15 @@ public class vistaActividadDetallesPdi {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public vistaActividadDetallesPdi(int id) throws Exception {
-		initialize(id);
+	public vistaActividadDetallesPdi(String user,int id) throws Exception {
+		initialize(user,id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
 	 */
-	private void initialize(int id) throws Exception {
+	private void initialize(String user,int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividadDetallesPdi.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -184,6 +184,7 @@ public class vistaActividadDetallesPdi {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//alumnoMainView.main(user);
+				pdiSolicitudesAlumnosView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});

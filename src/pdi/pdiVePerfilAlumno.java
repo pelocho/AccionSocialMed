@@ -4,9 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+
+import modelos.Usuario;
+
 import java.awt.Font;
 
 public class pdiVePerfilAlumno {
@@ -16,11 +22,11 @@ public class pdiVePerfilAlumno {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String correo) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pdiVePerfilAlumno window = new pdiVePerfilAlumno();
+					pdiVePerfilAlumno window = new pdiVePerfilAlumno(correo);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,14 +38,14 @@ public class pdiVePerfilAlumno {
 	/**
 	 * Create the application.
 	 */
-	public pdiVePerfilAlumno() {
-		initialize();
+	public pdiVePerfilAlumno(String correo) {
+		initialize(correo);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String correo) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiVePerfilAlumno.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -47,12 +53,14 @@ public class pdiVePerfilAlumno {
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
+		Usuario usuario = new Usuario(correo);
+		
 		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setBounds(10, 11, 46, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolver);
 		
-		JLabel label = new JLabel("<correo alumno>");
+		JLabel label = new JLabel(usuario.getEmail());
 		label.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
 		label.setBounds(66, 15, 342, 14);
 		frmAccionsocialmed.getContentPane().add(label);
@@ -81,17 +89,17 @@ public class pdiVePerfilAlumno {
 		lblreasElegidas.setBounds(10, 168, 108, 14);
 		frmAccionsocialmed.getContentPane().add(lblreasElegidas);
 		
-		JLabel label_1 = new JLabel("<primer apellido>");
+		JLabel label_1 = new JLabel(usuario.getPrimerApellido());
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_1.setBounds(109, 43, 299, 14);
 		frmAccionsocialmed.getContentPane().add(label_1);
 		
-		JLabel label_2 = new JLabel("<segundo apellido>");
+		JLabel label_2 = new JLabel(usuario.getSegundoApellido());
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_2.setBounds(119, 68, 289, 14);
 		frmAccionsocialmed.getContentPane().add(label_2);
 		
-		JLabel label_3 = new JLabel("<nombre>");
+		JLabel label_3 = new JLabel(usuario.getNombre());
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_3.setBounds(66, 93, 342, 14);
 		frmAccionsocialmed.getContentPane().add(label_3);
@@ -122,5 +130,19 @@ public class pdiVePerfilAlumno {
 		btnRechazar.setBackground(Color.LIGHT_GRAY);
 		btnRechazar.setBounds(119, 198, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
+		
+		btnAceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		btnRechazar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 }

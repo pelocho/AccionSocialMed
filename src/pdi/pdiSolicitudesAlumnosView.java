@@ -17,6 +17,7 @@ import login.loginView;
 import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Solicitud;
+import modelos.SolicitudApS;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -94,15 +95,12 @@ public class pdiSolicitudesAlumnosView {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 
-		List<Solicitud> solicitudes= Solicitud.listaSolicitudes();
+		List<SolicitudApS> solicitudes = SolicitudApS.listaSolicitudesAlumnos();
 
-		for (int i = 0; i<solicitudes.size();i++) {
-			Solicitud solicitud = solicitudes.get(i);
-			if (solicitud.isAprobadaPorGestor() == false && solicitud.isRechazadaPorGestor()== false) {
-				Actividad act = new Actividad(solicitud.getActividad());
-				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
-				modelo.addRow(insert);
-			}
+		for(SolicitudApS sol : solicitudes){
+			Actividad act = new Actividad(sol.getActividad());
+			Object[] insert = {sol.getAlumno(),act.getTitulo(),act.getHoras(),act.getPlazasDisponibles()};
+			modelo.addRow(insert);
 		}
 
 		scrollPane.setViewportView(table);
@@ -131,10 +129,11 @@ public class pdiSolicitudesAlumnosView {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//ongMainView.main(user);
+				pdiMainView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
 		verDetalles.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +144,7 @@ public class pdiSolicitudesAlumnosView {
 
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 1) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					vistaActividadDetallesPdi.main(id);
+					vistaActividadDetallesPdi.main(user,id);
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -154,6 +153,21 @@ public class pdiSolicitudesAlumnosView {
 			}
 		});
 
-
+		btnVerDetallesAlumno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String correo;
+					String[] res = bd.select("SELECT Correo FROM usuarios WHERE Correo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					correo = res[0];
+					pdiVePerfilAlumno.main(correo);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
+			}
+		});
 	}
 }
