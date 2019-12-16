@@ -161,7 +161,7 @@ public class pdiMainView {
 					pdiSolicitudesONGView.main(user);
 			}
 		});
-		
+
 		btnVerActividad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -175,10 +175,10 @@ public class pdiMainView {
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					e1.printStackTrace();
-				}				
+				}
 			}
 		});
-		
+
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editarPerfilView.main(user);
