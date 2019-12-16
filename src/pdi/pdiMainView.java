@@ -138,7 +138,6 @@ public class pdiMainView {
 		btnSolicitudesDeAlumnos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pdiSolicitudesAlumnosView.main(null);
-				frmAccionsocialmed.dispose();
 			}
 		});
 		
@@ -149,17 +148,13 @@ public class pdiMainView {
 			}
 		});*/
 		
-		btnSolicitudesDeAlumnos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pdiSolicitudesAlumnosView.main(user);
-			}
-		});
+	
 		
 		btnSolicitudesONG.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-					pdiSolicitudesAlumnosView.main(user);
+					pdiSolicitudesONG.main(user);
 							
 			}
 		});

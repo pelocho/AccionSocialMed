@@ -71,7 +71,37 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 
-		List<String[]> list = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades WHERE Tipo != 4");
+		List<String[]> list = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades WHERE Tipo = 1 or Tipo = 0 or Tipo =2;");
+
+		for(String[] sol : list) {
+			Actividad aux = new Actividad(Integer.parseInt(sol[0]));
+			res.add(aux);
+		}
+
+		return res;
+	}
+	
+	public static List<Actividad> listaActividadesTipo(int tipo) throws Exception{
+		List<Actividad> res = new ArrayList<>();
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+
+		List<String[]> list = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades WHERE Tipo = '"+tipo+"';");
+
+		for(String[] sol : list) {
+			Actividad aux = new Actividad(Integer.parseInt(sol[0]));
+			res.add(aux);
+		}
+
+		return res;
+	}
+	
+	public static List<Actividad> listaActividadesOng(String ong) throws Exception{
+		List<Actividad> res = new ArrayList<>();
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+
+		List<String[]> list = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades WHERE ONG= '"+ong+"';");
 
 		for(String[] sol : list) {
 			Actividad aux = new Actividad(Integer.parseInt(sol[0]));
