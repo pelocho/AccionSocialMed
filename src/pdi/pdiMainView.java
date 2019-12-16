@@ -135,14 +135,14 @@ public class pdiMainView {
 		
 		btnSolicitudesDeAlumnos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pdiSolicitudesAlumnos.main(null);
+				pdiSolicitudesAlumnosView.main(null);
 				frmAccionsocialmed.dispose();
 			}
 		});
 		
 		btnSolicitudesONG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pdiSolicitudesAlumnos.main(null);
+				//pdiSolicitudesAlumnos.main(null);
 				frmAccionsocialmed.dispose();
 			}
 		});
