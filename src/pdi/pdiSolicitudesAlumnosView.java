@@ -16,6 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class pdiSolicitudesAlumnosView extends JFrame {
 	private JTable table_1;
@@ -40,11 +42,14 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 	 * Create the frame.
 	 */
 	public pdiSolicitudesAlumnosView(String user) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(pdiSolicitudesAlumnosView.class.getResource("/imagenes/icono pequeno.png")));
+		setTitle("AccionSocialMed");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 455);
 		getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Aceptar");
+		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		btnNewButton.setBounds(516, 11, 111, 23);
 		getContentPane().add(btnNewButton);
 		
@@ -73,10 +78,12 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		scrollPane.setViewportView(table_1);
 		
 		JButton btnNewButton_1 = new JButton("Rechazar");
+		btnNewButton_1.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_1.setBounds(637, 11, 111, 23);
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnVerAlumno = new JButton("Ver perfil");
+		btnVerAlumno.setBackground(Color.LIGHT_GRAY);
 		btnVerAlumno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -85,6 +92,7 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		getContentPane().add(btnVerAlumno);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setBounds(10, 11, 89, 23);
 		getContentPane().add(btnVolver);
 	}

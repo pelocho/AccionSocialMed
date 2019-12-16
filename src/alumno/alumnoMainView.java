@@ -70,23 +70,25 @@ public class alumnoMainView {
 			new Object[][] {
 			},
 			new String[] {
-				"Titulo", "Lugar", "Horas"
+				"Titulo", "Lugar", "Horas", "Organizaci\u00F3n"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Integer.class
+				String.class, String.class, Integer.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
 		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(112);
+		table.getColumnModel().getColumn(0).setPreferredWidth(230);
 		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setPreferredWidth(86);
+		table.getColumnModel().getColumn(1).setPreferredWidth(130);
 		table.getColumnModel().getColumn(2).setResizable(false);
-		table.getColumnModel().getColumn(2).setPreferredWidth(485);
+		table.getColumnModel().getColumn(2).setPreferredWidth(55);
 		table.getColumnModel().getColumn(2).setMinWidth(1);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(3).setPreferredWidth(226);
 		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
@@ -99,7 +101,7 @@ public class alumnoMainView {
 		scrollPane.setViewportView(table);
 
 		JButton btnEditarPerfil = new JButton("Editar perfil");
-		btnEditarPerfil.setBounds(230, 11, 117, 23);
+		btnEditarPerfil.setBounds(466, 11, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnEditarPerfil);
 
 		JLabel label = new JLabel(user);
