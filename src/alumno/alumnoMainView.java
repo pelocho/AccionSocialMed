@@ -137,6 +137,9 @@ public class alumnoMainView {
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editarPerfilView.main(user);
+				frmAccionsocialmed.dispose();
+				
+				
 			}
 		});
 		

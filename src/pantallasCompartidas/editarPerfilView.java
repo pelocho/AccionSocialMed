@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import alumno.alumnoMainView;
 import main.MySQLBD;
+import modelos.Usuario;
 
 import javax.swing.JCheckBox;
 
@@ -147,6 +149,7 @@ public class editarPerfilView extends funcionesEditarPerfil{
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmAccionsocialmed.dispose();
+				alumnoMainView.main(user);
 			}
 		});
 		
@@ -169,43 +172,62 @@ public class editarPerfilView extends funcionesEditarPerfil{
 					e1.printStackTrace();
 				}
 				
-				int dni = Integer.parseInt(bd.select("SELECT DNI FROM eef_primera_iteracion.usuarios WHERE Correo = '" + user + "';").get(0)[0]);
+				Usuario us = new Usuario(user);
+				
 				//Si el alumno cambia sus preferencias hay que borrar las antiguas
-				bd.delete("DELETE FROM eef_primera_iteracion.alumno_tipo_preferencia WHERE DNI='"+dni+"';");
-				bd.delete("DELETE FROM eef_primera_iteracion.alumno_area_preferencia WHERE DNI='"+dni+"';");
+				bd.delete("DELETE FROM eef_primera_iteracion.usuario_tipo_preferencia WHERE Correo='"+user+"';");
+				bd.delete("DELETE FROM eef_primera_iteracion.usuario_area_preferencia WHERE Correo='"+user+"';");
+				
 				
 				//Preferencias tipo
 				if(chckbxSalud.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+1+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+1+", '"+user+"');");
+					us.añadirTipoIntereses(1);
 				}
 				if(chckbxEducacin.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+2+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+2+", '"+user+"');");
+					us.añadirTipoIntereses(2);
 				}
 				if(chckbxIntegracin.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+3+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+3+", '"+user+"');");
+					us.añadirTipoIntereses(3);
 				}
 				if(chckbxSaludSexual.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+4+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+4+", '"+user+"');");
+					us.añadirTipoIntereses(4);
 				}
 				if(chckbxNuevo.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+5+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_tipo_preferencia (Tipo, Correo) VALUES("+5+", '"+user+"');");
+					us.añadirTipoIntereses(5);
 				}
+				
+				
 				//Preferencias area
 				if(chckbxAncianos.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+1+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+1+", '"+user+"');");
+					us.añadirAreaInteres(1);
 				}
 				if(chckbxInmigrantes.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+2+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+2+", '"+user+"');");
+					us.añadirAreaInteres(2);
 				}
 				if(chckbxNios.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+3+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+3+", '"+user+"');");
+					us.añadirAreaInteres(3);
+
 				}
 				if(chckbxNecesitados.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+4+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+4+", '"+user+"');");
+					us.añadirAreaInteres(4);
+
 				}
 				if(chckbxAdictos.isSelected()) {
-					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+5+", '"+dni+"');");
+					bd.insert("INSERT INTO eef_primera_iteracion.usuario_area_preferencia (Area, Correo) VALUES("+5+", '"+user+"');");
+					us.añadirAreaInteres(5);
+
 				}
+				
+				
 				
 				if (ok) {
 					frmAccionsocialmed.dispose();
@@ -213,6 +235,11 @@ public class editarPerfilView extends funcionesEditarPerfil{
 				} else {
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Error al editar perfil");
 				}
+				
+				alumnoMainView.main(user);
+				
+				
+				
 			}
 		});
 	}
