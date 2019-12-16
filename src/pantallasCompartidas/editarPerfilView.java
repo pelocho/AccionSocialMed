@@ -135,13 +135,19 @@ public class editarPerfilView extends funcionesEditarPerfil{
 		
 		btnGuardarCambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int telf = Integer.parseInt(telefono.getText());
-	
-				try {
-					editarAlumno(telf, user);
-				} catch (Exception e1) {
-					e1.printStackTrace();
+				int telf ;
+				if(!telefono.getText().equals("") ) {
+					telf = Integer.parseInt(telefono.getText());
+					try {
+						editarAlumno(telf, user);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 				}
+	
+			
 				
 				MySQLBD bd = new MySQLBD();
 				try {
