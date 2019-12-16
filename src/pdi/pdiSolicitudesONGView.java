@@ -139,7 +139,7 @@ public class pdiSolicitudesONGView {
 					
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					vistaActividadDetalles.main(id, user);
+					vistaActividadDetallesOng.main(user,id);
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					e1.printStackTrace();

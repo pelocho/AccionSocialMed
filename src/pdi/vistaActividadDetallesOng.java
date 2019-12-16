@@ -39,11 +39,11 @@ public class vistaActividadDetallesOng {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(int id) {
+	public static void main(String user, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaActividadDetallesOng window = new vistaActividadDetallesOng(id);
+					vistaActividadDetallesOng window = new vistaActividadDetallesOng(user, id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,15 +56,15 @@ public class vistaActividadDetallesOng {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public vistaActividadDetallesOng(int id) throws Exception {
-		initialize(id);
+	public vistaActividadDetallesOng(String user, int id) throws Exception {
+		initialize(user,id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
 	 */
-	private void initialize(int id) throws Exception {
+	private void initialize(String user,int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividadDetallesOng.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -187,6 +187,37 @@ public class vistaActividadDetallesOng {
 		JButton btnRechazar = new JButton("Rechazar");
 		btnRechazar.setBounds(134, 432, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
+		
+		btnAceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Actividad act = new Actividad(id);
+					act.setTipo(1);
+					frmAccionsocialmed.dispose();
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Actividad aceptada");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnRechazar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Actividad act = new Actividad(id);
+					act.setTipo(3);
+					frmAccionsocialmed.dispose();
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Actividad Rechazada");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override

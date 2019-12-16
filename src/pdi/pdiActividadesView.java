@@ -127,7 +127,7 @@ public class pdiActividadesView {
 					bd.readDataBase();
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					vistaActividad.main(id);
+					vistaActividad.main(user,id);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}		

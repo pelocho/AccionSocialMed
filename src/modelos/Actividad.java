@@ -126,10 +126,11 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(int tipo) throws Exception {
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.update("UPDATE actividades SET Tipo = '" + tipo + "' "
-				+ "WHERE Codigo ='" + this.codigo + "';");
+				+ "WHERE Codigo ='"+ this.codigo + "';");
 		this.tipo = tipo;
 	}
 
