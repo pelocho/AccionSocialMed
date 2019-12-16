@@ -40,6 +40,22 @@ public class Solicitud {
 		return res;
 	}	
 	
+	public static List<String> listaSolicitudesAlumno(String user) throws Exception{
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		List<String> res = new ArrayList<>();
+		List<String[]> list = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+user+"';");
+		
+		for(String[] aa : list) {
+			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
+			res.add(aux.getTitulo());
+		}
+		list = bd.select("SELECT Actividad FROM solicitudesaps WHERE Alumno = '"+user+"';");
+		
+		
+		return res;
+	}	
+	
 	public Solicitud(String solicitante) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();

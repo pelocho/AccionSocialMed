@@ -100,4 +100,37 @@ public class funcionesCompartidas {
 		bd.insert(query);
 		return ok;
 	}
+	
+	public static List<Actividad> listaSolicitudesAlumno(String user) throws Exception{
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		List<Actividad> res = new ArrayList<>();
+		List<String[]> list = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+user+"';");
+		
+		for(String[] aa : list) {
+			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
+			res.add(aux);
+		}
+		list = bd.select("SELECT Actividad FROM solicitudesaps WHERE Alumno = '"+user+"';");
+		for(String[] aa : list) {
+			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
+			res.add(aux);
+		}
+		
+		return res;
+	}	
+	
+	public static List<Actividad> listaActividadesAlumno(String user) throws Exception{
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		List<Actividad> res = new ArrayList<>();
+		List<String[]> list = bd.select("SELECT idActividad FROM participacion WHERE correoUsuario = '"+user+"';");
+		
+		for(String[] aa : list) {
+			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
+			res.add(aux);
+		}
+		
+		return res;
+	}	
 }
