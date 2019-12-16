@@ -18,6 +18,10 @@ import javax.swing.JTextPane;
 
 import home.homeView;
 import modelos.Actividad;
+import modelos.Usuario;
+import pas.pasMainView;
+import pdi.pdiMainView;
+import alumno.funcionesCompartidas;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -38,11 +42,11 @@ public class vistaActividad {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(int id) {
+	public static void main(String user, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaActividad window = new vistaActividad(id);
+					vistaActividad window = new vistaActividad(user,id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,15 +59,15 @@ public class vistaActividad {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public vistaActividad(int id) throws Exception {
-		initialize(id);
+	public vistaActividad(String user,int id) throws Exception {
+		initialize(user,id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
 	 */
-	private void initialize(int id) throws Exception {
+	private void initialize(String user, int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -191,20 +195,41 @@ public class vistaActividad {
 			}
 		});
 		
-		
-		
-	/*	btnSolicitarEstaActividad.addActionListener(new ActionListener() {
+		btnSolicitarEstaActividad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean ok = enviarSolicitud();
-				if(ok) {
-					JOptionPane.showMessageDialog(frmAccionsocialmed, "Su solicitud ha sido enviada");
-				}else {
-					JOptionPane.showMessageDialog(frmAccionsocialmed, "Ha habido un error al enviar su solicitud");
+				boolean ok;
+				try {
+					Usuario u = new Usuario(user);
+					ok = funcionesCompartidas.enviarSolicitud(u.getEmail(),act.getCodigo());
+					if(ok) {
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Su solicitud ha sido enviada");
+						frmAccionsocialmed.dispose();
+						if(u.getCategoryId() == 2) {
+							pdiMainView.main(user);
+						}else if(u.getCategoryId() == 1) {
+							alumnoMainView.main(user);
+						}else {
+							pasMainView.main(user);
+						}
+						
+					}else {
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Ha habido un error al enviar su solicitud");
+						if(u.getCategoryId() == 2) {
+							pdiMainView.main(user);
+						}else if(u.getCategoryId() == 1) {
+							alumnoMainView.main(user);
+						}else {
+							pasMainView.main(user);
+						}
+					}
+					
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				
-				frmAccionsocialmed.dispose();
 			}
-		});*/
+		});
 	}
 }

@@ -94,15 +94,12 @@ public class pdiSolicitudesONGView {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<Solicitud> solicitudes = Solicitud.listaSolicitudes(); 
+		//List<Solicitud> solicitudes = Solicitud.listaSolicitudes(); 
+		List<Actividad> actividadesONG = Actividad.listaActividadesAceptadasporGestor();
 		
-		for (int i = 0; i<solicitudes.size();i++) {
-			Solicitud solicitud = solicitudes.get(i);
-			Actividad act = new Actividad(solicitud.getActividad());
-			if (act.getTipo() == 5) {
-				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
-				modelo.addRow(insert);
-			}
+		for (Actividad act : actividadesONG) {
+			Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
+			modelo.addRow(insert);			
 		}
 		
 		scrollPane.setViewportView(table);
