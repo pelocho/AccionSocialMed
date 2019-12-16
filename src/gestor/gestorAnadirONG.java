@@ -31,11 +31,11 @@ public class gestorAnadirONG {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gestorAnadirONG window = new gestorAnadirONG();
+					gestorAnadirONG window = new gestorAnadirONG(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,14 +47,14 @@ public class gestorAnadirONG {
 	/**
 	 * Create the application.
 	 */
-	public gestorAnadirONG() {
-		initialize();
+	public gestorAnadirONG(String user) {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(gestorAnadirONG.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -119,10 +119,10 @@ public class gestorAnadirONG {
 						if (textField.getText().equals(textField_1.getText()) && new String(passwordField.getPassword()).equals(new String(passwordField_1.getPassword()))) {
 							ok = funcionesGestor.insertarONG(textField.getText(),new String(passwordField.getPassword()));
 							if(ok == true) {
-								frmAccionsocialmed.dispose();
 								JOptionPane.showMessageDialog (frmAccionsocialmed, " ONG introducida correctamente " );
-							}else{
+								gestorMainView.main(user);
 								frmAccionsocialmed.dispose();
+							}else{
 								JOptionPane.showMessageDialog (frmAccionsocialmed, " Ya existe ese correo " );
 							}
 
