@@ -64,8 +64,9 @@ public class ONG {
 		return correo;
 	}
 
-	public void setCorreo(String correo) {
+	public void setCorreo(String correo) throws Exception {
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.update("UPDATE ong SET correo = '" + correo + "' "
 				+ "WHERE correo ='"+ this.correo + "';");
 		this.correo = correo;
@@ -77,7 +78,13 @@ public class ONG {
 
 	public void setContrasena(String contrasena) {
 		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE ong SET contrasena = '" + contrasena + "' "
+		try {
+			bd.readDataBase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		bd.update("UPDATE ong SET Contraseña = '" + contrasena + "' "
 				+ "WHERE correo ='"+ this.correo + "';");
 		this.contrasena = contrasena;
 	}
@@ -86,8 +93,9 @@ public class ONG {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws Exception {
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.update("UPDATE ong SET nombre = '" + nombre + "' "
 				+ "WHERE correo ='"+ this.correo + "';");
 		this.nombre = nombre;
@@ -97,8 +105,9 @@ public class ONG {
 		return tlfn;
 	}
 
-	public void setTlfn(String tlfn) {
+	public void setTlfn(String tlfn) throws Exception {
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.update("UPDATE ong SET Telefono = '" + tlfn + "' "
 				+ "WHERE correo ='"+ this.correo + "';");
 		this.tlfn = tlfn;
@@ -108,8 +117,9 @@ public class ONG {
 		return correo_contacto;
 	}
 
-	public void setCorreo_contacto(String correo_contacto) {
+	public void setCorreo_contacto(String correo_contacto) throws Exception {
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.update("UPDATE ong SET Correo_Contacto = '" + correo_contacto + "' "
 				+ "WHERE correo ='"+ this.correo + "';");
 		this.correo_contacto = correo_contacto;
@@ -119,8 +129,9 @@ public class ONG {
 		return web;
 	}
 
-	public void setWeb(String web) {
+	public void setWeb(String web) throws Exception {
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.update("UPDATE ong SET web = '" + web + "' "
 				+ "WHERE correo ='"+ this.correo + "';");
 		this.web = web;

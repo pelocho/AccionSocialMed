@@ -1,5 +1,6 @@
 package login;
 
+import ong.ongEditarPerfil;
 import ong.ongMainView;
 import pas.pasMainView;
 import pdi.pdiMainView;
@@ -15,6 +16,7 @@ import javax.swing.SwingConstants;
 import alumno.alumnoMainView;
 import gestor.gestorMainView;
 import home.homeView;
+import modelos.ONG;
 
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
@@ -117,13 +119,32 @@ public class loginONGView extends funcionesLogin{
 			public void actionPerformed(ActionEvent e) {
 				String user = textField.getText();
 				String passwd = String.valueOf(passwordField.getPassword());
-				Boolean acceso;
+				Boolean acceso, primeravez = false;
+				ONG ong = null;
+				try {
+					ong = new ONG(user);
+				} catch (Exception e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				System.out.println(ong.getNombre());
+				if (ong.getNombre() == null){
+					primeravez = true;
+				}
+				
 				try {
 					int tipoUsur = 0;
 					acceso = comprobarUsuarioONG(user, passwd);
 					if(acceso) {
-						ongMainView.main(user);
-						frmAccionsocialmed.dispose();
+						if (!primeravez) {
+							ongMainView.main(user);
+							frmAccionsocialmed.dispose();
+						}else {
+							ongEditarPerfil.main(user);
+							frmAccionsocialmed.dispose();
+						}
+						
 					} else {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "Datos incorrectos");
 					}
