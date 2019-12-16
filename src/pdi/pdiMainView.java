@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 import alumno.vistaActividad;
+import gestor.vistaActividadDetallesActs;
 import home.homeView;
+import main.MySQLBD;
 import modelos.Usuario;
 import ong.ongMainView;
 import ong.ongSubirActividad;
@@ -140,17 +142,27 @@ public class pdiMainView {
 			}
 		});
 		
-		btnSolicitudesONG.addActionListener(new ActionListener() {
+	/*	btnSolicitudesONG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//pdiSolicitudesAlumnos.main(null);
 				frmAccionsocialmed.dispose();
 			}
-		});
+		});*/
 		
 		btnSolicitudesDeAlumnos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pdiSolicitudesAlumnosView.main(user);
 			}
 		});
+		
+		btnSolicitudesONG.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+					pdiSolicitudesAlumnosView.main(user);
+							
+			}
+		});
+		
 	}
 }
