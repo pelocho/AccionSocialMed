@@ -48,11 +48,6 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		setBounds(100, 100, 774, 455);
 		getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setBounds(516, 11, 111, 23);
-		getContentPane().add(btnNewButton);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 39, 738, 366);
 		getContentPane().add(scrollPane);
@@ -77,23 +72,18 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(315);
 		scrollPane.setViewportView(table_1);
 		
-		JButton btnNewButton_1 = new JButton("Rechazar");
-		btnNewButton_1.setBackground(Color.LIGHT_GRAY);
-		btnNewButton_1.setBounds(637, 11, 111, 23);
-		getContentPane().add(btnNewButton_1);
-		
 		JButton btnVerAlumno = new JButton("Ver perfil");
 		btnVerAlumno.setBackground(Color.LIGHT_GRAY);
 		btnVerAlumno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnVerAlumno.setBounds(395, 11, 111, 23);
+		btnVerAlumno.setBounds(637, 11, 111, 23);
 		getContentPane().add(btnVerAlumno);
 		
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
-		btnVolver.setBounds(10, 11, 89, 23);
+		btnVolver.setBounds(10, 11, 53, 23);
 		getContentPane().add(btnVolver);
 	}
 }
