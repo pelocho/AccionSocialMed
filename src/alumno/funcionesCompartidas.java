@@ -17,8 +17,8 @@ public class funcionesCompartidas {
 
 		Map<Integer,List<Actividad>> prioridad = new TreeMap<Integer, List<Actividad > > ();  // 0 Voluntariado     1 APS     2 Invest     
 		
-		for(Actividad a : lista) {	// 1 estudiante 2 pdi 3 pas  4 ong   5 gestor
-			if(a.getPlazasDisponibles() >0 && !us.estaParticipando(a) ) {
+		for(Actividad a : lista) {	// 1 estudiante 2 pdi 3 pas  (4 ong)   5 gestor
+			if(a.getPlazasDisponibles() >0 && !us.estaParticipando(a) && !us.estaSolicitada(a) )  {
 				if(a.getTipo() == 2) { // si es invest
 					if(us.getCategoryId() == 2 ) { // cuenta solo pa los pdi
 						introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
@@ -27,7 +27,7 @@ public class funcionesCompartidas {
 					if(us.getCategoryId() == 1) {	// cuenta solo pa los estudiantes
 						introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
 					}
-				}else {					// si es voluntariado cuenta para todos
+				}else  if (a.getTipo() == 0 ){					// si es voluntariado cuenta para todos
 					introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
 				}
 			}
@@ -79,5 +79,16 @@ public class funcionesCompartidas {
 			}
 		}
 		return res;
+	}
+	
+	public static boolean enviarSolicitud(String user,int id) throws Exception {
+		boolean ok = false;
+		String query;
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		query = "INSERT INTO solicitud (Solicitante,Actividad) VALUES ('" + user + "', '" + id + "');";
+		ok = bd.insert(query);
+		
+		return ok;
 	}
 }

@@ -13,11 +13,16 @@ import javax.swing.JLabel;
 import alumno.funcionesCompartidas;
 import alumno.vistaActividad;
 import gestor.gestorSolicitudesActividad;
+import gestor.vistaActividadDetallesActs;
 import home.homeView;
+import main.MySQLBD;
 import modelos.Actividad;
+import modelos.Solicitud;
 import modelos.Usuario;
 import ong.ongMainView;
 import ong.ongSubirActividad;
+import pantallasCompartidas.editarPerfilView;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -125,7 +130,7 @@ public class pdiMainView {
 		Usuario pdi = new Usuario(user);
 
 		for (Actividad a : funcionesCompartidas.listaOrdenada(pdi)) {
-			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 		// Inserta todas las actividades de ese alumno de forma ordenada
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(), a.getOng()}; 		// Inserta todas las actividades de ese alumno de forma ordenada
 			modelo.addRow(prueba);
 		}
 		scrollPane.setViewportView(table);
@@ -150,22 +155,33 @@ public class pdiMainView {
 			}
 		});
 
-	/*	btnSolicitudesONG.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//pdiSolicitudesAlumnos.main(null);
-				pdiSolicitudesONGView.main(pdi.getEmail());
-				frmAccionsocialmed.dispose();
-			}
-		});*/
-		
-	
-		
 		btnSolicitudesONG.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
-					pdiSolicitudesONG.main(user);
-							
+					pdiSolicitudesONGView.main(user);
+			}
+		});
+
+		btnVerActividad.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					vistaActividad.main(user,id);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		btnEditarPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editarPerfilView.main(user);
 			}
 		});
 
