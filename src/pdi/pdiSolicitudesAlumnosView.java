@@ -21,6 +21,7 @@ import java.awt.Toolkit;
 
 public class pdiSolicitudesAlumnosView extends JFrame {
 	private JTable table_1;
+	//private JFrame frmAccionSocialmed;
 
 	/**
 	 * Launch the application.
@@ -31,6 +32,7 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 				try {
 					pdiSolicitudesAlumnosView frame = new pdiSolicitudesAlumnosView(user);
 					frame.setVisible(true);
+					//frame.frmAccionSocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -77,15 +79,15 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(315);
 		scrollPane.setViewportView(table_1);
 		
-		JButton btnNewButton_1 = new JButton("Rechazar");
-		btnNewButton_1.setBackground(Color.LIGHT_GRAY);
-		btnNewButton_1.setBounds(637, 11, 111, 23);
-		getContentPane().add(btnNewButton_1);
+		JButton btnRechazar = new JButton("Rechazar");
+		btnRechazar.setBackground(Color.LIGHT_GRAY);
+		btnRechazar.setBounds(637, 11, 111, 23);
+		getContentPane().add(btnRechazar);
 		
 		JButton btnVerAlumno = new JButton("Ver perfil");
 		btnVerAlumno.setBackground(Color.LIGHT_GRAY);
 		btnVerAlumno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btnVerAlumno.setBounds(395, 11, 111, 23);
@@ -95,5 +97,12 @@ public class pdiSolicitudesAlumnosView extends JFrame {
 		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setBounds(10, 11, 89, 23);
 		getContentPane().add(btnVolver);
+		
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//pdiMainView.main(user);
+				//frmAccionSocialmed.dispose();
+			}
+		});
 	}
 }

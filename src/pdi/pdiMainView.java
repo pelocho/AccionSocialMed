@@ -10,8 +10,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import alumno.funcionesCompartidas;
 import alumno.vistaActividad;
+import gestor.gestorSolicitudesActividad;
 import home.homeView;
+import modelos.Actividad;
 import modelos.Usuario;
 import ong.ongMainView;
 import ong.ongSubirActividad;
@@ -44,24 +47,24 @@ public class pdiMainView {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public pdiMainView(String user) {
+	public pdiMainView(String user) throws Exception {
 		Usuario u = new Usuario(0, user, null, 0, null, null, null);
 		initialize(u.getEmail());
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize(String user) {
+	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 836, 436);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
-		
-		Usuario pdi = new Usuario(user);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
@@ -118,6 +121,13 @@ public class pdiMainView {
 		table.getColumnModel().getColumn(3).setPreferredWidth(226);
 		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		
+		Usuario pdi = new Usuario(user);
+		
+		for (Actividad a : funcionesCompartidas.listaOrdenada(pdi)) {
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 		// Inserta todas las actividades de ese alumno de forma ordenada
+			modelo.addRow(prueba);
+		}
 		scrollPane.setViewportView(table);
 		
 		JButton btnVerActividad = new JButton("Ver actividad");
@@ -135,7 +145,7 @@ public class pdiMainView {
 		
 		btnSolicitudesDeAlumnos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pdiSolicitudesAlumnosView.main(null);
+				pdiSolicitudesAlumnosView.main(pdi.getEmail());
 				frmAccionsocialmed.dispose();
 			}
 		});
@@ -143,13 +153,8 @@ public class pdiMainView {
 		btnSolicitudesONG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//pdiSolicitudesAlumnos.main(null);
+				pdiSolicitudesONGView.main(pdi.getEmail());
 				frmAccionsocialmed.dispose();
-			}
-		});
-		
-		btnSolicitudesDeAlumnos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pdiSolicitudesAlumnosView.main(user);
 			}
 		});
 	}
