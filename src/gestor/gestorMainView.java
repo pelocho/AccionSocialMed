@@ -80,7 +80,7 @@ public class gestorMainView {
 		
 		btnAadirOng.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gestorAnadirONG.main(null);
+				gestorAnadirONG.main(user);
 			 	frmAccionsocialmed.dispose();
 			}
 		});
