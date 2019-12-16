@@ -10,7 +10,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import alumno.funcionesCompartidas;
+import gestor.vistaActividadDetallesActs;
 import home.homeView;
+import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Usuario;
 
@@ -43,7 +45,7 @@ public class pasMainView {
 
 	/**
 	 * Create the application.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public pasMainView(String user) throws Exception {
 		initialize(user);
@@ -51,7 +53,7 @@ public class pasMainView {
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
@@ -65,8 +67,8 @@ public class pasMainView {
 		scrollPane.setBounds(10, 45, 700, 388);
 		frmAccionsocialmed.getContentPane().add(scrollPane);
 
-table = new JTable();
-		
+		table = new JTable();
+
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -90,10 +92,11 @@ table = new JTable();
 		table.getColumnModel().getColumn(2).setMinWidth(1);
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(3).setPreferredWidth(226);
-		
+
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		Usuario  al = new Usuario(user); 
-		
+
+		Usuario al = new Usuario(user);
+
 		for (Actividad a : funcionesCompartidas.listaOrdenada(al)) {
 			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras() }; 		// Inserta todas las actividades de ese alumno de forma ordenada
 			modelo.addRow(prueba);
@@ -115,10 +118,13 @@ table = new JTable();
 
 		JButton btnVisualizarActividad = new JButton("Ver actividad");
 		btnVisualizarActividad.setBackground(Color.LIGHT_GRAY);
+
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 			}
 		});
+
 		btnVisualizarActividad.setBounds(10, 444, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
 
@@ -128,10 +134,30 @@ table = new JTable();
 				frmAccionsocialmed.dispose();
 			}
 		});
-		
+
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editarPerfilView.main(user);
+				frmAccionsocialmed.dispose();
+
+
+			}
+		});
+
+		btnVisualizarActividad.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					vistaActividadPas.main(user,id);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
