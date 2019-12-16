@@ -118,6 +118,7 @@ public class alumnoMainView {
 		
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		
