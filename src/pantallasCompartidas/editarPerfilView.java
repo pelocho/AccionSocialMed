@@ -171,40 +171,40 @@ public class editarPerfilView extends funcionesEditarPerfil{
 				
 				int dni = Integer.parseInt(bd.select("SELECT DNI FROM eef_primera_iteracion.usuarios WHERE Correo = '" + user + "';").get(0)[0]);
 				//Si el alumno cambia sus preferencias hay que borrar las antiguas
-				bd.delete("DELETE * FROM TABLAALUMNO-TIPO WHERE DNI="+dni+";");
-				bd.delete("DELETE * FROM TABLAALUMNO-area WHERE DNI="+dni+";");
+				bd.delete("DELETE FROM eef_primera_iteracion.alumno_tipo_preferencia WHERE DNI='"+dni+"';");
+				bd.delete("DELETE FROM eef_primera_iteracion.alumno_area_preferencia WHERE DNI='"+dni+"';");
 				
 				//Preferencias tipo
 				if(chckbxSalud.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+1+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+1+", '"+dni+"');");
 				}
 				if(chckbxEducacin.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+2+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+2+", '"+dni+"');");
 				}
 				if(chckbxIntegracin.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+3+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+3+", '"+dni+"');");
 				}
 				if(chckbxSaludSexual.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+4+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+4+", '"+dni+"');");
 				}
 				if(chckbxNuevo.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-TIPO VALUES(ID, DNIALUMNO) VALUES("+5+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_tipo_preferencia (Tipo, DNI) VALUES("+5+", '"+dni+"');");
 				}
 				//Preferencias area
 				if(chckbxAncianos.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+1+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+1+", '"+dni+"');");
 				}
 				if(chckbxInmigrantes.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+2+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+2+", '"+dni+"');");
 				}
 				if(chckbxNios.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+3+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+3+", '"+dni+"');");
 				}
 				if(chckbxNecesitados.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+4+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+4+", '"+dni+"');");
 				}
 				if(chckbxAdictos.isSelected()) {
-					bd.insert("INSERT INTO TABLAALUMNO-area VALUES(ID, DNIALUMNO) VALUES("+5+", "+dni+");");
+					bd.insert("INSERT INTO eef_primera_iteracion.alumno_area_preferencia (Area, DNI) VALUES("+5+", '"+dni+"');");
 				}
 				
 				if (ok) {
