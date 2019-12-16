@@ -109,7 +109,7 @@ public class Usuario {
 	}
 
 	public void vaciarTipoIntereses() {
-		tipoIntereses = null;
+		tipoIntereses = new int[10];
 		numTipos = 0;
 	}
 
@@ -118,18 +118,22 @@ public class Usuario {
 	}
 
 	public void vaciarAreaIntereses() {
-		this.areaIntereses = null;
+		this.areaIntereses  = new int[10];
 		numAreas = 0;
+
 	}
 	
 	public void anadirTipoIntereses(int g) {
+
 		tipoIntereses[numTipos] = g;
 		numTipos++;
+
 	}
 	
 	public void anadirAreaInteres(int g) {
 		areaIntereses[numAreas] = g;
 		numAreas++;
+
 	}
 	
 
