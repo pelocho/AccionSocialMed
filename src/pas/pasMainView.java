@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import alumno.MisActividadesAlumno;
 import alumno.funcionesCompartidas;
 import gestor.vistaActividadDetallesActs;
 import home.homeView;
@@ -119,6 +120,10 @@ public class pasMainView {
 		JButton btnVisualizarActividad = new JButton("Ver actividad");
 		btnVisualizarActividad.setBackground(Color.LIGHT_GRAY);
 
+		JButton btnMisActividades = new JButton("Mis Actividades");
+		btnMisActividades.setBounds(321, 11, 135, 23);
+		frmAccionsocialmed.getContentPane().add(btnMisActividades);
+		
 		btnVisualizarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -158,6 +163,13 @@ public class pasMainView {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
+			}
+		});
+		
+		btnMisActividades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				misActividadesPas.main(user);
+				frmAccionsocialmed.dispose();
 			}
 		});
 

@@ -191,6 +191,7 @@ public class vistaActividadPas {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				pasMainView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
