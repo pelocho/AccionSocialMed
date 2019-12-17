@@ -67,7 +67,6 @@ public class funcionesCompartidas {
 				if (us.getAsignaturasCursadas()[i] == a.getAsignaturaAsociada() ) asignatura = 5;
 			}
 		}
-		System.out.println("Act " + a.getTitulo() + "     Puntos " + area + tipo + asignatura );
 
 		return area + tipo + asignatura;
 	}
