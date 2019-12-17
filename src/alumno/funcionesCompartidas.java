@@ -15,8 +15,8 @@ public class funcionesCompartidas {
 	public static List<Actividad> listaOrdenada(Usuario us) throws Exception{
 		List<Actividad> lista = Actividad.listaActividades();
 
-		Map<Integer,List<Actividad>> prioridad = new TreeMap<Integer, List<Actividad > > ();  // 0 Voluntariado     1 APS     2 Invest     
-		
+		Map<Integer,List<Actividad>> prioridad = new TreeMap<Integer, List<Actividad > > ();  // 0 Voluntariado     1 APS     2 Invest
+
 		for(Actividad a : lista) {	// 1 estudiante 2 pdi 3 pas  (4 ong)   5 gestor
 			if(a.getPlazasDisponibles() >0 && !us.estaParticipando(a) && !us.estaSolicitada(a) )  {
 				if(a.getTipo() == 2) { // si es invest
@@ -31,31 +31,31 @@ public class funcionesCompartidas {
 					introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
 				}
 			}
-			
+
 		}
-		
+
 		List<Actividad> res = new ArrayList<> ();
 		for(int p : prioridad.keySet()) {
 			for(Actividad a : prioridad.get(p) ) {
 				res.add(a);
 			}
 		}
-		
+
 		Collections.reverse(res);
-		
-		return res; 		
-		
+
+		return res;
+
 	}
-		
+
 	private static void introducir(Map<Integer, List<Actividad>> prioridad, int puntos, Actividad a) {
-		
+
 		List<Actividad> aux = prioridad.getOrDefault(puntos, new ArrayList<>());
 		aux.add(a);
 		prioridad.put(puntos, aux);
-		
-			
-		
-		
+
+
+
+
 	}
 
 	private static int calcularCompatibilidad(Usuario us, Actividad a) {
@@ -67,17 +67,16 @@ public class funcionesCompartidas {
 				if (us.getAsignaturasCursadas()[i] == a.getAsignaturaAsociada() ) asignatura = 5;
 			}
 		}
-		System.out.println("Act " + a.getTitulo() + "     Puntos " + area + tipo + asignatura );
 
 		return area + tipo + asignatura;
 	}
-	
+
 	private static int calcularComunes(int[] a , int[]b) {
 		int res = 0;
-		
-		
 
-		
+
+
+
 		if(a != null && b != null && a.length != 0 && b.length != 0 ) {
 			for(int i = 0; i < a.length ; i++) {
 				for(int j = 0; j < b.length; j++) {
@@ -87,7 +86,7 @@ public class funcionesCompartidas {
 		}
 		return res;
 	}
-	
+
 	public static boolean enviarSolicitud(String user,int id) throws Exception {
 		boolean ok = false;
 		String query;
@@ -95,16 +94,17 @@ public class funcionesCompartidas {
 		bd.readDataBase();
 		query = "INSERT INTO solicitud (Solicitante,Actividad) VALUES ('" + user + "', '" + id + "');";
 		ok = bd.insert(query);
-		
+
 		return ok;
 	}
-	
+
 	public static boolean enviarSolicitudAPDI(String user,int id) throws Exception{
 		boolean ok = false;
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
+		System.out.print(user + ", " + id);
 		String query = "INSERT INTO solicitudesaps (Alumno,Actividad) VALUES ('" + user + "', '" + id + "');";
-		bd.insert(query);
+		ok = bd.insert(query);
 		return ok;
 	}
 	
@@ -113,7 +113,7 @@ public class funcionesCompartidas {
 		bd.readDataBase();
 		List<Actividad> res = new ArrayList<>();
 		List<String[]> list = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+user+"';");
-		
+
 		for(String[] aa : list) {
 			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
 			res.add(aux);
@@ -123,21 +123,21 @@ public class funcionesCompartidas {
 			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
 			res.add(aux);
 		}
-		
+
 		return res;
-	}	
-	
+	}
+
 	public static List<Actividad> listaActividadesAlumno(String user) throws Exception{
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		List<Actividad> res = new ArrayList<>();
 		List<String[]> list = bd.select("SELECT idActividad FROM participacion WHERE correoUsuario = '"+user+"';");
-		
+
 		for(String[] aa : list) {
 			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
 			res.add(aux);
 		}
-		
+
 		return res;
-	}	
+	}
 }

@@ -164,7 +164,7 @@ public class pdiSolicitudesAlumnosView {
 					correo = res[0];
 					res =  bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 1) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					pdiVePerfilAlumno.main(correo,id);
+					pdiVePerfilAlumno.main(user,correo,id);
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

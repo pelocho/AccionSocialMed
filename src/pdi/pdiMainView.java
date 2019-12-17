@@ -140,7 +140,7 @@ public class pdiMainView {
 		btnVerActividad.setBackground(Color.LIGHT_GRAY);
 		btnVerActividad.setBounds(10, 364, 116, 23);
 		frmAccionsocialmed.getContentPane().add(btnVerActividad);
-		
+
 		JButton btnMisActividades = new JButton("Mis Actividades");
 		btnMisActividades.setBounds(650, 364, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisActividades);
@@ -189,7 +189,7 @@ public class pdiMainView {
 				editarPerfilPdi.main(user);
 			}
 		});
-		
+
 		btnMisActividades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				misActividadesPdi.main(user);

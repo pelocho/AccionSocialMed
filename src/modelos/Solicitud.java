@@ -9,62 +9,64 @@ public class Solicitud {
 	private int actividad;
 	private String solicitante;
 	private boolean aprobada;
-	
+
 	public static List<Solicitud> listaSolicitudes() throws Exception{
 		List<Solicitud> res = new ArrayList<>();
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
+
 		List<String[]> list = bd.select("SELECT solicitante FROM solicitud");
-		
+
 		for(String[] sol : list) {
 			Solicitud aux = new Solicitud(sol[0]);
 			res.add(aux);
 		}
-		
-		return res;		
+
+		return res;
 	}
-	
-	public static List<Solicitud> listaSolicitudesNoAceptadas() throws Exception{
+
+	public static List<Solicitud> listaSolicitudesNoAceptadas(String ong) throws Exception{
 		List<Solicitud> res = new ArrayList<>();
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
-		List<String[]> list = bd.select("SELECT solicitante FROM solicitud WHERE Aceptada = '"+0+"';");
-		
+
+		List<String[]> list = bd.select("SELECT * FROM solicitud WHERE Aprobada = '"+0+"';");
+
 		for(String[] sol : list) {
 			Solicitud aux = new Solicitud(sol[0]);
-			res.add(aux);
+			if(aux.getONG(aux.getActividad()).equals(ong)) {
+				res.add(aux);
+			}
 		}
-		
+
 		return res;
-	}	
-	
+	}
+
 	public static List<String> listaSolicitudesAlumno(String user) throws Exception{
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		List<String> res = new ArrayList<>();
 		List<String[]> list = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+user+"';");
-		
+
 		for(String[] aa : list) {
 			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
 			res.add(aux.getTitulo());
 		}
 		list = bd.select("SELECT Actividad FROM solicitudesaps WHERE Alumno = '"+user+"';");
-		
-		
+
+
 		return res;
-	}	
-	
+	}
+
 	public Solicitud(String solicitante) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
+
 		String[] solicitud = bd.select("SELECT * FROM solicitud WHERE Solicitante = '" + solicitante + "';").get(0);
 		this.solicitante = solicitante;
 		this.actividad = Integer.parseInt(solicitud[1]);
 		this.aprobada = comprobarBool(Integer.parseInt(solicitud[2]));
-		
+
 	}
 
 	private boolean comprobarBool(int num) {
@@ -74,7 +76,7 @@ public class Solicitud {
 			return false;
 		}
 	}
-	
+
 	public Solicitud(String solicitante, int actividad, boolean aprobada) throws Exception {
 		this.solicitante = solicitante;
 		this.actividad = actividad;
@@ -83,7 +85,7 @@ public class Solicitud {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		bd.insert("INSERT INTO `eef_primera_iteracion`.`solicitud` (`Solicitante`, `CorreoSolicitante`, `Actividad`, "
-				+ "`Aprobada`) VALUES ('"+ this.solicitante + "', '" + this.actividad + "', '" 
+				+ "`Aprobada`) VALUES ('"+ this.solicitante + "', '" + this.actividad + "', '"
 				+ transformarATinyInt(this.aprobada) + "');");
 	}
 
