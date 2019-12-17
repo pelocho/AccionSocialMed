@@ -108,6 +108,16 @@ public class funcionesCompartidas {
 		return ok;
 	}
 	
+	public static String getTipoUsuario(int categoryId) {
+		  if(categoryId == 1) {
+		    return "Alumno";
+		  }else if(categoryId == 2) {
+		    return "PDI";
+		  }else {
+		    return "PAS";
+		  }
+		}
+	
 	public static List<Actividad> listaSolicitudesAlumno(String user) throws Exception{
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();

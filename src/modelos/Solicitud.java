@@ -41,6 +41,14 @@ public class Solicitud {
 
 		return res;
 	}
+	
+	private String getONG(int id) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		//String[] ong = bd.select("SELECT ONG FROM actividades WHERE Codigo = '"+id+"';").get(0);
+		String[] ong = bd.select("SELECT ONG FROM actividades WHERE Codigo = '25';").get(0);
+		return ong[0];		
+	}
 
 	public static List<String> listaSolicitudesAlumno(String user) throws Exception{
 		MySQLBD bd = new MySQLBD();
