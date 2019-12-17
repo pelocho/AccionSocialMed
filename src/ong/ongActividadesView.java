@@ -92,7 +92,8 @@ public class ongActividadesView extends ongListaActividades {
 		table.getColumnModel().getColumn(2).setPreferredWidth(132);
 		table.getColumnModel().getColumn(3).setResizable(false);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		List<Actividad> listaact = Actividad.listaActividades();
+		
+		List<Actividad> listaact = Actividad.listaActividadesAceptadas();
 		
 		
 		for (Actividad a : listaact) {

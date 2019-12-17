@@ -123,6 +123,7 @@ public class pdiSolicitudesAlumnosView {
 		contentPane.add(btnVolver);
 
 		JButton btnVerDetallesAlumno = new JButton("Ver detalles alumno");
+		btnVerDetallesAlumno.setBackground(Color.LIGHT_GRAY);
 		btnVerDetallesAlumno.setBounds(348, 11, 156, 23);
 		contentPane.add(btnVerDetallesAlumno);
 

@@ -142,6 +142,7 @@ public class pdiMainView {
 		frmAccionsocialmed.getContentPane().add(btnVerActividad);
 
 		JButton btnMisActividades = new JButton("Mis Actividades");
+		btnMisActividades.setBackground(Color.LIGHT_GRAY);
 		btnMisActividades.setBounds(650, 364, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisActividades);
 
@@ -177,6 +178,7 @@ public class pdiMainView {
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
 					vistaActividad.main(user,id);
+					//vistaActividadDetallesPdi.main(user, id);
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					e1.printStackTrace();

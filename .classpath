@@ -6,10 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/JuMed/OneDrive/Documentos/GitHub/AccionSocialMed/src/mysql-connector-java-8.0.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/JuMed/OneDrive/Documentos/GitHub/AccionSocialMed/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/Users/JuMed/OneDrive/Documentos/GitHub/AccionSocialMed/jgoodies-forms-1.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/JuMed/OneDrive/Documentos/GitHub/AccionSocialMed/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/JuMed/OneDrive/Documentos/GitHub/AccionSocialMed/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/laura/OneDrive/Documentos/GitHub/AccionSocialMed/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/laura/OneDrive/Documentos/GitHub/AccionSocialMed/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/laura/OneDrive/Documentos/GitHub/AccionSocialMed/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/laura/OneDrive/Documentos/GitHub/AccionSocialMed/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/laura/OneDrive/Documentos/GitHub/AccionSocialMed/src/mysql-connector-java-8.0.15.jar"/>
 	<classpathentry kind="output" path="src"/>
 </classpath>

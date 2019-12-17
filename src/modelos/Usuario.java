@@ -74,7 +74,7 @@ public class Usuario {
 			
 
 			List<String[]> vals = miBD.select("SELECT Area FROM eef_primera_iteracion.usuario_area_preferencia WHERE Correo='"+correo+"';");
-			for(String[] v : val) {
+			for(String[] v : vals) {
 				areaIntereses[numAreas] = Integer.parseInt(v[0]);
 				numAreas++;
 			}
@@ -102,16 +102,22 @@ public class Usuario {
 
 	}
 	
-	public boolean estaParticipando(Actividad a) {
-		return participacion.contains(a) ;
+	public boolean estaParticipando(Actividad a) throws Exception {
+		
+		MySQLBD miBD = new MySQLBD();
+		miBD.readDataBase();
+		int t = miBD.select("Select * from participacion where correoUsuario = '" + email + "' and idActividad = '" + a.getCodigo() + "' ;" ).size();
+
+		return t != 0 ;
 	}
 	
 	public boolean estaSolicitada(Actividad a) throws Exception {
 		MySQLBD miBD = new MySQLBD();
 		miBD.readDataBase();
-		int t = miBD.select("Select * from Solicitud where Solicitante = '" + email + "' and Actividad = '" + a.getCodigo() + "' ;" ).size();
-		
-		return t != 0;
+		int t = miBD.select("Select * from solicitud where Solicitante = '" + email + "' and Actividad = '" + a.getCodigo() + "' ;" ).size();
+		int x = miBD.select("Select * from solicitudesaps where Alumno = '" + email + "' and Actividad = '" + a.getCodigo() + "' ;" ).size();
+
+		return t != 0 || x!= 0;
 	}
 	
 	

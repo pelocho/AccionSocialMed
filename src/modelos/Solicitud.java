@@ -46,7 +46,7 @@ public class Solicitud {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		//String[] ong = bd.select("SELECT ONG FROM actividades WHERE Codigo = '"+id+"';").get(0);
-		String[] ong = bd.select("SELECT ONG FROM actividades WHERE Codigo = '25';").get(0);
+		String[] ong = bd.select("SELECT ONG FROM actividades WHERE Codigo = '"+id+"';").get(0);
 		return ong[0];		
 	}
 

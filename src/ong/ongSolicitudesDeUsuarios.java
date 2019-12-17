@@ -129,8 +129,8 @@ public class ongSolicitudesDeUsuarios {
 					String[] res = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+ usuario +"';").get(0);
 					int id = Integer.parseInt(res[0]);
 					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+usuario+"' AND Actividad ='"+id+"';");
-					/*Actividad act = new Actividad(id);
-					act.plazaMenos();*/
+					Actividad act = new Actividad(id);
+					act.plazaMenos();
 					bd.insert("INSERT INTO `eef_primera_iteracion`.`participacion` (`correoUsuario`, `idActividad`) VALUES ('"+usuario+"', '"+id+"');");
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Usuario Aceptado");
 					frmAccionsocialmed.dispose();
@@ -164,7 +164,7 @@ public class ongSolicitudesDeUsuarios {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ongMainView.main(ong);
+				//ongMainView.main(ong);
 				frmAccionsocialmed.dispose();
 			}
 		});

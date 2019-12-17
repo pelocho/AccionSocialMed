@@ -103,6 +103,7 @@ public class alumnoMainView {
 		scrollPane.setViewportView(table);
 
 		JButton btnEditarPerfil = new JButton("Editar perfil");
+		btnEditarPerfil.setBackground(Color.LIGHT_GRAY);
 		btnEditarPerfil.setBounds(466, 11, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnEditarPerfil);
 
@@ -128,6 +129,7 @@ public class alumnoMainView {
 		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
 		
 		JButton btnMisActividades = new JButton("Mis Actividades");
+		btnMisActividades.setBackground(Color.LIGHT_GRAY);
 		btnMisActividades.setBounds(321, 11, 135, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisActividades);
 

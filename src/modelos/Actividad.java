@@ -187,15 +187,17 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 		return plazasDisponibles;
 	}
 
-	public void setPlazasDisponibles(int plazasDisponibles) {
+	public void setPlazasDisponibles(int plazasDisponibles) throws Exception {
 		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE actividades SET ONG = '" + plazasDisponibles + "' "
+		bd.readDataBase();
+		bd.update("UPDATE actividades SET plazasDisponibles = '" + plazasDisponibles + "' "
 				+ "WHERE Codigo ='" + this.codigo + "';");
 		this.plazasDisponibles = plazasDisponibles;
 	}
 	
-	public void plazaMenos() {
+	public void plazaMenos() throws Exception {
 		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		bd.update("UPDATE actividades SET plazasDisponibles = '" + plazasDisponibles-- + "' "
 				+ "WHERE Codigo ='" + this.codigo + "';");
 		plazasDisponibles --;

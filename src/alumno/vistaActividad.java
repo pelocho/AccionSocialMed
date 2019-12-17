@@ -191,8 +191,15 @@ public class vistaActividad {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Usuario u = new Usuario(user);
 				frmAccionsocialmed.dispose();
-				alumnoMainView.main(user);
+				if(u.getCategoryId() == 2) {
+					pdiMainView.main(user);
+				}else if(u.getCategoryId() == 1) {
+					alumnoMainView.main(user);
+				}else {
+					pasMainView.main(user);
+				}
 			}
 		});
 		
