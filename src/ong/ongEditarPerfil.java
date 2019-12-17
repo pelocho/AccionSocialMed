@@ -144,6 +144,9 @@ public class ongEditarPerfil extends funcionesEditarPerfil{
 					ong.setCorreo_contacto(Correo);
 					ong.setWeb(Web);
 					ong.setTlfn(telf);
+					
+					frmAccionsocialmed.dispose();
+					ongMainView.main(user);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

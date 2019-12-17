@@ -119,17 +119,22 @@ public class loginONGView extends funcionesLogin{
 			public void actionPerformed(ActionEvent e) {
 				String user = textField.getText();
 				String passwd = String.valueOf(passwordField.getPassword());
-				Boolean acceso, primeravez = false;
+				Boolean acceso = false, primeravez = false;
 				ONG ong = null;
 				try {
-					ong = new ONG(user);
-				} catch (Exception e2) {
+					acceso = comprobarUsuarioONG(user, passwd);
+				} catch (Exception e3) {
 					// TODO Auto-generated catch block
-					e2.printStackTrace();
+					e3.printStackTrace();
 				}
+					try {
+						if(acceso) ong = new ONG(user);
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 				
-				System.out.println(ong.getNombre());
-				if (ong.getNombre() == null){
+				if (acceso && ong.getNombre() == null){
 					primeravez = true;
 				}
 				
