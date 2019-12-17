@@ -31,6 +31,7 @@ public class funcionesCompartidas {
 					introducir(prioridad, calcularCompatibilidad(us,a) , a ) ;
 				}
 			}
+			
 		}
 		
 		List<Actividad> res = new ArrayList<> ();
@@ -61,16 +62,22 @@ public class funcionesCompartidas {
 		int area = calcularComunes(us.getAreaIntereses(),a.getAreaActividad() );
 		int tipo = calcularComunes(us.getTipoIntereses() , a.getTipoActividad() );
 		int asignatura = 0;
-		if(us.getCategoryId() == 1 ) {
+		if(us.getCategoryId() == 1 && a.getTipo() == 1) {
 			for (int i = 0; i < us.getAsignaturasCursadas().length ; i++) {
 				if (us.getAsignaturasCursadas()[i] == a.getAsignaturaAsociada() ) asignatura = 5;
 			}
 		}
+		System.out.println("Act " + a.getTitulo() + "     Puntos " + area + tipo + asignatura );
+
 		return area + tipo + asignatura;
 	}
 	
 	private static int calcularComunes(int[] a , int[]b) {
 		int res = 0;
+		
+		
+
+		
 		if(a != null && b != null && a.length != 0 && b.length != 0 ) {
 			for(int i = 0; i < a.length ; i++) {
 				for(int j = 0; j < b.length; j++) {

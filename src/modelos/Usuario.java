@@ -60,13 +60,24 @@ public class Usuario {
 			//this.telefono = (int) tupla[6] ;
 			this.passwd = (String) tupla[7] ;
 			this.categoryId = Integer.parseInt((String)tupla[9]);
+			///////////////////////////////////////////////////////////////////////////////////////////
+			numAreas = 0;
+			numTipos = 0;
 			
-			//this.areaIntereses = 
-			//this.tipoIntereses = 
+			List<String[]> val = miBD.select("SELECT Tipo FROM eef_primera_iteracion.usuario_tipo_preferencia WHERE Correo='"+correo+"';");
+			for(String[] v : val) {
+				tipoIntereses[numTipos] = Integer.parseInt(v[0]);
+				numTipos++;
+			}
 			
-			//this.asignaturasCursadas = 
+
+			List<String[]> vals = miBD.select("SELECT Area FROM eef_primera_iteracion.usuario_area_preferencia WHERE Correo='"+correo+"';");
+			for(String[] v : val) {
+				areaIntereses[numAreas] = Integer.parseInt(v[0]);
+				numAreas++;
+			}
 			
-			////////////////////////////////////
+			//////////////////////////////////////////////
 			List<String[]> strs = miBD.select("SELECT * FROM eef_primera_iteracion.participacion WHERE correoUsuario='"+correo+"';");
 			for(String[] str : strs) {
 				participacion.add(new Actividad(Integer.parseInt(str[1])));

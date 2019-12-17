@@ -192,6 +192,8 @@ public class vistaActividad {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frmAccionsocialmed.dispose();
+				alumnoMainView.main(user);
+
 			}
 		});
 		
