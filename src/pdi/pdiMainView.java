@@ -22,6 +22,7 @@ import modelos.Usuario;
 import ong.ongMainView;
 import ong.ongSubirActividad;
 import pantallasCompartidas.editarPerfilView;
+import pas.misActividadesPas;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -82,17 +83,17 @@ public class pdiMainView {
 
 		JButton btnSolicitudesDeAlumnos = new JButton("Solicitudes de Alumnos");
 		btnSolicitudesDeAlumnos.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesDeAlumnos.setBounds(297, 11, 186, 23);
+		btnSolicitudesDeAlumnos.setBounds(340, 11, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesDeAlumnos);
 
 		JButton btnSolicitudesONG = new JButton("Solicitudes de ONG");
 		btnSolicitudesONG.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesONG.setBounds(493, 11, 177, 23);
+		btnSolicitudesONG.setBounds(510, 11, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesONG);
 
 		JButton btnEditarPerfil = new JButton("Editar perfil");
 		btnEditarPerfil.setBackground(Color.LIGHT_GRAY);
-		btnEditarPerfil.setBounds(178, 11, 109, 23);
+		btnEditarPerfil.setBounds(243, 11, 87, 23);
 		frmAccionsocialmed.getContentPane().add(btnEditarPerfil);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -140,6 +141,10 @@ public class pdiMainView {
 		btnVerActividad.setBounds(10, 364, 116, 23);
 		frmAccionsocialmed.getContentPane().add(btnVerActividad);
 
+		JButton btnMisActividades = new JButton("Mis Actividades");
+		btnMisActividades.setBounds(650, 364, 160, 23);
+		frmAccionsocialmed.getContentPane().add(btnMisActividades);
+
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -181,7 +186,13 @@ public class pdiMainView {
 
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editarPerfilView.main(user);
+				editarPerfilPdi.main(user);
+			}
+		});
+
+		btnMisActividades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				misActividadesPdi.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});

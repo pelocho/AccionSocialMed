@@ -126,6 +126,10 @@ public class alumnoMainView {
 
 		btnVisualizarActividad.setBounds(10, 444, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
+		
+		JButton btnMisActividades = new JButton("Mis Actividades");
+		btnMisActividades.setBounds(321, 11, 135, 23);
+		frmAccionsocialmed.getContentPane().add(btnMisActividades);
 
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -157,6 +161,13 @@ public class alumnoMainView {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
+			}
+		});
+		
+		btnMisActividades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MisActividadesAlumno.main(user);
+				frmAccionsocialmed.dispose();
 			}
 		});
 

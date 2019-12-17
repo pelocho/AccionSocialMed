@@ -1,4 +1,4 @@
-package alumno;
+package pas;
 
 import java.awt.EventQueue;
 
@@ -35,7 +35,7 @@ import java.awt.TextArea;
 import java.awt.Font;
 import java.awt.Color;
 
-public class vistaActividad {
+public class vistaActividadPas {
 
 	private JFrame frmAccionsocialmed;
 
@@ -46,7 +46,7 @@ public class vistaActividad {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaActividad window = new vistaActividad(user,id);
+					vistaActividadPas window = new vistaActividadPas(user,id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +59,7 @@ public class vistaActividad {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public vistaActividad(String user,int id) throws Exception {
+	public vistaActividadPas(String user,int id) throws Exception {
 		initialize(user,id);
 	}
 
@@ -69,7 +69,7 @@ public class vistaActividad {
 	 */
 	private void initialize(String user, int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividadPas.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setBounds(100, 100, 406, 504);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -191,8 +191,8 @@ public class vistaActividad {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				pasMainView.main(user);
 				frmAccionsocialmed.dispose();
-				alumnoMainView.main(user);
 			}
 		});
 		
@@ -209,17 +209,26 @@ public class vistaActividad {
 					}					
 					if(ok) {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "Su solicitud ha sido enviada");
-						frmAccionsocialmed.dispose();						
+						frmAccionsocialmed.dispose();
+						if(u.getCategoryId() == 2) {
+							pdiMainView.main(user);
+						}else if(u.getCategoryId() == 1) {
+							pasMainView.main(user);
+						}else {
+							pasMainView.main(user);
+						}
+						
 					}else {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "Ha habido un error al enviar su solicitud");
+						if(u.getCategoryId() == 2) {
+							pasMainView.main(user);
+						}else if(u.getCategoryId() == 1) {
+							pasMainView.main(user);
+						}else {
+							pasMainView.main(user);
+						}
 					}
-					if(u.getCategoryId() == 2) {
-						pdiMainView.main(user);
-					}else if(u.getCategoryId() == 1) {
-						alumnoMainView.main(user);
-					}else {
-						pasMainView.main(user);
-					}
+					
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

@@ -5,3 +5,5 @@
 *.class
 *.class
 *.class
+src/main/MySQLBD.java
+*.java
