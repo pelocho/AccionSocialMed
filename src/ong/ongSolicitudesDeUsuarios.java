@@ -4,11 +4,21 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import alumno.funcionesCompartidas;
+import alumno.vistaActividad;
+import main.MySQLBD;
+import modelos.Solicitud;
+import modelos.Usuario;
 
 public class ongSolicitudesDeUsuarios {
 
@@ -18,11 +28,11 @@ public class ongSolicitudesDeUsuarios {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String ong) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongSolicitudesDeUsuarios window = new ongSolicitudesDeUsuarios();
+					ongSolicitudesDeUsuarios window = new ongSolicitudesDeUsuarios(ong);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,15 +43,17 @@ public class ongSolicitudesDeUsuarios {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public ongSolicitudesDeUsuarios() {
-		initialize();
+	public ongSolicitudesDeUsuarios(String ong) throws Exception {
+		initialize(ong);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize() {
+	private void initialize(String ong) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongSolicitudesDeUsuarios.class.getResource("/imagenes/icono pequeno.png")));
@@ -61,7 +73,6 @@ public class ongSolicitudesDeUsuarios {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null},
 			},
 			new String[] {
 				"Tipo de usuario", "Asignaturas cursando actualmente"
@@ -80,6 +91,18 @@ public class ongSolicitudesDeUsuarios {
 		table.getColumnModel().getColumn(1).setPreferredWidth(324);
 		scrollPane.setViewportView(table);
 		
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		
+		List<Solicitud> solicitudes = Solicitud.listaSolicitudesNoAceptadas(ong);
+		for(Solicitud i : solicitudes) {
+			System.out.println(i.getSolicitante() + ", " + i.getActividad());
+		}
+		for(Solicitud solicitud : solicitudes) {
+			Usuario usuario = new Usuario(solicitud.getSolicitante());
+			Object[] insert = {funcionesCompartidas.getTipoUsuario(usuario.getCategoryId()),usuario.getAsignaturasCursadasToString()};
+			modelo.addRow(insert);	
+		}
+		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setForeground(new Color(50, 205, 50));
 		btnAceptar.setBackground(Color.LIGHT_GRAY);
@@ -91,5 +114,44 @@ public class ongSolicitudesDeUsuarios {
 		btnRechazar.setBackground(Color.LIGHT_GRAY);
 		btnRechazar.setBounds(447, 11, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
+		
+		btnAceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					/*int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					vistaActividad.main(user,id);
+					frmAccionsocialmed.dispose();
+					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+ong+"' AND Actividad ='"++"';");*/
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnRechazar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					/*MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+ong+"' AND Actividad ='"++"';");*/
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ongMainView.main(ong);
+				frmAccionsocialmed.dispose();
+			}
+		});
 	}
 }

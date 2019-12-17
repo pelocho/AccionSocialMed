@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import main.MySQLBD;
 import modelos.Usuario;
@@ -23,11 +24,11 @@ public class pdiVePerfilAlumno {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String correo, int id) {
+	public static void main(String pdi, String correo, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pdiVePerfilAlumno window = new pdiVePerfilAlumno(correo,id);
+					pdiVePerfilAlumno window = new pdiVePerfilAlumno(pdi,correo,id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,14 +40,14 @@ public class pdiVePerfilAlumno {
 	/**
 	 * Create the application.
 	 */
-	public pdiVePerfilAlumno(String correo, int id) {
-		initialize(correo, id);
+	public pdiVePerfilAlumno(String pdi, String correo, int id) {
+		initialize(pdi,correo, id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String correo, int id) {
+	private void initialize(String pdi, String correo, int id) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiVePerfilAlumno.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -140,7 +141,10 @@ public class pdiVePerfilAlumno {
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
 					bd.delete("DELETE FROM solicitudesaps WHERE Alumno = '"+correo+"' AND Actividad = '"+id+"';");
-					bd.insert("INSERT INTO solicitud VALUES(Solicitante,Actividad) ("+correo+", " + id + ")");
+					bd.insert("INSERT INTO solicitud (Solicitante,Actividad) VALUES ('"+correo+"', '" + id + "')");
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Alumno aceptado");
+					pdiSolicitudesAlumnosView.main(pdi);
+					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -156,6 +160,9 @@ public class pdiVePerfilAlumno {
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
 					bd.delete("DELETE FROM solicitudesaps WHERE Alumno = '"+correo+"' AND Actividad = '"+id+"';");
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Alumno rechazado");
+					pdiSolicitudesAlumnosView.main(pdi);
+					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

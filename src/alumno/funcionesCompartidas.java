@@ -96,8 +96,19 @@ public class funcionesCompartidas {
 		boolean ok = false;
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
+		System.out.print(user + ", " + id);
 		String query = "INSERT INTO solicitudesaps (Alumno,Actividad) VALUES ('" + user + "', '" + id + "');";
-		bd.insert(query);
+		ok = bd.insert(query);
 		return ok;
+	}
+
+	public static String getTipoUsuario(int categoryId) {
+		if(categoryId == 1) {
+			return "Alumno";
+		}else if(categoryId == 2) {
+			return "PDI";
+		}else {
+			return "PAS";
+		}
 	}
 }

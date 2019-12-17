@@ -208,26 +208,17 @@ public class vistaActividad {
 					}					
 					if(ok) {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "Su solicitud ha sido enviada");
-						frmAccionsocialmed.dispose();
-						if(u.getCategoryId() == 2) {
-							pdiMainView.main(user);
-						}else if(u.getCategoryId() == 1) {
-							alumnoMainView.main(user);
-						}else {
-							pasMainView.main(user);
-						}
-						
+						frmAccionsocialmed.dispose();						
 					}else {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "Ha habido un error al enviar su solicitud");
-						if(u.getCategoryId() == 2) {
-							pdiMainView.main(user);
-						}else if(u.getCategoryId() == 1) {
-							alumnoMainView.main(user);
-						}else {
-							pasMainView.main(user);
-						}
 					}
-					
+					if(u.getCategoryId() == 2) {
+						pdiMainView.main(user);
+					}else if(u.getCategoryId() == 1) {
+						alumnoMainView.main(user);
+					}else {
+						pasMainView.main(user);
+					}
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

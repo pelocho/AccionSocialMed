@@ -92,6 +92,13 @@ public class ongMainView {
 			}
 		});
 		
+		btnSolicitudes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ongSolicitudesDeUsuarios.main(user);
+			}
+		});
+		
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

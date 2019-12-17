@@ -25,21 +25,31 @@ public class Solicitud {
 		return res;		
 	}
 	
-	public static List<Solicitud> listaSolicitudesNoAceptadas() throws Exception{
+	public static List<Solicitud> listaSolicitudesNoAceptadas(String ong) throws Exception{
 		List<Solicitud> res = new ArrayList<>();
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT solicitante FROM solicitud WHERE Aceptada = '"+0+"';");
+		List<String[]> list = bd.select("SELECT * FROM solicitud WHERE Aprobada = '"+0+"';");
 		
 		for(String[] sol : list) {
 			Solicitud aux = new Solicitud(sol[0]);
-			res.add(aux);
+			if(aux.getONG(aux.getActividad()).equals(ong)) {
+				res.add(aux);
+			}
 		}
 		
 		return res;
 	}	
 	
+	private String getONG(int id) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		//String[] ong = bd.select("SELECT ONG FROM actividades WHERE Codigo = '"+id+"';").get(0);
+		String[] ong = bd.select("SELECT ONG FROM actividades WHERE Codigo = '25';").get(0);
+		return ong[0];		
+	}
+
 	public Solicitud(String solicitante) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();

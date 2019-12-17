@@ -211,6 +211,31 @@ public class Usuario {
 		return lista;
 	}
 
+	public String getAsignaturasCursadasToString() throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		int j = 0;
+		String[] res = new String[getAsignaturasCursadas().length];
+		for(int i : getAsignaturasCursadas()) {
+			String[] asig = bd.select("SELECT name FROM dumamockup.courses WHERE id = "+i+";").get(0);
+			res[j] = asig[0];
+			j++;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < res.length-1; i++) {
+			sb.append(res[i] + ", ");
+		}
+
+		if(res.length == 0) {
+			sb.append("No está cursando ninguna actividad");
+		}else {
+			sb.append(res[res.length-1]);
+		}
+		
+		return sb.toString();
+	}
+
 	
 	
 }
