@@ -196,10 +196,11 @@ public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2
 	
 	public void plazaMenos() {
 		MySQLBD bd = new MySQLBD();
-		bd.update("UPDATE actividades SET ONG = '" + plazasDisponibles-- + "' "
+		bd.update("UPDATE actividades SET plazasDisponibles = '" + plazasDisponibles-- + "' "
 				+ "WHERE Codigo ='" + this.codigo + "';");
 		plazasDisponibles --;
 	}
+
 
 	public void setOng(String ong) {
 		MySQLBD bd = new MySQLBD();
