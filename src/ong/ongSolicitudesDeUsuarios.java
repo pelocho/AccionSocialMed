@@ -3,6 +3,8 @@ package ong;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import alumno.funcionesCompartidas;
 import alumno.vistaActividad;
 import main.MySQLBD;
+import modelos.Actividad;
 import modelos.Solicitud;
 import modelos.Usuario;
 
@@ -75,11 +78,11 @@ public class ongSolicitudesDeUsuarios {
 			new Object[][] {
 			},
 			new String[] {
-				"Tipo de usuario", "Asignaturas cursando actualmente"
+				"Tipo de usuario", "Asignaturas cursando actualmente", "Correo"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class
+				String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -99,7 +102,7 @@ public class ongSolicitudesDeUsuarios {
 		}
 		for(Solicitud solicitud : solicitudes) {
 			Usuario usuario = new Usuario(solicitud.getSolicitante());
-			Object[] insert = {funcionesCompartidas.getTipoUsuario(usuario.getCategoryId()),usuario.getAsignaturasCursadasToString()};
+			Object[] insert = {funcionesCompartidas.getTipoUsuario(usuario.getCategoryId()),usuario.getAsignaturasCursadasToString(),usuario.getEmail()};
 			modelo.addRow(insert);	
 		}
 		
@@ -119,14 +122,19 @@ public class ongSolicitudesDeUsuarios {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					/*int id = 0;
+					String usuario = (String) modelo.getValueAt(table.getSelectedRow(), 2);
+					System.out.println(usuario);
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
-					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
-					id = Integer.parseInt(res[0]);
-					vistaActividad.main(user,id);
+					String[] res = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+ usuario +"';").get(0);
+					int id = Integer.parseInt(res[0]);
+					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+usuario+"' AND Actividad ='"+id+"';");
+					/*Actividad act = new Actividad(id);
+					act.plazaMenos();*/
+					bd.insert("INSERT INTO `eef_primera_iteracion`.`participacion` (`correoUsuario`, `idActividad`) VALUES ('"+usuario+"', '"+id+"');");
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Usuario Aceptado");
 					frmAccionsocialmed.dispose();
-					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+ong+"' AND Actividad ='"++"';");*/
+					ongMainView.main(ong);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -137,9 +145,16 @@ public class ongSolicitudesDeUsuarios {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					/*MySQLBD bd = new MySQLBD();
+					String usuario = (String) modelo.getValueAt(table.getSelectedRow(), 2);
+					System.out.println(usuario);
+					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
-					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+ong+"' AND Actividad ='"++"';");*/
+					String[] res = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+ usuario +"';").get(0);
+					int id = Integer.parseInt(res[0]);
+					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+usuario+"' AND Actividad ='"+id+"';");
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Usuario Rechazado");
+					frmAccionsocialmed.dispose();
+					ongMainView.main(ong);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

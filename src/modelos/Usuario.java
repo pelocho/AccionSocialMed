@@ -14,6 +14,7 @@ public class Usuario {
 	private int [] areaIntereses = new int [10] ;
 	private int numAreas = 0;
 	private int numTipos = 0;
+	private int numAsig = 0;
 	private List<Actividad> participacion = new ArrayList<>();
 
 	
@@ -63,6 +64,7 @@ public class Usuario {
 			///////////////////////////////////////////////////////////////////////////////////////////
 			numAreas = 0;
 			numTipos = 0;
+			numAsig = 0;
 			
 			List<String[]> val = miBD.select("SELECT Tipo FROM eef_primera_iteracion.usuario_tipo_preferencia WHERE Correo='"+correo+"';");
 			for(String[] v : val) {
@@ -76,6 +78,12 @@ public class Usuario {
 				areaIntereses[numAreas] = Integer.parseInt(v[0]);
 				numAreas++;
 			}
+			
+			/*List<String[]> asignaturas = miBD.select("SELECT courseId FROM dumamockup.enrollments WHERE StudentId='"+dni+"';");
+			for(String[] v : val) {
+				asignaturasCursadas[numAsig] = Integer.parseInt(v[0]);
+				numAsig++;
+			}*/
 			
 			//////////////////////////////////////////////
 			List<String[]> strs = miBD.select("SELECT * FROM eef_primera_iteracion.participacion WHERE correoUsuario='"+correo+"';");
