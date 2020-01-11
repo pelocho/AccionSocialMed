@@ -52,7 +52,7 @@ public class ongMainView {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 272, 281);
+		frmAccionsocialmed.setBounds(100, 100, 272, 315);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
@@ -68,7 +68,7 @@ public class ongMainView {
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
-		btnCerrarSesin.setBounds(66, 210, 126, 23);
+		btnCerrarSesin.setBounds(66, 242, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
 		JLabel lblnombreDeLa = new JLabel(user);
@@ -84,6 +84,11 @@ public class ongMainView {
 		btnActividades.setBackground(Color.LIGHT_GRAY);
 		btnActividades.setBounds(66, 146, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnActividades);
+		
+		JButton btnMensajes = new JButton("Mensajes");
+		btnMensajes.setBackground(Color.LIGHT_GRAY);
+		btnMensajes.setBounds(66, 180, 126, 23);
+		frmAccionsocialmed.getContentPane().add(btnMensajes);
 		
 		btnSubirProyecto.addActionListener(new ActionListener() {
 			@Override
