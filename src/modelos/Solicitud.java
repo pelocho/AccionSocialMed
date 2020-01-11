@@ -78,11 +78,7 @@ public class Solicitud {
 	}
 
 	private boolean comprobarBool(int num) {
-		if (num == 1){
-			return true;
-		}else{
-			return false;
-		}
+		return num == 1;
 	}
 
 	public Solicitud(String solicitante, int actividad, boolean aprobada) throws Exception {
@@ -98,7 +94,7 @@ public class Solicitud {
 	}
 
 	private int transformarATinyInt(boolean aprobado) {
-		if(aprobado == true) {
+		if(aprobado) {
 			return 1;
 		}else {
 			return 2;
@@ -137,4 +133,5 @@ public class Solicitud {
 				+ "WHERE Solicitante ='"+ this.solicitante + "';");
 		this.aprobada = aprobada;
 	}
+	
 }
