@@ -1,6 +1,8 @@
 package ong;
 
 import ong.ongSubirActividad;
+import pantallasCompartidas.mensajesView;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -117,9 +119,16 @@ public class ongMainView {
 				ongMisActividadesTableView.main(user);
 			}
 		});
+		
 		btnActividades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ongActividadesView.main(user);
+			}
+		});
+		
+		btnMensajes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mensajesView.main(user);
 			}
 		});
 	}

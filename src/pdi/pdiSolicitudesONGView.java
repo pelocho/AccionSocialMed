@@ -93,8 +93,7 @@ public class pdiSolicitudesONGView {
 		
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
-		//List<Solicitud> solicitudes = Solicitud.listaSolicitudes(); 
+
 		List<Actividad> actividadesONG = Actividad.listaActividadesTipo(5);
 		
 		for (Actividad act : actividadesONG) {
