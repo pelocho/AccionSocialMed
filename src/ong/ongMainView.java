@@ -129,6 +129,7 @@ public class ongMainView {
 		btnMensajes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mensajesView.main(user);
+				frmAccionsocialmed.dispose();
 			}
 		});
 	}
