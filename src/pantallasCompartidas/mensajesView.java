@@ -1,6 +1,7 @@
 package pantallasCompartidas;
 
 import java.awt.EventQueue;
+import pantallasCompartidas.editarPerfilView;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
@@ -9,10 +10,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import alumno.alumnoMainView;
+import gestor.vistaActividadDetallesActs;
 import home.homeView;
 import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Usuario;
+import ong.ongMainView;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -23,6 +26,7 @@ import java.awt.Color;
 public class mensajesView {
 
 	private JFrame frmAccionsocialmed;
+	private JTable table;
 	private JTable table_1;
 
 	/**
@@ -88,6 +92,8 @@ public class mensajesView {
 		table_1.getColumnModel().getColumn(1).setResizable(false);
 		scrollPane.setViewportView(table_1);
 		
+		
+		
 		JButton btnNuevoMensaje = new JButton("Nuevo mensaje");
 		btnNuevoMensaje.setBounds(75, 11, 114, 23);
 		frmAccionsocialmed.getContentPane().add(btnNuevoMensaje);
@@ -103,5 +109,12 @@ public class mensajesView {
 		JButton btnVolver = new JButton("<");
 		btnVolver.setBounds(10, 11, 55, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolver);
+		
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ongMainView.main(user);
+				frmAccionsocialmed.dispose();
+			}
+		});
 	}
 }
