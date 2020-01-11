@@ -26,7 +26,6 @@ import java.awt.Color;
 public class mensajesView {
 
 	private JFrame frmAccionsocialmed;
-	private JTable table;
 	private JTable table_1;
 
 	/**
