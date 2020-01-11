@@ -64,12 +64,12 @@ public class mensajesView {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(alumnoMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 482, 295);
+		frmAccionsocialmed.setBounds(100, 100, 635, 347);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 45, 456, 211);
+		scrollPane.setBounds(10, 46, 600, 219);
 		frmAccionsocialmed.getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -95,19 +95,24 @@ public class mensajesView {
 		
 		
 		JButton btnNuevoMensaje = new JButton("Nuevo mensaje");
-		btnNuevoMensaje.setBounds(75, 11, 114, 23);
+		btnNuevoMensaje.setBackground(Color.LIGHT_GRAY);
+		btnNuevoMensaje.setBounds(365, 11, 114, 23);
 		frmAccionsocialmed.getContentPane().add(btnNuevoMensaje);
 		
 		JButton btnVerMensaje = new JButton("Ver mensaje");
-		btnVerMensaje.setBounds(341, 11, 121, 23);
+		btnVerMensaje.setBackground(Color.LIGHT_GRAY);
+		btnVerMensaje.setBounds(489, 11, 121, 23);
 		frmAccionsocialmed.getContentPane().add(btnVerMensaje);
 		
 		JButton btnEliminarMensaje = new JButton("Eliminar mensaje");
-		btnEliminarMensaje.setBounds(199, 11, 132, 23);
+		btnEliminarMensaje.setForeground(new Color(204, 0, 0));
+		btnEliminarMensaje.setBackground(Color.LIGHT_GRAY);
+		btnEliminarMensaje.setBounds(478, 276, 132, 23);
 		frmAccionsocialmed.getContentPane().add(btnEliminarMensaje);
 		
 		JButton btnVolver = new JButton("<");
-		btnVolver.setBounds(10, 11, 55, 23);
+		btnVolver.setBackground(Color.LIGHT_GRAY);
+		btnVolver.setBounds(10, 11, 41, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolver);
 		
 		btnVolver.addActionListener(new ActionListener() {
