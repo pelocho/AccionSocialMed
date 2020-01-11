@@ -49,7 +49,7 @@ public class gestorMainView {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(gestorMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 320, 257);
+		frmAccionsocialmed.setBounds(200, 200, 320, 299);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
@@ -71,12 +71,17 @@ public class gestorMainView {
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
-		btnCerrarSesin.setBounds(72, 184, 147, 25);
+		btnCerrarSesin.setBounds(72, 224, 147, 25);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
 		JLabel lblcorreoGestor = new JLabel(user);
 		lblcorreoGestor.setBounds(70, 11, 131, 25);
 		frmAccionsocialmed.getContentPane().add(lblcorreoGestor);
+		
+		JButton btnNoticias = new JButton("Noticias");
+		btnNoticias.setBackground(Color.LIGHT_GRAY);
+		btnNoticias.setBounds(72, 165, 147, 25);
+		frmAccionsocialmed.getContentPane().add(btnNoticias);
 		
 		btnAadirOng.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,6 +109,12 @@ public class gestorMainView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gestorTodasActividades.main(user);
+			}
+		});
+		
+		btnNoticias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				noticiasView.main(user);
 			}
 		});
 	}

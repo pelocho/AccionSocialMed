@@ -156,16 +156,19 @@ public class pdiVistaActividadDetalles {
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
 		
 		JButton btnAceptar = new JButton("Aceptar como APS"); //1
+		btnAceptar.setForeground(new Color(0, 153, 0));
 		btnAceptar.setBackground(Color.LIGHT_GRAY);
 		btnAceptar.setBounds(10, 386, 197, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptar);
 		
 		JButton btnAceptarInv = new JButton("Aceptar como investigacion");//2
+		btnAceptarInv.setForeground(new Color(0, 153, 0));
 		btnAceptarInv.setBackground(Color.LIGHT_GRAY);
 		btnAceptarInv.setBounds(10, 420, 197, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptarInv);
 		
 		JButton btnAceptarVol = new JButton("Aceptar como voluntariado");//0
+		btnAceptarVol.setForeground(new Color(0, 153, 0));
 		btnAceptarVol.setBackground(Color.LIGHT_GRAY);
 		btnAceptarVol.setBounds(10, 456, 197, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptarVol);

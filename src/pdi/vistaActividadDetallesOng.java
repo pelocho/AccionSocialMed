@@ -181,11 +181,15 @@ public class vistaActividadDetallesOng {
 		frmAccionsocialmed.getContentPane().add(lblModificarplazas);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(20, 432, 89, 23);
+		btnAceptar.setForeground(new Color(0, 153, 51));
+		btnAceptar.setBackground(Color.LIGHT_GRAY);
+		btnAceptar.setBounds(10, 432, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptar);
 		
 		JButton btnRechazar = new JButton("Rechazar");
-		btnRechazar.setBounds(134, 432, 89, 23);
+		btnRechazar.setForeground(new Color(204, 0, 0));
+		btnRechazar.setBackground(Color.LIGHT_GRAY);
+		btnRechazar.setBounds(109, 432, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
 		
 		btnAceptar.addActionListener(new ActionListener() {
