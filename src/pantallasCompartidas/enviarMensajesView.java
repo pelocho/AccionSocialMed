@@ -25,11 +25,6 @@ import java.awt.Color;
 import javax.swing.JTextField;
 
 public class enviarMensajesView {
-
-	/**
-	 * Launch the application.
-	 * @wbp.parser.entryPoint
-	 */
 	private JFrame frmAccionsocialmed;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -99,7 +94,7 @@ public class enviarMensajesView {
 		
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.setBackground(Color.LIGHT_GRAY);
-		btnEnviar.setBounds(176, 222, 89, 23);
+		btnEnviar.setBounds(367, 222, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnEnviar);
 }
 }
