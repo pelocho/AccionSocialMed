@@ -49,29 +49,29 @@ public class gestorMainView {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(gestorMainView.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 320, 358);
+		frmAccionsocialmed.setBounds(100, 100, 320, 257);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JButton btnAadirOng = new JButton("A\u00F1adir ONG");
 		btnAadirOng.setBackground(Color.LIGHT_GRAY);
-		btnAadirOng.setBounds(62, 172, 182, 35);
+		btnAadirOng.setBounds(72, 126, 147, 25);
 		frmAccionsocialmed.getContentPane().add(btnAadirOng);
 		
 		JButton btnActividades = new JButton("Actividades");
 		
 		btnActividades.setBackground(Color.LIGHT_GRAY);
-		btnActividades.setBounds(62, 62, 182, 35);
+		btnActividades.setBounds(72, 54, 147, 25);
 		frmAccionsocialmed.getContentPane().add(btnActividades);
 		
 		JButton btnSolicitudesOng = new JButton("Solicitudes ONG");
 		btnSolicitudesOng.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesOng.setBounds(62, 118, 182, 36);
+		btnSolicitudesOng.setBounds(72, 90, 147, 25);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesOng);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.setBackground(Color.LIGHT_GRAY);
-		btnCerrarSesin.setBounds(62, 251, 182, 35);
+		btnCerrarSesin.setBounds(72, 184, 147, 25);
 		frmAccionsocialmed.getContentPane().add(btnCerrarSesin);
 		
 		JLabel lblcorreoGestor = new JLabel(user);

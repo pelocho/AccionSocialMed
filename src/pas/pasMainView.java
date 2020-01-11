@@ -105,6 +105,7 @@ public class pasMainView {
 		scrollPane.setViewportView(table);
 
 		JButton btnEditarPerfil = new JButton("Editar perfil");
+		btnEditarPerfil.setBackground(Color.LIGHT_GRAY);
 		btnEditarPerfil.setBounds(466, 11, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnEditarPerfil);
 
@@ -121,7 +122,8 @@ public class pasMainView {
 		btnVisualizarActividad.setBackground(Color.LIGHT_GRAY);
 
 		JButton btnMisActividades = new JButton("Mis Actividades");
-		btnMisActividades.setBounds(321, 11, 135, 23);
+		btnMisActividades.setBackground(Color.LIGHT_GRAY);
+		btnMisActividades.setBounds(222, 11, 135, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisActividades);
 		
 		btnVisualizarActividad.addActionListener(new ActionListener() {
@@ -132,6 +134,11 @@ public class pasMainView {
 
 		btnVisualizarActividad.setBounds(10, 444, 117, 23);
 		frmAccionsocialmed.getContentPane().add(btnVisualizarActividad);
+		
+		JButton btnMensajes = new JButton("Mensajes");
+		btnMensajes.setBackground(Color.LIGHT_GRAY);
+		btnMensajes.setBounds(367, 11, 89, 23);
+		frmAccionsocialmed.getContentPane().add(btnMensajes);
 
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

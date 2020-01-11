@@ -130,8 +130,13 @@ public class alumnoMainView {
 		
 		JButton btnMisActividades = new JButton("Mis Actividades");
 		btnMisActividades.setBackground(Color.LIGHT_GRAY);
-		btnMisActividades.setBounds(321, 11, 135, 23);
+		btnMisActividades.setBounds(222, 11, 135, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisActividades);
+		
+		JButton btnMensajes = new JButton("Mensajes");
+		btnMensajes.setBackground(Color.LIGHT_GRAY);
+		btnMensajes.setBounds(367, 11, 89, 23);
+		frmAccionsocialmed.getContentPane().add(btnMensajes);
 
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
