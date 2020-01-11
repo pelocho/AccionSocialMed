@@ -8,11 +8,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileSystemView;
 
+import javafx.stage.FileChooser;
 import pdi.editarPerfilPdi;
 
 public class crearNoticiaView {
@@ -65,7 +69,7 @@ public class crearNoticiaView {
 		frame.getContentPane().add(labelTtulo);
 		
 		JLabel labelCuerpo = new JLabel("Cuerpo:");
-		labelCuerpo.setBounds(10, 110, 115, 14);
+		labelCuerpo.setBounds(10, 98, 115, 14);
 		frame.getContentPane().add(labelCuerpo);
 		
 		textTitulo = new JTextField();
@@ -75,18 +79,42 @@ public class crearNoticiaView {
 		
 		textCuerpo = new JTextField();
 		textCuerpo.setColumns(10);
-		textCuerpo.setBounds(84, 107, 149, 20);
+		textCuerpo.setBounds(84, 92, 149, 20);
 		frame.getContentPane().add(textCuerpo);
 		
 		JLabel labelImagen = new JLabel("Imagen:");
-		labelImagen.setBounds(10, 158, 115, 14);
+		labelImagen.setBounds(10, 132, 115, 14);
 		frame.getContentPane().add(labelImagen);
+		
+		
 		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.setBackground(Color.LIGHT_GRAY);
 		btnCrear.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		btnCrear.setBounds(95, 198, 89, 23);
 		frame.getContentPane().add(btnCrear);
+		
+		JButton btnEscoger = new JButton("Escoger...");
+		btnEscoger.setBackground(Color.LIGHT_GRAY);
+		btnEscoger.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnEscoger.setBounds(94, 128, 89, 23);
+		frame.getContentPane().add(btnEscoger);
+		
+		JLabel lblRuta = new JLabel("Ruta...");
+		lblRuta.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblRuta.setBounds(117, 155, 46, 14);
+		frame.getContentPane().add(lblRuta);
+		
+		btnEscoger.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FileChooser file = new FileChooser();
+				JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				int r = j.showOpenDialog(null); 
+				if (r == JFileChooser.APPROVE_OPTION) {
+					lblRuta.setText(j.getSelectedFile().getAbsolutePath());
+				}
+			}
+		});
 		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
