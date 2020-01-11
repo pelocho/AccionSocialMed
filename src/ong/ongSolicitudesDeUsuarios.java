@@ -145,7 +145,7 @@ public class ongSolicitudesDeUsuarios {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String usuario = (String) modelo.getValueAt(table.getSelectedRow(), 2);
-					System.out.println(usuario);
+					//System.out.println(usuario);
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
 					String[] res = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+ usuario +"';").get(0);
