@@ -78,7 +78,7 @@ public class ongSolicitudesDeUsuarios {
 			new Object[][] {
 			},
 			new String[] {
-				"Tipo de usuario", "Asignaturas cursando actualmente", "Correo"
+				"Actividad", "Asignaturas cursando actualmente", "Correo"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -89,7 +89,7 @@ public class ongSolicitudesDeUsuarios {
 			}
 		});
 		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(15);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(324);
 		scrollPane.setViewportView(table);
@@ -97,12 +97,11 @@ public class ongSolicitudesDeUsuarios {
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
 		List<Solicitud> solicitudes = Solicitud.listaSolicitudesNoAceptadas(ong);
-		for(Solicitud i : solicitudes) {
-			System.out.println(i.getSolicitante() + ", " + i.getActividad());
-		}
+		
 		for(Solicitud solicitud : solicitudes) {
 			Usuario usuario = new Usuario(solicitud.getSolicitante());
-			Object[] insert = {funcionesCompartidas.getTipoUsuario(usuario.getCategoryId()),usuario.getAsignaturasCursadasToString(),usuario.getEmail()};
+			Actividad act = new Actividad (solicitud.getActividad() );
+			Object[] insert = {act.getTitulo(), usuario.getAsignaturasCursadasToString(),usuario.getEmail()};
 			modelo.addRow(insert);	
 		}
 		
@@ -146,7 +145,7 @@ public class ongSolicitudesDeUsuarios {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String usuario = (String) modelo.getValueAt(table.getSelectedRow(), 2);
-					System.out.println(usuario);
+					//System.out.println(usuario);
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
 					String[] res = bd.select("SELECT Actividad FROM solicitud WHERE Solicitante = '"+ usuario +"';").get(0);
