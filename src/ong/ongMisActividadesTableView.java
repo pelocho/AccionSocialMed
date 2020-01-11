@@ -66,7 +66,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 40, 585, 295);
+		scrollPane.setBounds(10, 40, 585, 263);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -123,12 +123,12 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		JButton btnVerDetalles = new JButton("Ver detalles");
 		btnVerDetalles.setBackground(Color.LIGHT_GRAY);
 		btnVerDetalles.setForeground(Color.BLACK);
-		btnVerDetalles.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnVerDetalles.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnVerDetalles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnVerDetalles.setBounds(510, 11, 85, 23);
+		btnVerDetalles.setBounds(482, 11, 114, 23);
 		contentPane.add(btnVerDetalles);
 		
 		JButton btnVolver = new JButton("<");
@@ -139,9 +139,15 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		
 		JButton btnEliminarRechazadas = new JButton("Eliminar rechazadas");
 		btnEliminarRechazadas.setBackground(Color.LIGHT_GRAY);
-		btnEliminarRechazadas.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnEliminarRechazadas.setBounds(374, 11, 126, 23);
+		btnEliminarRechazadas.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnEliminarRechazadas.setBounds(10, 314, 158, 23);
 		contentPane.add(btnEliminarRechazadas);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnFinalizar.setBackground(Color.LIGHT_GRAY);
+		btnFinalizar.setBounds(506, 314, 89, 23);
+		contentPane.add(btnFinalizar);
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override

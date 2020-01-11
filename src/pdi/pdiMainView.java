@@ -83,17 +83,17 @@ public class pdiMainView {
 
 		JButton btnSolicitudesDeAlumnos = new JButton("Solicitudes de Alumnos");
 		btnSolicitudesDeAlumnos.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesDeAlumnos.setBounds(340, 11, 160, 23);
+		btnSolicitudesDeAlumnos.setBounds(20, 364, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesDeAlumnos);
 
 		JButton btnSolicitudesONG = new JButton("Solicitudes de ONG");
 		btnSolicitudesONG.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesONG.setBounds(510, 11, 160, 23);
+		btnSolicitudesONG.setBounds(190, 364, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesONG);
 
 		JButton btnEditarPerfil = new JButton("Editar perfil");
 		btnEditarPerfil.setBackground(Color.LIGHT_GRAY);
-		btnEditarPerfil.setBounds(243, 11, 87, 23);
+		btnEditarPerfil.setBounds(554, 11, 116, 23);
 		frmAccionsocialmed.getContentPane().add(btnEditarPerfil);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -138,13 +138,18 @@ public class pdiMainView {
 
 		JButton btnVerActividad = new JButton("Ver actividad");
 		btnVerActividad.setBackground(Color.LIGHT_GRAY);
-		btnVerActividad.setBounds(10, 364, 116, 23);
+		btnVerActividad.setBounds(308, 11, 116, 23);
 		frmAccionsocialmed.getContentPane().add(btnVerActividad);
 
 		JButton btnMisActividades = new JButton("Mis Actividades");
 		btnMisActividades.setBackground(Color.LIGHT_GRAY);
 		btnMisActividades.setBounds(650, 364, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnMisActividades);
+		
+		JButton btnMensajes = new JButton("Mensajes");
+		btnMensajes.setBackground(Color.LIGHT_GRAY);
+		btnMensajes.setBounds(434, 11, 110, 23);
+		frmAccionsocialmed.getContentPane().add(btnMensajes);
 
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			@Override
