@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -45,7 +47,7 @@ public class mensajeDetallesView extends JFrame {
 		lblNewLabel.setBounds(10, 11, 80, 14);
 		getContentPane().add(lblNewLabel);
 		
-		JLabel label = new JLabel("<Correo del q envia");
+		JLabel label = new JLabel("Nombre destinatario");
 		label.setBounds(98, 11, 326, 14);
 		getContentPane().add(label);
 		
@@ -62,6 +64,13 @@ public class mensajeDetallesView extends JFrame {
 		btnVolver.setBounds(10, 192, 41, 23);
 		getContentPane().add(btnVolver);
 		initialize();
+		
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mensajesView.main(null);
+				frmAccionsocialmed.dispose();
+			}
+		});
 	}
 	
 	private void initialize() {
@@ -71,7 +80,5 @@ public class mensajeDetallesView extends JFrame {
 		frmAccionsocialmed.setBounds(100, 100, 406, 504);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
-		
-		
 	}
 }

@@ -22,6 +22,7 @@ import modelos.Usuario;
 import ong.ongMainView;
 import ong.ongSubirActividad;
 import pantallasCompartidas.editarPerfilView;
+import pantallasCompartidas.mensajesView;
 import pas.misActividadesPas;
 
 import javax.swing.JScrollPane;
@@ -200,6 +201,13 @@ public class pdiMainView {
 		btnMisActividades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				misActividadesPdi.main(user);
+				frmAccionsocialmed.dispose();
+			}
+		});
+		
+		btnMensajes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mensajesView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});

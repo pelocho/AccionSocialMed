@@ -2,6 +2,7 @@ package alumno;
 
 import java.awt.EventQueue;
 import pantallasCompartidas.editarPerfilView;
+import pantallasCompartidas.mensajesView;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
@@ -149,8 +150,6 @@ public class alumnoMainView {
 			public void actionPerformed(ActionEvent e) {
 				editarPerfilView.main(user);
 				frmAccionsocialmed.dispose();
-
-
 			}
 		});
 
@@ -177,6 +176,12 @@ public class alumnoMainView {
 				frmAccionsocialmed.dispose();
 			}
 		});
-
+		
+		btnMensajes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mensajesView.main(user);
+				frmAccionsocialmed.dispose();
+			}
+		});
 	}
 }

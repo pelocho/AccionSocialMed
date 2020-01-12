@@ -140,7 +140,6 @@ public class editarPerfilPdi extends funcionesEditarPerfil{
 					try {
 						editarAlumno(telf, user);
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 
