@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import modelos.Noticia;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -41,15 +44,17 @@ public class noticiasView {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public noticiasView(String user) {
+	public noticiasView(String user) throws Exception {
 		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize(String user) {
+	private void initialize(String user) throws Exception {
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(editarPerfilPdi.class.getResource("/imagenes/icono pequeno.png")));
 		frame.setTitle("AccionSocialMed");
@@ -81,6 +86,13 @@ public class noticiasView {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		
+		List<Noticia> listaNoticias = Noticia.listaNoticias();
+		
+		for(Noticia n : listaNoticias) {
+			Object[] noticia = {n.getTitulo(), n.getCuerpo()};
+			modelo.addRow(noticia);
+		}
 		
 		scrollPane.setViewportView(table);
 		
