@@ -190,5 +190,31 @@ public class ongMisActividadesTableView extends ongListaActividades {
 			}
 		});
 		
+		
+		
+		btnFinalizar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0] );
+					
+					Actividad aux = new Actividad(id);
+					aux.setTipo(5);
+					ongEvaluaGente.main(id);
+					
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		} );
+	
 	}
 }

@@ -4,12 +4,19 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JSlider;
 import javax.swing.JTextPane;
+
+import main.MySQLBD;
+import modelos.Usuario;
+
 import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
 
@@ -19,12 +26,13 @@ public class ongEvaluaGente2 {
 
 	/**
 	 * Launch the application.
+	 * @param act 
 	 */
-	public static void main(String[] args) {
+	public static void main(String correo, int act) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongEvaluaGente2 window = new ongEvaluaGente2();
+					ongEvaluaGente2 window = new ongEvaluaGente2(correo, act);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,15 +43,19 @@ public class ongEvaluaGente2 {
 
 	/**
 	 * Create the application.
+	 * @param correo 
+	 * @param act 
 	 */
-	public ongEvaluaGente2() {
-		initialize();
+	public ongEvaluaGente2(String correo, int act) {
+		initialize(correo, act);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @param correo 
+	 * @param act 
 	 */
-	private void initialize() {
+	private void initialize(String correo, int act) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongEvaluaGente2.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -51,16 +63,18 @@ public class ongEvaluaGente2 {
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
+		Usuario us = new Usuario (correo);
+		
 		JButton button = new JButton("<");
 		button.setBackground(Color.LIGHT_GRAY);
 		button.setBounds(10, 11, 54, 23);
 		frmAccionsocialmed.getContentPane().add(button);
 		
-		JLabel lblNombreYApellidos = new JLabel("Nombre y apellidos:");
+		JLabel lblNombreYApellidos = new JLabel("Nombre:");
 		lblNombreYApellidos.setBounds(10, 45, 128, 14);
 		frmAccionsocialmed.getContentPane().add(lblNombreYApellidos);
 		
-		JLabel label = new JLabel("<nombre>");
+		JLabel label = new JLabel(us.getNombre() + " " + us.getPrimerApellido() + " " + us.getSegundoApellido());
 		label.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label.setBounds(150, 45, 274, 14);
 		frmAccionsocialmed.getContentPane().add(label);
@@ -69,10 +83,10 @@ public class ongEvaluaGente2 {
 		lblDni.setBounds(10, 70, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblDni);
 		
-		JLabel label_1 = new JLabel("<dni>");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label_1.setBounds(69, 70, 170, 14);
-		frmAccionsocialmed.getContentPane().add(label_1);
+		JLabel labelDni = new JLabel(us.getDni());
+		labelDni.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		labelDni.setBounds(69, 70, 170, 14);
+		frmAccionsocialmed.getContentPane().add(labelDni);
 		
 		JLabel lblEvalaAlUsuario = new JLabel("Eval\u00FAa al usuario:");
 		lblEvalaAlUsuario.setBounds(10, 95, 138, 14);
@@ -112,9 +126,9 @@ public class ongEvaluaGente2 {
 		lblComentaAlgo.setBounds(10, 187, 200, 23);
 		frmAccionsocialmed.getContentPane().add(lblComentaAlgo);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(10, 208, 392, 141);
-		frmAccionsocialmed.getContentPane().add(textPane);
+		JTextPane campoTexto = new JTextPane();
+		campoTexto.setBounds(10, 208, 392, 141);
+		frmAccionsocialmed.getContentPane().add(campoTexto);
 		
 		JLabel lblHorasEmpleadas = new JLabel("Horas empleadas:");
 		lblHorasEmpleadas.setBounds(10, 164, 116, 14);
@@ -124,9 +138,40 @@ public class ongEvaluaGente2 {
 		spinner.setBounds(120, 164, 41, 20);
 		frmAccionsocialmed.getContentPane().add(spinner);
 		
-		JButton btnEnviarEvaluacin = new JButton("Enviar evaluaci\u00F3n");
-		btnEnviarEvaluacin.setBackground(Color.LIGHT_GRAY);
-		btnEnviarEvaluacin.setBounds(10, 360, 151, 23);
-		frmAccionsocialmed.getContentPane().add(btnEnviarEvaluacin);
+		JButton btnEnviarEvaluacion = new JButton("Enviar evaluaci\u00F3n");
+		btnEnviarEvaluacion.setBackground(Color.LIGHT_GRAY);
+		btnEnviarEvaluacion.setBounds(10, 360, 151, 23);
+		frmAccionsocialmed.getContentPane().add(btnEnviarEvaluacion);
+		
+		
+		btnEnviarEvaluacion.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					int valoracion = slider.getValue();
+					String opinion = campoTexto.getText();
+					int horas = (int) spinner.getValue();
+					//System.out.println("val: " + valoracion  + " "  + horas+ opinion);
+
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `valoracionONG` = '" + valoracion + 
+							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + act + " '); " );
+
+
+
+					frmAccionsocialmed.dispose();
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		} );
+		
 	}
+	
+	
 }

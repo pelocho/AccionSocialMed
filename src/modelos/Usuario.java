@@ -186,6 +186,14 @@ public class Usuario {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -224,14 +232,14 @@ public class Usuario {
 	}
 
 
-	public static List<Usuario> listaUsuarios(){
+	public static List<Usuario> listaUsuarios() throws Exception{
 		// Metodo de clase que devuelve la lista con todos los usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
 		MySQLBD miBD = new MySQLBD();
+		miBD.readDataBase();
 
-		for(Object[] tupla: miBD.select("SELECT id FROM users;")){
-			int id = (int)tupla[0];
-			lista.add(new Usuario(id));
+		for(Object[] tupla: miBD.select("SELECT Correo FROM usuarios;")){
+			lista.add(new Usuario((String)tupla[0]));
 		}
 		return lista;
 	}
