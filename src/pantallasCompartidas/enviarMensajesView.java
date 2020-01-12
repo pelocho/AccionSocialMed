@@ -6,10 +6,12 @@ import pantallasCompartidas.editarPerfilView;
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import alumno.alumnoMainView;
+import alumno.funcionesCompartidas;
 import gestor.vistaActividadDetallesActs;
 import home.homeView;
 import main.MySQLBD;
@@ -28,6 +30,7 @@ public class enviarMensajesView {
 	private JFrame frmAccionsocialmed;
 	private JTextField textField;
 	private JTextField textField_1;
+	
 	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -96,5 +99,36 @@ public class enviarMensajesView {
 		btnEnviar.setBackground(Color.LIGHT_GRAY);
 		btnEnviar.setBounds(367, 222, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnEnviar);
+		
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String destinatario = textField.getText();
+				String cuerpo = textField_1.getText();
+				
+				if(destinatario.equals("") || cuerpo.equals("")) {
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Faltan campos por rellenar");
+				}else {
+					try {
+						if(funcionesCompartidas.comprobarDestinatario(destinatario)) {
+							funcionesCompartidas.enviarMensaje(user,destinatario,cuerpo);
+							JOptionPane.showMessageDialog(frmAccionsocialmed, "Mensaje enviado correctamente");
+							mensajesView.main(user);
+							frmAccionsocialmed.dispose();
+						}else {
+							JOptionPane.showMessageDialog(frmAccionsocialmed, "El destinatario no se encuentra en la plataforma");
+						}						
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mensajesView.main(user);
+				frmAccionsocialmed.dispose();
+			}
+		});
 }
 }
