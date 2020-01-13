@@ -10,8 +10,10 @@ import java.util.List;
 import modelos.Noticia;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import gestor.gestorMainView;
@@ -115,6 +117,7 @@ public class noticiasView {
 		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				gestorMainView.main(user);
 				frame.dispose();
 			}
 		});
@@ -122,6 +125,26 @@ public class noticiasView {
 		btnNuevaNoticia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crearNoticiaView.main(user);
+				frame.dispose();
+			}
+		});
+		
+		btnBorrarNoticia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String titulo = (String) modelo.getValueAt(table.getSelectedRow(), 0);
+					Boolean ok = Noticia.borrarNoticia(titulo);
+					if (ok) {
+						JOptionPane.showMessageDialog(frame, "Noticia borrada correctamente.");
+						frame.dispose();
+						noticiasView window = new noticiasView(user);
+						window.frame.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(frame, "Hubo un fallo borrando la noticia.");
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 		});
 	}

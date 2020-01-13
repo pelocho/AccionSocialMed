@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import modelos.Noticia;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -13,6 +13,7 @@ import javax.swing.JFileChooser;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
 
@@ -119,6 +120,29 @@ public class crearNoticiaView {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				noticiasView.main(user);
+			}
+		});
+		
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!textTitulo.getText().equals("") && !textCuerpo.getText().equals("")) {
+					String titulo = textTitulo.getText();
+					String cuerpo = textCuerpo.getText();
+					try {
+						Boolean ok = Noticia.guardarNoticia(titulo, cuerpo);
+						if (ok) {
+							JOptionPane.showMessageDialog(frame, "Noticia creada correctamente.");
+							frame.dispose();
+							noticiasView.main(user);
+						} else {
+							JOptionPane.showMessageDialog(frame, "Fallo al crear la noticia.");
+						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 	}

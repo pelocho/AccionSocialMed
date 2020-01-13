@@ -114,6 +114,7 @@ public class gestorMainView {
 		
 		btnNoticias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
 				noticiasView.main(user);
 			}
 		});
