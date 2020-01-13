@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import alumno.alumnoMainView;
+import alumno.funcionesCompartidas;
 import gestor.gestorMainView;
 import gestor.vistaActividadDetallesActs;
 import home.homeView;
@@ -132,15 +133,21 @@ public class mensajesView {
 		
 		btnVerMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mensajeDetallesView.main(user,(String) modelo.getValueAt(table_1.getSelectedRow(), 0));
-				mensajeDetallesView.main(null);
-				frmAccionsocialmed.dispose();
+				try {
+					//mensajeDetallesView.main(user,(String) modelo.getValueAt(table_1.getSelectedRow(), 0));
+					//funcionesCompartidas.mensajeLeido(user,modelo.getValueAt(table_1.getSelectedRow(), 0));
+					mensajeDetallesView.main(user);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
 		btnEliminarMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//funcionesCompartidas.eliminarMensaje();
+				//funcionesCompartidas.eliminarMensaje(user,modelo.getValueAt(table_1.getSelectedRow(), 0));
 				JOptionPane.showMessageDialog(frmAccionsocialmed, "Mensaje eliminado");
 				mensajesView.main(user);
 				frmAccionsocialmed.dispose();				

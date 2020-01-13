@@ -24,11 +24,11 @@ public class mensajeDetallesView {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mensajeDetallesView window = new mensajeDetallesView();
+					mensajeDetallesView window = new mensajeDetallesView(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,11 +40,11 @@ public class mensajeDetallesView {
 	/**
 	 * Create the frame.
 	 */
-	public mensajeDetallesView() {
-		initialize();
+	public mensajeDetallesView(String user) {
+		initialize(user);
 	}
 	
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -65,7 +65,7 @@ public class mensajeDetallesView {
 		lblMensaje.setBounds(10, 36, 53, 14);
 		frmAccionsocialmed.getContentPane().add(lblMensaje);
 		
-		JTextArea textArea = new JTextArea();
+		JTextArea textArea = new JTextArea("Holi");
 		textArea.setBounds(10, 56, 414, 125);
 		frmAccionsocialmed.getContentPane().add(textArea);
 		
@@ -77,7 +77,7 @@ public class mensajeDetallesView {
 		
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mensajesView.main(null);
+				mensajesView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
