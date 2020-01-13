@@ -48,14 +48,9 @@ public class funcionesCompartidas {
 	}
 
 	private static void introducir(Map<Integer, List<Actividad>> prioridad, int puntos, Actividad a) {
-
 		List<Actividad> aux = prioridad.getOrDefault(puntos, new ArrayList<>());
 		aux.add(a);
 		prioridad.put(puntos, aux);
-
-
-
-
 	}
 
 	private static int calcularCompatibilidad(Usuario us, Actividad a) {
@@ -73,10 +68,7 @@ public class funcionesCompartidas {
 
 	private static int calcularComunes(int[] a , int[]b) {
 		int res = 0;
-
-
-
-
+		
 		if(a != null && b != null && a.length != 0 && b.length != 0 ) {
 			for(int i = 0; i < a.length ; i++) {
 				for(int j = 0; j < b.length; j++) {
@@ -149,5 +141,31 @@ public class funcionesCompartidas {
 		}
 
 		return res;
+	}
+	
+	public static void enviarMensaje(String remitente, String destinatario, String cuerpo) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		bd.insert("INSERT INTO `eef_primera_iteracion`.`mensajes` (`remitente`, `destinatario`, `cuerpo`, `estado`) VALUES ('"+remitente+"', '"+destinatario+"', '"+cuerpo+"', '0');");
+	}
+	
+	public static boolean comprobarDestinatario(String destinatario) throws Exception{
+		boolean acceso = false;
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		List<String[]> usuario = null;
+		
+		usuario = bd.selectForLogin("SELECT * FROM eef_primera_iteracion.usuarios WHERE Correo ='"+destinatario+"';");
+	
+		if (usuario.size() == 1) {
+			acceso = true;
+		}else {
+			usuario = bd.selectForLogin("SELECT * FROM eef_primera_iteracion.ong WHERE Correo ='"+destinatario+"';");
+			if (usuario.size() == 1) {
+				acceso = true;
+			}
+		}
+		
+		return acceso;
 	}
 }

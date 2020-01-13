@@ -32,7 +32,7 @@ public class Mensaje {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 
-		String[] msg = bd.select("SELECT * FROM mensajes WHERE id = '" + id + "';").get(0);
+		String[] msg = bd.select("SELECT * FROM Mensajes WHERE id = '" + id + "';").get(0);
 		remitente = new Usuario(msg[1]);
 		destinatario = new Usuario(msg[2]);
 		cuerpo = msg[3];
@@ -45,7 +45,7 @@ public class Mensaje {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT * FROM Mensaje");
+		List<String[]> list = bd.select("SELECT * FROM Mensajes");
 		
 		for(String[] sol : list) {
 			Mensaje aux = new Mensaje(sol[1],sol[2],sol[3], Integer.parseInt(sol [4] ) );
@@ -60,20 +60,18 @@ public class Mensaje {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT * FROM Mensaje");
+		List<String[]> list = bd.select("SELECT * FROM Mensajes");
 		
 		for(String[] sol : list) {
 			if(sol[2].equals(us.getEmail() ) ) {
-				Mensaje aux = new Mensaje(sol[1],sol[2],sol[3], Integer.parseInt(sol [4] ) );
+				//Mensaje aux = new Mensaje(sol[1],sol[2],sol[3], Integer.parseInt(sol[4]) );
+				Mensaje aux = new Mensaje(sol[0]);
 				res.add(aux);
 			}
-			
-		}
-		
+		}		
 		return res;
 	}
-
-
+	
 	public Usuario getRemitente() {
 		return remitente;
 	}
@@ -118,7 +116,14 @@ public class Mensaje {
 	public int getEstado() {
 		return estado;
 	}
-
+	
+	public String getEstadotoString() {
+		if(estado == 0) {
+			return "No leído";
+		}else {
+			return "Leído";
+		}
+	}
 
 	public void setEstado(int estado) {
 		MySQLBD bd = new MySQLBD();
@@ -126,9 +131,4 @@ public class Mensaje {
 				+ "WHERE cuerpo ='"+ cuerpo + "';");
 		this.estado = estado;
 	}
-	
-	
-	
-	
-
 }

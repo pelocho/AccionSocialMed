@@ -2,6 +2,7 @@ package pas;
 
 import java.awt.EventQueue;
 import pantallasCompartidas.editarPerfilView;
+import pantallasCompartidas.mensajesView;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
@@ -151,8 +152,6 @@ public class pasMainView {
 			public void actionPerformed(ActionEvent e) {
 				pasEditarPerfil.main(user);
 				frmAccionsocialmed.dispose();
-
-
 			}
 		});
 
@@ -176,6 +175,13 @@ public class pasMainView {
 		btnMisActividades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				misActividadesPas.main(user);
+				frmAccionsocialmed.dispose();
+			}
+		});
+		
+		btnMensajes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mensajesView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
