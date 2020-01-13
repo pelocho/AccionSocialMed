@@ -107,10 +107,11 @@ public class ongMisActividadesTableView extends ongListaActividades {
 				estado = "Rechazada";
 			}else if( a.getTipo()==5){
 				estado = "Pendiente de aceptación";
+			}else if(a.getTipo() == 6){ 
+				estado = "Finalizada";
 			}else {
 				estado = "Aceptada";
 			}
-			
 			
 			
 			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),estado }; 	
@@ -184,6 +185,8 @@ public class ongMisActividadesTableView extends ongListaActividades {
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
 					ongDetallesAct.main(id);
+
+
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}				
@@ -205,8 +208,14 @@ public class ongMisActividadesTableView extends ongListaActividades {
 					id = Integer.parseInt(res[0] );
 					
 					Actividad aux = new Actividad(id);
-					aux.setTipo(5);
-					ongEvaluaGente.main(id);
+					
+					if (aux.getTipo() == 6 ) {  // esta finalizada
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Esta actividad no se puede finalizar");
+					}else {
+						aux.setTipo(6);
+						ongEvaluaGente.main(id);
+					}
+			
 					
 				}catch (Exception e1) {
 					e1.printStackTrace();

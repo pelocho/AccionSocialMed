@@ -96,7 +96,7 @@ public class ongEvaluaGente {
 		List<Usuario> lista = Usuario.listaUsuarios();
 		
 		for(Usuario us : lista) {
-			if(us.estaParticipando(act) ) {
+			if(us.estaParticipando(act) && noEstaEvaluado(us,act) ) {
 				Object[] prueba = {us.getEmail(), us.getNombre() } ;
 				modelo.addRow(prueba) ;
 			}
@@ -135,6 +135,15 @@ public class ongEvaluaGente {
 		} );
 		
 		
+	}
+
+	private boolean noEstaEvaluado(Usuario us, Actividad act) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		boolean res =  bd.select("select numeroHoras from participacion where correoUsuario = 'j' and idActividad = '43'; " ).get(0) != null ;
+		System.out.println(res);
+		return res;
 	}
 }
 

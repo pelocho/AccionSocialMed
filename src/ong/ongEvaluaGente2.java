@@ -153,12 +153,18 @@ public class ongEvaluaGente2 {
 					int valoracion = slider.getValue();
 					String opinion = campoTexto.getText();
 					int horas = (int) spinner.getValue();
-					//System.out.println("val: " + valoracion  + " "  + horas+ opinion);
+					System.out.println("val: " + valoracion  + " "  + horas+ opinion);
+					System.out.println(correo + " " + act);
 
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
 					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `valoracionONG` = '" + valoracion + 
 							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + act + " '); " );
+					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `comentarioONG` = '" + opinion + 
+							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + act + " '); " );
+					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `numeroHoras` = '" + horas + 
+							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + act + " '); " );
+					
 
 
 
