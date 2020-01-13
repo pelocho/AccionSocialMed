@@ -46,20 +46,10 @@ public class enviarMensajesView {
 
 	
 
-	/**
-	 * Create the application.
-	 * @throws Exception
-	 * @wbp.parser.entryPoint
-	 */
 	public enviarMensajesView(String user) throws Exception {
 		initialize(user);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws Exception
-	 * @wbp.parser.entryPoint
-	 */
 	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(alumnoMainView.class.getResource("/imagenes/icono pequeno.png")));
