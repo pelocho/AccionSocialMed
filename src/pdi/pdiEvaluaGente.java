@@ -1,4 +1,4 @@
-package ong;
+package pdi;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import modelos.Usuario;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class ongEvaluaGente {
+public class pdiEvaluaGente {
 
 	private JFrame frmAccionsocialmed;
 	private JTable table;
@@ -30,12 +30,12 @@ public class ongEvaluaGente {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(int id) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 
-					ongEvaluaGente window = new ongEvaluaGente(id);
+					pdiEvaluaGente window = new pdiEvaluaGente(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,23 +48,23 @@ public class ongEvaluaGente {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public ongEvaluaGente(int id) throws Exception {
-		initialize(id);
+	public pdiEvaluaGente(String user) throws Exception {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
 	 */
-	private void initialize(int id) throws Exception {
+	private void initialize(String user) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongEvaluaGente.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiEvaluaGente.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setBounds(100, 100, 557, 366);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
-		Actividad act = new Actividad(id);
+		Usuario us= new Usuario(user);
 
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -101,7 +101,10 @@ public class ongEvaluaGente {
 		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
-		List<Usuario> lista = Usuario.listaUsuarios();
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		List<Object[]> lista = Usuario.listaUsuarios();
 		
 		for(Usuario us : lista) {
 			if(us.estaParticipando(act) && noEstaEvaluado(us,act) ) {
@@ -133,7 +136,7 @@ public class ongEvaluaGente {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ongEvaluaGente2.main((String)modelo.getValueAt(table.getSelectedRow(), 0), id);
+					pdiEvaluaGente2.main((String)modelo.getValueAt(table.getSelectedRow(), 0), user);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
