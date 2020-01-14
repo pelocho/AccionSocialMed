@@ -17,19 +17,19 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class mensajeDetallesView extends JFrame {
+public class mensajeDetallesView {
 
 	private JFrame frmAccionsocialmed;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mensajeDetallesView frame = new mensajeDetallesView();
-					frame.setVisible(true);
+					mensajeDetallesView window = new mensajeDetallesView(user);
+					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,45 +40,46 @@ public class mensajeDetallesView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public mensajeDetallesView() {
-		getContentPane().setLayout(null);
+	public mensajeDetallesView(String user) {
+		initialize(user);
+	}
+	
+	private void initialize(String user) {
+		frmAccionsocialmed = new JFrame();
+		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
+		frmAccionsocialmed.setTitle("AccionSocialMed");
+		frmAccionsocialmed.setBounds(100, 100, 406, 265);
+		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAccionsocialmed.getContentPane().setLayout(null);
+		
 		
 		JLabel lblNewLabel = new JLabel("Mensaje de:");
 		lblNewLabel.setBounds(10, 11, 80, 14);
-		getContentPane().add(lblNewLabel);
+		frmAccionsocialmed.getContentPane().add(lblNewLabel);
 		
 		JLabel label = new JLabel("Nombre destinatario");
 		label.setBounds(98, 11, 326, 14);
-		getContentPane().add(label);
+		frmAccionsocialmed.getContentPane().add(label);
 		
 		JLabel lblMensaje = new JLabel("Mensaje:");
 		lblMensaje.setBounds(10, 36, 53, 14);
-		getContentPane().add(lblMensaje);
+		frmAccionsocialmed.getContentPane().add(lblMensaje);
 		
-		JTextArea textArea = new JTextArea();
+		JTextArea textArea = new JTextArea("Holi");
 		textArea.setBounds(10, 56, 414, 125);
-		getContentPane().add(textArea);
+		frmAccionsocialmed.getContentPane().add(textArea);
 		
 		JButton btnVolver = new JButton("<");
 		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setBounds(10, 192, 41, 23);
-		getContentPane().add(btnVolver);
-		initialize();
+		frmAccionsocialmed.getContentPane().add(btnVolver);
+		
 		
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mensajesView.main(null);
+				mensajesView.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
-	}
-	
-	private void initialize() {
-		frmAccionsocialmed = new JFrame();
-		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
-		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 406, 504);
-		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAccionsocialmed.getContentPane().setLayout(null);
 	}
 }
