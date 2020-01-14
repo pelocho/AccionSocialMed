@@ -194,6 +194,7 @@ public class pdiMainView {
 
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
 				editarPerfilPdi.main(user);
 			}
 		});
