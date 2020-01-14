@@ -149,16 +149,16 @@ public class funcionesCompartidas {
 		bd.insert("INSERT INTO `eef_primera_iteracion`.`mensajes` (`remitente`, `destinatario`, `cuerpo`, `estado`) VALUES ('"+remitente+"', '"+destinatario+"', '"+cuerpo+"', '0');");
 	}
 	
-	public static void eliminarMensaje(String remitente, String destinatario, String cuerpo) throws Exception {
+	public static void eliminarMensaje(int id) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		bd.delete("DELETE FROM eef_primera_iteracion.mensajes WHERE (remitente = '"+remitente+"' AND destinatario = '"+destinatario+"' AND cuerpo = '"+cuerpo+"');");
+		bd.delete("DELETE FROM eef_primera_iteracion.mensajes WHERE (id = '"+id+"');");
 	}
 	
-	public static void mensajeLeido(String remitente, String destinatario, String cuerpo) throws Exception {
+	public static void mensajeLeido(int id) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		bd.update("UPDATE eef_primera_iteracion.mensajes SET `estado` = '1' WHERE (remitente = '"+remitente+"' AND destinatario = '"+destinatario+"' AND cuerpo = '"+cuerpo+"');");		
+		bd.update("UPDATE eef_primera_iteracion.mensajes SET `estado` = '1' WHERE (id = '"+id+"');");		
 	}
 	
 	public static boolean comprobarDestinatario(String destinatario) throws Exception{

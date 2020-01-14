@@ -29,6 +29,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.ListSelectionModel;
 
 public class mensajesView {
 
@@ -75,27 +76,31 @@ public class mensajesView {
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 45, 456, 211);
+		scrollPane.setBounds(10, 45, 479, 178);
 		frmAccionsocialmed.getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
+		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Enviado por:", "Estado"
+				"Enviado por:", "Estado", "id"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class
+				String.class, String.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
 		table_1.getColumnModel().getColumn(0).setResizable(false);
-		table_1.getColumnModel().getColumn(0).setPreferredWidth(315);
+		table_1.getColumnModel().getColumn(0).setPreferredWidth(330);
 		table_1.getColumnModel().getColumn(1).setResizable(false);
+		table_1.getColumnModel().getColumn(1).setPreferredWidth(135);
+		table_1.getColumnModel().getColumn(2).setResizable(false);
+		table_1.getColumnModel().getColumn(2).setPreferredWidth(15);
 		scrollPane.setViewportView(table_1);
 		
 		DefaultTableModel modelo = (DefaultTableModel) table_1.getModel();
@@ -104,7 +109,7 @@ public class mensajesView {
 		List<Mensaje> mensajes = Mensaje.listaMensajesUsuario(usuario);
 		
 		for(Mensaje m : mensajes) {
-			Object[] prueba = {m.getRemitente().getEmail(),m.getEstadotoString()}; 		// Inserta todos los mensajes
+			Object[] prueba = {m.getRemitente().getEmail(),m.getEstadotoString(),m.getId()}; 		// Inserta todos los mensajes
 			modelo.addRow(prueba);
 		}
 		
@@ -134,9 +139,9 @@ public class mensajesView {
 		btnVerMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					//mensajeDetallesView.main(user,(String) modelo.getValueAt(table_1.getSelectedRow(), 0));
-					//funcionesCompartidas.mensajeLeido(user,modelo.getValueAt(table_1.getSelectedRow(), 0));
-					mensajeDetallesView.main(user);
+					Mensaje msg = new Mensaje((int) modelo.getValueAt(table_1.getSelectedRow(), 2));
+					mensajeDetallesView.main(user,msg);
+					funcionesCompartidas.mensajeLeido(msg.getId());
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -147,10 +152,17 @@ public class mensajesView {
 		
 		btnEliminarMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//funcionesCompartidas.eliminarMensaje(user,modelo.getValueAt(table_1.getSelectedRow(), 0));
-				JOptionPane.showMessageDialog(frmAccionsocialmed, "Mensaje eliminado");
-				mensajesView.main(user);
-				frmAccionsocialmed.dispose();				
+				Mensaje msg;
+				try {
+					msg = new Mensaje((int)modelo.getValueAt(table_1.getSelectedRow(), 2));
+					funcionesCompartidas.eliminarMensaje(msg.getId());
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Mensaje eliminado");
+					mensajesView.main(user);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}		
 			}
 		});
 		

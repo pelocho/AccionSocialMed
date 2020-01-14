@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import alumno.vistaActividad;
+import modelos.Mensaje;
+
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -24,11 +26,11 @@ public class mensajeDetallesView {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String user) {
+	public static void main(String user, Mensaje msg) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mensajeDetallesView window = new mensajeDetallesView(user);
+					mensajeDetallesView window = new mensajeDetallesView(user,msg);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,11 +42,11 @@ public class mensajeDetallesView {
 	/**
 	 * Create the frame.
 	 */
-	public mensajeDetallesView(String user) {
-		initialize(user);
+	public mensajeDetallesView(String user, Mensaje msg) {
+		initialize(user,msg);
 	}
 	
-	private void initialize(String user) {
+	private void initialize(String user, Mensaje msg) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(vistaActividad.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -57,7 +59,7 @@ public class mensajeDetallesView {
 		lblNewLabel.setBounds(10, 11, 80, 14);
 		frmAccionsocialmed.getContentPane().add(lblNewLabel);
 		
-		JLabel label = new JLabel("Nombre destinatario");
+		JLabel label = new JLabel(msg.getRemitente().getEmail());
 		label.setBounds(98, 11, 326, 14);
 		frmAccionsocialmed.getContentPane().add(label);
 		
@@ -65,7 +67,7 @@ public class mensajeDetallesView {
 		lblMensaje.setBounds(10, 36, 53, 14);
 		frmAccionsocialmed.getContentPane().add(lblMensaje);
 		
-		JTextArea textArea = new JTextArea("Holi");
+		JTextArea textArea = new JTextArea(msg.getCuerpo());
 		textArea.setBounds(10, 56, 414, 125);
 		frmAccionsocialmed.getContentPane().add(textArea);
 		

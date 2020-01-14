@@ -10,7 +10,7 @@ public class Mensaje {
 	private Usuario remitente, destinatario;
 	private String cuerpo;
 	
-	private int estado;  ///// 0 No Leido      1 Leido    
+	private int estado, id;  ///// 0 No Leido      1 Leido    
 	
 	
 	
@@ -28,11 +28,12 @@ public class Mensaje {
 	}
 	
 	
-	public Mensaje (String id) throws Exception {
+	public Mensaje (int id) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 
 		String[] msg = bd.select("SELECT * FROM Mensajes WHERE id = '" + id + "';").get(0);
+		this.id = Integer.parseInt(msg[0]);
 		remitente = new Usuario(msg[1]);
 		destinatario = new Usuario(msg[2]);
 		cuerpo = msg[3];
@@ -48,7 +49,8 @@ public class Mensaje {
 		List<String[]> list = bd.select("SELECT * FROM Mensajes");
 		
 		for(String[] sol : list) {
-			Mensaje aux = new Mensaje(sol[1],sol[2],sol[3], Integer.parseInt(sol [4] ) );
+			//Mensaje aux = new Mensaje(sol[1],sol[2],sol[3], Integer.parseInt(sol[4]));
+			Mensaje aux = new Mensaje(Integer.parseInt(sol[0]));
 			res.add(aux);
 		}
 		
@@ -65,7 +67,7 @@ public class Mensaje {
 		for(String[] sol : list) {
 			if(sol[2].equals(us.getEmail() ) ) {
 				//Mensaje aux = new Mensaje(sol[1],sol[2],sol[3], Integer.parseInt(sol[4]) );
-				Mensaje aux = new Mensaje(sol[0]);
+				Mensaje aux = new Mensaje(Integer.parseInt(sol[0]));
 				res.add(aux);
 			}
 		}		
@@ -130,5 +132,15 @@ public class Mensaje {
 		bd.update("UPDATE mensajes SET estado = '" + estado + "' "
 				+ "WHERE cuerpo ='"+ cuerpo + "';");
 		this.estado = estado;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
