@@ -17,6 +17,7 @@ import login.loginView;
 import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Solicitud;
+import modelos.Usuario;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -97,8 +98,12 @@ public class pdiSolicitudesONGView {
 		List<Actividad> actividadesONG = Actividad.listaActividadesTipo(5);
 		
 		for (Actividad act : actividadesONG) {
-			Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
-			modelo.addRow(insert);			
+			
+			if(soyElCoordinador(user,act) ) {
+				Object[] insert = {act.getTitulo(),act.getLugar(),act.getHoras(),act.getPlazasDisponibles()};
+				modelo.addRow(insert);	
+			}
+					
 		}
 		
 		scrollPane.setViewportView(table);
@@ -134,7 +139,7 @@ public class pdiSolicitudesONGView {
 					int id = 0;
 					MySQLBD bd = new MySQLBD();
 					bd.readDataBase();
-					System.out.print(modelo.getValueAt(table.getSelectedRow(), 0));
+					//System.out.print(modelo.getValueAt(table.getSelectedRow(), 0));
 					
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
@@ -148,5 +153,28 @@ public class pdiSolicitudesONGView {
 		});
 		
 		
+	}
+
+	private boolean soyElCoordinador(String user, Actividad act) throws Exception {
+		boolean res = false;
+		int asig = act.getAsignaturaAsociada();
+		
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		String id ;
+		List<String[]> l =  bd.select("SELECT id FROM dumamockup.users WHERE userEmail='"+user+ "' ; " ) ;
+		if(l.size() == 1) {
+			id = l.get(0)[0];
+
+			
+			List<String[]> l2 =  bd.select("SELECT coordinator FROM dumamockup.courses WHERE id='"+asig+ "' ; " ) ;
+			if(l2.size() == 1) {
+				String coordinator = l2.get(0)[0];
+
+				res = id.equals(coordinator);
+			}
+		}
+		return res;
 	}
 }

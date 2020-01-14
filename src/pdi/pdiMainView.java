@@ -84,12 +84,12 @@ public class pdiMainView {
 
 		JButton btnSolicitudesDeAlumnos = new JButton("Solicitudes de Alumnos");
 		btnSolicitudesDeAlumnos.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesDeAlumnos.setBounds(20, 364, 160, 23);
+		btnSolicitudesDeAlumnos.setBounds(20, 364, 187, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesDeAlumnos);
 
 		JButton btnSolicitudesONG = new JButton("Solicitudes de ONG");
 		btnSolicitudesONG.setBackground(Color.LIGHT_GRAY);
-		btnSolicitudesONG.setBounds(190, 364, 160, 23);
+		btnSolicitudesONG.setBounds(214, 364, 160, 23);
 		frmAccionsocialmed.getContentPane().add(btnSolicitudesONG);
 
 		JButton btnEditarPerfil = new JButton("Editar perfil");
@@ -151,6 +151,11 @@ public class pdiMainView {
 		btnMensajes.setBackground(Color.LIGHT_GRAY);
 		btnMensajes.setBounds(434, 11, 110, 23);
 		frmAccionsocialmed.getContentPane().add(btnMensajes);
+		
+		JButton btnEvaluar = new JButton("Evaluar");
+		btnEvaluar.setBackground(Color.LIGHT_GRAY);
+		btnEvaluar.setBounds(384, 364, 103, 23);
+		frmAccionsocialmed.getContentPane().add(btnEvaluar);
 
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			@Override
@@ -194,6 +199,7 @@ public class pdiMainView {
 
 		btnEditarPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
 				editarPerfilPdi.main(user);
 			}
 		});

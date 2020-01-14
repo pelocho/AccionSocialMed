@@ -102,6 +102,7 @@ public class ongMainView {
 		btnSolicitudes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
 				ongSolicitudesDeUsuarios.main(user);
 			}
 		});

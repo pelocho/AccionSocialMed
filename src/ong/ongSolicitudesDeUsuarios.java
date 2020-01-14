@@ -163,8 +163,8 @@ public class ongSolicitudesDeUsuarios {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//ongMainView.main(ong);
 				frmAccionsocialmed.dispose();
+				ongMainView.main(ong);
 			}
 		});
 	}

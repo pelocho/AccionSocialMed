@@ -129,6 +129,7 @@ public class editarPerfilPdi extends funcionesEditarPerfil{
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmAccionsocialmed.dispose();
+				pdiMainView.main(user);
 			}
 		});
 		

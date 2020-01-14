@@ -8,7 +8,9 @@ import java.util.List;
 
 import main.MySQLBD;
 
-public class Actividad {//voluntariado = 0, ApyS = 1, voluntariado = 2,   rechazada = 3,   pendiente = 4,     6 finalizada
+public class Actividad {
+	//voluntariado = 0, ApyS = 1, voluntariado = 2,   rechazada = 3, 
+	//pendienteDeAceptarPorGestor = 4,          ApsPendienteDeAceptarPorPDI = 5        ,       6 finalizada
 	private int codigo, tipo, horas, asignaturaAsociada, plazasDisponibles;
 	private String titulo,descripcion,ong,lugar;
 	java.util.Date fecha_inicio, fecha_fin;
