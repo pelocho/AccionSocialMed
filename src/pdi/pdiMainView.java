@@ -217,6 +217,13 @@ public class pdiMainView {
 				frmAccionsocialmed.dispose();
 			}
 		});
+		
+		btnEvaluar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pdiEvaluaGente.main(user);
+				frmAccionsocialmed.dispose();
+			}
+		});
 
 	}
 }

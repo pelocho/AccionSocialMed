@@ -64,7 +64,7 @@ public class pdiEvaluaGente {
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
-		Usuario us= new Usuario(user);
+		Usuario pdi= new Usuario(user);
 
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -104,11 +104,15 @@ public class pdiEvaluaGente {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<Object[]> lista = Usuario.listaUsuarios();
+		List<String[]> lista = bd.select("SELECT * FROM eef_primera_iteracion.participacion; " );
 		
-		for(Usuario us : lista) {
-			if(us.estaParticipando(act) && noEstaEvaluado(us,act) ) {
-				Object[] prueba = {us.getEmail(), us.getNombre() } ;
+		for(String[] tupla : lista) {
+			Usuario us = new Usuario(tupla[0] );
+			Actividad act = new Actividad (Integer.parseInt(tupla[1]) );
+			System.out.println(tupla[0] + " "+tupla[1] + " "  + tupla[2] );
+			
+			if(estaEvaluadoOng(us,act) &&  !estaEvaluadoPdi(us,act) ) {
+				Object[] prueba = {us.getEmail(), us.getNombre(), act.getTitulo() } ;
 				modelo.addRow(prueba) ;
 			}
 		}
@@ -128,6 +132,7 @@ public class pdiEvaluaGente {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frmAccionsocialmed.dispose();
+				pdiMainView.main(user);
 			}
 		});
 		
@@ -136,7 +141,15 @@ public class pdiEvaluaGente {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					pdiEvaluaGente2.main((String)modelo.getValueAt(table.getSelectedRow(), 0), user);
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					
+					String usuario  = (String)modelo.getValueAt(table.getSelectedRow(), 0);
+					String nombreAct = (String)modelo.getValueAt(table.getSelectedRow(), 2) ;
+					
+					String act = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades where Titulo = '" +nombreAct + "'; ").get(0)[0];
+					
+					pdiEvaluaGente2.main(usuario, Integer.parseInt(act) )  ;
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -148,13 +161,24 @@ public class pdiEvaluaGente {
 		
 	}
 
-	private boolean noEstaEvaluado(Usuario us, Actividad act) throws Exception {
+	private boolean estaEvaluadoOng(Usuario us, Actividad act) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		boolean res =  bd.select("select numeroHoras from participacion where correoUsuario = 'j' and idActividad = '43'; " ).get(0) != null ;
-		System.out.println(res);
-		return res;
+		String res =  bd.select("select valoracionONG from participacion where correoUsuario = ' " + us.getEmail() 
+		+ "' and idActividad = '" +act.getCodigo()+ "'; " ).get(0)[0];
+
+		return res != null;
+	}
+
+	private boolean estaEvaluadoPdi(Usuario us, Actividad act) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		
+		String res =  bd.select("select valoracionPDI from participacion where correoUsuario = ' " + us.getEmail() 
+		+ "' and idActividad = '" +act.getCodigo()+ "'; " ).get(0)[0];
+
+		return res != null;
 	}
 }
 

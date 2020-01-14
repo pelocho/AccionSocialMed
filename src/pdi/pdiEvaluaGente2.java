@@ -107,10 +107,10 @@ public class pdiEvaluaGente2 {
 		lblNota.setBounds(10, 237, 41, 14);
 		frmAccionsocialmed.getContentPane().add(lblNota);
 		
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerNumberModel(0, 0, 10, 1));
-		spinner_1.setBounds(51, 234, 33, 20);
-		frmAccionsocialmed.getContentPane().add(spinner_1);
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(0, 0, 10, 1));
+		spinner.setBounds(51, 234, 33, 20);
+		frmAccionsocialmed.getContentPane().add(spinner);
 		
 		JLabel lblEvaliacinDeLa = new JLabel("Evaliaci\u00F3n de la ONG:");
 		lblEvaliacinDeLa.setBounds(10, 95, 140, 14);
@@ -138,9 +138,8 @@ public class pdiEvaluaGente2 {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					
-					int valoracion = slider.getValue();
+					int valoracion = (int) spinner.getValue();
 					String opinion = campoTexto.getText();
-					int horas = (int) spinner.getValue();
 					System.out.println("val: " + valoracion  + " "  + horas+ opinion);
 					System.out.println(correo + " " + act);
 

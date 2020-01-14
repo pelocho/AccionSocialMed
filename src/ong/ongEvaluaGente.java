@@ -104,7 +104,7 @@ public class ongEvaluaGente {
 		List<Usuario> lista = Usuario.listaUsuarios();
 		
 		for(Usuario us : lista) {
-			if(us.estaParticipando(act) && noEstaEvaluado(us,act) ) {
+			if(us.estaParticipando(act) && !estaEvaluado(us,act) ) {
 				Object[] prueba = {us.getEmail(), us.getNombre() } ;
 				modelo.addRow(prueba) ;
 			}
@@ -145,13 +145,14 @@ public class ongEvaluaGente {
 		
 	}
 
-	private boolean noEstaEvaluado(Usuario us, Actividad act) throws Exception {
+	private boolean estaEvaluado(Usuario us, Actividad act) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		boolean res =  bd.select("select numeroHoras from participacion where correoUsuario = 'j' and idActividad = '43'; " ).get(0) != null ;
-		System.out.println(res);
-		return res;
+		String res =  bd.select("select valoracionONG from participacion where correoUsuario = ' " + us.getEmail() 
+		+ "' and idActividad = '" +act.getCodigo()+ "'; " ).get(0)[0];
+
+		return res != null;
 	}
 }
 
