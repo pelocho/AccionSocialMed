@@ -180,4 +180,15 @@ public class funcionesCompartidas {
 		
 		return acceso;
 	}
+	
+	public static boolean esUsuario(String nombre) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		List<String[]> res = bd.select("SELECT * FROM eef_primera_iteracion.usuarios WHERE Correo ='"+nombre+"';");
+		if(res.size() > 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

@@ -59,7 +59,7 @@ public class mensajeDetallesView {
 		lblNewLabel.setBounds(10, 11, 80, 14);
 		frmAccionsocialmed.getContentPane().add(lblNewLabel);
 		
-		JLabel label = new JLabel(msg.getRemitente().getEmail());
+		JLabel label = new JLabel(msg.getRemitente());
 		label.setBounds(98, 11, 326, 14);
 		frmAccionsocialmed.getContentPane().add(label);
 		

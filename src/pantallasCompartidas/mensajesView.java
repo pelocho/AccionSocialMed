@@ -20,6 +20,7 @@ import home.homeView;
 import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Mensaje;
+import modelos.ONG;
 import modelos.Usuario;
 import ong.ongMainView;
 
@@ -105,11 +106,10 @@ public class mensajesView {
 		
 		DefaultTableModel modelo = (DefaultTableModel) table_1.getModel();
 		
-		Usuario usuario = new Usuario(user);
-		List<Mensaje> mensajes = Mensaje.listaMensajesUsuario(usuario);
-		
+		List<Mensaje> mensajes = Mensaje.listaMensajesUsuario(user);
+			
 		for(Mensaje m : mensajes) {
-			Object[] prueba = {m.getRemitente().getEmail(),m.getEstadotoString(),m.getId()}; 		// Inserta todos los mensajes
+			Object[] prueba = {m.getRemitente(),m.getEstadotoString(),m.getId()}; 		// Inserta todos los mensajes
 			modelo.addRow(prueba);
 		}
 		
@@ -168,19 +168,26 @@ public class mensajesView {
 		
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(usuario.getCategoryId());
-				if(usuario.getCategoryId() == 1) {
-					alumnoMainView.main(user);
-				}else if(usuario.getCategoryId() == 2) {
-					pdiMainView.main(user);
-				}else if(usuario.getCategoryId() == 3) {
-					pasMainView.main(user);
-				}else if(usuario.getCategoryId() == 5) {
-					gestorMainView.main(user);
-				}else {
-					ongMainView.main(user);
-				}
-				frmAccionsocialmed.dispose();
+				try {
+					if(funcionesCompartidas.esUsuario(user)) {
+						Usuario usuario = new Usuario(user);
+						if(usuario.getCategoryId() == 1) {
+							alumnoMainView.main(user);
+						}else if(usuario.getCategoryId() == 2) {
+							pdiMainView.main(user);
+						}else if(usuario.getCategoryId() == 3) {
+							pasMainView.main(user);
+						}else {
+							gestorMainView.main(user);
+						}
+					}else {
+						ongMainView.main(user);
+					}
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
 			}
 		});
 	}
