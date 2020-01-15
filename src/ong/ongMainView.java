@@ -6,13 +6,8 @@ import pantallasCompartidas.mensajesView;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-
 import home.homeView;
-import login.loginView;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Toolkit;
@@ -91,6 +86,7 @@ public class ongMainView {
 		btnMensajes.setBackground(Color.LIGHT_GRAY);
 		btnMensajes.setBounds(66, 180, 126, 23);
 		frmAccionsocialmed.getContentPane().add(btnMensajes);
+		
 		
 		btnSubirProyecto.addActionListener(new ActionListener() {
 			@Override
