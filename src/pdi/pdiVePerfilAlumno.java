@@ -16,6 +16,8 @@ import main.MySQLBD;
 import modelos.Usuario;
 
 import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class pdiVePerfilAlumno {
 
@@ -39,19 +41,21 @@ public class pdiVePerfilAlumno {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public pdiVePerfilAlumno(String pdi, String correo, int id) {
+	public pdiVePerfilAlumno(String pdi, String correo, int id) throws Exception {
 		initialize(pdi,correo, id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize(String pdi, String correo, int id) {
+	private void initialize(String pdi, String correo, int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiVePerfilAlumno.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
-		frmAccionsocialmed.setBounds(100, 100, 434, 269);
+		frmAccionsocialmed.setBounds(100, 100, 436, 323);
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
@@ -80,15 +84,15 @@ public class pdiVePerfilAlumno {
 		frmAccionsocialmed.getContentPane().add(lblNombre);
 		
 		JLabel lblAsignaturasCursando = new JLabel("Asignaturas:");
-		lblAsignaturasCursando.setBounds(10, 118, 89, 14);
+		lblAsignaturasCursando.setBounds(10, 123, 89, 14);
 		frmAccionsocialmed.getContentPane().add(lblAsignaturasCursando);
 		
 		JLabel lblTiposElegidos = new JLabel("Tipos elegidos:");
-		lblTiposElegidos.setBounds(10, 143, 108, 14);
+		lblTiposElegidos.setBounds(10, 168, 108, 14);
 		frmAccionsocialmed.getContentPane().add(lblTiposElegidos);
 		
 		JLabel lblreasElegidas = new JLabel("\u00C1reas elegidas:");
-		lblreasElegidas.setBounds(10, 168, 108, 14);
+		lblreasElegidas.setBounds(10, 198, 108, 14);
 		frmAccionsocialmed.getContentPane().add(lblreasElegidas);
 		
 		JLabel label_1 = new JLabel(usuario.getPrimerApellido());
@@ -106,32 +110,38 @@ public class pdiVePerfilAlumno {
 		label_3.setBounds(66, 93, 342, 14);
 		frmAccionsocialmed.getContentPane().add(label_3);
 		
-		JLabel label_4 = new JLabel("<asignatura1,asignatura2,asignatura3>");
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label_4.setBounds(96, 118, 312, 14);
-		frmAccionsocialmed.getContentPane().add(label_4);
-		
-		JLabel label_5 = new JLabel("<tipo1,tipo2,tipo3>");
+		JLabel label_5 = new JLabel(usuario.getTipoInteresesToString());
 		label_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label_5.setBounds(109, 143, 299, 14);
+		label_5.setBounds(109, 170, 299, 14);
 		frmAccionsocialmed.getContentPane().add(label_5);
 		
-		JLabel label_6 = new JLabel("<area1,area2,area3>");
+		JLabel label_6 = new JLabel(usuario.getAreaInteresesToString());
 		label_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label_6.setBounds(109, 168, 299, 14);
+		label_6.setBounds(109, 200, 299, 14);
 		frmAccionsocialmed.getContentPane().add(label_6);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setForeground(new Color(60, 179, 113));
 		btnAceptar.setBackground(Color.LIGHT_GRAY);
-		btnAceptar.setBounds(10, 198, 89, 23);
+		btnAceptar.setBounds(10, 228, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptar);
 		
 		JButton btnRechazar = new JButton("Rechazar");
 		btnRechazar.setForeground(new Color(220, 20, 60));
 		btnRechazar.setBackground(Color.LIGHT_GRAY);
-		btnRechazar.setBounds(119, 198, 89, 23);
+		btnRechazar.setBounds(119, 228, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(109, 118, 290, 34);
+		frmAccionsocialmed.getContentPane().add(scrollPane);
+		
+		JLabel lblAsignaturas = new JLabel(usuario.getAsignaturasCursadasToString());
+		lblAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblAsignaturas.setBounds(109, 200, 299, 14);
+		lblAsignaturas.setBackground(new Color(240, 240, 240));
+		scrollPane.setViewportView(lblAsignaturas);
 		
 		btnAceptar.addActionListener(new ActionListener() {
 			@Override
@@ -161,6 +171,19 @@ public class pdiVePerfilAlumno {
 					bd.readDataBase();
 					bd.delete("DELETE FROM solicitudesaps WHERE Alumno = '"+correo+"' AND Actividad = '"+id+"';");
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Alumno rechazado");
+					pdiSolicitudesAlumnosView.main(pdi);
+					frmAccionsocialmed.dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
 					pdiSolicitudesAlumnosView.main(pdi);
 					frmAccionsocialmed.dispose();
 				} catch (Exception e1) {

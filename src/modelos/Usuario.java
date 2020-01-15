@@ -1,6 +1,7 @@
 package modelos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -9,7 +10,7 @@ import main.MySQLBD;
 public class Usuario {
 	private int id, categoryId, telefono;
 	private String email, passwd, nombre, primerApellido, segundoApellido, nacionalidad, dni;
-	private int[] asignaturasCursadas = new int [10] ;
+	private int[] asignaturasCursadas = new int[20] ;
 	private int[] tipoIntereses = new int [10] ;
 	private int [] areaIntereses = new int [10] ;
 	private int numAreas = 0;
@@ -71,6 +72,7 @@ public class Usuario {
 				tipoIntereses[numTipos] = Integer.parseInt(v[0]);
 				numTipos++;
 			}
+			tipoIntereses = Arrays.copyOfRange(tipoIntereses, 0, numTipos);
 			
 
 			List<String[]> vals = miBD.select("SELECT Area FROM eef_primera_iteracion.usuario_area_preferencia WHERE Correo='"+correo+"';");
@@ -78,12 +80,14 @@ public class Usuario {
 				areaIntereses[numAreas] = Integer.parseInt(v[0]);
 				numAreas++;
 			}
+			areaIntereses = Arrays.copyOfRange(areaIntereses, 0, numAreas);
 			
-			/*List<String[]> asignaturas = miBD.select("SELECT courseId FROM dumamockup.enrollments WHERE StudentId='"+dni+"';");
-			for(String[] v : val) {
+			List<String[]> asignaturas = miBD.select("SELECT courseId FROM dumamockup.enrollments WHERE StudentId="+dni+";");
+			for(String[] v : asignaturas) {
 				asignaturasCursadas[numAsig] = Integer.parseInt(v[0]);
 				numAsig++;
-			}*/
+			}			
+			asignaturasCursadas = Arrays.copyOfRange(asignaturasCursadas, 0, numAsig);
 			
 			//////////////////////////////////////////////
 			List<String[]> strs = miBD.select("SELECT * FROM eef_primera_iteracion.participacion WHERE correoUsuario='"+correo+"';");
@@ -96,10 +100,6 @@ public class Usuario {
 			System.err.println("Error al cargar de la base de datos de eef en el constructor de usuario") ;
 			e.printStackTrace();
 		}
-
-		
-		
-
 	}
 	
 	public boolean estaParticipando(Actividad a) throws Exception {
@@ -149,19 +149,14 @@ public class Usuario {
 	}
 	
 	public void anadirTipoIntereses(int g) {
-
 		tipoIntereses[numTipos] = g;
 		numTipos++;
-
 	}
 	
 	public void anadirAreaInteres(int g) {
 		areaIntereses[numAreas] = g;
 		numAreas++;
-
 	}
-	
-
 
 	public String toString() {
 		return id + " " + email + " " + passwd + " " + categoryId + " " + nombre + " " + primerApellido + " " + segundoApellido;
@@ -231,7 +226,6 @@ public class Usuario {
 		this.segundoApellido = segundoApellido;
 	}
 
-
 	public static List<Usuario> listaUsuarios() throws Exception{
 		// Metodo de clase que devuelve la lista con todos los usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
@@ -249,7 +243,7 @@ public class Usuario {
 		bd.readDataBase();
 		int j = 0;
 		String[] res = new String[getAsignaturasCursadas().length];
-		for(int i : getAsignaturasCursadas()) {
+		for(int i : asignaturasCursadas) {
 			String[] asig = bd.select("SELECT name FROM dumamockup.courses WHERE id = "+i+";").get(0);
 			res[j] = asig[0];
 			j++;
@@ -261,7 +255,7 @@ public class Usuario {
 		}
 
 		if(res.length == 0) {
-			sb.append("No está cursando ninguna actividad");
+			sb.append("No está cursando ninguna asignatura");
 		}else {
 			sb.append(res[res.length-1]);
 		}
@@ -269,7 +263,55 @@ public class Usuario {
 		return sb.toString();
 	}
 
+	public String getTipoInteresesToString() throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		int j = 0;
+		String[] res = new String[getTipoIntereses().length];
+		for(int i : tipoIntereses) {
+			String[] tipo = bd.select("SELECT titulo FROM eef_primera_iteracion.tipoactividad WHERE idTipoActividad = "+i+";").get(0);
+			res[j] = tipo[0];
+			j++;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < res.length-1; i++) {
+			sb.append(res[i] + ", ");
+		}
+
+		if(res.length == 0) {
+			sb.append("No tiene ningún tipo de interés");
+		}else {
+			sb.append(res[res.length-1]);
+		}
+		
+		return sb.toString();
+	}
 	
+	public String getAreaInteresesToString() throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		int j = 0;
+		String[] res = new String[getAreaIntereses().length];
+		for(int i : areaIntereses) {
+			String[] area = bd.select("SELECT titulo FROM eef_primera_iteracion.areaactividad WHERE idAreaActividad = "+i+";").get(0);
+			res[j] = area[0];
+			j++;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < res.length-1; i++) {
+			sb.append(res[i] + ", ");
+		}
+
+		if(res.length == 0) {
+			sb.append("No tiene ningún área de interés");
+		}else {
+			sb.append(res[res.length-1]);
+		}
+		
+		return sb.toString();
+	}
 	
 }
 
