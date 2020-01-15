@@ -102,11 +102,11 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		String estado = ""; 
 		for (Actividad a : listaact) {
 			if (a.getTipo() == 4) {
-				estado = "Pendiente";
+				estado = "Pendiente de Gestor";
 			}else if (a.getTipo()==3) {
 				estado = "Rechazada";
 			}else if( a.getTipo()==5){
-				estado = "Pendiente de aceptación";
+				estado = "Aps Pendiente de aceptación";
 			}else if(a.getTipo() == 6){ 
 				estado = "Finalizada";
 			}else {
@@ -125,10 +125,8 @@ public class ongMisActividadesTableView extends ongListaActividades {
 		btnVerDetalles.setBackground(Color.LIGHT_GRAY);
 		btnVerDetalles.setForeground(Color.BLACK);
 		btnVerDetalles.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnVerDetalles.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
+		
 		btnVerDetalles.setBounds(482, 11, 114, 23);
 		contentPane.add(btnVerDetalles);
 		
@@ -209,11 +207,14 @@ public class ongMisActividadesTableView extends ongListaActividades {
 					
 					Actividad aux = new Actividad(id);
 					
-					if (aux.getTipo() == 6 ) {  // esta finalizada
-						JOptionPane.showMessageDialog(frmAccionsocialmed, "Esta actividad no se puede finalizar");
-					}else {
+					if (aux.getTipo() == 1 || aux.getTipo() == 2 || aux.getTipo() == 3) {  // Actividad en curso valida
 						aux.setTipo(6);
-						ongEvaluaGente.main(id);
+						ongEvaluaGente.main(user,id);
+						frmAccionsocialmed.dispose();
+
+						
+					}else {
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Esta actividad no se puede finalizar");
 					}
 			
 					

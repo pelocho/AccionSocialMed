@@ -109,9 +109,10 @@ public class pdiEvaluaGente {
 		for(String[] tupla : lista) {
 			Usuario us = new Usuario(tupla[0] );
 			Actividad act = new Actividad (Integer.parseInt(tupla[1]) );
-			System.out.println(tupla[0] + " "+tupla[1] + " "  + tupla[2] );
-			
+			System.out.println(tupla[0] + " "+tupla[1] + " "  + tupla[2] + "  " + estaEvaluadoOng(us,act) +  !estaEvaluadoPdi(us,act));
+
 			if(estaEvaluadoOng(us,act) &&  !estaEvaluadoPdi(us,act) ) {
+
 				Object[] prueba = {us.getEmail(), us.getNombre(), act.getTitulo() } ;
 				modelo.addRow(prueba) ;
 			}
@@ -149,7 +150,8 @@ public class pdiEvaluaGente {
 					
 					String act = bd.select("SELECT Codigo FROM eef_primera_iteracion.actividades where Titulo = '" +nombreAct + "'; ").get(0)[0];
 					
-					pdiEvaluaGente2.main(usuario, Integer.parseInt(act) )  ;
+					frmAccionsocialmed.dispose();
+					pdiEvaluaGente2.main(usuario, Integer.parseInt(act),user )  ;
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -164,22 +166,34 @@ public class pdiEvaluaGente {
 	private boolean estaEvaluadoOng(Usuario us, Actividad act) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
+		boolean res = false;
 		
-		String res =  bd.select("select valoracionONG from participacion where correoUsuario = ' " + us.getEmail() 
-		+ "' and idActividad = '" +act.getCodigo()+ "'; " ).get(0)[0];
 
-		return res != null;
+		List<String[]> l =  bd.select("select valoracionONG from eef_primera_iteracion.participacion "
+				+ "WHERE (`correoUsuario` = '" + us.getEmail() + "') and (`idActividad` = '" + act.getCodigo() + "');; " );
+
+		
+			res = l.get(0)[0] != null;
+		
+		
+
+
+		return res ;
 	}
 
 	private boolean estaEvaluadoPdi(Usuario us, Actividad act) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		
-		String res =  bd.select("select valoracionPDI from participacion where correoUsuario = ' " + us.getEmail() 
-		+ "' and idActividad = '" +act.getCodigo()+ "'; " ).get(0)[0];
+		boolean res = false;
 
-		return res != null;
-	}
+		List<String[]> l =  bd.select("select valoracionPDI from eef_primera_iteracion.participacion "
+				+ "WHERE (`correoUsuario` = '" + us.getEmail() + "') and (`idActividad` = '" + act.getCodigo() + "');; " );
+
+		if(l.size() != 0  && l.get(0).length != 0) {
+			res = l.get(0)[0] != null;
+		}
+
+		return res ;	}
 }
 
 

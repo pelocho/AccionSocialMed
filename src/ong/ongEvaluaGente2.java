@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JSlider;
 import javax.swing.JTextPane;
+import javax.swing.SpinnerNumberModel;
 
 import main.MySQLBD;
 import modelos.Usuario;
@@ -136,6 +137,8 @@ public class ongEvaluaGente2 {
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setBounds(120, 164, 41, 20);
+		spinner.setModel(new SpinnerNumberModel(0, 0, 1000, 1));
+
 		frmAccionsocialmed.getContentPane().add(spinner);
 		
 		JButton btnEnviarEvaluacion = new JButton("Enviar evaluaci\u00F3n");
