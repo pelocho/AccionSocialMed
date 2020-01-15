@@ -6,15 +6,16 @@ import javax.swing.JFrame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JSlider;
 import javax.swing.JTextPane;
 
 import main.MySQLBD;
+import modelos.Actividad;
 import modelos.Usuario;
 
 import javax.swing.JSpinner;
@@ -29,12 +30,13 @@ public class pdiEvaluaGente2 {
 	/**
 	 * Launch the application.
 	 * @param act 
+	 * @param profe 
 	 */
-	public static void main(String correo, int act) {
+	public static void main(String correo, int act, String profe) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pdiEvaluaGente2 window = new pdiEvaluaGente2(correo, act);
+					pdiEvaluaGente2 window = new pdiEvaluaGente2(correo, act, profe);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,17 +49,25 @@ public class pdiEvaluaGente2 {
 	 * Create the application.
 	 * @param correo 
 	 * @param act 
+	 * @param profe 
 	 */
-	public pdiEvaluaGente2(String correo, int act) {
-		initialize(correo, act);
+	public pdiEvaluaGente2(String correo, int act, String profe) {
+		try {
+			initialize(correo, act, profe);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @param correo 
+	 * @param profe 
 	 * @param act 
+	 * @throws Exception 
 	 */
-	private void initialize(String correo, int act) {
+	private void initialize(String correo, int a, String profe) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(pdiEvaluaGente2.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -65,12 +75,16 @@ public class pdiEvaluaGente2 {
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
-		Usuario us = new Usuario (correo);
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
 		
-		JButton button = new JButton("<");
-		button.setBackground(Color.LIGHT_GRAY);
-		button.setBounds(10, 11, 41, 23);
-		frmAccionsocialmed.getContentPane().add(button);
+		Usuario us = new Usuario (correo);
+		Actividad act = new Actividad (a);
+		
+		JButton botonVolver = new JButton("<");
+		botonVolver.setBackground(Color.LIGHT_GRAY);
+		botonVolver.setBounds(10, 11, 41, 23);
+		frmAccionsocialmed.getContentPane().add(botonVolver);
 		
 		JLabel lblNombreYApellidos = new JLabel("Nombre:");
 		lblNombreYApellidos.setBounds(10, 45, 128, 14);
@@ -85,14 +99,14 @@ public class pdiEvaluaGente2 {
 		lblDni.setBounds(10, 70, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblDni);
 		
-		JLabel labelDni = new JLabel("null");
+		JLabel labelDni = new JLabel(us.getDni());
 		labelDni.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		labelDni.setBounds(69, 70, 170, 14);
 		frmAccionsocialmed.getContentPane().add(labelDni);
 		
-		JLabel lblComentaAlgo = new JLabel("Comenta algo sobre usuario:");
-		lblComentaAlgo.setBounds(10, 255, 200, 23);
-		frmAccionsocialmed.getContentPane().add(lblComentaAlgo);
+		JLabel lblValoracion = new JLabel("Comenta algo sobre usuario:");
+		lblValoracion.setBounds(10, 255, 200, 23);
+		frmAccionsocialmed.getContentPane().add(lblValoracion);
 		
 		JTextPane campoTexto = new JTextPane();
 		campoTexto.setBounds(10, 275, 414, 88);
@@ -116,9 +130,14 @@ public class pdiEvaluaGente2 {
 		lblEvaliacinDeLa.setBounds(10, 95, 140, 14);
 		frmAccionsocialmed.getContentPane().add(lblEvaliacinDeLa);
 		
-		JLabel label_1 = new JLabel("<nota>");
-		label_1.setBounds(127, 95, 49, 14);
-		frmAccionsocialmed.getContentPane().add(label_1);
+		List<String[]> l =  bd.select("select valoracionONG from eef_primera_iteracion.participacion "
+				+ "WHERE (`correoUsuario` = '" + us.getEmail() + "') and (`idActividad` = '" + act.getCodigo() + "');; " );
+
+		String notaONG = l.get(0)[0];
+		
+		JLabel lblNotaOng = new JLabel(notaONG);
+		lblNotaOng.setBounds(127, 95, 49, 14);
+		frmAccionsocialmed.getContentPane().add(lblNotaOng);
 		
 		JLabel lblOpininDeLa = new JLabel("Opini\u00F3n de la ONG:");
 		lblOpininDeLa.setBounds(10, 120, 128, 14);
@@ -127,10 +146,18 @@ public class pdiEvaluaGente2 {
 		JTextPane textPane = new JTextPane();
 		textPane.setBackground(UIManager.getColor("Button.background"));
 		textPane.setForeground(Color.BLACK);
+		textPane.setText(act.getDescripcion());
 		textPane.setEditable(false);
 		textPane.setBounds(10, 145, 414, 81);
 		frmAccionsocialmed.getContentPane().add(textPane);
 		
+		botonVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
+				pdiEvaluaGente.main(profe);
+			}
+		});
 		
 		btnEnviarEvaluacion.addActionListener(new ActionListener() {
 
@@ -140,22 +167,21 @@ public class pdiEvaluaGente2 {
 					
 					int valoracion = (int) spinner.getValue();
 					String opinion = campoTexto.getText();
-					System.out.println("val: " + valoracion  + " "  + horas+ opinion);
+				//	System.out.println("val: " + valoracion  + " "  + horas+ opinion);
 					System.out.println(correo + " " + act);
 
-					MySQLBD bd = new MySQLBD();
-					bd.readDataBase();
-					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `valoracionONG` = '" + valoracion + 
-							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + act + " '); " );
-					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `comentarioONG` = '" + opinion + 
-							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + act + " '); " );
-					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `numeroHoras` = '" + horas + 
-							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + act + " '); " );
+					
+					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `valoracionPDI` = '" + valoracion + 
+							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + a + " '); " );
+					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `comentarioPDI` = '" + opinion + 
+							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + a + " '); " );
 					
 
 
 
 					frmAccionsocialmed.dispose();
+					pdiEvaluaGente.main(profe);
+
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}

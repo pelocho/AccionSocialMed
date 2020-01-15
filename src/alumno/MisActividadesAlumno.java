@@ -99,15 +99,25 @@ public class MisActividadesAlumno {
 		
 		List<Actividad> listaAceptada = funcionesCompartidas.listaActividadesAlumno(user);
 		List<Actividad> listaSolicitud = funcionesCompartidas.listaSolicitudesAlumno(user);
-			
+		String estado = "";
 		for (Actividad a : listaAceptada) {
-			
-			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),"Aceptada" }; 	
+			if (a.getTipo() == 4) {
+				estado = "Pendiente de Gestor";
+			}else if (a.getTipo()==3) {
+				estado = "Rechazada";
+			}else if( a.getTipo()==5){
+				estado = "Aps Pendiente de aceptación";
+			}else if(a.getTipo() == 6){ 
+				estado = "Finalizada";
+			}else {
+				estado = "Aceptada";
+			}
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),estado }; 	
 			modelo.addRow(prueba);
 		}
 		
 		for (Actividad a : listaSolicitud) {
-			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),"Pendiente" }; 	
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),"Solicitada" }; 	
 			modelo.addRow(prueba);
 		}
 		

@@ -99,8 +99,11 @@ public class pdiSolicitudesAlumnosView {
 
 		for(SolicitudApS sol : solicitudes){
 			Actividad act = new Actividad(sol.getActividad());
-			Object[] insert = {sol.getAlumno(),act.getTitulo(),act.getHoras(),act.getPlazasDisponibles()};
-			modelo.addRow(insert);
+			if(funcionesPDI.soyElCoordinador(user,act) ) {
+				Object[] insert = {sol.getAlumno(),act.getTitulo(),act.getHoras(),act.getPlazasDisponibles()};
+				modelo.addRow(insert);
+			}
+			
 		}
 
 		scrollPane.setViewportView(table);

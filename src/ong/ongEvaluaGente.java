@@ -29,13 +29,14 @@ public class ongEvaluaGente {
 
 	/**
 	 * Launch the application.
+	 * @param user 
 	 */
-	public static void main(int id) {
+	public static void main(String user, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 
-					ongEvaluaGente window = new ongEvaluaGente(id);
+					ongEvaluaGente window = new ongEvaluaGente(user,id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,17 +47,19 @@ public class ongEvaluaGente {
 
 	/**
 	 * Create the application.
+	 * @param user 
 	 * @throws Exception 
 	 */
-	public ongEvaluaGente(int id) throws Exception {
-		initialize(id);
+	public ongEvaluaGente(String user, int id) throws Exception {
+		initialize(user,id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @param user 
 	 * @throws Exception 
 	 */
-	private void initialize(int id) throws Exception {
+	private void initialize(String user, int id) throws Exception {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setTitle("AccionSocialMed");
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongEvaluaGente.class.getResource("/imagenes/icono pequeno.png")));
@@ -103,11 +106,16 @@ public class ongEvaluaGente {
 		
 		List<Usuario> lista = Usuario.listaUsuarios();
 		
+		
 		for(Usuario us : lista) {
 			if(us.estaParticipando(act) && !estaEvaluado(us,act) ) {
 				Object[] prueba = {us.getEmail(), us.getNombre() } ;
 				modelo.addRow(prueba) ;
 			}
+		}
+		if(modelo.getRowCount() == 0) {
+			frmAccionsocialmed.dispose();
+			ongMisActividadesTableView.main(user);
 		}
 
 		
@@ -125,6 +133,7 @@ public class ongEvaluaGente {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frmAccionsocialmed.dispose();
+				ongMisActividadesTableView.main(user);
 			}
 		});
 		
@@ -148,11 +157,15 @@ public class ongEvaluaGente {
 	private boolean estaEvaluado(Usuario us, Actividad act) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
+		boolean res;
 		
-		String res =  bd.select("select valoracionONG from participacion where correoUsuario = ' " + us.getEmail() 
-		+ "' and idActividad = '" +act.getCodigo()+ "'; " ).get(0)[0];
+		List<String[]> l =  bd.select("select valoracionONG from eef_primera_iteracion.participacion "
+				+ "WHERE (`correoUsuario` = '" + us.getEmail() + "') and (`idActividad` = '" + act.getCodigo() + "');; " );
 
-		return res != null;
+		
+			res = l.get(0)[0] != null;
+
+		return res ;
 	}
 }
 
