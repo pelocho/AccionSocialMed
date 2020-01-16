@@ -168,7 +168,7 @@ public class vistaActividadDetallesOng {
 		
 		JLabel tipo_actividad = new JLabel(act.getTipoToString());
 		tipo_actividad.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		tipo_actividad.setBounds(273, 436, 107, 14);
+		tipo_actividad.setBounds(241, 407, 107, 14);
 		frmAccionsocialmed.getContentPane().add(tipo_actividad);
 		
 		JLabel lblPlazasDisponibles = new JLabel("Plazas disponibles:");
@@ -183,14 +183,19 @@ public class vistaActividadDetallesOng {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setForeground(new Color(0, 153, 51));
 		btnAceptar.setBackground(Color.LIGHT_GRAY);
-		btnAceptar.setBounds(10, 432, 89, 23);
+		btnAceptar.setBounds(10, 432, 83, 23);
 		frmAccionsocialmed.getContentPane().add(btnAceptar);
 		
 		JButton btnRechazar = new JButton("Rechazar");
 		btnRechazar.setForeground(new Color(204, 0, 0));
 		btnRechazar.setBackground(Color.LIGHT_GRAY);
-		btnRechazar.setBounds(109, 432, 89, 23);
+		btnRechazar.setBounds(95, 432, 83, 23);
 		frmAccionsocialmed.getContentPane().add(btnRechazar);
+		
+		JButton btnAceptarYAadir = new JButton("Aceptar y a\u00F1adir a un proyecto");
+		btnAceptarYAadir.setBackground(Color.LIGHT_GRAY);
+		btnAceptarYAadir.setBounds(188, 432, 204, 23);
+		frmAccionsocialmed.getContentPane().add(btnAceptarYAadir);
 		
 		btnAceptar.addActionListener(new ActionListener() {
 			@Override
@@ -221,6 +226,14 @@ public class vistaActividadDetallesOng {
 					e1.printStackTrace();
 				}
 				
+			}
+		});
+		
+		btnAceptarYAadir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pdiAnadirAProyecto.main(id, user);
+				frmAccionsocialmed.dispose();
 			}
 		});
 		
