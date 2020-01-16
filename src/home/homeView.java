@@ -92,10 +92,12 @@ public class homeView {
 		noticiasPanel.setLayout(card);
 		
 		JButton btnAnterior = new JButton("Anterior");
+		btnAnterior.setBackground(Color.LIGHT_GRAY);
 		btnAnterior.setBounds(10, 44, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnAnterior);
 		
 		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.setBackground(Color.LIGHT_GRAY);
 		btnSiguiente.setBounds(170, 44, 89, 23);
 		frmAccionsocialmed.getContentPane().add(btnSiguiente);
 		
@@ -117,7 +119,8 @@ public class homeView {
 			byte[] image = imagen.getBytes();
 			Image img = Toolkit.getDefaultToolkit().createImage(image);
 			ImageIcon icon = new ImageIcon(img);
-			JLabel lPhoto = new JLabel(icon);
+			JLabel lPhoto = new JLabel();
+			lPhoto.setIcon(icon);
 			panel.add(lPhoto);
 			noticiasPanel.add(panel);
 			panel.setName(numero);

@@ -1,4 +1,5 @@
 package main;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -12,7 +13,12 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 import java.nio.charset.StandardCharsets;
+
 
 import com.sun.org.apache.bcel.internal.classfile.Field;
 
@@ -102,20 +108,14 @@ public class MySQLBD {
 				String imagen = null;
 				String titulo = result.getString("Titulo");
 				String cuerpo = result.getString("cuerpo");
-				//Blob image = result.getBlob("foto");
-				//byte[] b = image.getBytes(1, (int) image.length());
-				
-				//Da null
-				InputStream binaryStream = result.getBinaryStream("foto");
-		        System.out.println(binaryStream);
-		        
-		        
-				noticia[1] = titulo;
-				noticia[2] = cuerpo;
-				
-				//aqui hay que transformar en string los datos de la imagen
-				imagen = new String();
-				noticia[3] = imagen;
+				BufferedImage im = ImageIO.read(result.getBinaryStream("foto"));
+				ByteArrayOutputStream b = new ByteArrayOutputStream();
+				ImageIO.write(im, "jpg", b);
+				byte[] jaja = b.toByteArray();
+				imagen = new String(jaja);
+				noticia[0] = titulo;
+				noticia[1] = cuerpo;
+				noticia[2] = imagen;
 				list.add(noticia);
 			}
 			
