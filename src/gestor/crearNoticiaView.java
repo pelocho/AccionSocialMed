@@ -129,8 +129,9 @@ public class crearNoticiaView {
 				if(!textTitulo.getText().equals("") && !textCuerpo.getText().equals("")) {
 					String titulo = textTitulo.getText();
 					String cuerpo = textCuerpo.getText();
+					String ruta = lblRuta.getText();
 					try {
-						Boolean ok = Noticia.guardarNoticia(titulo, cuerpo);
+						Boolean ok = Noticia.guardarNoticia(titulo, cuerpo, ruta);
 						if (ok) {
 							JOptionPane.showMessageDialog(frame, "Noticia creada correctamente.");
 							frame.dispose();

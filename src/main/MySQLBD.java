@@ -1,7 +1,24 @@
 package main;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.charset.StandardCharsets;
+
+import com.sun.org.apache.bcel.internal.classfile.Field;
+
+import sun.nio.ch.IOUtil;
+
+//import sun.nio.cs.StandardCharsets;
 
 public class MySQLBD {
 	private Connection connection = null;
@@ -72,6 +89,41 @@ public class MySQLBD {
 
 		return list;
 	}
+	
+	public List<String[]> selectImage() throws Exception, IOException, SQLException {
+		ArrayList<String[]> list = new ArrayList<>();
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://" + host + "/eef_primera_iteracion?user=" + user + "&password=" + passwd + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+		try {
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM noticias");
+			ResultSet result = statement.executeQuery();
+			while(result.next()) {
+				String[] noticia = new String[3];
+				String imagen = null;
+				String titulo = result.getString("Titulo");
+				String cuerpo = result.getString("cuerpo");
+				//Blob image = result.getBlob("foto");
+				//byte[] b = image.getBytes(1, (int) image.length());
+				
+				//Da null
+				InputStream binaryStream = result.getBinaryStream("foto");
+		        System.out.println(binaryStream);
+		        
+		        
+				noticia[1] = titulo;
+				noticia[2] = cuerpo;
+				
+				//aqui hay que transformar en string los datos de la imagen
+				imagen = new String();
+				noticia[3] = imagen;
+				list.add(noticia);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public String selectEscalar(String query) {
 		String result = null;
@@ -137,5 +189,24 @@ public class MySQLBD {
 		} catch (SQLException e) {
 			System.err.println("Error al cerrar la base de datos");
 		}
+	}
+	
+	public Boolean insert_image(String titulo, String cuerpo, String imagen) throws Exception, IOException, SQLException {
+		Boolean ok = false;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://" + host + "/eef_primera_iteracion?user=" + user + "&password=" + passwd + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+		String insert_image = "INSERT INTO `eef_primera_iteracion`.`noticias` (`titulo`, `cuerpo`, `foto`) VALUES(?,?,?);";
+		conn.setAutoCommit(false);
+		File file = new File(imagen);
+		try (FileInputStream fis = new FileInputStream(file);
+				PreparedStatement ps = conn.prepareStatement(insert_image)) {
+			ps.setString(1, titulo);
+			ps.setString(2, cuerpo);
+			ps.setBinaryStream(3, fis, (int) file.length());
+			ps.executeUpdate();
+			conn.commit();
+			ok = true;
+		}
+		return ok;
 	}
 }

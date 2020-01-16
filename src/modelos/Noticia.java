@@ -1,21 +1,23 @@
 package modelos;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import main.MySQLBD;
 
 public class Noticia {
-	private String titulo, cuerpo;
+	private String titulo, cuerpo, imagen;
 	
-	public Noticia(String titulo, String cuerpo) {
+	public Noticia(String titulo, String cuerpo, String imagen) {
 		this.titulo = titulo;
 		this.cuerpo = cuerpo;
+		this.imagen = imagen;
 	}
 	
-	public static Boolean guardarNoticia(String titulo, String cuerpo) throws Exception{
+	public static Boolean guardarNoticia(String titulo, String cuerpo, String imagen) throws Exception{
 		MySQLBD bd = new MySQLBD();
-		bd.readDataBase();
-		Boolean ok = bd.insert("INSERT INTO `eef_primera_iteracion`.`noticias` (`titulo`, `cuerpo`) VALUES('"+ titulo+ "', '"+cuerpo+"');");
+		Boolean ok = bd.insert_image(titulo, cuerpo, imagen);
 		return ok;
 	}
 	
@@ -29,12 +31,11 @@ public class Noticia {
 	public static List<Noticia> listaNoticias() throws Exception {
 		List<Noticia> res = new ArrayList<>();
 		MySQLBD bd = new MySQLBD();
-		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT * FROM noticias");
+		List<String[]> list = bd.selectImage();
 		
 		for(String[] notice : list) {
-			Noticia aux = new Noticia(notice[0], notice[1]);
+			Noticia aux = new Noticia(notice[0], notice[1], notice[2]);
 			res.add(aux);
 		}
 		
@@ -47,5 +48,9 @@ public class Noticia {
 	
 	public String getCuerpo() {
 		return cuerpo;
+	}
+	
+	public String getImagen() {
+		return imagen;
 	}
 }

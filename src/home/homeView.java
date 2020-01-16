@@ -6,6 +6,7 @@ import modelos.Actividad;
 import modelos.Noticia;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -108,10 +109,16 @@ public class homeView {
 			String numero = String.valueOf(i);
 			String title = listaNoticias.get(i).getTitulo();
 			String body = listaNoticias.get(i).getCuerpo();
+			String imagen = listaNoticias.get(i).getImagen();
 			JPanel panel = new JPanel();
 			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 			panel.add(new JLabel(title));
 			panel.add(new JLabel(body));
+			byte[] image = imagen.getBytes();
+			Image img = Toolkit.getDefaultToolkit().createImage(image);
+			ImageIcon icon = new ImageIcon(img);
+			JLabel lPhoto = new JLabel(icon);
+			panel.add(lPhoto);
 			noticiasPanel.add(panel);
 			panel.setName(numero);
 		} 
