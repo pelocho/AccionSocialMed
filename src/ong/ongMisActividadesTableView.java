@@ -207,10 +207,11 @@ public class ongMisActividadesTableView extends ongListaActividades {
 					
 					Actividad aux = new Actividad(id);
 					
-					if (aux.getTipo() == 1 || aux.getTipo() == 2 || aux.getTipo() == 3) {  // Actividad en curso valida
+					if (aux.getTipo() == 1 || aux.getTipo() == 2 || aux.getTipo() == 0) {  // Actividad en curso valida
 						aux.setTipo(6);
-						ongEvaluaGente.main(user,id);
 						frmAccionsocialmed.dispose();
+						ongEvaluaGente.main(user,id);
+
 
 						
 					}else {
