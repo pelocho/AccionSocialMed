@@ -3,6 +3,8 @@ package ong;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -113,10 +115,7 @@ public class ongEvaluaGente {
 				modelo.addRow(prueba) ;
 			}
 		}
-		if(modelo.getRowCount() == 0) {
-			frmAccionsocialmed.dispose();
-			ongMisActividadesTableView.main(user);
-		}
+	
 
 		
 		JButton btnVolver = new JButton("<");
@@ -132,6 +131,10 @@ public class ongEvaluaGente {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(modelo.getRowCount() > 0) {
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "Aún quedan alumnos por evaluar" );
+
+				}
 				frmAccionsocialmed.dispose();
 				ongMisActividadesTableView.main(user);
 			}

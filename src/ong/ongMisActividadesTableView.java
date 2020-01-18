@@ -173,6 +173,7 @@ public class ongMisActividadesTableView extends ongListaActividades {
 				ongMisActividadesTableView.main(user);
 			}
 		});
+		
 		btnVerDetalles.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
