@@ -220,7 +220,7 @@ public class usuariosEvaluanActividad {
 		textArea_1.setBounds(10, 422, 370, 74);
 		frmAccionsocialmed.getContentPane().add(textArea_1);
 		
-		JButton btnEvaluacin = new JButton("Enviar evaluaci\u00F3n");
+		JButton btnEvaluacin = new JButton("Enviar valoraci\u00F3n");
 		btnEvaluacin.setBackground(Color.LIGHT_GRAY);
 		btnEvaluacin.setBounds(10, 502, 127, 23);
 		frmAccionsocialmed.getContentPane().add(btnEvaluacin);

@@ -35,6 +35,7 @@ public class MisActividadesAlumno {
 	private JTable table;
 	private JFrame frmAccionsocialmed;
 	private Solicitud prueba;
+	private JButton btnGenerarCertificado;
 	/**
 	 * Launch the application.
 	 */
@@ -140,6 +141,11 @@ public class MisActividadesAlumno {
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		btnVolver.setBounds(10, 11, 46, 23);
 		contentPane.add(btnVolver);
+		
+		btnGenerarCertificado = new JButton("Certificado");
+		btnGenerarCertificado.setBackground(Color.LIGHT_GRAY);
+		btnGenerarCertificado.setBounds(398, 11, 102, 23);
+		contentPane.add(btnGenerarCertificado);
 		
 		
 		btnVolver.addActionListener(new ActionListener() {
