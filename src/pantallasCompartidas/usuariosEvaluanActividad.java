@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 
 import home.homeView;
+import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Usuario;
 import pas.pasMainView;
@@ -221,6 +222,22 @@ public class usuariosEvaluanActividad {
 		frmAccionsocialmed.getContentPane().add(textArea_1);
 		
 		JButton btnEvaluacin = new JButton("Enviar valoraci\u00F3n");
+		btnEvaluacin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int valoracion = slider.getValue();
+				
+				MySQLBD bd = new MySQLBD();
+				try {
+					bd.readDataBase();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `valoracionONG` = '" + valoracion + 
+						"' WHERE (`correoUsuario` = '" + user + "') and (`idActividad` = '" + id + " '); " );
+			}
+		});
 		btnEvaluacin.setBackground(Color.LIGHT_GRAY);
 		btnEvaluacin.setBounds(10, 502, 127, 23);
 		frmAccionsocialmed.getContentPane().add(btnEvaluacin);

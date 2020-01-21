@@ -91,7 +91,6 @@ public class nuevoProyectoView {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
 					bd.insert("INSERT INTO eef_primera_iteracion.proyectos (nombre, coordinador) VALUES ('"+nombre+"', '"+user+"');");
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Proyecto creado con éxito");
 					pdiAnadirAProyecto.main(id, user);
