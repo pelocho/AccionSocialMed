@@ -234,8 +234,10 @@ public class usuariosEvaluanActividad {
 					e.printStackTrace();
 				}
 				
-				bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `valoracionONG` = '" + valoracion + 
+				bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `valoracionAlumno` = '" + valoracion + 
 						"' WHERE (`correoUsuario` = '" + user + "') and (`idActividad` = '" + id + " '); " );
+				frmAccionsocialmed.dispose();
+				
 			}
 		});
 		btnEvaluacin.setBackground(Color.LIGHT_GRAY);

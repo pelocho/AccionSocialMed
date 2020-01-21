@@ -114,18 +114,22 @@ public class mensajesView {
 		}
 		
 		JButton btnNuevoMensaje = new JButton("Nuevo mensaje");
+		btnNuevoMensaje.setBackground(Color.LIGHT_GRAY);
 		btnNuevoMensaje.setBounds(75, 11, 114, 23);
 		frmAccionsocialmed.getContentPane().add(btnNuevoMensaje);
 		
 		JButton btnVerMensaje = new JButton("Ver mensaje");
+		btnVerMensaje.setBackground(Color.LIGHT_GRAY);
 		btnVerMensaje.setBounds(341, 11, 121, 23);
 		frmAccionsocialmed.getContentPane().add(btnVerMensaje);
 		
 		JButton btnEliminarMensaje = new JButton("Eliminar mensaje");
+		btnEliminarMensaje.setBackground(Color.LIGHT_GRAY);
 		btnEliminarMensaje.setBounds(199, 11, 132, 23);
 		frmAccionsocialmed.getContentPane().add(btnEliminarMensaje);
 		
 		JButton btnVolver = new JButton("<");
+		btnVolver.setBackground(Color.LIGHT_GRAY);
 		btnVolver.setBounds(10, 11, 55, 23);
 		frmAccionsocialmed.getContentPane().add(btnVolver);
 		

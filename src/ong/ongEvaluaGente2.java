@@ -172,6 +172,7 @@ public class ongEvaluaGente2 {
 
 
 					frmAccionsocialmed.dispose();
+					ongEvaluaGente.main(correo, act);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}

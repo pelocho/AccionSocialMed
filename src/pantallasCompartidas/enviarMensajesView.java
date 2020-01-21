@@ -67,7 +67,7 @@ public class enviarMensajesView {
 		frmAccionsocialmed.getContentPane().add(lblDestinatario);
 		
 		textField = new JTextField();
-		textField.setBounds(89, 33, 367, 20);
+		textField.setBounds(108, 33, 348, 20);
 		frmAccionsocialmed.getContentPane().add(textField);
 		textField.setColumns(10);
 		

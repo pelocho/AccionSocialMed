@@ -11,6 +11,8 @@ import java.util.List;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextPane;
 
@@ -87,12 +89,12 @@ public class pdiEvaluaGente2 {
 		frmAccionsocialmed.getContentPane().add(botonVolver);
 		
 		JLabel lblNombreYApellidos = new JLabel("Nombre:");
-		lblNombreYApellidos.setBounds(10, 45, 128, 14);
+		lblNombreYApellidos.setBounds(10, 45, 61, 14);
 		frmAccionsocialmed.getContentPane().add(lblNombreYApellidos);
 		
 		JLabel label = new JLabel(us.getNombre() + " " + us.getPrimerApellido() + " " + us.getSegundoApellido());
-		label.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label.setBounds(150, 45, 274, 14);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label.setBounds(81, 45, 274, 14);
 		frmAccionsocialmed.getContentPane().add(label);
 		
 		JLabel lblDni = new JLabel("DNI:");
@@ -135,7 +137,7 @@ public class pdiEvaluaGente2 {
 
 		String notaONG = l.get(0)[0];
 		
-		JLabel lblNotaOng = new JLabel(notaONG);
+		JLabel lblNotaOng = new JLabel("  " + notaONG);
 		lblNotaOng.setBounds(127, 95, 49, 14);
 		frmAccionsocialmed.getContentPane().add(lblNotaOng);
 		
@@ -166,7 +168,11 @@ public class pdiEvaluaGente2 {
 				try {
 					
 					int valoracion = (int) spinner.getValue();
-					String opinion = campoTexto.getText();
+					
+					if (valoracion<0 || valoracion >10) {
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "Por favor ponga una valoracion entre 0 y 10");
+					}else {
+						String opinion = campoTexto.getText();
 				//	System.out.println("val: " + valoracion  + " "  + horas+ opinion);
 					System.out.println(correo + " " + act);
 
@@ -176,11 +182,10 @@ public class pdiEvaluaGente2 {
 					bd.update("UPDATE `eef_primera_iteracion`.`participacion` SET `comentarioPDI` = '" + opinion + 
 							"' WHERE (`correoUsuario` = '" + correo + "') and (`idActividad` = '" + a + " '); " );
 					
-
-
-
 					frmAccionsocialmed.dispose();
 					pdiEvaluaGente.main(profe);
+					}
+					
 
 				}catch (Exception e1) {
 					e1.printStackTrace();

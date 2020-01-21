@@ -108,10 +108,11 @@ public class ongEvaluaGente {
 		
 		List<Usuario> lista = Usuario.listaUsuarios();
 		
+		Actividad actividad = new Actividad(id);
 		
 		for(Usuario us : lista) {
 			if(us.estaParticipando(act) && !estaEvaluado(us,act) ) {
-				Object[] prueba = {us.getEmail(), us.getNombre() } ;
+				Object[] prueba = {us.getEmail(), us.getNombre(), actividad.getTitulo() } ;
 				modelo.addRow(prueba) ;
 			}
 		}
@@ -134,9 +135,11 @@ public class ongEvaluaGente {
 				if(modelo.getRowCount() > 0) {
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Aún quedan alumnos por evaluar" );
 
+				}else {
+					frmAccionsocialmed.dispose();
+					ongMisActividadesTableView.main(user);
 				}
-				frmAccionsocialmed.dispose();
-				ongMisActividadesTableView.main(user);
+				
 			}
 		});
 		
@@ -145,6 +148,7 @@ public class ongEvaluaGente {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					frmAccionsocialmed.dispose();
 					ongEvaluaGente2.main((String)modelo.getValueAt(table.getSelectedRow(), 0), id);
 				}catch (Exception e1) {
 					e1.printStackTrace();

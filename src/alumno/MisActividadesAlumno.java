@@ -19,6 +19,7 @@ import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Solicitud;
 import ong.ongDetallesAct;
+import pantallasCompartidas.usuariosEvaluanActividad;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -165,10 +166,32 @@ public class MisActividadesAlumno {
 					bd.readDataBase();
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
-					alumnoDetallesActividad.main(id);
+					
+					Actividad act = new Actividad(id);
+					int tipo = act.getTipo();
+					
+					if (tipo == 6 && !evaluada(id,user)) {
+						usuariosEvaluanActividad.main(user, id);
+					}else {
+						alumnoDetallesActividad.main(id);
+					}
+					
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}				
+			}
+
+			private boolean evaluada(int id, String user) throws Exception {
+				MySQLBD bd = new MySQLBD();
+				bd.readDataBase();
+				boolean res = true;
+				String[] valoracion = bd.select("SELECT valoracionAlumno FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
+						+ " '"+user+"';").get(0);
+				if (valoracion[0] == null) {
+					res= false;
+				}
+				return res;
 			}
 		});
 		
