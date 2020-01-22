@@ -171,7 +171,9 @@ public class MisActividadesAlumno {
 					Actividad act = new Actividad(id);
 					int tipo = act.getTipo();
 					
-					if (tipo == 6 && !funcionesCompartidas.evaluadaPorUsuario(id,user)) {
+					if(tipo!=6) {
+						alumnoDetallesActividad.main(id);
+					}else if (tipo == 6 && !funcionesCompartidas.evaluadaPorUsuario(id,user)) {
 						usuariosEvaluanActividad.main(user, id);
 					}else {
 						alumnoDetallesActividad.main(id);

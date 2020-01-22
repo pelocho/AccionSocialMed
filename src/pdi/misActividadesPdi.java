@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import alumno.alumnoCertificado;
 import alumno.funcionesCompartidas;
 import alumno.vistaActividad;
 import gestor.vistaActividadDetallesActs;
@@ -20,6 +21,7 @@ import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Solicitud;
 import ong.ongDetallesAct;
+import pantallasCompartidas.usuariosCertificado;
 import pas.pasDetallesActividad;
 
 import javax.swing.JButton;
@@ -103,9 +105,8 @@ public class misActividadesPdi {
 		List<Actividad> listaAceptada = funcionesCompartidas.listaActividadesAlumno(user);
 		List<Actividad> listaSolicitud = funcionesCompartidas.listaSolicitudesAlumno(user);
 			
-		for (Actividad a : listaAceptada) {
-			
-			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),"Aceptada" }; 	
+		for (Actividad a : listaAceptada) {			
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),a.mostrarEstado()}; 	
 			modelo.addRow(prueba);
 		}
 		
@@ -164,6 +165,26 @@ public class misActividadesPdi {
 			}
 		});
 		
+		btnCertificado.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					Actividad act = new Actividad(id);
+					if(act.getTipo() == 6) {
+						usuariosCertificado.main(user,id);
+					}else {
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
+					}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
+				}				
+			}
+		});
 	}
 }
 

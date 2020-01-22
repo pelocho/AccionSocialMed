@@ -20,6 +20,7 @@ import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Solicitud;
 import ong.ongDetallesAct;
+import pantallasCompartidas.usuariosCertificado;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -104,7 +105,7 @@ public class misActividadesPas {
 			
 		for (Actividad a : listaAceptada) {
 			
-			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),"Aceptada" }; 	
+			Object[] prueba = {a.getTitulo(),a.getLugar(), a.getHoras(),a.getPlazasDisponibles(),a.mostrarEstado()}; 	
 			modelo.addRow(prueba);
 		}
 		
@@ -159,6 +160,27 @@ public class misActividadesPas {
 					pasDetallesActividad.main(id);
 				} catch (Exception e1) {
 					e1.printStackTrace();
+				}				
+			}
+		});
+		
+		btnCertificado.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					Actividad act = new Actividad(id);
+					if(act.getTipo() == 6) {
+						usuariosCertificado.main(user,id);
+					}else {
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
+					}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
 				}				
 			}
 		});

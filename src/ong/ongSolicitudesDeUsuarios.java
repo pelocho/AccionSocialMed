@@ -133,7 +133,7 @@ public class ongSolicitudesDeUsuarios {
 					bd.insert("INSERT INTO `eef_primera_iteracion`.`participacion` (`correoUsuario`, `idActividad`) VALUES ('"+usuario+"', '"+id+"');");
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Usuario Aceptado");
 					frmAccionsocialmed.dispose();
-					ongMainView.main(ong);
+					ongSolicitudesDeUsuarios.main(ong);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -152,7 +152,7 @@ public class ongSolicitudesDeUsuarios {
 					bd.delete("DELETE FROM solicitud WHERE Solicitante = '"+usuario+"' AND Actividad ='"+id+"';");
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Usuario Rechazado");
 					frmAccionsocialmed.dispose();
-					ongMainView.main(ong);
+					ongSolicitudesDeUsuarios.main(ong);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

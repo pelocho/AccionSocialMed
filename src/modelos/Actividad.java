@@ -10,8 +10,7 @@ import main.MySQLBD;
 
 public class Actividad {
 	//voluntariado = 0, ApyS = 1, voluntariado = 2,   rechazada = 3, 
-	//pendienteDeAceptarPorGestor = 4,          ApsPendienteDeAceptarPorPDI = 5        ,       6 finalizada o evaluada por PDI
-	//	7 evaluada sólo por ONG
+	//pendienteDeAceptarPorGestor = 4,          ApsPendienteDeAceptarPorPDI = 5        ,       6 finalizada 
 	private int codigo, tipo, horas, asignaturaAsociada, plazasDisponibles;
 	private String titulo,descripcion,ong,lugar;
 	java.util.Date fecha_inicio, fecha_fin;
@@ -339,6 +338,14 @@ public class Actividad {
 		}
 		
 		return sb.toString();
+	}
+	
+	public String mostrarEstado() {
+		if(getTipo()==6) {
+			return "Finalizada";
+		}else {
+			return "Aceptada";
+		}
 	}
 	/*public Actividad (int codigo, String titulo, int horas, Date fecha_inicio, Date fecha_fin, String descripcion, String ong, String lugar) throws Exception {
 		this.codigo = codigo;
