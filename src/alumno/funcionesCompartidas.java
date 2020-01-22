@@ -18,7 +18,7 @@ public class funcionesCompartidas {
 		bd.readDataBase();
 		String[] valoracion = bd.select("SELECT valoracionPDI FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
 				+ " '"+user+"';").get(0);
-		return valoracion.length == 0;
+		return valoracion.length > 0;
 	}
 	
 	public static boolean evaluadaPorUsuario(int id, String user) throws Exception {
