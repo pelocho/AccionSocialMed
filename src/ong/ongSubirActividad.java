@@ -163,7 +163,7 @@ public class ongSubirActividad extends funcionesONG{
 		rdbtnSaludSexual.setBounds(357, 134, 111, 23);
 		frmAccionsocialmed.getContentPane().add(rdbtnSaludSexual);
 
-		JRadioButton rdbtnNuevo = new JRadioButton("Nuevo");
+		JRadioButton rdbtnNuevo = new JRadioButton("Eventos");
 		rdbtnNuevo.setBounds(95, 159, 111, 23);
 		frmAccionsocialmed.getContentPane().add(rdbtnNuevo);
 
