@@ -15,10 +15,10 @@ public class Solicitud {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 
-		List<String[]> list = bd.select("SELECT solicitante FROM solicitud");
+		List<String[]> list = bd.select("SELECT solicitante, Actividad FROM solicitud");
 
 		for(String[] sol : list) {
-			Solicitud aux = new Solicitud(sol[0]);
+			Solicitud aux = new Solicitud(sol[0],Integer.parseInt(sol[1]));
 			res.add(aux);
 		}
 
@@ -33,7 +33,7 @@ public class Solicitud {
 		List<String[]> list = bd.select("SELECT * FROM solicitud WHERE Aprobada = '"+0+"';");
 
 		for(String[] sol : list) {
-			Solicitud aux = new Solicitud(sol[0]);
+			Solicitud aux = new Solicitud(sol[0],Integer.parseInt(sol[1]));
 			if(aux.getONG(aux.getActividad()).equals(ong)) {
 				res.add(aux);
 			}
@@ -66,13 +66,13 @@ public class Solicitud {
 		return res;
 	}
 
-	public Solicitud(String solicitante) throws Exception {
+	public Solicitud(String solicitante, int Actividad) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 
-		String[] solicitud = bd.select("SELECT * FROM solicitud WHERE Solicitante = '" + solicitante + "';").get(0);
+		String[] solicitud = bd.select("SELECT * FROM solicitud WHERE Solicitante = '" + solicitante + "' AND Actividad ='"+Actividad+"';").get(0);
 		this.solicitante = solicitante;
-		this.actividad = Integer.parseInt(solicitud[1]);
+		this.actividad = Actividad;
 		this.aprobada = comprobarBool(Integer.parseInt(solicitud[2]));
 
 	}

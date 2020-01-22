@@ -12,6 +12,27 @@ import modelos.Actividad;
 import modelos.Usuario;
 
 public class funcionesCompartidas {
+	
+	public static boolean evaluadaPorONG(int id, String user) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		String[] valoracion = bd.select("SELECT valoracionAlumno FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
+				+ " '"+user+"';").get(0);
+		return valoracion.length == 0;
+	}
+	
+	public static boolean evaluadaPorAlumno(int id, String user) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		boolean res = true;
+		String[] valoracion = bd.select("SELECT valoracionAlumno FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
+				+ " '"+user+"';").get(0);
+		if (valoracion[0] == null) {
+			res= false;
+		}
+		return res;
+	}
+	
 	public static List<Actividad> listaOrdenada(Usuario us) throws Exception{
 		List<Actividad> lista = Actividad.listaActividades();
 

@@ -19,6 +19,7 @@ import main.MySQLBD;
 import modelos.Actividad;
 import modelos.Solicitud;
 import ong.ongDetallesAct;
+import pantallasCompartidas.usuariosCertificado;
 import pantallasCompartidas.usuariosEvaluanActividad;
 
 import javax.swing.JButton;
@@ -170,7 +171,7 @@ public class MisActividadesAlumno {
 					Actividad act = new Actividad(id);
 					int tipo = act.getTipo();
 					
-					if (tipo == 6 && !evaluada(id,user)) {
+					if (tipo == 6 && !funcionesCompartidas.evaluada(id,user)) {
 						usuariosEvaluanActividad.main(user, id);
 					}else {
 						alumnoDetallesActividad.main(id);
@@ -180,20 +181,32 @@ public class MisActividadesAlumno {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}				
-			}
-
-			private boolean evaluada(int id, String user) throws Exception {
-				MySQLBD bd = new MySQLBD();
-				bd.readDataBase();
-				boolean res = true;
-				String[] valoracion = bd.select("SELECT valoracionAlumno FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
-						+ " '"+user+"';").get(0);
-				if (valoracion[0] == null) {
-					res= false;
-				}
-				return res;
+			}			
+		});
+		
+		btnGenerarCertificado.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = 0;
+					MySQLBD bd = new MySQLBD();
+					bd.readDataBase();
+					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
+					id = Integer.parseInt(res[0]);
+					Actividad act = new Actividad(id);
+					if(act.getTipo() == 6 && funcionesCompartidas.evaluada(id, user)) {
+						alumnoCertificado.main(user,id);						
+					}else if(act.getTipo() == 6){
+						usuariosCertificado.main(user);
+					}else {
+						JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}				
 			}
 		});
+
 		
 	}
 }

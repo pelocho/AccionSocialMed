@@ -4,11 +4,17 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextArea;
+
+import alumno.alumnoMainView;
+
 import java.awt.Label;
 
 public class usuariosCertificado {
@@ -18,11 +24,11 @@ public class usuariosCertificado {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					usuariosCertificado window = new usuariosCertificado();
+					usuariosCertificado window = new usuariosCertificado(user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,14 +40,14 @@ public class usuariosCertificado {
 	/**
 	 * Create the application.
 	 */
-	public usuariosCertificado() {
-		initialize();
+	public usuariosCertificado(String user) {
+		initialize(user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(usuariosCertificado.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -49,10 +55,10 @@ public class usuariosCertificado {
 		frmAccionsocialmed.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAccionsocialmed.getContentPane().setLayout(null);
 		
-		JButton button = new JButton("<");
-		button.setBackground(Color.LIGHT_GRAY);
-		button.setBounds(10, 11, 41, 28);
-		frmAccionsocialmed.getContentPane().add(button);
+		JButton btnVolver = new JButton("<");
+		btnVolver.setBackground(Color.LIGHT_GRAY);
+		btnVolver.setBounds(10, 11, 41, 28);
+		frmAccionsocialmed.getContentPane().add(btnVolver);
 		
 		JLabel lblCertificadoDeActividad = new JLabel("CERTIFICADO DE ACTIVIDAD");
 		lblCertificadoDeActividad.setFont(new Font("MS UI Gothic", Font.PLAIN, 25));
@@ -117,5 +123,11 @@ public class usuariosCertificado {
 		label_7.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_7.setBounds(111, 79, 307, 14);
 		frmAccionsocialmed.getContentPane().add(label_7);
+		
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmAccionsocialmed.dispose();
+			}
+		});
 	}
 }
