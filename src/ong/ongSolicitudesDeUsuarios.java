@@ -131,8 +131,6 @@ public class ongSolicitudesDeUsuarios {
 					Actividad act = new Actividad(id);
 					act.plazaMenos();
 					bd.insert("INSERT INTO `eef_primera_iteracion`.`participacion` (`correoUsuario`, `idActividad`) VALUES ('"+usuario+"', '"+id+"');");
-					
-					act.setPlazasDisponibles(act.getPlazasDisponibles()-1);
 					JOptionPane.showMessageDialog(frmAccionsocialmed, "Usuario Aceptado");
 					frmAccionsocialmed.dispose();
 					ongSolicitudesDeUsuarios.main(ong);

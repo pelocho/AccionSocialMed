@@ -9,7 +9,7 @@ import java.util.List;
 import main.MySQLBD;
 
 public class Actividad {
-	//voluntariado = 0, ApyS = 1, voluntariado = 2,   rechazada = 3, 
+	//voluntariado = 0, ApyS = 1, investigacion = 2,   rechazada = 3, 
 	//pendienteDeAceptarPorGestor = 4,          ApsPendienteDeAceptarPorPDI = 5        ,       6 finalizada 
 	private int codigo, tipo, horas, asignaturaAsociada, plazasDisponibles;
 	private String titulo,descripcion,ong,lugar;
@@ -200,9 +200,10 @@ public class Actividad {
 	public void plazaMenos() throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		bd.update("UPDATE actividades SET plazasDisponibles = '" + plazasDisponibles-- + "' "
-				+ "WHERE Codigo ='" + this.codigo + "';");
+		
 		plazasDisponibles --;
+		bd.update("UPDATE actividades SET plazasDisponibles = '" + plazasDisponibles + "' "
+				+ "WHERE Codigo ='" + this.codigo + "';");
 	}
 
 
