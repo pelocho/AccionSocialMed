@@ -14,6 +14,9 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 
 import alumno.alumnoMainView;
+import modelos.Actividad;
+import modelos.Participacion;
+import modelos.Usuario;
 
 import java.awt.Label;
 
@@ -24,11 +27,11 @@ public class usuariosCertificado {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String user) {
+	public static void main(String user, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					usuariosCertificado window = new usuariosCertificado(user);
+					usuariosCertificado window = new usuariosCertificado(user,id);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,15 +42,21 @@ public class usuariosCertificado {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public usuariosCertificado(String user) {
-		initialize(user);
+	public usuariosCertificado(String user, int id) throws Exception {
+		initialize(user,id);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize(String user) {
+	private void initialize(String user, int id) throws Exception {
+		Usuario usuario = new Usuario(user);
+		Actividad act = new Actividad(id);
+		Participacion participacion = new Participacion(user,id);
+		
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(usuariosCertificado.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -69,7 +78,7 @@ public class usuariosCertificado {
 		lblActividadRealizada.setBounds(10, 54, 79, 14);
 		frmAccionsocialmed.getContentPane().add(lblActividadRealizada);
 		
-		JLabel label = new JLabel("<actividad>");
+		JLabel label = new JLabel(act.getTitulo());
 		label.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label.setBounds(91, 54, 327, 14);
 		frmAccionsocialmed.getContentPane().add(label);
@@ -78,7 +87,7 @@ public class usuariosCertificado {
 		lblRealizadaPor.setBounds(10, 104, 93, 14);
 		frmAccionsocialmed.getContentPane().add(lblRealizadaPor);
 		
-		JLabel label_1 = new JLabel("<NombreCompleto>");
+		JLabel label_1 = new JLabel(usuario.getNombre()+" "+usuario.getPrimerApellido()+" "+usuario.getSegundoApellido());
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_1.setBounds(113, 104, 305, 14);
 		frmAccionsocialmed.getContentPane().add(label_1);
@@ -87,7 +96,7 @@ public class usuariosCertificado {
 		lblNmeroDeHoras.setBounds(10, 129, 116, 14);
 		frmAccionsocialmed.getContentPane().add(lblNmeroDeHoras);
 		
-		JLabel label_2 = new JLabel("<horas>");
+		JLabel label_2 = new JLabel(participacion.getNumeroHoras()+"");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_2.setBounds(123, 129, 295, 14);
 		frmAccionsocialmed.getContentPane().add(label_2);
@@ -96,7 +105,7 @@ public class usuariosCertificado {
 		lblValoracinDeLa.setBounds(10, 154, 131, 14);
 		frmAccionsocialmed.getContentPane().add(lblValoracinDeLa);
 		
-		JLabel label_3 = new JLabel("<notaONG>");
+		JLabel label_3 = new JLabel(participacion.getValoracionONG()+"/5");
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_3.setBounds(151, 154, 27, 14);
 		frmAccionsocialmed.getContentPane().add(label_3);
@@ -105,21 +114,16 @@ public class usuariosCertificado {
 		lblComentarioDeLa.setBounds(10, 179, 174, 20);
 		frmAccionsocialmed.getContentPane().add(lblComentarioDeLa);
 		
-		JTextArea textArea = new JTextArea();
+		JTextArea textArea = new JTextArea(participacion.getComentarioONG());
 		textArea.setEditable(false);
 		textArea.setBounds(10, 204, 408, 93);
 		frmAccionsocialmed.getContentPane().add(textArea);
-		
-		JLabel label_5 = new JLabel("/5");
-		label_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label_5.setBounds(177, 154, 33, 14);
-		frmAccionsocialmed.getContentPane().add(label_5);
 		
 		JLabel lblOrganizadaPor = new JLabel("Organizada por:");
 		lblOrganizadaPor.setBounds(10, 72, 93, 28);
 		frmAccionsocialmed.getContentPane().add(lblOrganizadaPor);
 		
-		JLabel label_7 = new JLabel("<nombreONG>");
+		JLabel label_7 = new JLabel(act.getOng());
 		label_7.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_7.setBounds(111, 79, 307, 14);
 		frmAccionsocialmed.getContentPane().add(label_7);

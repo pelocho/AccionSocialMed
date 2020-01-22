@@ -171,7 +171,9 @@ public class MisActividadesAlumno {
 					Actividad act = new Actividad(id);
 					int tipo = act.getTipo();
 					
-					if (tipo == 6 && !funcionesCompartidas.evaluadaPorUsuario(id,user)) {
+					if(tipo!=6) {
+						alumnoDetallesActividad.main(id);
+					}else if (tipo == 6 && !funcionesCompartidas.evaluadaPorUsuario(id,user)) {
 						usuariosEvaluanActividad.main(user, id);
 					}else {
 						alumnoDetallesActividad.main(id);
@@ -197,7 +199,7 @@ public class MisActividadesAlumno {
 					if(act.getTipo() == 6 && funcionesCompartidas.evaluadaPorPDI(id, user)) {
 						alumnoCertificado.main(user,id);						
 					}else if(act.getTipo() == 6){
-						usuariosCertificado.main(user);
+						usuariosCertificado.main(user,id);
 					}else {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
 					}

@@ -18,19 +18,15 @@ public class funcionesCompartidas {
 		bd.readDataBase();
 		String[] valoracion = bd.select("SELECT valoracionPDI FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
 				+ " '"+user+"';").get(0);
-		return valoracion.length == 0;
+		return Integer.parseInt(valoracion[0]) != -1;
 	}
 	
 	public static boolean evaluadaPorUsuario(int id, String user) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		boolean res = true;
 		String[] valoracion = bd.select("SELECT valoracionAlumno FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
 				+ " '"+user+"';").get(0);
-		if (valoracion[0] == null) {
-			res= false;
-		}
-		return res;
+		return Integer.parseInt(valoracion[0]) != -1;
 	}
 	
 	public static List<Actividad> listaOrdenada(Usuario us) throws Exception{
@@ -139,13 +135,12 @@ public class funcionesCompartidas {
 
 		for(String[] aa : list) {
 			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
-			res.add(aux);
+			if(aux.getTipo()!= 6) res.add(aux);
 		}
 		list = bd.select("SELECT Actividad FROM solicitudesaps WHERE Alumno = '"+user+"';");
 		for(String[] aa : list) {
 			Actividad aux = new Actividad(Integer.parseInt(aa[0]));
-			res.add(aux);
-		}
+			if(aux.getTipo()!= 6) res.add(aux);		}
 
 		return res;
 	}

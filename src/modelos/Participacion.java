@@ -32,11 +32,11 @@ public class Participacion {
 		this.correoUsuario = correoUsuario;
 		this.idActividad = idActividad;
 		this.valoracionONG = Integer.parseInt(participacion[2]);
-		//this.valoracionPDI = Integer.parseInt(participacion[3]);
+		this.valoracionPDI = Integer.parseInt(participacion[3]);
 		this.comentarioONG = participacion[4];
 		this.comentarioPDI = participacion[5];
 		this.numeroHoras = Double.parseDouble(participacion[6]);
-		//this.valoracionAlumno = Integer.parseInt(participacion[7]);
+		this.valoracionAlumno = Integer.parseInt(participacion[7]);
 	}
 
 	public String getCorreoUsuario() {
