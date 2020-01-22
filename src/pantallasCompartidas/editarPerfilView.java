@@ -92,7 +92,7 @@ public class editarPerfilView extends funcionesEditarPerfil{
 		chckbxSaludSexual.setBounds(10, 168, 109, 23);
 		frmAccionsocialmed.getContentPane().add(chckbxSaludSexual);
 		
-		JCheckBox chckbxNuevo = new JCheckBox("Nuevo");
+		JCheckBox chckbxNuevo = new JCheckBox("Eventos");
 		chckbxNuevo.setBounds(10, 194, 94, 23);
 		frmAccionsocialmed.getContentPane().add(chckbxNuevo);
 		
