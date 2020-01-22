@@ -198,7 +198,7 @@ public class vistaActividadDetalles {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pdiSolicitudesONGView.main(user);
+				gestorSolicitudesActividad.main(user);
 				frmAccionsocialmed.dispose();
 			}
 		});
