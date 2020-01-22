@@ -171,7 +171,7 @@ public class MisActividadesAlumno {
 					Actividad act = new Actividad(id);
 					int tipo = act.getTipo();
 					
-					if (tipo == 6 && !funcionesCompartidas.evaluada(id,user)) {
+					if (tipo == 6 && !funcionesCompartidas.evaluadaPorUsuario(id,user)) {
 						usuariosEvaluanActividad.main(user, id);
 					}else {
 						alumnoDetallesActividad.main(id);
@@ -194,7 +194,7 @@ public class MisActividadesAlumno {
 					String[] res = bd.select("SELECT Codigo FROM actividades WHERE Titulo = '"+ modelo.getValueAt(table.getSelectedRow(), 0) +"';").get(0);
 					id = Integer.parseInt(res[0]);
 					Actividad act = new Actividad(id);
-					if(act.getTipo() == 6 && funcionesCompartidas.evaluada(id, user)) {
+					if(act.getTipo() == 6 && funcionesCompartidas.evaluadaPorPDI(id, user)) {
 						alumnoCertificado.main(user,id);						
 					}else if(act.getTipo() == 6){
 						usuariosCertificado.main(user);
@@ -202,7 +202,7 @@ public class MisActividadesAlumno {
 						JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
 					}
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(frmAccionsocialmed, "No puedes ver el certificado de una actividad que no ha finalizado");
 				}				
 			}
 		});

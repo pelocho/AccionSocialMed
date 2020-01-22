@@ -13,15 +13,15 @@ import modelos.Usuario;
 
 public class funcionesCompartidas {
 	
-	public static boolean evaluadaPorONG(int id, String user) throws Exception {
+	public static boolean evaluadaPorPDI(int id, String user) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
-		String[] valoracion = bd.select("SELECT valoracionAlumno FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
+		String[] valoracion = bd.select("SELECT valoracionPDI FROM participacion WHERE idActividad = '"+ id +"' AND correoUsuario = "
 				+ " '"+user+"';").get(0);
 		return valoracion.length == 0;
 	}
 	
-	public static boolean evaluadaPorAlumno(int id, String user) throws Exception {
+	public static boolean evaluadaPorUsuario(int id, String user) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		boolean res = true;
