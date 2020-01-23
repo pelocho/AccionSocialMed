@@ -15,8 +15,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import alumno.funcionesCompartidas;
 import main.MySQLBD;
 import modelos.Actividad;
+import modelos.Participacion;
 import modelos.Usuario;
 
 import javax.swing.JButton;
@@ -105,13 +107,14 @@ public class pdiEvaluaGente {
 		bd.readDataBase();
 		
 		List<String[]> lista = bd.select("SELECT * FROM eef_primera_iteracion.participacion; " );
+		Usuario profesor = new Usuario(user);
 		
 		for(String[] tupla : lista) {
-			Usuario us = new Usuario(tupla[0] );
+			Usuario us = new Usuario(tupla[0]);
 			Actividad act = new Actividad (Integer.parseInt(tupla[1]) );
-
-			if(estaEvaluadoOng(us,act) &&  !estaEvaluadoPdi(us,act) ) {
-
+			Participacion part = new Participacion(tupla[0],Integer.parseInt(tupla[1]));
+			
+			if(part.getValoracionONG() != -1 && part.getValoracionPDI() == -1 && funcionesCompartidas.esProfesor(act.getAsignaturaAsociada(),profesor)) {
 				Object[] prueba = {us.getEmail(), us.getNombre(), act.getTitulo() } ;
 				modelo.addRow(prueba) ;
 			}

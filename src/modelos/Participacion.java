@@ -10,7 +10,7 @@ public class Participacion {
 	int idActividad, valoracionONG, valoracionPDI, valoracionAlumno;
 	double numeroHoras;
 	
-	public List<Participacion> listaActividadesTipo() throws Exception{
+	public List<Participacion> listaParticipaciones() throws Exception{
 		List<Participacion> res = new ArrayList<>();
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();

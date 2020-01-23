@@ -207,4 +207,12 @@ public class funcionesCompartidas {
 			return false;
 		}
 	}
+
+	public static boolean esProfesor(int asignaturaAsociada, Usuario profesor) throws Exception {
+		MySQLBD bd = new MySQLBD();
+		bd.readDataBase();
+		String[] res = bd.select("SELECT id FROM dumamockup.courses WHERE coordinator = '"+profesor.getDni()+"';").get(0);
+		
+		return Integer.parseInt(res[0]) == asignaturaAsociada;
+	}
 }
