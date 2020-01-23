@@ -170,7 +170,7 @@ public class ongEvaluaGente {
 				+ "WHERE (`correoUsuario` = '" + us.getEmail() + "') and (`idActividad` = '" + act.getCodigo() + "');; " );
 
 		
-			res = l.get(0)[0] != null;
+			res = Integer.parseInt(l.get(0)[0]) != -1;
 
 		return res ;
 	}

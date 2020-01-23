@@ -109,7 +109,6 @@ public class pdiEvaluaGente {
 		for(String[] tupla : lista) {
 			Usuario us = new Usuario(tupla[0] );
 			Actividad act = new Actividad (Integer.parseInt(tupla[1]) );
-			System.out.println(tupla[0] + " "+tupla[1] + " "  + tupla[2] + "  " + estaEvaluadoOng(us,act) +  !estaEvaluadoPdi(us,act));
 
 			if(estaEvaluadoOng(us,act) &&  !estaEvaluadoPdi(us,act) ) {
 
@@ -190,7 +189,7 @@ public class pdiEvaluaGente {
 				+ "WHERE (`correoUsuario` = '" + us.getEmail() + "') and (`idActividad` = '" + act.getCodigo() + "');; " );
 
 		if(l.size() != 0  && l.get(0).length != 0) {
-			res = l.get(0)[0] != null;
+			res = Integer.parseInt(l.get(0)[0]) != -1;
 		}
 
 		return res ;	}
