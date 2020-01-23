@@ -28,12 +28,13 @@ public class ongEvaluaGente2 {
 	/**
 	 * Launch the application.
 	 * @param act 
+	 * @param user 
 	 */
-	public static void main(String correo, int act) {
+	public static void main(String correo, int act, String user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ongEvaluaGente2 window = new ongEvaluaGente2(correo, act);
+					ongEvaluaGente2 window = new ongEvaluaGente2(correo, act, user);
 					window.frmAccionsocialmed.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,17 +47,19 @@ public class ongEvaluaGente2 {
 	 * Create the application.
 	 * @param correo 
 	 * @param act 
+	 * @param user 
 	 */
-	public ongEvaluaGente2(String correo, int act) {
-		initialize(correo, act);
+	public ongEvaluaGente2(String correo, int act, String user) {
+		initialize(correo, act, user);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @param correo 
 	 * @param act 
+	 * @param user 
 	 */
-	private void initialize(String correo, int act) {
+	private void initialize(String correo, int act, String user) {
 		frmAccionsocialmed = new JFrame();
 		frmAccionsocialmed.setIconImage(Toolkit.getDefaultToolkit().getImage(ongEvaluaGente2.class.getResource("/imagenes/icono pequeno.png")));
 		frmAccionsocialmed.setTitle("AccionSocialMed");
@@ -172,7 +175,7 @@ public class ongEvaluaGente2 {
 
 
 					frmAccionsocialmed.dispose();
-					ongEvaluaGente.main(correo, act);
+					ongEvaluaGente.main(user, act);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}

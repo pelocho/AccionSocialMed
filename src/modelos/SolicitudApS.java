@@ -15,10 +15,10 @@ public class SolicitudApS {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT alumno FROM solicitudesaps");
+		List<String[]> list = bd.select("SELECT Alumno , Actividad FROM solicitudesaps");
 		
 		for(String[] sol : list) {
-			SolicitudApS aux = new SolicitudApS(sol[0]);
+			SolicitudApS aux = new SolicitudApS(sol[0],Integer.parseInt(sol[1]));
 			res.add(aux);
 		}
 		
@@ -30,21 +30,21 @@ public class SolicitudApS {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		List<String[]> list = bd.select("SELECT alumno FROM solicitudesaps WHERE Aceptada = '"+0+"';");
+		List<String[]> list = bd.select("SELECT Alumno,Actividad FROM solicitudesaps WHERE Aceptada = '"+0+"';");
 		
 		for(String[] sol : list) {
-			SolicitudApS aux = new SolicitudApS(sol[0]);
+			SolicitudApS aux = new SolicitudApS(sol[0],Integer.parseInt(sol[1]));
 			res.add(aux);
 		}
 		
 		return res;
 	}	
 	
-	public SolicitudApS(String alumno) throws Exception {
+	public SolicitudApS(String alumno, int id) throws Exception {
 		MySQLBD bd = new MySQLBD();
 		bd.readDataBase();
 		
-		String[] solicitud = bd.select("SELECT * FROM solicitudesaps WHERE alumno = '" + alumno + "';").get(0);
+		String[] solicitud = bd.select("SELECT * FROM solicitudesaps WHERE alumno = '" + alumno + "' and Actividad = '"+id+"';").get(0);
 		this.alumno = alumno;
 		this.actividad = Integer.parseInt(solicitud[1]);
 		this.aprobada = comprobarBool(Integer.parseInt(solicitud[2]));

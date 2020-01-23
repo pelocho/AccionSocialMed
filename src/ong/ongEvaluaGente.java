@@ -149,7 +149,7 @@ public class ongEvaluaGente {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					frmAccionsocialmed.dispose();
-					ongEvaluaGente2.main((String)modelo.getValueAt(table.getSelectedRow(), 0), id);
+					ongEvaluaGente2.main((String)modelo.getValueAt(table.getSelectedRow(), 0), id, user);
 				}catch (Exception e1) {
 					e1.printStackTrace();
 				}

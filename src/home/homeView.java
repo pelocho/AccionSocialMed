@@ -118,12 +118,10 @@ public class homeView {
 			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 			panel.add(new JLabel(title));
 			panel.add(new JLabel(body));
-			byte[] image = imagen.getBytes();
-			Image img = Toolkit.getDefaultToolkit().createImage(image);
-			ImageIcon icon = new ImageIcon(img);
-			JLabel lPhoto = new JLabel();
-			lPhoto.setIcon(icon);
-			panel.add(lPhoto);
+			JLabel fotonoticia = new JLabel("");
+			fotonoticia.setIcon(new ImageIcon(imagen));
+			fotonoticia.setBounds(10, 74, 249, 187);
+			panel.add(fotonoticia);
 			noticiasPanel.add(panel);
 			panel.setName(numero);
 		} 
